@@ -1,10 +1,10 @@
 <?php
 
-namespace Cie\Models;
+namespace HappyFeet\Models;
 
-// use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model;
 
-class Role extends BaseModel
+class Role extends Model
 {
     protected $table = "role";
 
@@ -25,12 +25,12 @@ class Role extends BaseModel
 
     public function permissions()
     {
-    	return $this->belongsToMany('Cie\Models\Permission','role_permission','role_id','permission_id');
+    	return $this->belongsToMany('HappyFeet\Models\Permission','role_permission','role_id','permission_id');
     }
 
     public function users()
     {
-        return $this->belongsToMany('Cie\Models\User','user_role','role_id','user_id');
+        return $this->belongsToMany('HappyFeet\Models\User','user_role','role_id','user_id');
     }
 
     public function getIsDefaultAttribute($value)

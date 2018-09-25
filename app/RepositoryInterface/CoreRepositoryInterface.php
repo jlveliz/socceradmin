@@ -1,5 +1,5 @@
 <?php
-namespace Cie\RepositoryInterface;
+namespace HappyFeet\RepositoryInterface;
 /**
 * 
 */

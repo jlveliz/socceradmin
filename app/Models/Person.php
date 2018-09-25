@@ -1,11 +1,11 @@
 <?php
 
-namespace Cie\Models;
+namespace HappyFeet\Models;
 
-// use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model;
 use  Illuminate\Database\Eloquent\SoftDeletes;
 
-class Person extends BaseModel
+class Person extends Model
 {
     
     use SoftDeletes;
@@ -63,22 +63,22 @@ class Person extends BaseModel
 
     public function province()
     {
-        return $this->belongsTo('Cie\Models\Province','province_id');
+        return $this->belongsTo('HappyFeet\Models\Province','province_id');
     }
 
     public function city()
     {
-        return $this->belongsTo('Cie\Models\City','city_id');
+        return $this->belongsTo('HappyFeet\Models\City','city_id');
     }
 
     public function parish()
     {
-    	return $this->belongsTo('Cie\Models\Parish','city_id');
+    	return $this->belongsTo('HappyFeet\Models\Parish','city_id');
     }
 
     public function identificationType()
     {
-        return $this->belongsTo('Cie\Models\IdentificationType','identification_type_id');
+        return $this->belongsTo('HappyFeet\Models\IdentificationType','identification_type_id');
     }
 
     public function getMale()

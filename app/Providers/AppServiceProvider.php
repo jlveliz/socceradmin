@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace HappyFeet\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

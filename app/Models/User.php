@@ -1,6 +1,6 @@
 <?php
 
-namespace Cie\Models;
+namespace HappyFeet\Models\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -33,17 +33,17 @@ class User extends Authenticatable
 
     public function person()
     {
-        return $this->belongsTo('Cie\Models\Person','person_id');
+        return $this->belongsTo('HappyFeet\Models\Person','person_id');
     }
 
     public function roles()
     {
-        return $this->belongsToMany('Cie\Models\Role','user_role','user_id','role_id');
+        return $this->belongsToMany('HappyFeet\Models\Role','user_role','user_id','role_id');
     }
 
     public function permissions()
     {
-        return $this->hasMany('Cie\Models\UserPermission','user_id');
+        return $this->hasMany('HappyFeet\Models\UserPermission','user_id');
     }
 
 

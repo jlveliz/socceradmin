@@ -1,10 +1,10 @@
 <?php
 
-namespace Cie\Models;
+namespace HappyFeet\Models;
 
-// use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model;
 
-class Permission extends BaseModel
+class Permission extends Model
 {
     protected $table = "permission";
 
@@ -39,27 +39,27 @@ class Permission extends BaseModel
 
     public function module()
     {
-        return $this->belongsTo('Cie\Models\Module','module_id');
+        return $this->belongsTo('HappyFeet\Models\Module','module_id');
     }
 
     public function parent()
     {
-        return $this->belongsTo('Cie\Models\Permission','parent_id');
+        return $this->belongsTo('HappyFeet\Models\Permission','parent_id');
     }
 
     public function type()
     {
-    	return $this->belongsTo('Cie\Models\PermissionType','type_id');
+    	return $this->belongsTo('HappyFeet\Models\PermissionType','type_id');
     }
 
     public function children()
     {
-       return $this->hasMany('Cie\Models\Permission','parent_id','id');
+       return $this->hasMany('HappyFeet\Models\Permission','parent_id','id');
     }
 
     public function roles()
     {
-        return $this->belongsToMany('Cie\Models\Role','role_id');
+        return $this->belongsToMany('HappyFeet\Models\Role','role_id');
     }
 
     public static function boot()

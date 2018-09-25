@@ -1,10 +1,10 @@
 <?php
 
-namespace Cie\Models;
+namespace HappyFeet\Models;
 
-// use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model;
 
-class PermissionType extends BaseModel
+class PermissionType extends Model
 {
     protected $table = "permission_type";
 
@@ -18,6 +18,6 @@ class PermissionType extends BaseModel
 
     public function permissions()
     {
-    	return $this->hasMany('Cie\Models\Permission','type_id');
+    	return $this->hasMany('HappyFeet\Models\Permission','type_id');
     }
 }

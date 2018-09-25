@@ -1,10 +1,10 @@
 <?php
 
-namespace Cie\Models;
+namespace HappyFeet\Models;
 
-// use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model;
 
-class UserPermission extends BaseModel
+class UserPermission extends Model
 {
     protected $table = "user_permission";
 

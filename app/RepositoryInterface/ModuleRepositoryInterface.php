@@ -1,7 +1,7 @@
 <?php
-namespace Cie\RepositoryInterface;
+namespace HappyFeet\RepositoryInterface;
 
-// use Cie\RespositoryInterface\CoreRepositoryInterface;
+// use HappyFeet\RespositoryInterface\CoreRepositoryInterface;
 
 
 interface ModuleRepositoryInterface extends CoreRepositoryInterface {
