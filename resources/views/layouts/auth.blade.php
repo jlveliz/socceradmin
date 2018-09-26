@@ -3,11 +3,12 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>@yield('title') | {{ app()->name}}</title>
+	<title> @yield('title') | {{ config('app.name')}} </title>
 	<!-- app -->
-	<link href="" rel="stylesheet" href="">
+	<link href="{{asset('css/app.css')}}" rel="stylesheet" media="all">
 </head>
-<body>
-	<script src="" type="text/javascript"></script>
+<body class="fix-header fix-sidebar">
+	@yield('content')
+	<script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
 </body>
 </html>

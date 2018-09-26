@@ -12,15 +12,15 @@ let mix = require('laravel-mix');
  */
 
 
-mix.css([
-	'resources/css/bootstrap/bootstrap.min.css',
-	'resources/css/style.css'
+mix.styles([
+	'resources/assets/css/bootstrap/bootstrap.min.css',
+	'resources/assets/css/style.css'
 	],'public/css/app.css');
 
 
 
 mix.js([
-	'resources/js/jquery/jquery.min.js',
-	'resources/js/bootstrap/bootstrap.min.js',
-	'resources/js/bootstrap/popper.min.js'
+	'resources/assets/js/jquery/jquery.min.js',
+	'resources/assets/js/bootstrap/js/bootstrap.min.js',
+	'resources/assets/js/bootstrap/js/popper.min.js'
 	],'public/js/app.js');
