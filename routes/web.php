@@ -11,7 +11,8 @@
 |
 */
 
-Route::get('/', '\HappyFeet\Http\Controllers\Frontend\Auth\RegisterController@showRegisterForm');
+Route::get('/', '\HappyFeet\Http\Controllers\Frontend\Auth\RegisterController@showRegisterForm')->name('register-show');
+Route::post('/', '\HappyFeet\Http\Controllers\Frontend\Auth\RegisterController@verifyForm')->name('register-verify');
 
 Auth::routes();
 

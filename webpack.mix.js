@@ -11,11 +11,12 @@ let mix = require('laravel-mix');
  |
  */
 
-
+//VENDORS
 mix.styles([
 	'resources/assets/css/bootstrap/bootstrap.min.css',
-	'resources/assets/css/style.css'
-	],'public/css/app.css');
+	'resources/assets/css/style.css',
+	],'public/css/vendors.css');
+
 
 
 
@@ -23,4 +24,16 @@ mix.js([
 	'resources/assets/js/jquery/jquery.min.js',
 	'resources/assets/js/bootstrap/js/bootstrap.min.js',
 	'resources/assets/js/bootstrap/js/popper.min.js'
-	],'public/js/app.js');
+	],'public/js/vendors.js');
+
+
+/*  
+	=================
+	COMPONENTS
+ 	=================
+ */
+
+ //auth
+ mix.js([
+ 	'resources/assets/js/components/register.js'
+ ],'public/js/register.js')
