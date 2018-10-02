@@ -29,7 +29,13 @@ class RepresentantRepository implements RepresentantRepositoryInterface
 	{
 		if (is_array($field)) {
 			if (array_key_exists('num_identification', $field)) { 
-				$representant = Representant::where('num_identification',$field['num_identification'])->first();
+				$identification = $field['num_identification'];
+				return $representant = Representant::with(['user' => function($query) use($identification){
+					$query->with(['person' => function($subQuery) use($identification) {
+						$subQuery->where('num_identification',$identification);
+					}]);
+				}])->first();
+				
 			} else {
 				throw new RepresentantException('No se puede buscar el representante con cédula '.$field['num_identification'] ,404);	
 			}
@@ -55,7 +61,7 @@ class RepresentantRepository implements RepresentantRepositoryInterface
 			$key = $representant->getKey();
 			return  $this->find($key);
 		} else {
-			throw new RepresentantException('Ha ocurrido un error al guardar el representante ' + $data['name'] ' ' +  $data['last_name'],500);
+			throw new RepresentantException('Ha ocurrido un error al guardar el representante ' . $data['name']. ' ' .  $data['last_name'],500);
 		}		
 	}
 
@@ -69,7 +75,7 @@ class RepresentantRepository implements RepresentantRepositoryInterface
 				return $this->find($key);
 			}
 		} else {
-			throw new RepresentantException('Ha ocurrido un error al actualizar el representante '.$data['name'].' ' + $data['last_name'],500);
+			throw new RepresentantException('Ha ocurrido un error al actualizar el representante '.$data['name'].' ' . $data['last_name'],500);
 		}
 
 

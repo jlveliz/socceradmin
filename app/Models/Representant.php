@@ -27,5 +27,13 @@ class Representant extends Model
     {
     	return $this->belongsTo('HappyFeet\Models\User','user_id');
     }
+
+
+    public function students()
+    {
+        return $this->hasMany('HappyFeet\Models\Student','representant_id');
+    }
+
+    
     
 }

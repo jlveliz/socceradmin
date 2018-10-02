@@ -1,6 +1,6 @@
 <?php
 
-namespace HappyFeet\Models\Models;
+namespace HappyFeet\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -11,7 +11,7 @@ class User extends Authenticatable
 
     protected $table = "user";
 
-    protected $with = ["person",'roles','permissions'];
+    protected $with = ["person"];
 
     /**
      * The attributes that are mass assignable.
@@ -41,10 +41,10 @@ class User extends Authenticatable
         return $this->belongsToMany('HappyFeet\Models\Role','user_role','user_id','role_id');
     }
 
-    public function permissions()
-    {
-        return $this->hasMany('HappyFeet\Models\UserPermission','user_id');
-    }
+    // public function permissions()
+    // {
+    //     return $this->hasMany('HappyFeet\Models\UserPermission','user_id');
+    // }
 
 
     public function authorizeRoles($roles)

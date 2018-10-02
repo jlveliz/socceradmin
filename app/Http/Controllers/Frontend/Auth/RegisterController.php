@@ -5,12 +5,20 @@ namespace HappyFeet\Http\Controllers\Frontend\Auth;
 use Illuminate\Http\Request;
 use HappyFeet\Http\Controllers\Controller;
 use Illuminate\Validation\Rule;
-use HappyFeet\Repository\RepresentantRepositoryInterface;
+use HappyFeet\RepositoryInterface\RepresentantRepositoryInterface;
 use Validator;
 
 
 class RegisterController extends Controller
 {
+    
+    private $representantRepository;
+
+    public function __construct(RepresentantRepositoryInterface $representantRepository)
+    {
+        $this->representantRepository = $representantRepository;
+    }
+
     public function showRegisterForm()
     {
     	return view('frontend.auth.insert-identification');
@@ -36,24 +44,40 @@ class RegisterController extends Controller
 
     	
     	// si existe representante
-    	$validator = Validator::make($request->all(), 
-    		['num_identification' => Rule::exists('person')->where(function($query)
-    			{
-    				$query->select('person.num_identification')
-    				->rightJoin('user','user.person_id','=','person.id')
-    				->rightJoin('representant','representant.user_id','=','user.id');
-    			})
-    		]
-    	);
+    	$existRepresentant = $this->existRepresentant($request);
 
 
-    	//si no existe niño 
-    	if ($validator->fails()) {
+    	//si no existe representante 
+    	if ($existRepresentant->fails()) 
+        {
     		session()->put('num_identification',$request->get('num_identification'));
-    		return view('frontend.auth.insert-identification');
-    	} else {
+    		return redirect('register-wizard');
+        } 
 
+
+        //si representante tiene niños
+        $representant = $this->representantRepository->find(['num_identification'=>$request->get('num_identification')]);
+        if (count($representant->students) > 0) 
+        { 
+            //verifica si ha llevado a niño a clase demostrativa
+            if (condition) {
+                # code...
+            }
     	}
     	
+    }
+
+
+    private function existRepresentant(Request $request)
+    {
+        return Validator::make($request->all(), 
+                ['num_identification' => Rule::exists('person')->where(function($query)
+                    {
+                        $query->select('person.num_identification')
+                        ->rightJoin('user','user.person_id','=','person.id')
+                        ->rightJoin('representant','representant.user_id','=','user.id');
+                    })
+                ]
+            );
     }
 }
