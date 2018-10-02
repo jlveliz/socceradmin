@@ -57,11 +57,18 @@ class RegisterController extends Controller
 
         //si representante tiene niños
         $representant = $this->representantRepository->find(['num_identification'=>$request->get('num_identification')]);
+        
         if (count($representant->students) > 0) 
         { 
             //verifica si ha llevado a niño a clase demostrativa
-            if (condition) {
-                # code...
+            foreach ($representant->students as $key => $student) 
+            {
+                if (!$student->hasActiveTrialClass()) {
+                    dd("no tiene clase trial");
+                } else {
+                    dd("tiene clase trial");
+
+                }
             }
     	}
     	
