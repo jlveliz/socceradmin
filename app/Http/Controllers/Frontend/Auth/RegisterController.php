@@ -51,26 +51,31 @@ class RegisterController extends Controller
     	if ($existRepresentant->fails()) 
         {
     		session()->put('num_identification',$request->get('num_identification'));
-    		return redirect('register-wizard');
+    		// hora de registrar padre
+            return redirect('register-wizard');
         } 
 
 
-        //si representante tiene niños
+        //existe representante y busca si tiene niños
         $representant = $this->representantRepository->find(['num_identification'=>$request->get('num_identification')]);
         
         if (count($representant->students) > 0) 
         { 
-            //verifica si ha llevado a niño a clase demostrativa
             foreach ($representant->students as $key => $student) 
             {
-                if (!$student->hasActiveTrialClass()) {
-                    dd("no tiene clase trial");
+                //verifica si ha llevado a niño a clase demostrativa
+                if ($student->hasTakenTrialClass()) { // lo ha llevado
+                    dd("LLEVAR A PAGO");
                 } else {
-                    dd("tiene clase trial");
-
+                    dd("tiene clase trial activa, enviar a pago");
                 }
             }
-    	}
+    	} 
+        else 
+        {
+            //no tiene niños
+            dd("no tiene niños, hora de ingresar");
+        }
     	
     }
 

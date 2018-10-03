@@ -12,7 +12,7 @@ class Student extends Model
 
     const TYPETRIALCLASS = 'trial';
 
-    const STATEACTIVETRIALLCLASS = '1';
+    const STATEINACTIVETRIALLCLASS = '0';
 
     protected $table = 'student';
 
@@ -40,9 +40,11 @@ class Student extends Model
         return $this->belongsToMany('HappyFeet\Models\GroupClass','group_class_student','student_id','group_id');
     }
 
-    public function hasActiveTrialClass()
+    public function hasTakenTrialClass()
     {
-        $object = $this->groupsClass()->where('group_class_student.type',self::TYPETRIALCLASS)->where('group_class_student.date','<=',date('Y-m-d'))->where('group_class_student.state',self::STATEACTIVETRIALLCLASS)->toSql();
-        dd($object);
+        return $this->groupsClass()->where('group_class_student.type',self::TYPETRIALCLASS)
+               ->where('group_class_student.date','<',date('Y-m-d'))
+               ->where('group_class_student.state',self::STATEINACTIVETRIALLCLASS)->first();
+        
     }
 }
