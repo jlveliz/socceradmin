@@ -4,6 +4,7 @@ namespace HappyFeet\Repository;
 use HappyFeet\RepositoryInterface\RepresentantRepositoryInterface;
 use HappyFeet\Exceptions\RepresentantException;
 use HappyFeet\Models\Representant;
+use HappyFeet\Models\Person;
 use DB;
 
 /**
@@ -30,12 +31,10 @@ class RepresentantRepository implements RepresentantRepositoryInterface
 		if (is_array($field)) {
 			if (array_key_exists('num_identification', $field)) { 
 				$identification = $field['num_identification'];
-				return $representant = Representant::with(['user' => function($query) use($identification){
-					$query->with(['person' => function($subQuery) use($identification) {
-						$subQuery->where('num_identification',$identification);
-					}]);
-				}])->first();
-				
+				 return Person::join('user','user.person_id','=','person.id')
+				                 ->join('representant','representant.user_id','=','user.id')
+				                 ->where('person.num_identification','=',$identification)->first();
+
 			} else {
 				throw new RepresentantException('No se puede buscar el representante con cédula '.$field['num_identification'] ,404);	
 			}

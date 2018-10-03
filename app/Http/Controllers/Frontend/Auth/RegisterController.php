@@ -44,21 +44,21 @@ class RegisterController extends Controller
 
     	
     	// si existe representante
-    	$existRepresentant = $this->existRepresentant($request);
+    	// $existRepresentant = $this->existRepresentant($request);
+        $representant = $this->representantRepository->find(['num_identification'=>$request->get('num_identification')]);
 
 
-    	//si no existe representante 
-    	if ($existRepresentant->fails()) 
+        //si no existe representante 
+        if (!$representant) 
         {
-    		session()->put('num_identification',$request->get('num_identification'));
-    		// hora de registrar padre
-            return redirect('register-wizard');
+            session()->put('num_identification',$request->get('num_identification'));
+            // hora de registrar padre
+            return redirect('wizard');
         } 
 
 
         //existe representante y busca si tiene niños
-        $representant = $this->representantRepository->find(['num_identification'=>$request->get('num_identification')]);
-        
+        // dd($representant);
         if (count($representant->students) > 0) 
         { 
             foreach ($representant->students as $key => $student) 
@@ -79,17 +79,9 @@ class RegisterController extends Controller
     	
     }
 
-
-    private function existRepresentant(Request $request)
+    public function wizard(Request $request)
     {
-        return Validator::make($request->all(), 
-                ['num_identification' => Rule::exists('person')->where(function($query)
-                    {
-                        $query->select('person.num_identification')
-                        ->rightJoin('user','user.person_id','=','person.id')
-                        ->rightJoin('representant','representant.user_id','=','user.id');
-                    })
-                ]
-            );
+        dd("hola");
+        return view('frontend.auth.register');
     }
 }
