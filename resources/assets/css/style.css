@@ -213,14 +213,6 @@ h6 {
     width: 100%;
 }
 
-.register-wrapper {
-    background: url('../images/bg_register.jpeg');
-    height: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
 .bg-white .card {
     box-shadow: none;
 }

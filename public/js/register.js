@@ -66,9 +66,8 @@
 /******/ ({
 
 /***/ 10:
-/***/ (function(module, __webpack_exports__) {
+/***/ (function(module, exports) {
 
-"use strict";
 (function () {
   'use strict';
 

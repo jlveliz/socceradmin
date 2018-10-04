@@ -9,7 +9,7 @@
 @section('content')
 
  <!-- Main wrapper  -->
-    <div id="main-wrapper" class="register-wrapper">
+    <div id="main-wrapper" class="">
 
         <div class="unix-login">
             <div class="container-fluid">

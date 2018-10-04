@@ -7,9 +7,10 @@
 	<title> @yield('title') | {{ config('app.name')}} </title>
 	<!-- app -->
 	<link href="{{asset('css/vendors.css')}}" rel="stylesheet" media="all">
+	<link href="{{asset('css/custom-frontend.css')}}" rel="stylesheet" media="all">
 	@yield('css')
 </head>
-<body class="fix-header fix-sidebar">
+<body class="bg">
 	@yield('content')
 	<script src="{{ asset('js/vendors.js') }}" type="text/javascript"></script>
 	@yield('js')
