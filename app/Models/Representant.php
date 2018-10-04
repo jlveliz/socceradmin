@@ -7,14 +7,14 @@ use  Illuminate\Database\Eloquent\SoftDeletes;
 
 class Representant extends Model
 {
-    use SoftDeletes;
 
+    use SoftDeletes;
 
     protected $table = "representant";
 
     protected $primaryKey = "id";
 
-    protected $with = ['user'];
+    // protected $with = ['user'];
 
     protected $dates = ['deleted_at'];
     

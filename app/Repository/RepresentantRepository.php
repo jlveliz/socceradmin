@@ -31,9 +31,10 @@ class RepresentantRepository implements RepresentantRepositoryInterface
 		if (is_array($field)) {
 			if (array_key_exists('num_identification', $field)) { 
 				$identification = $field['num_identification'];
-				 return Person::join('user','user.person_id','=','person.id')
-				                 ->join('representant','representant.user_id','=','user.id')
+				 return  Representant::select('representant.*')->join('user','user.id','=','representant.user_id')
+				                 ->join('person','person.id','=','user.person_id')
 				                 ->where('person.num_identification','=',$identification)->first();
+				// return Representant::find(1);
 
 			} else {
 				throw new RepresentantException('No se puede buscar el representante con cédula '.$field['num_identification'] ,404);	

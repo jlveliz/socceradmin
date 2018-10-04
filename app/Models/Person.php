@@ -96,6 +96,11 @@ class Person extends Model
         $this->attributes['date_birth'] = date('Y-m-d',strtotime($value));
     }
 
+    public function user()
+    {
+        return $this->hasOne('HappyFeet\Models\User','person_id');
+    }
+
 
 
    

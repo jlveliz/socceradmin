@@ -41,6 +41,11 @@ class User extends Authenticatable
         return $this->belongsToMany('HappyFeet\Models\Role','user_role','user_id','role_id');
     }
 
+    public function representant()
+    {
+        return $this->hasOne('HappyFeet\Models\Representant','user_id');
+    }
+
     // public function permissions()
     // {
     //     return $this->hasMany('HappyFeet\Models\UserPermission','user_id');
