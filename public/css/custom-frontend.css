@@ -5,4 +5,7 @@ body {
 
 .bg {
 	background: url('../images/bg_register.jpg');
+	background-size: cover;
+	background-position: center;
+
 }
