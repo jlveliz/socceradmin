@@ -9,13 +9,9 @@
 @section('content')
 
  <!-- Main wrapper  -->
-    <div id="main-wrapper" class="register-wrapper">
-
-        <div class="unix-login">
-            <div class="container-fluid">
-                <div class="row justify-content-center">
-                    <div class="col-lg-4">
-                        <div class="login-content card">
+            <div class="container h-100">
+                <div class="row h-100 justify-content-center align-items-center">
+                    <div class="col-12 card">
                             <div class="login-form">
                                 <h3 class="text-center">Registro para Inicio de Clases Regulares y Demostrativas</h3>
 
@@ -36,17 +32,18 @@
                                     <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Siguiente</button>
                                 </form>
                             </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
-        </div>
-
+        
         <footer class="row footer-site">
         	<div class="container">
         		<a href="">Acceso a Padres</a> | <a href="">Acceso a Coachs</a>
         	</div>
         </footer>
+    <div id="main-wrapper">
+
 
     </div>
 
