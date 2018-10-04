@@ -143,26 +143,6 @@ div.side h1 span {
 	/*outline: 1px solid #fff;*/ /* avoid gap */
 }
 
-.side-left:after,
-.side-right:after{
-    content: '';
-    position: absolute;
-    bottom: 0px;
-    width: 0px;
-    height: 0px;
-    border-top: 8px solid transparent;
-    border-bottom: 8px solid transparent;
-}
-.side-left:after{
-    border-right: 15px solid #053973;
-    right: 0px;
-	bottom: 13%;/*100px;*/
-}
-.side-right:after{
-    border-left: 15px solid #161616;
-    left: 0px;
-	top: 13%;/*100px;*/
-}
 
 /* Intro content, profile image and name, back button */
 .intro-content {
