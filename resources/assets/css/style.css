@@ -6636,7 +6636,8 @@ tbody tr td:last-child {
 .login-form h3 {
     color: #455a64;
     text-align: center;
-    margin-bottom: 50px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .login-form .checkbox {

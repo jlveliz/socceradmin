@@ -13,6 +13,7 @@
         <div class="row h-100 justify-content-center align-items-center">
             <div class="col-lg-5 col-md-8 col-xs-12 col-sm-12 card">
                     <div class="login-form">
+                        <img src="{{ asset('images/logo.png') }}" class="img-fluid mx-auto d-block" alt="{{config('app.name')}}" title="{{config('app.name')}}">
                         <h3 class="text-center">Registro para Inicio de Clases Regulares y Demostrativas</h3>
 
                         <form class="needs-validation @if($errors->has('num_identification')) was-validated @endif" action="{{ route('register-verify') }}" method="post" novalidate>
@@ -35,12 +36,5 @@
                 
             </div>
         </div>
-    </div>
-
-    <footer class="row footer-site">
-    	<div class="container">
-    		<a href="">Acceso a Padres</a> | <a href="">Acceso a Coachs</a>
-    	</div>
-    </footer>
-    
+    </div>    
 @endsection
