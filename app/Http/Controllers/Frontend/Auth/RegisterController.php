@@ -52,9 +52,9 @@ class RegisterController extends Controller
         //si no existe representante 
         if (!$representant) 
         {
-            session()->put('num_identification',$request->get('num_identification'));
+            session()->push('representant.num_identification',$request->get('num_identification'));
             // hora de registrar padre
-            return redirect()->route('wizard');
+            return redirect()->route('register-wizard');
         } 
 
 
@@ -82,12 +82,12 @@ class RegisterController extends Controller
     public function wizard(Request $request)
     {
         if (session()->has('num_identification')) {
-
-            return view('frontend.auth.register');
+            
+            return view('frontend.auth.register',compact('representant'));
 
         } else {
 
-            return redirect()->route('register-show');
+            return redirect()->route('register-insert-identification');
 
         }
     }

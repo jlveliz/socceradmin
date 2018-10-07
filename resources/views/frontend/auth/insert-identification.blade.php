@@ -16,7 +16,7 @@
                         <img src="{{ asset('images/logo.png') }}" class="img-fluid mx-auto d-block" alt="{{config('app.name')}}" title="{{config('app.name')}}">
                         <h3 class="text-center">Registro para Inicio de Clases Regulares y Demostrativas</h3>
 
-                        <form class="needs-validation @if($errors->has('num_identification')) was-validated @endif" action="{{ route('register-verify') }}" method="post" novalidate>
+                        <form class="needs-validation @if($errors->has('num_identification')) was-validated @endif" action="{{ route('regiser-verify-identification') }}" method="post" novalidate>
                             {{ csrf_field() }}
                             <div class="row">
                                 <div class="col-sm-12 col-lg-12 col-xs-12 form-group">

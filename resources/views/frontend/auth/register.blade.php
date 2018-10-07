@@ -19,7 +19,7 @@
                             <div class="login-form">
                                 <h3 class="text-center">Registro para Inicio de Clases Regulares y Demostrativas</h3>
 
-                                <form class="needs-validation @if($errors->has('num_identification')) was-validated @endif" action="{{ route('register-verify') }}" method="post" novalidate>
+                                <form class="needs-validation @if($errors->has('num_identification')) was-validated @endif" action="{{ route('regiser-verify-identification') }}" method="post" novalidate>
                                     {{ csrf_field() }}
                                 	<div class="row">
 	                                    <div class="col-sm-6 col-lg-6 form-group">
