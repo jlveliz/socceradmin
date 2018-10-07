@@ -15,6 +15,7 @@
 Route::get('/', '\HappyFeet\Http\Controllers\Frontend\Auth\RegisterController@showRegisterForm')->name('register-insert-identification');
 Route::post('/', '\HappyFeet\Http\Controllers\Frontend\Auth\RegisterController@verifyForm')->name('regiser-verify-identification');
 Route::get('/register','\HappyFeet\Http\Controllers\Frontend\Auth\RegisterController@wizard')->name('register-wizard');
+Route::post('/register','\HappyFeet\Http\Controllers\Frontend\Auth\RegisterController@processWizard')->name('register-wizard');
 
 // Auth::routes();
 
