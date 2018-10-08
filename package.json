@@ -17,6 +17,7 @@
     "lodash": "^4.17.4"
   },
   "dependencies": {
+    "gijgo": "^1.9.10",
     "popper.js": "^1.14.4"
   },
   "externals": {

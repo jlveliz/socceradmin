@@ -1,5 +1,7 @@
 let mix = require('laravel-mix');
 
+
+
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -11,20 +13,28 @@ let mix = require('laravel-mix');
  |
  */
 
+mix.autoload({
+    jquery: ['$', 'window.jQuery', 'jQuery'],
+    gj: ['gijgo']
+})
+
 //VENDORS
 mix.styles([
-	'resources/assets/css/bootstrap/bootstrap.min.css',
-	'resources/assets/css/style.css',
-	],'public/css/vendors.css');
+    'resources/assets/css/bootstrap/bootstrap.min.css',
+    'node_modules/gijgo/css/gijgo.min.css',
+    'resources/assets/css/style.css',
+], 'public/css/vendors.css');
 
 
 
 
 mix.js([
-	'resources/assets/js/jquery/jquery.min.js',
-	'resources/assets/js/bootstrap/js/bootstrap.min.js',
-	'resources/assets/js/bootstrap/js/popper.min.js'
-	],'public/js/vendors.js');
+    'resources/assets/js/jquery/jquery.min.js',
+    'resources/assets/js/bootstrap/js/bootstrap.min.js',
+    'resources/assets/js/bootstrap/js/popper.min.js',
+    'resources/assets/js/gijgo/js/gijgo.js',
+    'resources/assets/js/gijgo/js/messages/messages.es-es.js',
+], 'public/js/vendors.js');
 
 
 /*  
@@ -33,7 +43,14 @@ mix.js([
  	=================
  */
 
- //auth
- mix.js([
- 	'resources/assets/js/components/register.js'
- ],'public/js/register.js')
+//auth
+mix.js([
+    'resources/assets/js/components/register.js'
+], 'public/js/register.js')
+
+
+// mix.autoload({
+//     jQuery: 'jquery',
+//     $: 'jquery',
+//     jquery: jquery
+// })

@@ -360,7 +360,7 @@ print_r(session()->all());
 @endif
 
 {{-- INGRESA TIPO DE CLASE --}}
-@if (!session()->has('register_wizard.children_exist_class_type') && (session()->get('register_wizard.representant_exist_facebook_link') == 1))
+@if (!session()->has('register_wizard.group_class_exist_group') && (session()->get('register_wizard.representant_exist_facebook_link') == 1))
 <div class="container h-100">
     <div class="row h-100 justify-content-center align-items-center">
         <div class="col-lg-5 col-md-8 col-xs-12 col-sm-12 card">
@@ -373,7 +373,7 @@ print_r(session()->all());
                         <input type="hidden" name="is_group_children_class_type" value="1">
                         <div class="row">
                             <div class="col-sm-12 col-lg-12 col-xs-12 form-group">
-                                <label for="representant_facebook_link">Seleccione un tipo de Clase</label>
+                                <label for="group_class_type">Seleccione un tipo de Clase</label>
                                 <select name="group_class_type" id="group_class_type" class="form-control" required>
                                     <option value="">Seleccione</option>
                                     <option value="trial" @if(old('group_class_type') == 'trial') selected @endif>Demostrativa</option> 
@@ -397,7 +397,7 @@ print_r(session()->all());
 @endif
 
 {{-- INGRESA UNA EDAD DEL NIñO --}}
-@if (!session()->has('register_wizard.children_age') && (session()->get('register_wizard.children_exist_class_type') == 1))
+@if (!session()->has('register_wizard.children_exist_age') && (session()->get('register_wizard.group_class_exist_group') == 1))
 <div class="container h-100">
     <div class="row h-100 justify-content-center align-items-center">
         <div class="col-lg-5 col-md-8 col-xs-12 col-sm-12 card">
@@ -414,13 +414,46 @@ print_r(session()->all());
                                 <select name="children_age" id="children_age" class="form-control" required>
                                     <option value="">Seleccione</option>
                                     @for ($i = 2; $i <= 8 ; $i++)
-                                        <option value="trial" @if(old('children_age') == $i) selected @endif>{{$i}}</option> 
+                                        <option value="trial" @if(old('children_age') == $i) selected @endif>{{$i}} Años</option> 
                                     @endfor
                                 </select>
-                                <div class="invalid-feedback">Seleccione una edad del niñ(a).</div>
+                                <div class="invalid-feedback">Seleccione una edad del niño(a).</div>
                                 @if($errors->has('group_class_type'))
                                     <div class="invalid-feedback" style="display: block">
                                         {{$errors->first('children_age')}}
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Siguiente</button>
+                    </form>
+                </div>
+            
+        </div>
+    </div>
+</div>
+@endif
+
+{{-- INGRESA UNA EDAD DEL NIñO --}}
+@if (!session()->has('register_wizard.children_exist_date_for_class') && (session()->get('register_wizard.children_exist_age') == 1))
+<div class="container h-100">
+    <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-lg-5 col-md-8 col-xs-12 col-sm-12 card">
+                <div class="login-form">
+                    <img src="{{ asset('images/logo.png') }}" class="img-fluid mx-auto d-block" alt="{{config('app.name')}}" title="{{config('app.name')}}">
+                    <h3 class="text-center">Registro para Inicio de Clases Regulares y Demostrativas</h3>
+
+                    <form class="needs-validation" action="{{ route('register-wizard') }}" method="post" novalidate>
+                        {{ csrf_field() }}
+                        <input type="hidden" name="is_date_for_class" value="1">
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-12 col-xs-12 form-group">
+                                <label for="group_class_date">Seleccione un día para la Clase</label>
+                                <input  class="form-control" name="group_class_date" id="group_class_date" required>
+                                <div class="invalid-feedback">Seleccione una fecha para la clase.</div>
+                                @if($errors->has('group_class_date'))
+                                    <div class="invalid-feedback" style="display: block">
+                                        {{$errors->first('group_class_date')}}
                                     </div>
                                 @endif
                             </div>

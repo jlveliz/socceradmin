@@ -392,6 +392,32 @@ class RegisterController extends Controller
 
         }
 
+        //ingresa una fecha disponible para la clase
+        if ($request->has('is_date_for_class')) {
+            
+            $validator = Validator::make($request->all(),[
+                'group_class_date' => 'required|date',
+            ],[
+                'group_class_date.required' => 'Seleccione una fecha para la clase',
+                'group_class_date.date' => 'Seleccione una fecha válida',
+            ]);
+
+            if ($validator->fails()) 
+            {
+                return redirect()->back()
+                ->withInput($request->all())
+                ->withErrors(
+                    [
+                        'group_class_date' => $validator->errors()->first('group_class_date'),
+                    ]
+                );
+            }
+
+            session()->put('group_class_student.date',$request->get('group_class_date'));
+            session()->put('register_wizard.group_exist_date',1);
+
+        }
+
         return redirect()->back();
     }
 }
