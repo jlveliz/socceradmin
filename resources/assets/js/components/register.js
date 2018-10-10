@@ -1,12 +1,10 @@
 window.$ = window.jQuery = require('jquery');
-window.gj = require('gijgo');
 
 
-import 'gijgo/js/gijgo.js';
-import 'gijgo/js/messages/messages.es-es.min.js';
+import 'pc-bootstrap4-datetimepicker/build/js/bootstrap-datetimepicker.min.js';
 
 (function() {
-  console.log(gj)
+
     'use strict';
 
     window.addEventListener('load', function() {
@@ -26,9 +24,10 @@ import 'gijgo/js/messages/messages.es-es.min.js';
 
 
         //datepicker
-        $('#group_class_date').datepicker({
-            locale: 'es-es',
-            uiLibrary: 'bootstrap4'
+        $('#group_class_date').datetimepicker({
+            locale: 'es',
+            format: 'YYYY-MM-DD',
+            minDate: new Date()
         });
 
 

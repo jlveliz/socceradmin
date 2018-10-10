@@ -458,7 +458,7 @@ print_r(session()->all());
                                 @endif
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Siguiente</button>
+                        <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Registrarse</button>
                     </form>
                 </div>
             

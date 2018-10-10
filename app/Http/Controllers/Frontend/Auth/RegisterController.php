@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use HappyFeet\Http\Controllers\Controller;
 use Illuminate\Validation\Rule;
 use HappyFeet\RepositoryInterface\RepresentantRepositoryInterface;
+use HappyFeet\RepositoryInterface\RegisterStudentFrontendRepositoryInterface;
 use Validator;
 
 
@@ -13,10 +14,12 @@ class RegisterController extends Controller
 {
     
     private $representantRepository;
+    private $registerRepo;
 
-    public function __construct(RepresentantRepositoryInterface $representantRepository)
+    public function __construct(RepresentantRepositoryInterface $representantRepository,RegisterStudentFrontendRepositoryInterface  $registerRepo)
     {
         $this->representantRepository = $representantRepository;
+        $this->registerRepo = $registerRepo;
     }
 
     public function showRegisterForm()
@@ -212,7 +215,7 @@ class RegisterController extends Controller
                 );
             }
 
-            session()->put('representant.address',$request->get('representant_email'));
+            session()->put('representant.address',$request->get('representant_address'));
             session()->put('register_wizard.representant_exist_address',1);
 
         }
@@ -415,6 +418,13 @@ class RegisterController extends Controller
 
             session()->put('group_class_student.date',$request->get('group_class_date'));
             session()->put('register_wizard.group_exist_date',1);
+
+            //get todo lo ingresado
+            $data = [];
+            $data['representant'] = session()->get('representant');
+            $data['children'] = session()->get('children');
+            $data['group_class_student'] = session()->get('group_class_student');
+            $this->registerRepo->save($data);
 
         }
 

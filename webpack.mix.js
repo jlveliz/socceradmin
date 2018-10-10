@@ -14,14 +14,13 @@ let mix = require('laravel-mix');
  */
 
 mix.autoload({
-    jquery: ['$', 'window.jQuery', 'jQuery'],
-    gj: ['gijgo']
+    jquery: ['$', 'window.jQuery', 'jQuery']
 })
 
 //VENDORS
 mix.styles([
     'resources/assets/css/bootstrap/bootstrap.min.css',
-    'node_modules/gijgo/css/gijgo.min.css',
+    'node_modules/pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css',
     'resources/assets/css/style.css',
 ], 'public/css/vendors.css');
 
@@ -32,8 +31,8 @@ mix.js([
     'resources/assets/js/jquery/jquery.min.js',
     'resources/assets/js/bootstrap/js/bootstrap.min.js',
     'resources/assets/js/bootstrap/js/popper.min.js',
-    'resources/assets/js/gijgo/js/gijgo.js',
-    'resources/assets/js/gijgo/js/messages/messages.es-es.js',
+    // 'resources/assets/js/gijgo/js/gijgo.js',
+    // 'resources/assets/js/gijgo/js/messages/messages.es-es.js',
 ], 'public/js/vendors.js');
 
 
