@@ -24,7 +24,6 @@ class Student extends Model
     	'person_id',
     	'representant_id',
     	'nickname',
-    	'genre',
     	'medical_history',
     	'observation'
     ];

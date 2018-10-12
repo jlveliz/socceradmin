@@ -414,7 +414,7 @@ print_r(session()->all());
                                 <select name="children_age" id="children_age" class="form-control" required>
                                     <option value="">Seleccione</option>
                                     @for ($i = 2; $i <= 8 ; $i++)
-                                        <option value="trial" @if(old('children_age') == $i) selected @endif>{{$i}} Años</option> 
+                                        <option value="{{$i}}" @if(old('children_age') == $i) selected @endif>{{$i}} Años</option> 
                                     @endfor
                                 </select>
                                 <div class="invalid-feedback">Seleccione una edad del niño(a).</div>

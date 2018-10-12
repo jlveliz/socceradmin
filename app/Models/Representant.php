@@ -14,12 +14,13 @@ class Representant extends Model
 
     protected $primaryKey = "id";
 
-    // protected $with = ['user'];
+    protected $with = ['user'];
 
     protected $dates = ['deleted_at'];
     
     protected $fillable = [
-    	'*'
+    	'user_id',
+        'state'
     ];
 
 
