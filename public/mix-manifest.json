@@ -1,5 +1,6 @@
 {
     "/js/register.js": "/js/register.js",
     "/js/vendors.js": "/js/vendors.js",
+    "/js/validations.js": "/js/validations.js",
     "/css/vendors.css": "/css/vendors.css"
 }

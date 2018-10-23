@@ -68,4 +68,9 @@
         </div>
     </div>
 </div>
+<footer class="row footer-site">
+        <div class="container">
+            <a href="">Acceso a Padres</a> | <a href="">Acceso a Coachs</a>
+        </div>
+    </footer>
 @endsection

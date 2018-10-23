@@ -17,6 +17,9 @@
     "lodash": "^4.17.4"
   },
   "dependencies": {
+    "animate": "^1.0.0",
+    "animate.css": "^3.7.0",
+    "jquery-validation": "^1.18.0",
     "pc-bootstrap4-datetimepicker": "^4.17.50",
     "popper.js": "^1.14.4"
   },

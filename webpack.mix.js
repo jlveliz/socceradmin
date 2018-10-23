@@ -21,6 +21,7 @@ mix.autoload({
 mix.styles([
     'resources/assets/css/bootstrap/bootstrap.min.css',
     'node_modules/pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css',
+    'node_modules/animate.css/animate.min.css',
     'resources/assets/css/style.css',
 ], 'public/css/vendors.css');
 
@@ -46,6 +47,11 @@ mix.js([
 mix.js([
     'resources/assets/js/components/register.js'
 ], 'public/js/register.js')
+
+
+mix.js([
+    'resources/assets/js/components/backend-login.js'
+], 'public/js/validations.js')
 
 
 // mix.autoload({

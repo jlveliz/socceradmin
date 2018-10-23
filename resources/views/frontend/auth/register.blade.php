@@ -8,12 +8,6 @@
 
 @section('content')
 
-
-    <p>
-@php
-print_r(session()->all());
-@endphp
-</p>
 {{-- ============= REPRESENTANTES ============== --}}
 
 {{-- INGRESA NOMBRES REPR --}}
@@ -467,4 +461,9 @@ print_r(session()->all());
 </div>
 @endif
 
+<footer class="row footer-site">
+        <div class="container">
+            <a href="">Acceso a Padres</a> | <a href="">Acceso a Coachs</a>
+        </div>
+    </footer>
 @endsection

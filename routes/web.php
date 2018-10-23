@@ -12,11 +12,18 @@
 */
 
 //REGISTER
-Route::get('/', '\HappyFeet\Http\Controllers\Frontend\Auth\RegisterController@showRegisterForm')->name('register-insert-identification');
-Route::post('/', '\HappyFeet\Http\Controllers\Frontend\Auth\RegisterController@verifyForm')->name('regiser-verify-identification');
-Route::get('/register','\HappyFeet\Http\Controllers\Frontend\Auth\RegisterController@wizard')->name('register-wizard');
-Route::post('/register','\HappyFeet\Http\Controllers\Frontend\Auth\RegisterController@processWizard')->name('register-wizard');
+Route::get('/', 'Frontend\Auth\RegisterController@showRegisterForm')->name('register-insert-identification');
+Route::post('/', 'Frontend\Auth\RegisterController@verifyForm')->name('regiser-verify-identification');
+Route::get('/register','Frontend\Auth\RegisterController@wizard')->name('register-wizard');
+Route::post('/register','Frontend\Auth\RegisterController@processWizard')->name('register-wizard');
 
-// Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::prefix('backend')->group(function(){
+	Route::get('/','Backend\Auth\LoginController@showLoginForm');
+	Route::post('/login','Backend\Auth\LoginController@login')->name('backend-login');
+
+	Route::get('/dashboard','Backend\Dashboard\DashboardController@showDash');
+});
