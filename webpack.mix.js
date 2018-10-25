@@ -52,9 +52,9 @@ mix.js([
 ], 'public/js/register.js')
 
 
-// mix.js([
-//     'resources/assets/js/components/custom.min.js'
-// ], 'public/js/custom.min.js')
+mix.js([
+    'resources/assets/js/components/custom.min.js'
+], 'public/js/custom.min.js')
 
 
 // mix.autoload({

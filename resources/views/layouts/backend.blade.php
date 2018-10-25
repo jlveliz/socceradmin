@@ -30,7 +30,7 @@
     	</div>
     </div>
 	<script type="text/javascript" src="{{ asset('js/vendors.js') }}"></script>
-	{{-- <script type="text/javascript" src="{{ asset('js/custom.min.js') }}"></script> --}}
+	<script type="text/javascript" src="{{ asset('js/custom.min.js') }}"></script>
 	@yield('js')
 </body>
 </html>
