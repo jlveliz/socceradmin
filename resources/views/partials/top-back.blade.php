@@ -27,14 +27,15 @@
                        
                         <!-- Profile -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{ asset('images/users/5.jpg') }}" alt="user" class="profile-pic" /></a>
+                            <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{ asset('images/users/default.png') }}" alt="user" class="profile-pic" /></a>
                             <div class="dropdown-menu dropdown-menu-right animated zoomIn">
                                 <ul class="dropdown-user">
-                                    <li><a href="#"><i class="ti-user"></i> Profile</a></li>
-                                    <li><a href="#"><i class="ti-wallet"></i> Balance</a></li>
-                                    <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
-                                    <li><a href="#"><i class="ti-settings"></i> Setting</a></li>
-                                    <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
+                                    <li>
+                                        <a href=""><i class="fa fa-power-off" onclick="e.preventDefault();document.getElement('logout').submit();"></i> Salir</a>
+                                        <form action="{{ route('backend-logout') }}" style="display: none">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </li>
                                 </ul>
                             </div>
                         </li>
