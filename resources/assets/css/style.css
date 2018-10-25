@@ -758,7 +758,8 @@ a,
 button {
     outline: none!important;
     text-decoration: none!important;
-    color: #99abb4;
+    /*color: #99abb4;*/
+    color: #000;
     transition: all 0.2s ease 0s;
 }
 
@@ -784,7 +785,8 @@ li {
 
 p {
     font-family: 'Poppins', sans-serif;
-    color: #99abb4;
+    /*color: #99abb4;*/
+    color: #000;
 }
 
 .h2,
@@ -1921,7 +1923,8 @@ textarea {
     font-size: 16px;
     display: inline-block;
     vertical-align: middle;
-    color: #99abb4;
+    /*color: #99abb4;*/
+    color: #000;
 }
 
 .sidebar-nav>ul>li>a .label {
@@ -2291,6 +2294,7 @@ textarea {
 
 .page-titles .breadcrumb .breadcrumb-item.active {
     color: #99abb4;
+    /*color: #99abb4;*/
 }
 
 .pagination>li:first-child>a {
@@ -2543,7 +2547,8 @@ textarea {
 }
 
 .card .card-subtitle {
-    color: #99abb4;
+    /*color: #99abb4;*/
+    color: #000;
     font-weight: 300;
     margin-bottom: 15px;
 }
@@ -5355,7 +5360,8 @@ footer p {
 
 .stat-widget-one .stat-text {
     font-size: 14px;
-    color: #99abb4;
+    /*color: #99abb4;*/
+    color: #000;
 }
 
 .stat-widget-one .stat-digit {
@@ -5382,7 +5388,8 @@ footer p {
 .stat-widget-two .stat-text {
     font-size: 20px;
     margin-bottom: 5px;
-    color: #99abb4;
+    /*color: #99abb4;*/
+    color: #000;
 }
 
 .stat-widget-two .progress {
@@ -5755,7 +5762,8 @@ footer p {
 .recent-comment .media-body p {
     margin-bottom: 10px;
     line-height: 16px;
-    color: #99abb4;
+    /*color: #99abb4;*/
+    color: #000;
 }
 
 .recent-comment .comment-date {
@@ -6420,7 +6428,8 @@ label {
 
 .tdl-holder label:hover {
     background-color: #eef5f9;
-    color: #99abb4;
+    /*color: #99abb4;*/
+    color: #000;
 }
 
 .tdl-holder label:hover a {
@@ -6429,7 +6438,8 @@ label {
 
 .tdl-holder label a {
     border-radius: 50%;
-    color: #99abb4;
+    /*color: #99abb4;*/
+    color: #000;
     display: none;
     float: right;
     font-weight: bold;
@@ -6509,7 +6519,8 @@ tbody tr th {
 
 tbody tr td {
     font-family: 'Poppins', sans-serif;
-    color: #99abb4;
+    /*color: #99abb4;*/
+    color: #000;
 }
 
 tbody tr td:last-child {
@@ -6753,7 +6764,8 @@ tbody tr td:last-child {
 }
 
 .profiletimeline .sl-date {
-    color: #99abb4;
+    /*color: #99abb4;*/
+    color: #000;
     font-size: 12px;
 }
 
@@ -7471,7 +7483,8 @@ tbody tr td:last-child {
 }
 
 .media-body p {
-    color: #99abb4;
+    /*color: #99abb4;*/
+    color: #000;
     line-height: 15px;
 }
 

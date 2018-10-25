@@ -22,7 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::prefix('backend')->group(function(){
-	Route::get('/','Backend\Auth\LoginController@showLoginForm');
+	Route::get('/','Backend\Auth\LoginController@showLoginForm')->name('dashboard');
 	Route::post('/login','Backend\Auth\LoginController@login')->name('backend-login');
 
 	Route::get('/dashboard','Backend\Dashboard\DashboardController@showDash');

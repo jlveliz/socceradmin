@@ -21,6 +21,8 @@ mix.autoload({
 mix.styles([
     'resources/assets/css/bootstrap/bootstrap.min.css',
     'node_modules/pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css',
+    'resources/assets/css/font-awesome/css/font-awesome.min.css',
+    'resources/assets/css/themify-icons/themify-icons.css',
     'node_modules/animate.css/animate.min.css',
     'resources/assets/css/style.css',
 ], 'public/css/vendors.css');
@@ -30,8 +32,9 @@ mix.styles([
 
 mix.js([
     'resources/assets/js/jquery/jquery.min.js',
-    'resources/assets/js/bootstrap/js/bootstrap.min.js',
     'resources/assets/js/bootstrap/js/popper.min.js',
+    'resources/assets/js/bootstrap/js/bootstrap.min.js',
+    // 'resources/assets/js/sticky-kit-master/dist/sticky-kit.min.js',
     // 'resources/assets/js/gijgo/js/gijgo.js',
     // 'resources/assets/js/gijgo/js/messages/messages.es-es.js',
 ], 'public/js/vendors.js');
@@ -49,9 +52,9 @@ mix.js([
 ], 'public/js/register.js')
 
 
-mix.js([
-    'resources/assets/js/components/backend-login.js'
-], 'public/js/validations.js')
+// mix.js([
+//     'resources/assets/js/components/custom.min.js'
+// ], 'public/js/custom.min.js')
 
 
 // mix.autoload({
