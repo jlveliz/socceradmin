@@ -27,4 +27,7 @@ Route::prefix('backend')->group(function(){
 	Route::post('/logout','Backend\Auth\LoginController@logout')->name('backend-logout');
 
 	Route::get('/dashboard','Backend\Dashboard\DashboardController@showDash');
+
+	//modules
+	Route::resource('modules','Backend\ModuleController',['except'=>['show']]);
 });

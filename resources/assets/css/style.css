@@ -2409,6 +2409,7 @@ textarea {
     padding: 17px 15px;
     position: absolute;
     right: 0;
+    bottom: 0
 }
 
 .footer {
@@ -8428,4 +8429,8 @@ only screen and (min-resolution: 2dppx) {
 
 .footer-site a {
     color: #FFFFFF;
+}
+
+.btn {
+    color :#FFFFFF!important;
 }
