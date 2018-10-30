@@ -26,6 +26,12 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
+            	@if (session()->has('type') && session()->has('content'))
+            		<div class="alert alert-{{ session()->get('type') }}">
+            			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            			{{ session()->get('content') }}
+            		</div>
+            	@endif
             	<form action="@if(isset($module)) {{ route('modules.update',['id'=>$module->id]) }} @else {{ route('modules.store') }} @endif" method="POST" >
             		{{ csrf_field() }}
             		@if (isset($module))
@@ -46,6 +52,15 @@
 		                		</div>
 		                		<div class="col-2">
 			                		<div class="form-group">
+			                			<label for="order">Orden <span class="text-danger">*</span></label>
+			                			<input type="text" name="order" id="order" class="form-control"  autofocus="" value="@if(isset($module)){{ $module->order }}@else {{ old('order') }}@endif" >
+			                			@if ($errors->has('name'))
+			                				<div id="val-order-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('order') }}</div>
+			                			@endif
+			                		</div>
+		                		</div>
+		                		<div class="col-2">
+			                		<div class="form-group">
 			                			<label for="state">Estado <span class="text-danger">*</span></label>
 			                			<select name="state" id="state" class="form-control custom-select">
 			                				<option value="1" @if( (isset($module) && $module->state == '1') || ( old('state') == '1' ) ) selected @endif>Activo</option>
@@ -57,8 +72,9 @@
 	                	</div>
 	                	<hr>
 	                	<div class="form-actions">
+	                		<input type="hidden" value="0" name="redirect-index" id="redirect-index">
 	                		<button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-save"></i> Guardar</button>
-	                		<button class="btn btn-success btn-sm" type="submit"><i class="fa fa-save"></i> Guardar y Cerrar</button>
+	                		<button class="btn btn-success btn-sm save-close" type="submit"><i class="fa fa-save"></i> Guardar y Cerrar</button>
 	                		<a class="btn btn-inverse btn-sm" href="{{ route('modules.index') }}"><i class="fa fa-ban"></i> Cancelar</a>
 	                	</div>
 	                </div>

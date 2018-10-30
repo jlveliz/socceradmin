@@ -29,8 +29,13 @@
             <!-- End footer -->
     	</div>
     </div>
-	<script type="text/javascript" src="{{ asset('js/vendors.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('js/custom.min.js') }}"></script>
-	@yield('js')
+
+
+    @include('partials.modals')
+    <script type="text/javascript" src="{{ asset('js/jquery/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/bootstrap/js/popper.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/custom.min.js') }}"></script>
+    @yield('js')
 </body>
 </html>

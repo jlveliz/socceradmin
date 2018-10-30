@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use HappyFeet\Http\Controllers\Controller;
 use HappyFeet\Http\Requests\ModuleRequest;
 use HappyFeet\RepositoryInterface\ModuleRepositoryInterface;
+use HappyFeet\Exceptions\ModuleException;
 
 
 class ModuleController extends Controller
@@ -13,6 +14,8 @@ class ModuleController extends Controller
     
 
     protected $module;
+
+    protected $routeRedirectIndex = 'modules.index';
 
 
     public function __construct(ModuleRepositoryInterface $module)
@@ -49,10 +52,25 @@ class ModuleController extends Controller
      */
     public function store(ModuleRequest $request)
     {
-        $module = $this->module->save($request->all());
-        if ($module) {
-            
+        $message = [
+            'type' => 'success',
+            'content' =>'',
+        ];
+
+        try {
+            $message['content'] = "Se ha creado el módulo satisfactoriamente";
+            $module = $this->module->save($request->all());
+            if ($request->get('redirect-index') == 1) {
+                return redirect()->route($this->routeRedirectIndex)->with($message);
+            } else {
+                return redirect()->route('modules.edit',['id'=>$module->id])->with($message);
+            }
+        } catch (ModuleException $e) {
+            $message['type'] = "error";
+            $message['content'] = "No se ha creado el módulo, intente nuevamente";
+            return back()->with($message);
         }
+            
     }
 
     /**
@@ -87,7 +105,24 @@ class ModuleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $message = [
+            'type' => 'success',
+            'content' =>'',
+        ];
+        try {
+          $module = $this->module->edit($id,$request->all());
+          $message['content'] = "Se ha Actualizaddo el módulo satisfactoriamente";
+          
+          if ($request->get('redirect-index') == 1) { 
+            return redirect()->route($this->routeRedirectIndex)->with($message);
+          } else {
+            return back()->with($message);
+          }
+          
+        } catch (ModuleException $e) {
+            $message['type'] = 'error';
+            $message['content'] = "No se Ha podido actualizar el módulo, intente nuevamente";
+        }
     }
 
     /**
@@ -98,6 +133,19 @@ class ModuleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $message = [
+            'type' => 'success',
+            'content' =>'',
+        ];
+        try {
+            $deleted = $this->module->remove($id);
+            $message['content'] = "Se ha eliminado el módulo satisfactoriamente";
+            return back()->with($message);
+        } catch (ModuleException $e) {
+            $message['type'] = "error";
+            $message['content'] = "No se ha podido eliminar el módulo, intente nuevamente";
+            return back()->with($message);
+        }
+        
     }
 }

@@ -44,17 +44,17 @@ mix.js([
 	=================
 	COMPONENTS
  	=================
- */
+//  */
 
-//auth
-mix.js([
-    'resources/assets/js/components/register.js'
-], 'public/js/register.js')
+// //auth
+// mix.js([
+//     'resources/assets/js/components/register.js'
+// ], 'public/js/register.js')
 
 
-mix.js([
-    'resources/assets/js/components/custom.min.js'
-], 'public/js/custom.min.js')
+// mix.js([
+//     'resources/assets/js/components/custom.min.js'
+// ], 'public/js/custom.min.js')
 
 
 // mix.autoload({

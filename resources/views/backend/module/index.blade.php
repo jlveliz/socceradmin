@@ -21,6 +21,12 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
+                @if (session()->has('type') && session()->has('content'))
+                    <div class="alert alert-{{ session()->get('type') }}">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        {{ session()->get('content') }}
+                    </div>
+                @endif
                 <div class="card-body"> 
                 	<div class="form-group">
                 		<a href="{{ route('modules.create') }}" class="btn btn-primary btn-sm pull-right"><i class="fa fa-plus"></i> Crear</a><br>
@@ -47,7 +53,7 @@
 	                				</td>
 	                				<td>
 	                					<a class="btn btn-warning btn-flat btn-sm" href="{{ route('modules.edit',['id' => $module->id]) }}"><i class="fa fa-edit"></i> Editar</a>
-	                					<a class="btn btn-danger btn-flat btn-sm"><i class="fa fa-trash"></i> Eliminar</a>
+	                					<button class="btn btn-danger btn-flat btn-sm delete-btn" data-toggle="modal" data-target="#delete-modal" data-component="módulo" data-component-name="{{ $module->name }}" data-url="{{ route('modules.destroy',['id'=>$module->id]) }}"><i class="fa fa-trash"></i> Eliminar</button>
 	                				</td>
 	                			</tr>
 	                			@endforeach
