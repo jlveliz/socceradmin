@@ -31,10 +31,7 @@
                             <div class="dropdown-menu dropdown-menu-right animated zoomIn">
                                 <ul class="dropdown-user">
                                     <li>
-                                        <a href=""><i class="fa fa-power-off" onclick="e.preventDefault();document.getElement('logout').submit();"></i> Salir</a>
-                                        <form action="{{ route('backend-logout') }}" style="display: none">
-                                            {{ csrf_field() }}
-                                        </form>
+                                        <a href="{{ route('backend-logout') }}"><i class="fa fa-power-off"></i> Salir</a>
                                     </li>
                                 </ul>
                             </div>

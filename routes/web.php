@@ -24,7 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::prefix('backend')->group(function(){
 	Route::get('/','Backend\Auth\LoginController@showLoginForm')->name('dashboard');
 	Route::post('/login','Backend\Auth\LoginController@login')->name('backend-login');
-	Route::post('/logout','Backend\Auth\LoginController@logout')->name('backend-logout');
+	Route::get('/logout','Backend\Auth\LoginController@logout')->name('backend-logout');
 
 	Route::get('/dashboard','Backend\Dashboard\DashboardController@showDash');
 
