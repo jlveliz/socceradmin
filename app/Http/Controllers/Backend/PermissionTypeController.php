@@ -4,23 +4,21 @@ namespace HappyFeet\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use HappyFeet\Http\Controllers\Controller;
-use HappyFeet\Http\Requests\ModuleRequest;
-use HappyFeet\RepositoryInterface\ModuleRepositoryInterface;
-use HappyFeet\Exceptions\ModuleException;
+use HappyFeet\RepositoryInterface\PermissionTypeRepositoryInterface;
+use HappyFeet\Http\Requests\PermissionTypeRequest;
+use HappyFeet\Exceptions\PermissionTypeException;
 
-
-class ModuleController extends Controller
+class PermissionTypeController extends Controller
 {
     
+    protected $permissionType;
 
-    protected $module;
-
-    protected $routeRedirectIndex = 'modules.index';
+    protected $routeRedirectIndex = 'permission-types.index';
 
 
-    public function __construct(ModuleRepositoryInterface $module)
+    function __construct(PermissionTypeRepositoryInterface $permissionType)
     {
-        $this->module = $module;
+        $this->permissionType = $permissionType;
     }
     /**
      * Display a listing of the resource.
@@ -29,9 +27,8 @@ class ModuleController extends Controller
      */
     public function index()
     {
-        
-        $modules = $this->module->enum();
-        return view('backend.module.index',compact('modules'));
+        $permissionTypes = $this->permissionType->enum();
+        return view('backend.permission-type.index',compact('permissionTypes'));
     }
 
     /**
@@ -41,7 +38,7 @@ class ModuleController extends Controller
      */
     public function create()
     {
-        return view('backend.module.create-edit');
+        return view('backend.permission-type.create-edit');
     }
 
     /**
@@ -50,7 +47,7 @@ class ModuleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ModuleRequest $request)
+    public function store(PermissionTypeRequest $request)
     {
         $message = [
             'type' => 'success',
@@ -58,19 +55,18 @@ class ModuleController extends Controller
         ];
 
         try {
-            $message['content'] = "Se ha creado el módulo satisfactoriamente";
-            $module = $this->module->save($request->all());
+            $message['content'] = "Se ha creado el tipo de permiso satisfactoriamente";
+            $permissionType = $this->permissionType->save($request->all());
             if ($request->get('redirect-index') == 1) {
                 return redirect()->route($this->routeRedirectIndex)->with($message);
             } else {
-                return redirect()->route('modules.edit',['id'=>$module->id])->with($message);
+                return redirect()->route('permission-types.edit',['id'=>$permissionType->id])->with($message);
             }
-        } catch (ModuleException $e) {
+        } catch (PermissionTypeException $e) {
             $message['type'] = "error";
             $message['content'] = $e->getMessage();
             return back()->with($message);
         }
-            
     }
 
     /**
@@ -92,8 +88,8 @@ class ModuleController extends Controller
      */
     public function edit($id)
     {
-        $module = $this->module->find($id);
-        return view('backend.module.create-edit',compact('module'));
+        $permissionType = $this->permissionType->find($id);
+        return view('backend.permission-type.create-edit',compact('permissionType'));
     }
 
     /**
@@ -110,8 +106,8 @@ class ModuleController extends Controller
             'content' =>'',
         ];
         try {
-          $module = $this->module->edit($id,$request->all());
-          $message['content'] = "Se ha Actualizado el módulo satisfactoriamente";
+          $permissionType = $this->permissionType->edit($id,$request->all());
+          $message['content'] = "Se ha Actualizado el tipo de permiso satisfactoriamente";
           
           if ($request->get('redirect-index') == 1) { 
             return redirect()->route($this->routeRedirectIndex)->with($message);
@@ -119,7 +115,7 @@ class ModuleController extends Controller
             return back()->with($message);
           }
           
-        } catch (ModuleException $e) {
+        } catch (PermissionTypeException $e) {
             $message['type'] = 'error';
             $message['content'] = $e->getMessage();
         }
@@ -138,14 +134,13 @@ class ModuleController extends Controller
             'content' =>'',
         ];
         try {
-            $deleted = $this->module->remove($id);
-            $message['content'] = "Se ha eliminado el módulo satisfactoriamente";
+            $deleted = $this->permissionType->remove($id);
+            $message['content'] = "Se ha eliminado el tipo de permiso satisfactoriamente";
             return back()->with($message);
-        } catch (ModuleException $e) {
+        } catch (PermissionTypeException $e) {
             $message['type'] = "error";
             $message['content'] = $e->getMessage();
             return back()->with($message);
         }
-        
     }
 }

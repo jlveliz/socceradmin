@@ -1,14 +1,14 @@
 @extends('layouts.backend')
-@section('title','Módulos')
+@section('title','Tipos de Permiso')
 
 @section('content')
 <!-- Bread crumb -->
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h3 class="text-primary">Módulos</h3> </div>
+        <h3 class="text-primary">Tipos de Permiso</h3> </div>
     <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="javascript:void(0)">Módulos</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Tipo de Permisos</a></li>
             <li class="breadcrumb-item active">Listado</li>
         </ol>
     </div>
@@ -29,7 +29,7 @@
                 @endif
                 <div class="card-body"> 
                 	<div class="form-group">
-                		<a href="{{ route('modules.create') }}" class="btn btn-primary btn-sm pull-right"><i class="fa fa-plus"></i> Crear</a><br>
+                		<a href="{{ route('permission-types.create') }}" class="btn btn-primary btn-sm pull-right"><i class="fa fa-plus"></i> Crear</a><br>
                 	</div>
                 	<table class="table table-hover">
                 		<thead>
@@ -40,27 +40,27 @@
                 			</tr>
                 		</thead>
                 		<tbody>
-                			@if (count($modules) > 0)
-	                			@foreach ($modules as $module)
+                			@if (count($permissionTypes) > 0)
+	                			@foreach ($permissionTypes as $pType)
 	                			<tr>
-	                				<td>{{ $module->name }}</td>
+	                				<td>{{ $pType->name }}</td>
 	                				<td>
-	                					@if($module->state == 1)
+	                					@if($pType->state == 1)
 	                						<span class="badge badge-success">Activa</span>
 	                					@else 
 	                						<span class="badge badge-danger">Inactiva</span>
 	                					@endif
 	                				</td>
 	                				<td>
-	                					<a class="btn btn-warning btn-flat btn-sm" href="{{ route('modules.edit',['id' => $module->id]) }}"><i class="fa fa-edit"></i> Editar</a>
-	                					<button class="btn btn-danger btn-flat btn-sm delete-btn" data-toggle="modal" data-target="#delete-modal" data-component="módulo" data-component-name="{{ $module->name }}" data-url="{{ route('modules.destroy',['id'=>$module->id]) }}"><i class="fa fa-trash"></i> Eliminar</button>
+	                					<a class="btn btn-warning btn-flat btn-sm" href="{{ route('permission-types.edit',['id' => $pType->id]) }}"><i class="fa fa-edit"></i> Editar</a>
+	                					<button class="btn btn-danger btn-flat btn-sm delete-btn" data-toggle="modal" data-target="#delete-modal" data-component="Tipo de Permiso" data-component-name="{{ $pType->name }}" data-url="{{ route('permission-types.destroy',['id'=>$pType->id]) }}"><i class="fa fa-trash"></i> Eliminar</button>
 	                				</td>
 	                			</tr>
 	                			@endforeach
 	                		@else
 	                			<tr>
 	                				<td class="text-center" colspan="3">
-	                					<p class="text-primary">No existen módulos a consultar</p>
+	                					<p class="text-primary">No existen Tipos de Permiso a consultar</p>
 	                				</td>
 	                			</tr>
                 			@endif

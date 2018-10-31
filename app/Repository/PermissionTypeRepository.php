@@ -16,7 +16,7 @@ class PermissionTypeRepository implements PermissionTypeRepositoryInterface
 		$tPermissions = PermissionType::all();
 
 		if (!$tPermissions) {
-			throw new PermissionTypeException(['title'=>'No se han encontrado el listado de tipos de permisos','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"404");
+			throw new PermissionTypeException('No se han encontrado el listado de tipos de permisos',404);
 		}
 		return $tPermissions;
 	}
@@ -30,16 +30,16 @@ class PermissionTypeRepository implements PermissionTypeRepositoryInterface
 				$tPermission = PermissionType::where('name',$field['name'])->first();	
 			} else {
 
-				throw new PermissionTypeException(['title'=>'No se puede buscar el tipo de permiso','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"404");	
+				throw new PermissionTypeException('No se puede buscar el tipo de permiso',404);	
 			}
 
 		} elseif (is_string($field) || is_int($field)) {
 			$tPermission = PermissionType::where('id',$field)->first();
 		} else {
-			throw new PermissionTypeException(['title'=>'Se ha producido un error al buscar el tipo permiso','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"500");	
+			throw new PermissionTypeException('Se ha producido un error al buscar el tipo permiso',500);	
 		}
 
-		if (!$tPermission) throw new PermissionTypeException(['title'=>'No se puede buscar al tipo permiso','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"404");	
+		if (!$tPermission) throw new PermissionTypeException('No se puede buscar al tipo permiso',404);	
 		
 		return $tPermission;
 
@@ -54,7 +54,7 @@ class PermissionTypeRepository implements PermissionTypeRepositoryInterface
 			$key = $tPermission->getKey();
 			return  $this->find($key);
 		} else {
-			throw new PermissionTypeException(['title'=>'Ha ocurrido un error al guardar el tipo de permiso '.$data['name'].'','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"500");
+			throw new PermissionTypeException('Ha ocurrido un error al guardar el tipo de permiso '.$data['name'],500);
 		}		
 	}
 
@@ -68,7 +68,7 @@ class PermissionTypeRepository implements PermissionTypeRepositoryInterface
 				return $this->find($key);
 			}
 		} else {
-			throw new PermissionTypeException(['title'=>'Ha ocurrido un error al actualizar el tipo de permiso '.$data['name'].'','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"500");
+			throw new PermissionTypeException('Ha ocurrido un error al actualizar el tipo de permiso '.$data['name'],500);
 		}
 
 
@@ -80,6 +80,6 @@ class PermissionTypeRepository implements PermissionTypeRepositoryInterface
 			$tPermission->delete();
 			return true;
 		}
-		throw new PermissionTypeException(['title'=>'Ha ocurrido un error al eliminar el tipo de permiso ','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"500");
+		throw new PermissionTypeException('Ha ocurrido un error al eliminar el tipo de permiso ',500);
 	}
 }

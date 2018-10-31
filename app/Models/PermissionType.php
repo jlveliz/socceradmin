@@ -12,12 +12,22 @@ class PermissionType extends Model
 
     protected $fillable = [
     	'name',
-    	'code'
+    	'code',
+        'state'
     ];
 
 
     public function permissions()
     {
     	return $this->hasMany('HappyFeet\Models\Permission','type_id');
+    }
+
+
+    public static function boot(){
+        parent::boot();
+
+        static::creating(function($permissionType){
+            $permissionType->code = str_slug($permissionType->name);
+        });
     }
 }

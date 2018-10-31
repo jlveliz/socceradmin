@@ -17,7 +17,7 @@ class ModuleRepository implements ModuleRepositoryInterface
 		$modules = Module::with('permissions')->get();
 
 		if (!$modules) {
-			throw new ModuleException(['title'=>'No se han encontrado el listado de  módulos','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"404");
+			throw new ModuleException('No se han encontrado el listado de  módulos',404);
 		}
 		return $modules;
 	}
@@ -32,16 +32,16 @@ class ModuleRepository implements ModuleRepositoryInterface
 				$Module = Module::where('name',$field['name'])->first();	
 			} else {
 
-				throw new ModuleException(['title'=>'No se puede buscar el módulo','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"404");	
+				throw new ModuleException('No se puede buscar el módulo',404);	
 			}
 
 		} elseif (is_string($field) || is_int($field)) {
 			$Module = Module::where('id',$field)->first();
 		} else {
-			throw new ModuleException(['title'=>'Se ha producido un error al buscar el módulo','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"500");	
+			throw new ModuleException('Se ha producido un error al buscar el módulo',500);	
 		}
 
-		if (!$Module) throw new ModuleException(['title'=>'No se puede buscar al módulo','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"404");	
+		if (!$Module) throw new ModuleException('No se puede buscar al módulo',404);	
 		
 		return $Module;
 
@@ -56,7 +56,7 @@ class ModuleRepository implements ModuleRepositoryInterface
 			$key = $module->getKey();
 			return  $this->find($key);
 		} else {
-			throw new ModuleException(['title'=>'Ha ocurrido un error al guardar el módulo '.$data['name'].'','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"500");
+			throw new ModuleException('Ha ocurrido un error al guardar el módulo '.$data['name'],500);
 		}		
 	}
 
@@ -70,7 +70,7 @@ class ModuleRepository implements ModuleRepositoryInterface
 				return $this->find($key);
 			}
 		} else {
-			throw new ModuleException(['title'=>'Ha ocurrido un error al actualizar el módulo '.$data['name'].'','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"500");
+			throw new ModuleException('Ha ocurrido un error al actualizar el módulo '.$data['name'],500);
 		}
 
 
@@ -82,7 +82,7 @@ class ModuleRepository implements ModuleRepositoryInterface
 			$module->delete();
 			return true;
 		}
-		throw new ModuleException(['title'=>'Ha ocurrido un error al eliminar el módulo ','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"500");
+		throw new ModuleException('Ha ocurrido un error al eliminar el módulo ',500);
 	}
 
 
