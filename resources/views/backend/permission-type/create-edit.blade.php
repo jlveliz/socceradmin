@@ -3,7 +3,7 @@
 @if(isset($permissionType))
 	@section('title','Editar Tipo de Permiso de '. $permissionType->name)
 @else
-	@section('title','Crear Módulo')
+	@section('title','Crear Tipo de Permiso')
 @endif
 
 @section('content')
@@ -14,7 +14,7 @@
     <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('permission-types.index') }}">Tipos de Permiso</a></li>
-            <li class="breadcrumb-item active">Crear Módulo</li>
+            <li class="breadcrumb-item active">Crear Tipo de Permiso</li>
         </ol>
     </div>
 </div>

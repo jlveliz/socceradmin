@@ -21,7 +21,7 @@ class PermissionRepository implements PermissionRepositoryInterface
 		}
 
 		if (!$permissions) {
-			throw new PermissionException(['title'=>'No se han encontrado el listado de permisos','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"404");
+			throw new PermissionException('No se han encontrado el listado de permisos',404);
 		}
 		return $permissions;
 	}
@@ -35,16 +35,16 @@ class PermissionRepository implements PermissionRepositoryInterface
 				$permission = Permission::where('name',$field['name'])->first();	
 			} else {
 
-				throw new PermissionException(['title'=>'No se puede buscar el permiso','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"404");	
+				throw new PermissionException('No se puede buscar el permiso',404);	
 			}
 
 		} elseif (is_string($field) || is_int($field)) {
 			$permission = Permission::where('id',$field)->first();
 		} else {
-			throw new PermissionException(['title'=>'Se ha producido un error al buscar el permiso','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"500");	
+			throw new PermissionException('Se ha producido un error al buscar el permiso',500);	
 		}
 
-		if (!$permission) throw new PermissionException(['title'=>'No se puede buscar al permiso','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"404");	
+		if (!$permission) throw new PermissionException('No se puede buscar al permiso',404);	
 		
 		return $permission;
 
@@ -59,7 +59,7 @@ class PermissionRepository implements PermissionRepositoryInterface
 			$key = $permission->getKey();
 			return  $this->find($key);
 		} else {
-			throw new PermissionException(['title'=>'Ha ocurrido un error al guardar el permiso '.$data['name'].'','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"500");
+			throw new PermissionException('Ha ocurrido un error al guardar el permiso '.$data['name'],500);
 		}		
 	}
 
@@ -73,7 +73,7 @@ class PermissionRepository implements PermissionRepositoryInterface
 				return $this->find($key);
 			}
 		} else {
-			throw new PermissionException(['title'=>'Ha ocurrido un error al actualizar el permiso '.$data['name'].'','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"500");
+			throw new PermissionException('Ha ocurrido un error al actualizar el permiso '.$data['name'],500);
 		}
 
 
@@ -85,6 +85,6 @@ class PermissionRepository implements PermissionRepositoryInterface
 			$permission->delete();
 			return true;
 		}
-		throw new PermissionException(['title'=>'Ha ocurrido un error al eliminar el permiso ','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"500");
+		throw new PermissionException('Ha ocurrido un error al eliminar el permiso ',500);
 	}
 }

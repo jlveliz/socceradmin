@@ -14,7 +14,7 @@ class ModuleRepository implements ModuleRepositoryInterface
 	
 	public function enum($params = null)
 	{
-		$modules = Module::with('permissions')->get();
+		$modules = Module::with('permissions')->where('module.state',1)->get();
 
 		if (!$modules) {
 			throw new ModuleException('No se han encontrado el listado de  módulos',404);

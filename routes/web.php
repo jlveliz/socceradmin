@@ -30,6 +30,7 @@ Route::prefix('backend')->group(function(){
 
 	//modules
 	Route::resource('modules','Backend\ModuleController',['except'=>['show']]);
-	//modules
+	//Tipos de Permisos
+	Route::resource('permissions','Backend\PermissionController',['except'=>['show']]);
 	Route::resource('permission-types','Backend\PermissionTypeController',['except'=>['show']]);
 });
