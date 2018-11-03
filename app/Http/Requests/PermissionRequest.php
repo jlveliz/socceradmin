@@ -24,9 +24,7 @@ class PermissionRequest extends FormRequest
     public function rules()
     {
         return [
-            'module_id' => 'required|exists:module,name',
-            'parent_id' => 'integer',
-            'order' => 'integer',
+            'module_id' => 'required|exists:module,id',
             'name' => 'required',
             'type_id' => 'required|exists:permission_type,id',
             'description' => 'required'

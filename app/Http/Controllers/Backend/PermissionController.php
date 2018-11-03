@@ -99,8 +99,11 @@ class PermissionController extends Controller
      */
     public function edit($id)
     {
+        $permissionTypes = $this->permissionType->enum();
+        $modules = $this->module->enum();
+        $parents = $this->permission->enum();
         $permission = $this->permission->find($id);
-        return view('backend.permission.create-edit',compact('permission'));
+        return view('backend.permission.create-edit',compact('permission','parents','modules','permissionTypes'));
     }
 
     /**
@@ -146,7 +149,7 @@ class PermissionController extends Controller
         ];
         try {
             $deleted = $this->permission->remove($id);
-            $message['content'] = "Se ha eliminado el tipo permiso satisfactoriamente";
+            $message['content'] = "Se ha eliminado el permiso satisfactoriamente";
             return back()->with($message);
         } catch (PermissionException $e) {
             $message['type'] = "error";
