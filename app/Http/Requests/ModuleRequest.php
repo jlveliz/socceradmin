@@ -23,10 +23,16 @@ class ModuleRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'name' => 'required|unique:module,name',
             'state' => 'required'
         ];
+        
+        if ($this->method() == 'PUT') {
+            $rules['name'] = 'required|unique:module,name,'.$this->get('key');
+        }
+
+        return $rules;
     }
 
     public function messages()

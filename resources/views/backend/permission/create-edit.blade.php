@@ -45,7 +45,7 @@
 	                	<div class="form-body">
 		                	<div class="row">
 		                		<div class="col-3">
-			                		<div class="form-group">
+			                		<div class="form-group @if ($errors->has('module_id')) is-invalid @endif">
 			                			<label for="module_id">Módulo <span class="text-danger">*</span></label>
 			                			<select name="module_id" id="module_id" class="form-control">
 			                				@foreach ($modules as $module)

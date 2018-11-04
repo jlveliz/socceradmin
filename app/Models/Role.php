@@ -10,10 +10,6 @@ class Role extends Model
 
     protected $primaryKey = "id";
 
-    protected $no_uppercase = [
-        'code'
-    ];
-
     protected $fillable = [
     	'name',
         'code',
@@ -45,6 +41,7 @@ class Role extends Model
                 $istance = new Static();
                 $istance->where('is_default',\DB::raw(1))->update(['is_default'=>0]);
             }
+            $role->code = str_slug($role->name);
         }); 
 
         static::updating(function($role) { // before inserting update all items to default 1

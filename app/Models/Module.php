@@ -14,6 +14,10 @@ class Module extends Model
         'order' => 'int'
     ];
 
+    const ACTIVE = 1;
+
+    const INACTIVE = 0;
+
     protected $fillable = [
     	'name',
     	'order',
@@ -23,5 +27,15 @@ class Module extends Model
     public function permissions()
     {
     	return $this->hasMany('HappyFeet\Models\Permission','module_id');
+    }
+
+    public function getActive()
+    {
+        return self::ACTIVE;
+    }
+
+    public function getInActive()
+    {
+        return self::INACTIVE;
     }
 }

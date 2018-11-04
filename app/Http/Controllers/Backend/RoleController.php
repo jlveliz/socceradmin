@@ -2,26 +2,23 @@
 
 namespace HappyFeet\Http\Controllers\Backend;
 
-use Illuminate\Http\Request;
 use HappyFeet\Http\Controllers\Controller;
-use HappyFeet\Http\Requests\ModuleRequest;
-use HappyFeet\RepositoryInterface\ModuleRepositoryInterface;
-use HappyFeet\Exceptions\ModuleException;
+use HappyFeet\RepositoryInterface\RoleRepositoryInterface;
+use HappyFeet\Http\Requests\RoleRequest;
+use HappyFeet\Exceptions\RoleException;
 
-
-class ModuleController extends Controller
+class RoleController extends Controller
 {
     
+    protected $role;
 
-    protected $module;
-
-    protected $routeRedirectIndex = 'modules.index';
+    protected $routeRedirectIndex = 'roles.index';
 
 
-    public function __construct(ModuleRepositoryInterface $module)
+    function __construct(RoleRepositoryInterface $role)
     {
-        $this->middleware('auth.backend');
-        $this->module = $module;
+       $this->middleware('auth.backend');
+        $this->role = $role;
     }
     /**
      * Display a listing of the resource.
@@ -30,9 +27,8 @@ class ModuleController extends Controller
      */
     public function index()
     {
-        
-        $modules = $this->module->paginate();
-        return view('backend.module.index',compact('modules'));
+        $roles = $this->role->paginate();
+        return view('backend.role.index',compact('roles'));
     }
 
     /**
@@ -42,7 +38,7 @@ class ModuleController extends Controller
      */
     public function create()
     {
-        return view('backend.module.create-edit');
+        return view('backend.role.create-edit');
     }
 
     /**
@@ -51,7 +47,7 @@ class ModuleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ModuleRequest $request)
+    public function store(RoleRequest $request)
     {
         $message = [
             'type' => 'success',
@@ -59,19 +55,18 @@ class ModuleController extends Controller
         ];
 
         try {
-            $message['content'] = "Se ha creado el módulo satisfactoriamente";
-            $module = $this->module->save($request->all());
+            $message['content'] = "Se ha creado el rol satisfactoriamente";
+            $role = $this->role->save($request->all());
             if ($request->get('redirect-index') == 1) {
                 return redirect()->route($this->routeRedirectIndex)->with($message);
             } else {
-                return redirect()->route('modules.edit',['id'=>$module->id])->with($message);
+                return redirect()->route('roles.edit',['id'=>$role->id])->with($message);
             }
-        } catch (ModuleException $e) {
+        } catch (RoleException $e) {
             $message['type'] = "error";
             $message['content'] = $e->getMessage();
             return back()->with($message);
         }
-            
     }
 
     /**
@@ -93,8 +88,8 @@ class ModuleController extends Controller
      */
     public function edit($id)
     {
-        $module = $this->module->find($id);
-        return view('backend.module.create-edit',compact('module'));
+        $role = $this->role->find($id);
+        return view('backend.role.create-edit',compact('role'));
     }
 
     /**
@@ -104,15 +99,15 @@ class ModuleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(RoleRequest $request, $id)
     {
         $message = [
             'type' => 'success',
             'content' =>'',
         ];
         try {
-          $module = $this->module->edit($id,$request->all());
-          $message['content'] = "Se ha Actualizado el módulo satisfactoriamente";
+          $role = $this->role->edit($id,$request->all());
+          $message['content'] = "Se ha Actualizado el rol satisfactoriamente";
           
           if ($request->get('redirect-index') == 1) { 
             return redirect()->route($this->routeRedirectIndex)->with($message);
@@ -120,7 +115,7 @@ class ModuleController extends Controller
             return back()->with($message);
           }
           
-        } catch (ModuleException $e) {
+        } catch (RoleException $e) {
             $message['type'] = 'error';
             $message['content'] = $e->getMessage();
         }
@@ -139,14 +134,13 @@ class ModuleController extends Controller
             'content' =>'',
         ];
         try {
-            $deleted = $this->module->remove($id);
-            $message['content'] = "Se ha eliminado el módulo satisfactoriamente";
+            $deleted = $this->role->remove($id);
+            $message['content'] = "Se ha eliminado el rol satisfactoriamente";
             return back()->with($message);
-        } catch (ModuleException $e) {
+        } catch (RoleException $e) {
             $message['type'] = "error";
             $message['content'] = $e->getMessage();
             return back()->with($message);
         }
-        
     }
 }

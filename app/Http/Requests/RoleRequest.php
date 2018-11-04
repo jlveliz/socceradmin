@@ -4,7 +4,7 @@ namespace HappyFeet\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PermissionTypeRequest extends FormRequest
+class RoleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,23 +24,25 @@ class PermissionTypeRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'name' => 'required|unique:permission_type,name',
-            'state' => 'required'
+            'name' => 'required|unique:role,name',
+            'is_default' => 'required',
+            'description' => 'required'
         ];
-
-        if ($this->method() == 'PUT') {
-            $rules['name'] = 'required|unique:permission_type,name,'.$this->get('key');
-        }
         
+        if ($this->method() == 'PUT') {
+            $rules['name'] = 'required|unique:role,name,'.$this->get('key');
+        }
         return $rules;
+        
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'Ingrese un nombre',
-            'name.unique' => 'Ya existe un tipo de permiso con el mismo nombre',
-            'state.required' => 'Ingrese un estado'
+            'name.required' => 'Ingrese un nombre válido',
+            'name.unique' => 'Ya existe un rol con este nombre',
+            'is_default.required' => 'Identifique si es default',
+            'description.required' => 'Ingrese una descripción'
         ];
     }
 }

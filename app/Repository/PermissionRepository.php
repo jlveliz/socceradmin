@@ -12,10 +12,24 @@ use DB;
 class PermissionRepository implements PermissionRepositoryInterface
 {
 	
+	public function paginate()
+	{
+		return Permission::paginate();
+	}
+
 	public function enum($params = null)
 	{
 		if ($params) {
-			$permissions = Permission::where('type_id','=',DB::raw('( select id from permission_type where code = "'.$params["type"].'")'))->get();
+			
+			if(is_array($params)) {
+
+				if (array_key_exists('state', $params)) {
+					return Permission::where('state',$params['state'])->get();
+				}
+
+			} else {
+				$permissions = Permission::where('type_id','=',DB::raw('( select id from permission_type where code = "'.$params["type"].'")'))->get();
+			}
 		} else {
 			$permissions = Permission::all();
 		}
@@ -86,5 +100,10 @@ class PermissionRepository implements PermissionRepositoryInterface
 			return true;
 		}
 		throw new PermissionException('Ha ocurrido un error al eliminar el permiso ',500);
+	}
+
+	public function getModel()
+	{
+		return new Permission();
 	}
 }

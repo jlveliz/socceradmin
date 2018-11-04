@@ -11,12 +11,17 @@ use HappyFeet\Models\Role;
 class RoleRepository implements RoleRepositoryInterface
 {
 	
+	public function paginate()
+	{
+		return Role::paginate();
+	}
+
 	public function enum($params = null)
 	{
 		$roles = Role::all();
 
 		if (!$roles) {
-			throw new RoleException(['title'=>'No se han encontrado el listado de rols','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"404");
+			throw new RoleException('No se han encontrado el listado de roles',404);
 		}
 		return $roles;
 	}
@@ -30,16 +35,16 @@ class RoleRepository implements RoleRepositoryInterface
 				$role = Role::with('permissions')->where('name',$field['name'])->first();	
 			} else {
 
-				throw new RoleException(['title'=>'No se puede buscar el rol','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"404");	
+				throw new RoleException('No se puede buscar el rol',404);	
 			}
 
 		} elseif (is_string($field) || is_int($field)) {
 			$role = Role::with('permissions')->where('id',$field)->first();
 		} else {
-			throw new RoleException(['title'=>'Se ha producido un error al buscar el rol','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"500");	
+			throw new RoleException('Se ha producido un error al buscar el rol',500);	
 		}
 
-		if (!$role) throw new RoleException(['title'=>'No se puede buscar al rol','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"404");	
+		if (!$role) throw new RoleException('No se puede buscar al rol',404);	
 		
 		return $role;
 
@@ -51,11 +56,13 @@ class RoleRepository implements RoleRepositoryInterface
 		$role = new Role();
 		$role->fill($data);
 		if ($role->save()) {
-			$role->permissions()->sync($data['permissions']);
+			if (array_key_exists('permissions', $data)) {
+				$role->permissions()->sync($data['permissons']);
+			}
 			$key = $role->getKey();
 			return  $this->find($key);
 		} else {
-			throw new RoleException(['title'=>'Ha ocurrido un error al guardar el rol '.$data['name'].'','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"500");
+			throw new RoleException('Ha ocurrido un error al guardar el rol '.$data['name'],500);
 		}		
 	}
 
@@ -65,12 +72,14 @@ class RoleRepository implements RoleRepositoryInterface
 		if ($role) {
 			$role->fill($data);
 			if($role->update()){
-				$role->permissions()->sync($data['permissions']);
+				if (array_key_exists('permissions', $data)) {
+					$role->permissions()->sync($data['permissions']);
+				}
 				$key = $role->getKey();
 				return $this->find($key);
 			}
 		} else {
-			throw new RoleException(['title'=>'Ha ocurrido un error al actualizar el rol '.$data['name'].'','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"500");
+			throw new RoleException('Ha ocurrido un error al actualizar el rol '.$data['name'],500);
 		}
 
 
@@ -82,6 +91,11 @@ class RoleRepository implements RoleRepositoryInterface
 			$role->delete();
 			return true;
 		}
-		throw new RoleException(['title'=>'Ha ocurrido un error al eliminar el rol ','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"500");
+		throw new RoleException('Ha ocurrido un error al eliminar el rol ',500);
+	}
+
+	public function getModel()
+	{
+		return new Role();
 	}
 }

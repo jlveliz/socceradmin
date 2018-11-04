@@ -11,9 +11,22 @@ use HappyFeet\Models\PermissionType;
 class PermissionTypeRepository implements PermissionTypeRepositoryInterface
 {
 	
+	public function paginate()
+	{
+		return PermissionType::paginate();
+	}
+
 	public function enum($params = null)
 	{
-		$tPermissions = PermissionType::all();
+		if ($params) {
+			if (is_array($params)) {
+				if (array_key_exists('state', $params)) {
+					$tPermissions = PermissionType::where('state',$params['state'])->get();
+				}
+			}
+		} else {
+			$tPermissions = PermissionType::all();
+		}
 
 		if (!$tPermissions) {
 			throw new PermissionTypeException('No se han encontrado el listado de tipos de permisos',404);
@@ -81,5 +94,10 @@ class PermissionTypeRepository implements PermissionTypeRepositoryInterface
 			return true;
 		}
 		throw new PermissionTypeException('Ha ocurrido un error al eliminar el tipo de permiso ',500);
+	}
+
+	public function getModel()
+	{
+		return new PermissionType();
 	}
 }

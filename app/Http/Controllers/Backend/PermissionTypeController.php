@@ -18,6 +18,7 @@ class PermissionTypeController extends Controller
 
     function __construct(PermissionTypeRepositoryInterface $permissionType)
     {
+        $this->middleware('auth.backend');
         $this->permissionType = $permissionType;
     }
     /**
@@ -27,7 +28,7 @@ class PermissionTypeController extends Controller
      */
     public function index()
     {
-        $permissionTypes = $this->permissionType->enum();
+        $permissionTypes = $this->permissionType->paginate();
         return view('backend.permission-type.index',compact('permissionTypes'));
     }
 

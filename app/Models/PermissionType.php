@@ -10,6 +10,10 @@ class PermissionType extends Model
 
     protected $primaryKey = "id";
 
+    const ACTIVES = 1;
+
+    const INACTIVES = 0;
+
     protected $fillable = [
     	'name',
     	'code',
@@ -29,5 +33,15 @@ class PermissionType extends Model
         static::creating(function($permissionType){
             $permissionType->code = str_slug($permissionType->name);
         });
+    }
+
+    public function getActive()
+    {
+        return self::ACTIVES;
+    }
+
+    public function getInactive()
+    {
+        return self::INACTIVES;
     }
 }

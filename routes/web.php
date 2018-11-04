@@ -26,11 +26,14 @@ Route::prefix('backend')->group(function(){
 	Route::post('/login','Backend\Auth\LoginController@login')->name('backend-login');
 	Route::get('/logout','Backend\Auth\LoginController@logout')->name('backend-logout');
 
-	Route::get('/dashboard','Backend\Dashboard\DashboardController@showDash');
+	Route::get('/dashboard','Backend\Dashboard\DashboardController@showDash')->name('get-dashboard');
 
 	//modules
 	Route::resource('modules','Backend\ModuleController',['except'=>['show']]);
-	//Tipos de Permisos
+	//Permisos
 	Route::resource('permissions','Backend\PermissionController',['except'=>['show']]);
+	//Tipos de Permisos
 	Route::resource('permission-types','Backend\PermissionTypeController',['except'=>['show']]);
+	//Roles
+	Route::resource('roles','Backend\RoleController',['except'=>['show']]);
 });

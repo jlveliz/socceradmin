@@ -23,12 +23,18 @@ class PermissionRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'module_id' => 'required|exists:module,id',
-            'name' => 'required',
+            'name' => 'required|unique:permission,name',
             'type_id' => 'required|exists:permission_type,id',
             'description' => 'required'
         ];
+        
+        if ($this->method() == 'PUT') {
+            $rules['name'] = 'required|unique:permission,name,'.$this->get('key');
+        }
+        
+        return $rules;
     }
 
     public function messages()
@@ -39,6 +45,7 @@ class PermissionRequest extends FormRequest
             'parent_id.integer' => 'Ingrese un permiso padre válido',
             'order.integer' => 'Ingrese un orden válido',
             'name.required' => 'Ingrese un nombre válido',
+            'name.unique' => 'Ya existe un permiso con este nombre',
             'type_id.required' => 'Ingrese un tipo de permiso',
             'type_id.exists'=>'Ingrese un tipo de permiso válido',
             'description.required' => 'Ingrese una descripción'

@@ -12,6 +12,10 @@ class Permission extends Model
 
     protected $primaryKey = "id";
 
+    const ACTIVES = 1;
+
+    const INACTIVES = 0;
+
     protected $casts = [
         'module_id' => 'int',
         'parent_id' => 'int',

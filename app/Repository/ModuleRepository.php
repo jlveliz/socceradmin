@@ -12,9 +12,24 @@ use HappyFeet\Models\Permission;
 class ModuleRepository implements ModuleRepositoryInterface
 {
 	
+	public function paginate()
+	{
+		return Module::paginate();
+	}
+
 	public function enum($params = null)
 	{
-		$modules = Module::with('permissions')->where('module.state',1)->get();
+		if ($params) {
+			if (is_array($params)) {
+				if (array_key_exists('state', $params)) {
+					$modules = Module::with('permissions')->where('state',$params['state'])->orderBy('order')->get();
+				} else {
+					$modules = Module::with('permissions')->orderBy('order')->get();
+				}
+			}
+		} else {
+			$modules = Module::with('permissions')->orderBy('order')->get();
+		}
 
 		if (!$modules) {
 			throw new ModuleException('No se han encontrado el listado de  módulos',404);
@@ -85,6 +100,11 @@ class ModuleRepository implements ModuleRepositoryInterface
 		throw new ModuleException('Ha ocurrido un error al eliminar el módulo ',500);
 	}
 
+	public function getModel()
+	{
+		return new Module();
+	}
+
 
 	public function loadMenu($userId)
 	{
@@ -108,7 +128,7 @@ class ModuleRepository implements ModuleRepositoryInterface
 					}])
 					->leftJoin('permission as parent','parent.module_id','=','module.id')
 					->leftJoin('permission as child','child.parent_id','=','parent.id')
-					->whereRaw("module.id in (SELECT per.module_id FROM permission per left JOIN role_permission rPer ON rPer.permission_id = per.id left join user_role rolU on rolU.role_id = rPer.role_id left join user on `user`.id = rolU.user_id where user.id = ".$userId.") and parent.type_id = (select id from permission_type where code = 'menu')")
+					->whereRaw("module.state=1 and module.id in (SELECT per.module_id FROM permission per left JOIN role_permission rPer ON rPer.permission_id = per.id left join user_role rolU on rolU.role_id = rPer.role_id left join user on `user`.id = rolU.user_id where user.id = ".$userId.") and parent.type_id = (select id from permission_type where code = 'menu')")
 					->groupBy('module.name')
 					->orderBy('module.order')
 					->orderBy('parent.order')
@@ -130,6 +150,7 @@ class ModuleRepository implements ModuleRepositoryInterface
 				->get();
 			}])->orderBy('permission.order')->get();
 		}])
+		->whereRaw('module.state=1 ')
 		->leftJoin('permission as parent','parent.module_id','=','module.id')
 		->groupBy('module.name')
 		->orderBy('module.order')

@@ -3,6 +3,8 @@
 namespace HappyFeet\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use HappyFeet\Repository\ModuleRepository;
+use Auth;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +15,25 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        view()->composer('*',function($view) {
+
+            $user = Auth::user();
+            
+            if ($user) {
+                
+                $moduleRepo = new ModuleRepository();
+                
+                if ($user->super_admin) {
+                    $menu = $moduleRepo->loadAdminMenu();
+                } else {
+                    $menu = $moduleRepo->loadMenu($user->id);
+
+                }
+
+                view()->share('menu',$menu);
+            }
+            
+        });
     }
 
     /**
@@ -32,5 +52,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('HappyFeet\RepositoryInterface\PermissionTypeRepositoryInterface','HappyFeet\Repository\PermissionTypeRepository');
 
         $this->app->bind('HappyFeet\RepositoryInterface\PermissionRepositoryInterface','HappyFeet\Repository\PermissionRepository');
+        
+        $this->app->bind('HappyFeet\RepositoryInterface\ModuleRepositoryInterface','HappyFeet\Repository\ModuleRepository');
+        
+        $this->app->bind('HappyFeet\RepositoryInterface\RoleRepositoryInterface','HappyFeet\Repository\RoleRepository');
     }
 }

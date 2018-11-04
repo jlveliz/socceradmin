@@ -8,7 +8,7 @@ use HappyFeet\RepositoryInterface\PermissionRepositoryInterface;
 use HappyFeet\RepositoryInterface\PermissionTypeRepositoryInterface;
 use HappyFeet\RepositoryInterface\ModuleRepositoryInterface;
 use HappyFeet\Http\Requests\PermissionRequest;
-use HappyFeet\Exceptions\Permission;
+use HappyFeet\Exceptions\PermissionException;
 
 class PermissionController extends Controller
 {
@@ -24,6 +24,7 @@ class PermissionController extends Controller
 
     function __construct(PermissionRepositoryInterface $permission, PermissionTypeRepositoryInterface $permissionType, ModuleRepositoryInterface $module)
     {
+        $this->middleware('auth.backend');
         $this->permission = $permission;
         $this->permissionType = $permissionType;
         $this->module = $module;
@@ -46,8 +47,18 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        $permissionTypes = $this->permissionType->enum();
-        $modules = $this->module->enum();
+        $paramsPTypes = [
+            'state' => $this->permissionType->getModel()->getActive()
+        ];
+        
+        $permissionTypes = $this->permissionType->enum($paramsPTypes);
+        
+        $paramsModule = [
+            'state' => $this->module->getModel()->getActive()
+        ];
+
+        $modules = $this->module->enum($paramsModule);
+        
         $parents = $this->permission->enum();
         return view('backend.permission.create-edit',compact('permissionTypes','modules','parents'));
     }
@@ -99,8 +110,16 @@ class PermissionController extends Controller
      */
     public function edit($id)
     {
-        $permissionTypes = $this->permissionType->enum();
-        $modules = $this->module->enum();
+        
+        $paramsPTypes = [
+            'state' => $this->permissionType->getModel()->getActive()
+        ];
+        $permissionTypes = $this->permissionType->enum($paramsPTypes);
+        
+        $paramsModule = [
+            'state' => $this->module->getModel()->getActive()
+        ];
+        $modules = $this->module->enum($paramsModule);
         $parents = $this->permission->enum();
         $permission = $this->permission->find($id);
         return view('backend.permission.create-edit',compact('permission','parents','modules','permissionTypes'));

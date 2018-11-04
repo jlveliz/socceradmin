@@ -1,14 +1,14 @@
 @extends('layouts.backend')
-@section('title','Módulos')
+@section('title','Roles')
 
 @section('content')
 <!-- Bread crumb -->
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h3 class="text-primary">Módulos</h3> </div>
+        <h3 class="text-primary">Roles</h3> </div>
     <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="javascript:void(0)">Módulos</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Roles</a></li>
             <li class="breadcrumb-item active">Listado</li>
         </ol>
     </div>
@@ -29,47 +29,41 @@
                 @endif
                 <div class="card-body"> 
                 	<div class="form-group">
-                		<a href="{{ route('modules.create') }}" class="btn btn-primary btn-sm pull-right"><i class="fa fa-plus"></i> Crear</a><br>
+                		<a href="{{ route('roles.create') }}" class="btn btn-primary btn-sm pull-right"><i class="fa fa-plus"></i> Crear</a><br>
                 	</div>
-                    {{ $modules->links() }}
+                    {{ $roles->links() }}
                 	<table class="table table-hover">
                 		<thead>
                 			<tr>
                                 <th>Nombre</th>
-                				<th>Orden</th>
-                				<th>Estado</th>
+                				<th>Predeterminado</th>
+                				<th>Descripción</th>
                 				<th>Acción</th>
                 			</tr>
                 		</thead>
                 		<tbody>
-                			@if (count($modules) > 0)
-	                			@foreach ($modules as $module)
+                			@if (count($roles) > 0)
+	                			@foreach ($roles as $role)
 	                			<tr>
-                                    <td>{{ $module->name }}</td>
-	                				<td>{{ $module->order }}</td>
+                                    <td>{{ $role->name }}</td>
+                                    <td>@if($role->is_default == 1) Si @else No @endif</td>
+	                				<td>{{ $role->description }}</td>
 	                				<td>
-	                					@if($module->state == 1)
-	                						<span class="badge badge-success">Activa</span>
-	                					@else 
-	                						<span class="badge badge-danger">Inactiva</span>
-	                					@endif
-	                				</td>
-	                				<td>
-	                					<a class="btn btn-warning btn-flat btn-sm" href="{{ route('modules.edit',['id' => $module->id]) }}"><i class="fa fa-edit"></i> Editar</a>
-	                					<button class="btn btn-danger btn-flat btn-sm delete-btn" data-toggle="modal" data-target="#delete-modal" data-component="módulo" data-component-name="{{ $module->name }}" data-url="{{ route('modules.destroy',['id'=>$module->id]) }}"><i class="fa fa-trash"></i> Eliminar</button>
+	                					<a class="btn btn-warning btn-flat btn-sm" href="{{ route('roles.edit',['id' => $role->id]) }}"><i class="fa fa-edit"></i> Editar</a>
+	                					<button class="btn btn-danger btn-flat btn-sm delete-btn" data-toggle="modal" data-target="#delete-modal" data-component="Rol" data-component-name="{{ $role->name }}" data-url="{{ route('roles.destroy',['id'=>$role->id]) }}"><i class="fa fa-trash"></i> Eliminar</button>
 	                				</td>
 	                			</tr>
 	                			@endforeach
 	                		@else
 	                			<tr>
-	                				<td class="text-center" colspan="3">
-	                					<p class="text-primary">No existen módulos a consultar</p>
+	                				<td class="text-center" colspan="4">
+	                					<p class="text-primary">No existen roles a consultar</p>
 	                				</td>
 	                			</tr>
                 			@endif
                 		</tbody>
                 	</table>
-                    {{ $modules->links() }}
+                    {{ $roles->links() }}
                 </div>
             </div>
         </div>
