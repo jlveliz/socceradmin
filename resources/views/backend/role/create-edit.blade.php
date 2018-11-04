@@ -72,6 +72,19 @@
 			                		</div>
 		                		</div>
 		                	</div>
+		                	<div class="row">
+		                		<div class="col-12">
+		                			<h6><span>Permisos</span>  </h6>
+		                			<hr>
+		                			<div class="accordion" id="permissions">
+		                				@foreach ($modules as $module)
+		                					<div class="card">
+		                						<div class="card-header"></div>
+		                					</div>
+		                				@endforeach
+		                			</div>
+		                		</div>
+		                	</div>
 	                	</div>
 	                	<hr>
 	                	<div class="form-actions">

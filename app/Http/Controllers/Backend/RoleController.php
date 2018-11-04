@@ -4,6 +4,7 @@ namespace HappyFeet\Http\Controllers\Backend;
 
 use HappyFeet\Http\Controllers\Controller;
 use HappyFeet\RepositoryInterface\RoleRepositoryInterface;
+use HappyFeet\RepositoryInterface\ModuleRepositoryInterface;
 use HappyFeet\Http\Requests\RoleRequest;
 use HappyFeet\Exceptions\RoleException;
 
@@ -12,13 +13,16 @@ class RoleController extends Controller
     
     protected $role;
 
+    protected $module;
+
     protected $routeRedirectIndex = 'roles.index';
 
 
-    function __construct(RoleRepositoryInterface $role)
+    function __construct(RoleRepositoryInterface $role, ModuleRepositoryInterface $module)
     {
        $this->middleware('auth.backend');
         $this->role = $role;
+        $this->module = $module;
     }
     /**
      * Display a listing of the resource.
@@ -38,7 +42,11 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('backend.role.create-edit');
+        $paramModule = [
+            'state' => $this->module->getModel()->getActive()
+        ];
+        $modules = $this->module->enum($paramModule);
+        return view('backend.role.create-edit',compact('modules'));
     }
 
     /**
