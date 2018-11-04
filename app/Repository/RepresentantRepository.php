@@ -89,4 +89,14 @@ class RepresentantRepository implements RepresentantRepositoryInterface
 		}
 		throw new RepresentantException('Ha ocurrido un error al eliminar el permiso ',500);
 	}
+
+	public function getModel()
+	{
+		return new Representant();
+	}
+
+	public function paginate()
+	{
+		return Representant::paginate();
+	}
 }
