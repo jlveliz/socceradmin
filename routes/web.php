@@ -37,3 +37,7 @@ Route::prefix('backend')->group(function(){
 	//Roles
 	Route::resource('roles','Backend\RoleController',['except'=>['show']]);
 });
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
