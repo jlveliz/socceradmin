@@ -12,3 +12,4 @@ yarn-error.log
 .env
 .htaccess
 sftp-config.json
+.vscode/sftp.json
