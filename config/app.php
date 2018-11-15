@@ -176,6 +176,7 @@ return [
         // HappyFeet\Providers\BroadcastServiceProvider::class,
         HappyFeet\Providers\EventServiceProvider::class,
         HappyFeet\Providers\RouteServiceProvider::class,
+        TCG\Voyager\VoyagerServiceProvider::class,
 
     ],
 
