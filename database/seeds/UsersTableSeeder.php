@@ -13,10 +13,10 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $password = 'representant';
-        $password = \Hash::make($password);
-        $user = User::where('username','representant')->first();
-        $user->password = $password;
-        $user->save();
+        // $password = 'representant';
+        // $password = \Hash::make($password);
+        // $user = User::where('username','representant')->first();
+        // $user->password = $password;
+        // $user->save();
     }
 }

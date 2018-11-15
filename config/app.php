@@ -163,6 +163,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        TCG\Voyager\VoyagerServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -176,7 +177,7 @@ return [
         // HappyFeet\Providers\BroadcastServiceProvider::class,
         HappyFeet\Providers\EventServiceProvider::class,
         HappyFeet\Providers\RouteServiceProvider::class,
-        HappyFeet\Providers\ExtendValidatorServiceProvider::class,
+        HappyFeet\Providers\ExtendValidatorServiceProvider::class
 
     ],
 

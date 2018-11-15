@@ -43,7 +43,7 @@ return [
     */
 
     'models' => [
-        'namespace' => 'HappyFeet\\Models',
+        'namespace' => 'HappyFeet\\Models\\',
     ],
 
     /*
@@ -120,7 +120,7 @@ return [
         /*
          * Select default language
          */
-        'default' => 'es',
+        'default' => 'en',
 
         /*
          * Select languages that are supported.

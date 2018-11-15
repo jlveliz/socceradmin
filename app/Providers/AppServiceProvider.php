@@ -15,25 +15,25 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer('*',function($view) {
+        // view()->composer('*',function($view) {
 
-            $user = Auth::user();
+        //     $user = Auth::user();
             
-            if ($user) {
+        //     if ($user) {
                 
-                $moduleRepo = new ModuleRepository();
+        //         $moduleRepo = new ModuleRepository();
                 
-                if ($user->super_admin) {
-                    $menu = $moduleRepo->loadAdminMenu();
-                } else {
-                    $menu = $moduleRepo->loadMenu($user->id);
+        //         if ($user->super_admin) {
+        //             $menu = $moduleRepo->loadAdminMenu();
+        //         } else {
+        //             $menu = $moduleRepo->loadMenu($user->id);
 
-                }
+        //         }
 
-                view()->share('menu',$menu);
-            }
+        //         view()->share('menu',$menu);
+        //     }
             
-        });
+        // });
     }
 
     /**
