@@ -11,5 +11,9 @@
 |
 */
 
-Voyager::routes();
+Route::get('/','Auth\RegisterController@showRegistrationForm');
+
+Route::prefix('admin')->group(function(){
+    Voyager::routes();
+});
 
