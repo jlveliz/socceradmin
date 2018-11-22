@@ -2,7 +2,19 @@
 	<head>
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="{{ asset('css/frontend.css') }}" media="all">
+		<link rel="stylesheet" href="{{ asset('css/ui-bootstrap.css') }}" media="all">
+		<link rel="stylesheet" href="{{ asset('css/ui.css') }}" media="all">
+		<link rel="stylesheet" href="{{ asset('css/fields.css') }}" media="all">
+		<link rel="stylesheet" href="{{ asset('css/animate.css') }}" media="all">
+		<link rel="stylesheet" href="{{ asset('css/bootstrap-material-datetimepicker.css') }}" media="all">
+		<link rel="stylesheet" href="{{ asset('css/nouislider.css') }}" media="all">
+		<link rel="stylesheet" href="{{ asset('css/materialize-ui.css') }}" media="all">
+		<link rel="stylesheet" href="{{ asset('css/material-checkboxradio.css') }}" media="all">
+		<link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}" media="all">
 		<link rel="stylesheet" href="{{ asset('css/post.css') }}" media="all">
+		<link rel="stylesheet" href="{{ asset('css/poppins.css') }}" media="all">
+
+		<script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
 	</head>
 	<body>
 		<div class="elementor elementor-376">
@@ -29,18 +41,8 @@
 				</div>
 				<div data-id="c41701e" class="elementor-element elementor-element-c41701e elementor-widget elementor-widget-shortcode" data-element_type="shortcode.default">
 				<div class="elementor-widget-container">
-			<script type="text/javascript">var get_wow = 'enabled';</script><script type="text/javascript">var get_raty = 'enabled';</script><script type="text/javascript">var md_time_color = '607d8b';</script><link rel="stylesheet" id="nex-forms-font-awesome-css" href="https://sur.happyfeetsoccer.com.ec/wp-content/plugins/nex-forms/css/font-awesome.min.css?v7_4_1_13&amp;ver=4.9.8" type="text/css" media="all">
-<link rel="stylesheet" id="nex-forms-bootstrap-ui-css" href="https://sur.happyfeetsoccer.com.ec/wp-content/plugins/nex-forms/css/ui-bootstrap.css?v7_4_1_13&amp;ver=4.9.8" type="text/css" media="all">
-<link rel="stylesheet" id="nex-forms-ui-css" href="https://sur.happyfeetsoccer.com.ec/wp-content/plugins/nex-forms/css/ui.css?v7_2_7&amp;ver=4.9.8" type="text/css" media="all">
-<link rel="stylesheet" id="nex-forms-fields-css" href="https://sur.happyfeetsoccer.com.ec/wp-content/plugins/nex-forms/css/fields.css?v7_4_1_13&amp;ver=4.9.8" type="text/css" media="all">
-<link rel="stylesheet" id="nex-forms-animations-css" href="https://sur.happyfeetsoccer.com.ec/wp-content/plugins/nex-forms/css/animate.css?v7_4_1_13&amp;ver=4.9.8" type="text/css" media="all">
-<link rel="stylesheet" id="bootstrap-material-datetimepicker-css" href="https://sur.happyfeetsoccer.com.ec/wp-content/plugins/nex-forms/css/bootstrap-material-datetimepicker.css?v7_4_1_13&amp;ver=4.9.8" type="text/css" media="all">
-<link rel="stylesheet" id="jqui-timepicker-css" href="https://sur.happyfeetsoccer.com.ec/wp-content/plugins/nex-forms/css/jqui-timepicker.css?v7_4_1_13&amp;ver=4.9.8" type="text/css" media="all">
-<link rel="stylesheet" id="nex-forms-bootstrap-touchspin-css" href="https://sur.happyfeetsoccer.com.ec/wp-content/plugins/nex-forms/css/jquery.bootstrap-touchspin.css?v7_4_1_13&amp;ver=4.9.8" type="text/css" media="all">
-<link rel="stylesheet" id="nouislider-css" href="https://sur.happyfeetsoccer.com.ec/wp-content/plugins/nex-forms/css/nouislider.css?v7_4_1_13&amp;ver=4.9.8" type="text/css" media="all">
-<link rel="stylesheet" id="nex-forms-materialize-css" href="https://sur.happyfeetsoccer.com.ec/wp-content/plugins/nex-forms/css/materialize-ui.css?v7_4_1_13&amp;ver=4.9.8" type="text/css" media="all">
-<link rel="stylesheet" id="nf-md-checkbox-radio-css" href="https://sur.happyfeetsoccer.com.ec/wp-content/plugins/nex-forms/css/material-checkboxradio.css?v7_4_1_13&amp;ver=4.9.8" type="text/css" media="all">
-<link rel="stylesheet" id="google-roboto-css" href="https://fonts.googleapis.com/css?family=Poppins&amp;ver=4.9.8" type="text/css" media="all">
+			<script type="text/javascript">var get_wow = 'enabled';</script><script type="text/javascript">var get_raty = 'enabled';</script><script type="text/javascript">var md_time_color = '607d8b';</script>
+
 		<div class="elementor-shortcode"><script type="text/javascript" name="js_con">
 		
 		function run_nf_conditional_logic55769784(){
@@ -171,84 +173,6 @@
 #_87298 {
     margin-top: 22px !important;
 }</style></div>
-				</div>
-				</div>
-						</div>
-			</div>
-		</div>
-						</div>
-			</div>
-		</section>
-				<section data-id="8f6436c" class="elementor-element elementor-element-8f6436c elementor-section-boxed elementor-section-height-default elementor-section-height-default elementor-section elementor-top-section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}" data-element_type="section">
-						<div class="elementor-container elementor-column-gap-default">
-				<div class="elementor-row">
-				<div data-id="bc05df3" class="elementor-element elementor-element-bc05df3 elementor-column elementor-col-16 elementor-top-column" data-element_type="column">
-			<div class="elementor-column-wrap elementor-element-populated">
-					<div class="elementor-widget-wrap">
-				<div data-id="d9c1871" class="elementor-element elementor-element-d9c1871 elementor-widget elementor-widget-image" data-element_type="image.default">
-				<div class="elementor-widget-container">
-					<div class="elementor-image">
-										<img width="51" height="30" src="https://sur.happyfeetsoccer.com.ec/wp-content/uploads/mini-mastercard.png" class="attachment-large size-large" alt="" sizes="100vw">											</div>
-				</div>
-				</div>
-						</div>
-			</div>
-		</div>
-				<div data-id="f4b8794" class="elementor-element elementor-element-f4b8794 elementor-column elementor-col-16 elementor-top-column" data-element_type="column">
-			<div class="elementor-column-wrap elementor-element-populated">
-					<div class="elementor-widget-wrap">
-				<div data-id="c9b856c" class="elementor-element elementor-element-c9b856c elementor-widget elementor-widget-image" data-element_type="image.default">
-				<div class="elementor-widget-container">
-					<div class="elementor-image">
-										<img width="52" height="30" src="https://sur.happyfeetsoccer.com.ec/wp-content/uploads/mini-visa.png" class="attachment-large size-large" alt="" sizes="100vw">											</div>
-				</div>
-				</div>
-						</div>
-			</div>
-		</div>
-				<div data-id="ca11191" class="elementor-element elementor-element-ca11191 elementor-column elementor-col-16 elementor-top-column" data-element_type="column">
-			<div class="elementor-column-wrap elementor-element-populated">
-					<div class="elementor-widget-wrap">
-				<div data-id="25e01f7" class="elementor-element elementor-element-25e01f7 elementor-widget elementor-widget-image" data-element_type="image.default">
-				<div class="elementor-widget-container">
-					<div class="elementor-image">
-										<img width="49" height="30" src="https://sur.happyfeetsoccer.com.ec/wp-content/uploads/mini-american.png" class="attachment-large size-large" alt="" sizes="100vw">											</div>
-				</div>
-				</div>
-						</div>
-			</div>
-		</div>
-				<div data-id="7a71c5d" class="elementor-element elementor-element-7a71c5d elementor-column elementor-col-16 elementor-top-column" data-element_type="column">
-			<div class="elementor-column-wrap elementor-element-populated">
-					<div class="elementor-widget-wrap">
-				<div data-id="aacf7aa" class="elementor-element elementor-element-aacf7aa elementor-widget elementor-widget-image" data-element_type="image.default">
-				<div class="elementor-widget-container">
-					<div class="elementor-image">
-										<img width="133" height="30" src="https://sur.happyfeetsoccer.com.ec/wp-content/uploads/mini-pacificard.png" class="attachment-large size-large" alt="" sizes="100vw">											</div>
-				</div>
-				</div>
-						</div>
-			</div>
-		</div>
-				<div data-id="f6f5639" class="elementor-element elementor-element-f6f5639 elementor-column elementor-col-16 elementor-top-column" data-element_type="column">
-			<div class="elementor-column-wrap elementor-element-populated">
-					<div class="elementor-widget-wrap">
-				<div data-id="2107fd6" class="elementor-element elementor-element-2107fd6 elementor-widget elementor-widget-image" data-element_type="image.default">
-				<div class="elementor-widget-container">
-					<div class="elementor-image">
-										<img width="101" height="30" src="https://sur.happyfeetsoccer.com.ec/wp-content/uploads/mini-paymentez.png" class="attachment-large size-large" alt="" srcset="https://sur.happyfeetsoccer.com.ec/wp-content/uploads/mini-paymentez.png 101w, https://sur.happyfeetsoccer.com.ec/wp-content/uploads/mini-paymentez-100x30.png 100w" sizes="100vw">											</div>
-				</div>
-				</div>
-						</div>
-			</div>
-		</div>
-				<div data-id="4f78609" class="elementor-element elementor-element-4f78609 elementor-column elementor-col-16 elementor-top-column" data-element_type="column">
-			<div class="elementor-column-wrap elementor-element-populated">
-					<div class="elementor-widget-wrap">
-				<div data-id="f7bb5ea" class="elementor-element elementor-element-f7bb5ea elementor-widget elementor-widget-image" data-element_type="image.default">
-				<div class="elementor-widget-container">
-					<div class="elementor-image">
-										<img width="87" height="30" src="https://sur.happyfeetsoccer.com.ec/wp-content/uploads/internacional.png" class="attachment-large size-large" alt="" sizes="100vw">											</div>
 				</div>
 				</div>
 						</div>
