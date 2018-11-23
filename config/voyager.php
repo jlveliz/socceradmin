@@ -43,7 +43,7 @@ return [
     */
 
     'models' => [
-        'namespace' => 'HapppyFeet\\',
+        'namespace' => 'HapppyFeet\\Models\\',
     ],
 
     /*

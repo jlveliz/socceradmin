@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => HappyFeet\User::class,
+            'model' => HappyFeet\Models\User::class,
         ],
 
         // 'users' => [
