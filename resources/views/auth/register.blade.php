@@ -2,6 +2,7 @@
 	<head>
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="{{ asset('css/frontend.css') }}" media="all">
+		<link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}" media="all">
 		<link rel="stylesheet" href="{{ asset('css/post.css') }}" media="all">
 	</head>
 	<body>
