@@ -15,7 +15,7 @@ return [
         'default_role'                 => 'user',
         'namespace'                    => null,
         'default_avatar'               => 'users/default.png',
-        'redirect'                     => '/',
+        'redirect'                     => '/admin',
     ],
 
     /*
@@ -126,7 +126,7 @@ return [
          * Select languages that are supported.
          */
         'locales' => [
-            'en',
+            'es',
             //'pt',
         ],
     ],
@@ -143,17 +143,12 @@ return [
     'dashboard' => [
         // Add custom list items to navbar's dropdown
         'navbar_items' => [
-            'Profile' => [
+            'Mi Perfil' => [
                 'route'      => 'voyager.profile',
                 'classes'    => 'class-full-of-rum',
                 'icon_class' => 'voyager-person',
             ],
-            'Home' => [
-                'route'        => '/',
-                'icon_class'   => 'voyager-home',
-                'target_blank' => true,
-            ],
-            'Logout' => [
+            'Salir' => [
                 'route'      => 'voyager.logout',
                 'icon_class' => 'voyager-power',
             ],
@@ -199,7 +194,9 @@ return [
     |
     */
 
-    'primary_color' => '#22A7F0',
+    'primary_color' => '#ee2c3d',
+
+    'secunday_color' => '#fce011',
 
     'show_dev_tips' => true, // Show development tip "How To Use:" in Menu and Settings
 
