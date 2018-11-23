@@ -10,7 +10,9 @@
 		<link rel="stylesheet" href="{{ asset('css/nouislider.css') }}" media="all">
 		<link rel="stylesheet" href="{{ asset('css/materialize-ui.css') }}" media="all">
 		<link rel="stylesheet" href="{{ asset('css/material-checkboxradio.css') }}" media="all">
-
+		<link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}" media="all">
+		<link rel="stylesheet" href="{{ asset('css/post.css') }}" media="all">
+		<link rel="stylesheet" href="{{ asset('css/poppins.css') }}" media="all">
 
 		<script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
 	</head>
