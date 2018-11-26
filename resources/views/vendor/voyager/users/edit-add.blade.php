@@ -61,7 +61,6 @@
 
                             <div class="form-group">
                                 <label for="person">Persona</label>
-                                {{dd($dataTypeContent)}}
                                 @php
                                     $dataTypeRows = $dataType->{(isset($dataTypeContent->id) ? 'editRows' : 'addRows' )};
                                     $row = $dataTypeRows->where('field','user_belongsto_person_relationship')->first();

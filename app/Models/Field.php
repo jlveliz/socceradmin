@@ -11,6 +11,10 @@ class Field extends Model
     protected $table = "field";
 
 
+    protected $with = [
+        'User'
+    ];
+
     protected $perPage = 15;
 
     protected $fillable = [

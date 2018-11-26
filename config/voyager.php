@@ -1,5 +1,4 @@
 <?php
-
 return [
     /*
     |--------------------------------------------------------------------------
@@ -13,7 +12,7 @@ return [
     'user' => [
         'add_default_role_on_register' => true,
         'default_role'                 => 'user',
-        'namespace'                    =>  HappyFeet\Models\User::class,
+        'namespace'                    =>  \HappyFeet\Models\User::class,
         'default_avatar'               => 'users/default.png',
         'redirect'                     => '/admin',
     ],

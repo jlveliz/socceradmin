@@ -9,13 +9,15 @@ class User extends VoyagerUser
 {
     use Notifiable;
 
-    protected $with  = [
-        'person'
-    ];
+    protected $table = "users";
+
+    // protected $with  = [
+    //     'person'
+    // ];
 
     protected $perPage = 10;
 
-    
+   
     public $additional_attributes  = ['full_name'];
     
 
@@ -47,5 +49,6 @@ class User extends VoyagerUser
     public function person()
     {
        return $this->belongsTo('HappyFeet\Models\Person','person_id');
+        
     }
 }
