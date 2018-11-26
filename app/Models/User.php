@@ -3,11 +3,21 @@
 namespace HappyFeet\Models;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use TCG\Voyager\Models\User as VoyagerUser;
 
-class User extends \TCG\Voyager\Models\User
+class User extends VoyagerUser
 {
     use Notifiable;
+
+    protected $with  = [
+        'person'
+    ];
+
+    protected $perPage = 10;
+
+    
+    public $additional_attributes  = ['full_name'];
+    
 
     /**
      * The attributes that are mass assignable.
@@ -26,4 +36,16 @@ class User extends \TCG\Voyager\Models\User
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+    public function getFullName()
+    {
+        return "{$this->email} {$this->name}";
+    }
+
+
+    public function person()
+    {
+       return $this->belongsTo('HappyFeet\Models\Person','person_id');
+    }
 }
