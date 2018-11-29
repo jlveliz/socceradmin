@@ -547,6 +547,7 @@ ul.file_list li {
     margin-top: -18px;
     padding-left: 11px;
 	cursor:pointer !important;
+  margin-top: 1px;
 }
 
 #nex-forms .prettyradio a,
