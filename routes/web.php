@@ -11,9 +11,17 @@
 |
 */
 
-Route::get('/','Auth\RegisterController@showRegistrationForm');
+Auth::routes();
+Route::get('/', 'HomeController@index')->name('home');
 
-Route::prefix('admin')->group(function(){
-    Voyager::routes();
-});
+Route::get('/dashboard','HomeController@index');
+
+
+
+// Route::get('/','Auth\RegisterController@showRegistrationForm');
+// Route::prefix('admin')->group(function(){
+//     // Voyager::routes();
+// });
+
+
 

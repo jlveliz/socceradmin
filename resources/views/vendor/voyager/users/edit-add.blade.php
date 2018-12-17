@@ -42,6 +42,12 @@
                                 <label for="name">{{ __('voyager::generic.name') }}</label>
                                 <input type="text" class="form-control" id="name" name="name" placeholder="{{ __('voyager::generic.name') }}"
                                        value="@if(isset($dataTypeContent->name)){{ $dataTypeContent->name }}@endif">
+                            </div> 
+
+                            <div class="form-group">
+                                <label for="lastname">{{ __('voyager::generic.lastname') }}</label>
+                                <input type="text" class="form-control" id="lastname" name="lastname" placeholder="{{ __('voyager::generic.lastname') }}"
+                                       value="@if(isset($dataTypeContent->lastname)){{ $dataTypeContent->lastname }}@endif">
                             </div>
 
                             <div class="form-group">
@@ -59,21 +65,12 @@
                                 <input type="password" class="form-control" id="password" name="password" value="" autocomplete="new-password">
                             </div>
 
-                            <div class="form-group">
-                                <label for="person">Persona</label>
-                                @php
-                                    $dataTypeRows = $dataType->{(isset($dataTypeContent->id) ? 'editRows' : 'addRows' )};
-                                    $row = $dataTypeRows->where('field','user_belongsto_person_relationship')->first();
-                                    $options = $row->details;
-                                @endphp
-                                @include('voyager::formfields.relationship')
-                            </div>
-
                             @can('editRoles', $dataTypeContent)
                                 <div class="form-group">
                                     <label for="default_role">{{ __('voyager::profile.role_default') }}</label>
                                     @php
                                       
+                                        $dataTypeRows = $dataType->{(isset($dataTypeContent->id) ? 'editRows' : 'addRows' )};
                                         $row     = $dataTypeRows->where('field', 'user_belongsto_role_relationship')->first();
                                         $options = $row->details;
                                     @endphp

@@ -11,9 +11,9 @@ class User extends VoyagerUser
 
     protected $table = "users";
 
-    // protected $with  = [
-    //     'person'
-    // ];
+    protected $with  = [
+        'person'
+    ];
 
     protected $perPage = 10;
 
