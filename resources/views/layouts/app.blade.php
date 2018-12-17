@@ -18,7 +18,7 @@
     <title>@yield('title') - {{ config('app.name', 'Laravel') }}</title>
 
 </head>
-<body>
+<body class="fix-header fix-sidebar">
     <div id="main-wrapper">
         <!-- Header -->
         @section('header')
@@ -36,7 +36,20 @@
         <!-- Content -->
         <div class="page-wrapper">
             <div class="row page-titles">
-                
+                <div class="col-md-5 align-self-center">
+                    <h3 class="text-primary">@yield('title')</h3>                    
+                </div>
+                <div class="col-md-7 align-self-center">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">@yield('parent-page')</a></li>
+                        <li class="breadcrumb-item active">@yield('title')</li>
+                    </ol>
+                </div>
+            </div>
+
+             <!-- Container fluid  -->
+            <div class="container-fluid">
+                @yield('content')
             </div>
 
             <!-- footer -->

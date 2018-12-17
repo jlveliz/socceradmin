@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300i,400,600,700,800');
-@import url(../icons/font-awesome/css/font-awesome.min.css);
-@import url(../icons/simple-line-icons/css/simple-line-icons.css);
-@import url(../icons/weather-icons/css/weather-icons.min.css);
-@import url(../icons/linea-icons/linea.css);
-@import url(../icons/themify-icons/themify-icons.css);
-@import url(../icons/flag-icon-css/flag-icon.min.css);
-@import url(../icons/material-design-iconic-font/css/materialdesignicons.min.css);
+@import url(../icon/font-awesome/css/font-awesome.min.css);
+@import url(../icon/simple-line-icons/css/simple-line-icons.css);
+@import url(../icon/weather-icons/css/weather-icons.min.css);
+@import url(../icon/linea-icons/linea.css);
+@import url(../icon/themify-icons/themify-icons.css);
+@import url(../icon/flag-icon-css/flag-icon.min.css);
+@import url(../icon/material-design-iconic-font/css/materialdesignicons.min.css);
 @import url(spinners.css);
 @import url(animate.css);
 /*
@@ -5551,9 +5551,10 @@ tbody tr td:last-child {
 /*background: linear-gradient(to bottom, #FFB88C, #DE6262); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 /*float:left;*/
 width:100%;
+height: 100%
 }
 
-.banner-sec{background:url(https://static.pexels.com/photos/33972/pexels-photo.jpg)  no-repeat left bottom; background-size:cover; min-height:500px; border-radius: 0 10px 10px 0; padding:0;}
+.banner-sec{padding:0;}
 .container{background:#fff; border-radius: 10px; box-shadow:15px 20px 0px rgba(0,0,0,0.1);}
 .carousel-caption{text-align:left; left:5%;}
 .login-sec{padding: 50px 30px; position:relative;border-top: 5px solid #fce011}
