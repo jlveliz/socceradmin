@@ -27,6 +27,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // Voyager::useModel('Field', \HappyFeet\Models\Field::class);
+        //User
+        // $this->app->bind('HappyFeet\RepositoryInterface\UserRepositoryInterface','HappyFeet\Repository\UserRepository');
+        //Module
+        $this->app->bind('HappyFeet\RepositoryInterface\ModuleRepositoryInterface','HappyFeet\Repository\ModuleRepository');
+        //Type Permission
+        $this->app->bind('HappyFeet\RepositoryInterface\PermissionTypeRepositoryInterface','HappyFeet\Repository\PermissionTypeRepository');
+        //Permission
+        $this->app->bind('HappyFeet\RepositoryInterface\PermissionRepositoryInterface','HappyFeet\Repository\PermissionRepository');
+        //Role
+        $this->app->bind('HappyFeet\RepositoryInterface\RoleRepositoryInterface','HappyFeet\Repository\RoleRepository');
+        //Patient
     }
 }

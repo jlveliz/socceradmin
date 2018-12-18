@@ -19,6 +19,11 @@ class Module extends Model
     	'order'
     ];
 
+    protected $dates = [
+        'created_at',
+        'updated_at'
+    ];
+
     public function permissions()
     {
     	return $this->hasMany('HappyFeet\Models\Permission','module_id');

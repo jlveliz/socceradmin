@@ -15,9 +15,7 @@ class ModuleController extends Controller
 
     public function __construct(ModuleRepositoryInterface $moduleRepo, Request $request)
     {
-        $this->middleware('jwt.auth');
-        $this->middleware('checkrole:admin');
-        parent::__construct($request);
+        $this->middleware('auth');
         $this->moduleRepo = $moduleRepo;
     }
     /**
@@ -27,9 +25,8 @@ class ModuleController extends Controller
      */
     public function index()
     {
-        $modules = $this->moduleRepo->enum()->toJson();
-        $modules = $this->encodeResponse($modules);
-        return response()->json($modules,200);
+        $modules = $this->moduleRepo->enum();
+        return view('module.index',compact('modules'));
     }
 
     /**
@@ -43,7 +40,7 @@ class ModuleController extends Controller
         try {
             $data = $request->all();
             $module = $this->moduleRepo->save($data)->toJson();
-            $module = $this->encodeResponse($module);
+           
             return response()->json($module,200);
         } catch (ModuleException $e) {
             return response()->json($e->getMessage(),$e->getCode());
@@ -61,7 +58,7 @@ class ModuleController extends Controller
         
         try {
             $module = $this->moduleRepo->find($id)->toJson();
-            $module = $this->encodeResponse($module);
+           
             return response()->json($module,200);
         } catch (ModuleException $e) {
             return response()->json($e->getMessage(),$e->getCode());
@@ -80,7 +77,7 @@ class ModuleController extends Controller
     {
         try {
             $module = $this->moduleRepo->edit($id, $request->all())->tojson();
-            $module = $this->encodeResponse($module);
+           
             return response()->json($module,200);
         } catch (ModuleException $e) {
             return response()->json($e->getMessage(),$e->getCode());
@@ -98,7 +95,6 @@ class ModuleController extends Controller
         try {
             $removed = $this->moduleRepo->remove($id);
             if ($removed) {
-                $removed = $this->encodeResponse(json_encode(['exitoso'=>true]));
                 return response()->json($removed,200);
             }
         } catch (ModuleException $e) {
