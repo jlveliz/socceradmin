@@ -3,15 +3,14 @@
 namespace HappyFeet\Http\Controllers;
 
 use HappyFeet\RepositoryInterface\ModuleRepositoryInterface;
-use HappyFeet\Http\Validators\ModuleValidator;
+use HappyFeet\Http\Requests\ModuleRequest;
 use HappyFeet\Exceptions\ModuleException;
 use Illuminate\Http\Request;
 
 class ModuleController extends Controller
 {
     
-    protected $moduleRepo;
-
+    protected $moduleRepo; 
 
     public function __construct(ModuleRepositoryInterface $moduleRepo, Request $request)
     {
@@ -29,21 +28,35 @@ class ModuleController extends Controller
         return view('module.index',compact('modules'));
     }
 
+
+    public function create()
+    {
+        return view('module.create-edit');
+    }
+
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ModuleValidator $validator, Request $request)
+    public function store(ModuleRequest $request)
     {
         try {
             $data = $request->all();
-            $module = $this->moduleRepo->save($data)->toJson();
-           
-            return response()->json($module,200);
+            $module = $this->moduleRepo->save($data);
+
+
+             if ($request->get('redirect') == 1) {
+                return redirect()->route('modules.index')->with('mensaje','Módulo '.$module->name .' Creado Correctamente');
+            } else {
+                return redirect()->route('modules.edit',$module->id)->with('mensaje','Módulo '.$module->name .' Creado Correctamente');
+            }
+
+            
+
         } catch (ModuleException $e) {
-            return response()->json($e->getMessage(),$e->getCode());
+            return back()->with($e->getMessage(),$e->getCode());
         }
     }
 
@@ -56,12 +69,20 @@ class ModuleController extends Controller
     public function show($id)
     {
         
+       #
+    }
+
+
+    public function edit($id)
+    {
         try {
-            $module = $this->moduleRepo->find($id)->toJson();
-           
-            return response()->json($module,200);
+
+            $module = $this->moduleRepo->find($id);
+
+            return view('module.create-edit',compact('module'));
+            
         } catch (ModuleException $e) {
-            return response()->json($e->getMessage(),$e->getCode());
+            return back()->with(['message' => 'no existe el recurso']);
         }
     }
 
@@ -73,12 +94,17 @@ class ModuleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ModuleValidator $validator, Request $request, $id)
+    public function update(ModuleRequest $request, $id)
     {
         try {
-            $module = $this->moduleRepo->edit($id, $request->all())->tojson();
+            $module = $this->moduleRepo->edit($id, $request->all());
            
-            return response()->json($module,200);
+            if ($request->get('redirect') == 1) {
+                return redirect()->route('modules.index')->with('mensaje','Módulo '.$module->name .' Actualizado Correctamente');
+            } else {
+                return redirect()->route('modules.edit',$module->id)->with('mensaje','Módulo '.$module->name .' Actualizado Correctamente');
+            }
+
         } catch (ModuleException $e) {
             return response()->json($e->getMessage(),$e->getCode());
         }
@@ -94,11 +120,13 @@ class ModuleController extends Controller
     {
         try {
             $removed = $this->moduleRepo->remove($id);
+            
             if ($removed) {
-                return response()->json($removed,200);
+                return redirect()->route('modules.index')->with('mensaje' , 'Se ha Eliminado  Satisfactoriamente el módulo');
             }
         } catch (ModuleException $e) {
-            return response()->json($e->getMessage(),$e->getCode());
+
+            return back()->with($e->getMessage(),$e->getCode());
         }
     }
 }

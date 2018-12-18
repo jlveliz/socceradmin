@@ -17,6 +17,12 @@
 				</div>
 			</div>
 			<div class="card-body">
+				@if (session()->has('mensaje'))
+					<div class="sufee-alert alert with-close alert-primary alert-dismissible fade show">
+						{{ session()->get('mensaje') }}
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+					</div>
+				@endif
 				<div class="table-responsive">
 					<table class="table">
 						<thead>

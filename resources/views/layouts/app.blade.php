@@ -41,7 +41,7 @@
                 </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">@yield('parent-page')</a></li>
+                        <li class="breadcrumb-item"><a href="@yield('route-parent')">@yield('parent-page')</a></li>
                         <li class="breadcrumb-item active">@yield('title')</li>
                     </ol>
                 </div>
