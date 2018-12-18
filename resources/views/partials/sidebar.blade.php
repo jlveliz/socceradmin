@@ -13,14 +13,6 @@
                         <li><a href="index1.html">Analytics </a></li>
                     </ul>
                 </li>
-                <li class="nav-label">Apps</li>
-                <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-envelope"></i><span class="hide-menu">Email</span></a>
-                    <ul aria-expanded="false" class="collapse">
-                        <li><a href="email-compose.html">Compose</a></li>
-                        <li><a href="email-read.html">Read</a></li>
-                        <li><a href="email-inbox.html">Inbox</a></li>
-                    </ul>
-                </li>
             </ul>
         </nav>
         <!-- End Sidebar navigation -->
