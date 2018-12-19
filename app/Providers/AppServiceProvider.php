@@ -3,10 +3,8 @@
 namespace HappyFeet\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Events\Dispatcher;
-use TCG\Voyager\Facades\Voyager;
-
+use HappyFeet\Repository\ModuleRepository;
+use Auth;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,7 +15,25 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Schema::defaultStringLength(191);
+        // view()->composer('*',function($view) {
+
+        //     $user = Auth::user();
+            
+        //     if ($user) {
+                
+        //         $moduleRepo = new ModuleRepository();
+                
+        //         if ($user->super_admin) {
+        //             $menu = $moduleRepo->loadAdminMenu();
+        //         } else {
+        //             $menu = $moduleRepo->loadMenu($user->id);
+
+        //         }
+
+        //         view()->share('menu',$menu);
+        //     }
+            
+        // });
     }
 
     /**
@@ -27,16 +43,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //User
-        // $this->app->bind('HappyFeet\RepositoryInterface\UserRepositoryInterface','HappyFeet\Repository\UserRepository');
-        //Module
+        $this->app->bind('HappyFeet\RepositoryInterface\RepresentantRepositoryInterface','HappyFeet\Repository\RepresentantRepository');
+
+        $this->app->bind('HappyFeet\RepositoryInterface\RegisterStudentFrontendRepositoryInterface','HappyFeet\Repository\RegisterStudentFrontendRepository');
+
         $this->app->bind('HappyFeet\RepositoryInterface\ModuleRepositoryInterface','HappyFeet\Repository\ModuleRepository');
-        //Type Permission
+
         $this->app->bind('HappyFeet\RepositoryInterface\PermissionTypeRepositoryInterface','HappyFeet\Repository\PermissionTypeRepository');
-        //Permission
+
         $this->app->bind('HappyFeet\RepositoryInterface\PermissionRepositoryInterface','HappyFeet\Repository\PermissionRepository');
-        //Role
+        
+        $this->app->bind('HappyFeet\RepositoryInterface\ModuleRepositoryInterface','HappyFeet\Repository\ModuleRepository');
+        
         $this->app->bind('HappyFeet\RepositoryInterface\RoleRepositoryInterface','HappyFeet\Repository\RoleRepository');
-        //Patient
     }
 }

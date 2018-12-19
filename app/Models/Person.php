@@ -26,30 +26,12 @@ class Person extends Model
     	'last_name',
     	'email',
     	'genre',
-    	'date_birth',
-        'province_id',
-        'city_id',
-        'parish_id',
         'age',
         'address',
         'phone',
         'mobile',
         'activity',
-        'has_facebook',
-        'has_twitter',
-        'has_instagram',
-    ];
-
-    protected $casts = [
-        'date_birth' => 'date',
-        'province_id' => 'int',
-        'city_id' => 'int',
-        'parish_id' => 'int',
-        'age' => 'int',
-        'has_facebook' => 'int',
-        'has_twitter' => 'int',
-        'has_instagram' => 'int',
-
+        'facebook_link',
     ];
 
     /**
@@ -94,6 +76,11 @@ class Person extends Model
     public function setDateBirthAttribute($value)
     {
         $this->attributes['date_birth'] = date('Y-m-d',strtotime($value));
+    }
+
+    public function user()
+    {
+        return $this->hasOne('HappyFeet\Models\User','person_id');
     }
 
 

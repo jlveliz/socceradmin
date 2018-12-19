@@ -6,6 +6,8 @@ namespace HappyFeet\RepositoryInterface;
 interface CoreRepositoryInterface 
 {
 	
+	public function paginate();
+
 	public function enum($params = null);
 
 	public function find($id);
@@ -15,4 +17,6 @@ interface CoreRepositoryInterface
 	public function edit($id,$data);
 
 	public function remove($id);
+
+	public function getModel();
 }

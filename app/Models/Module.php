@@ -14,18 +14,28 @@ class Module extends Model
         'order' => 'int'
     ];
 
+    const ACTIVE = 1;
+
+    const INACTIVE = 0;
+
     protected $fillable = [
     	'name',
-    	'order'
-    ];
-
-    protected $dates = [
-        'created_at',
-        'updated_at'
+    	'order',
+        'state'
     ];
 
     public function permissions()
     {
     	return $this->hasMany('HappyFeet\Models\Permission','module_id');
+    }
+
+    public function getActive()
+    {
+        return self::ACTIVE;
+    }
+
+    public function getInActive()
+    {
+        return self::INACTIVE;
     }
 }

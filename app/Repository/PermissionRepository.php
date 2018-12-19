@@ -12,16 +12,30 @@ use DB;
 class PermissionRepository implements PermissionRepositoryInterface
 {
 	
+	public function paginate()
+	{
+		return Permission::paginate();
+	}
+
 	public function enum($params = null)
 	{
 		if ($params) {
-			$permissions = Permission::where('type_id','=',DB::raw('( select id from permission_type where code = "'.$params["type"].'")'))->get();
+			
+			if(is_array($params)) {
+
+				if (array_key_exists('state', $params)) {
+					return Permission::where('state',$params['state'])->get();
+				}
+
+			} else {
+				$permissions = Permission::where('type_id','=',DB::raw('( select id from permission_type where code = "'.$params["type"].'")'))->get();
+			}
 		} else {
 			$permissions = Permission::all();
 		}
 
 		if (!$permissions) {
-			throw new PermissionException(['title'=>'No se han encontrado el listado de permisos','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"404");
+			throw new PermissionException('No se han encontrado el listado de permisos',404);
 		}
 		return $permissions;
 	}
@@ -35,16 +49,16 @@ class PermissionRepository implements PermissionRepositoryInterface
 				$permission = Permission::where('name',$field['name'])->first();	
 			} else {
 
-				throw new PermissionException(['title'=>'No se puede buscar el permiso','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"404");	
+				throw new PermissionException('No se puede buscar el permiso',404);	
 			}
 
 		} elseif (is_string($field) || is_int($field)) {
 			$permission = Permission::where('id',$field)->first();
 		} else {
-			throw new PermissionException(['title'=>'Se ha producido un error al buscar el permiso','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"500");	
+			throw new PermissionException('Se ha producido un error al buscar el permiso',500);	
 		}
 
-		if (!$permission) throw new PermissionException(['title'=>'No se puede buscar al permiso','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"404");	
+		if (!$permission) throw new PermissionException('No se puede buscar al permiso',404);	
 		
 		return $permission;
 
@@ -59,7 +73,7 @@ class PermissionRepository implements PermissionRepositoryInterface
 			$key = $permission->getKey();
 			return  $this->find($key);
 		} else {
-			throw new PermissionException(['title'=>'Ha ocurrido un error al guardar el permiso '.$data['name'].'','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"500");
+			throw new PermissionException('Ha ocurrido un error al guardar el permiso '.$data['name'],500);
 		}		
 	}
 
@@ -73,7 +87,7 @@ class PermissionRepository implements PermissionRepositoryInterface
 				return $this->find($key);
 			}
 		} else {
-			throw new PermissionException(['title'=>'Ha ocurrido un error al actualizar el permiso '.$data['name'].'','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"500");
+			throw new PermissionException('Ha ocurrido un error al actualizar el permiso '.$data['name'],500);
 		}
 
 
@@ -85,6 +99,11 @@ class PermissionRepository implements PermissionRepositoryInterface
 			$permission->delete();
 			return true;
 		}
-		throw new PermissionException(['title'=>'Ha ocurrido un error al eliminar el permiso ','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"500");
+		throw new PermissionException('Ha ocurrido un error al eliminar el permiso ',500);
+	}
+
+	public function getModel()
+	{
+		return new Permission();
 	}
 }

@@ -6,13 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
-    protected $table = "roles";
+    protected $table = "role";
 
     protected $primaryKey = "id";
-
-    protected $no_uppercase = [
-        'code'
-    ];
 
     protected $fillable = [
     	'name',
@@ -25,12 +21,12 @@ class Role extends Model
 
     public function permissions()
     {
-    	return $this->belongsToMany('HappyFeet\Models\Permission','role_permissions','role_id','permission_id');
+    	return $this->belongsToMany('HappyFeet\Models\Permission','role_permission','role_id','permission_id');
     }
 
     public function users()
     {
-        return $this->belongsToMany('HappyFeet\Models\User','user_roles','role_id','user_id');
+        return $this->belongsToMany('HappyFeet\Models\User','user_role','role_id','user_id');
     }
 
     public function getIsDefaultAttribute($value)
@@ -45,6 +41,7 @@ class Role extends Model
                 $istance = new Static();
                 $istance->where('is_default',\DB::raw(1))->update(['is_default'=>0]);
             }
+            $role->code = str_slug($role->name);
         }); 
 
         static::updating(function($role) { // before inserting update all items to default 1

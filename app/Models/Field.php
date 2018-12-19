@@ -2,30 +2,40 @@
 
 namespace HappyFeet\Models;
 
+use  Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
-use  HappyFeet\Events\CreatingField;
 use Auth;
 
 class Field extends Model
 {
-    protected $table = "field";
+    
+	use SoftDeletes;
 
+    protected $table = 'field';
 
-    protected $with = [
-        'User'
-    ];
+    protected $primaryKey = 'id';
 
-    protected $perPage = 15;
+    protected $dates = ['deleted_at'];
 
     protected $fillable = [
-    	'created_user_id',
+    	'name',
+    	'address',
+    	'type',
+    	'width',
+    	'height',
+    	'created_user_id'
     ];
 
+
+    public function groups()
+    {
+    	return $this->hasMany('HappyFeet\Models\GroupClass','field_id');
+    }
+
     public static function boot() {
-    	parent::boot();
-    	
-    	static::creating(function($field){
-    		$field->created_user_id = Auth::id();
-    	});
+        parent::boot();
+        static::creating(function($field){
+            $field->created_user_id = Auth::user()->id;
+        });
     }
 }

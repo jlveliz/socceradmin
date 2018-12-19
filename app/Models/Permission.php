@@ -6,17 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Permission extends Model
 {
-    protected $table = "permissions";
+    protected $table = "permission";
 
-    protected $with = ['module','type','parent'];
+    protected $with = ['module','type'];
 
     protected $primaryKey = "id";
 
-    protected $no_uppercase = [
-        'code',
-        'resource',
-        'fav_icon'
-    ];
+    const ACTIVES = 1;
+
+    const INACTIVES = 0;
 
     protected $casts = [
         'module_id' => 'int',
@@ -42,10 +40,10 @@ class Permission extends Model
         return $this->belongsTo('HappyFeet\Models\Module','module_id');
     }
 
-    public function parent()
-    {
-        return $this->belongsTo('HappyFeet\Models\Permission','parent_id');
-    }
+    // public function parent()
+    // {
+    //     return $this->belongsTo('HappyFeet\Models\Permission','parent_id');
+    // }
 
     public function type()
     {
@@ -66,13 +64,13 @@ class Permission extends Model
     {
         $istance = new Static;
         parent::boot();
-        static::saving(function($permission) use($istance){
-            $permission->code =  $istance->removeAccent($permission->name);
+        static::creating(function($permission){
+            $permission->code =  str_slug($permission->name);
         });
 
-        static::updating(function($permission) use($istance) {
-            $permission->code =  $istance->removeAccent($permission->name);
-        });
+        // static::updating(function($permission) use($istance) {
+        //     $permission->code =  str_slug($permission->name);
+        // });
     }
 
     

@@ -1,4 +1,5 @@
 <?php
+
 return [
     /*
     |--------------------------------------------------------------------------
@@ -12,9 +13,9 @@ return [
     'user' => [
         'add_default_role_on_register' => true,
         'default_role'                 => 'user',
-        'namespace'                    =>  \HappyFeet\Models\User::class,
+        'namespace'                    => null,
         'default_avatar'               => 'users/default.png',
-        'redirect'                     => '/admin',
+        'redirect'                     => '/',
     ],
 
     /*
@@ -42,7 +43,7 @@ return [
     */
 
     'models' => [
-        'namespace' => 'HapppyFeet\\Models\\',
+        'namespace' => 'HappyFeet\\Models\\',
     ],
 
     /*
@@ -125,7 +126,7 @@ return [
          * Select languages that are supported.
          */
         'locales' => [
-            'es',
+            'en',
             //'pt',
         ],
     ],
@@ -142,12 +143,17 @@ return [
     'dashboard' => [
         // Add custom list items to navbar's dropdown
         'navbar_items' => [
-            'Mi Perfil' => [
+            'Profile' => [
                 'route'      => 'voyager.profile',
                 'classes'    => 'class-full-of-rum',
                 'icon_class' => 'voyager-person',
             ],
-            'Salir' => [
+            'Home' => [
+                'route'        => '/',
+                'icon_class'   => 'voyager-home',
+                'target_blank' => true,
+            ],
+            'Logout' => [
                 'route'      => 'voyager.logout',
                 'icon_class' => 'voyager-power',
             ],
@@ -193,9 +199,7 @@ return [
     |
     */
 
-    'primary_color' => '#ee2c3d',
-
-    'secunday_color' => '#fce011',
+    'primary_color' => '#FCE011',
 
     'show_dev_tips' => true, // Show development tip "How To Use:" in Menu and Settings
 
