@@ -26,7 +26,6 @@ class RoleRequest extends FormRequest
         $rules = [
             'name' => 'required|unique:role,name',
             'is_default' => 'required',
-            'description' => 'required'
         ];
         
         if ($this->method() == 'PUT') {

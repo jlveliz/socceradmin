@@ -21,7 +21,15 @@ class Role extends Model
 
     public function permissions()
     {
-    	return $this->belongsToMany('HappyFeet\Models\Permission','role_permission','role_id','permission_id');
+    	return $this->belongsToMany('HappyFeet\Models\Permission','permission_role','role_id','permission_id');
+    }
+
+    public function hasPermission($idPermission)
+    {
+        foreach ($this->permissions as $key => $permission) {
+            if ($permission->id == $idPermission) return true;
+            return false;
+        }
     }
 
     public function users()

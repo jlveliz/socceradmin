@@ -57,7 +57,7 @@ class RoleRepository implements RoleRepositoryInterface
 		$role->fill($data);
 		if ($role->save()) {
 			if (array_key_exists('permissions', $data)) {
-				$role->permissions()->sync($data['permissons']);
+				$role->permissions()->sync($data['permissions']);
 			}
 			$key = $role->getKey();
 			return  $this->find($key);

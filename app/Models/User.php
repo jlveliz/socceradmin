@@ -9,7 +9,7 @@ class User extends \TCG\Voyager\Models\User
 {
     use Notifiable;
 
-    protected $table = "users";
+    protected $table = "user";
 
     // protected $with = ["person"];
 

@@ -1,36 +1,32 @@
 @extends('layouts.backend')
 @section('title','Roles')
+@section('parent-page','Escritorio')
+@section('route-parent',route('home'))
 
 @section('content')
-<!-- Bread crumb -->
-<div class="row page-titles">
-    <div class="col-md-5 align-self-center">
-        <h3 class="text-primary">Roles</h3> </div>
-    <div class="col-md-7 align-self-center">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="javascript:void(0)">Roles</a></li>
-            <li class="breadcrumb-item active">Listado</li>
-        </ol>
-    </div>
-</div>
-<!-- End Bread crumb -->
-
 <!-- Container fluid  -->
 <div class="container-fluid">
     <!-- Start Page Content -->
     <div class="row">
         <div class="col-12">
-            <div class="card">
-                @if (session()->has('type') && session()->has('content'))
-                    <div class="alert alert-{{ session()->get('type') }}">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-                        {{ session()->get('content') }}
+            <div class="card p-30">
+                <div class="row">
+                    <div class="card-title col-6">
+                        <h3>Listado</h3>
                     </div>
-                @endif
+                    <div class="col-6 text-right">
+                        <a href="{{ route('roles.create') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Crear</a>             
+                    </div>
+                </div>
+
                 <div class="card-body"> 
-                	<div class="form-group">
-                		<a href="{{ route('roles.create') }}" class="btn btn-primary btn-sm pull-right"><i class="fa fa-plus"></i> Crear</a><br>
-                	</div>
+                    @if (session()->has('type') && session()->has('content'))
+                        <div class="alert alert-{{ session()->get('type') }}">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                            {{ session()->get('content') }}
+                        </div>
+                    @endif
+
                     {{ $roles->links() }}
                 	<table class="table table-hover">
                 		<thead>
@@ -50,7 +46,7 @@
 	                				<td>{{ $role->description }}</td>
 	                				<td>
 	                					<a class="btn btn-warning btn-flat btn-sm" href="{{ route('roles.edit',['id' => $role->id]) }}"><i class="fa fa-edit"></i> Editar</a>
-	                					<button class="btn btn-danger btn-flat btn-sm delete-btn" data-toggle="modal" data-target="#delete-modal" data-component="Rol" data-component-name="{{ $role->name }}" data-url="{{ route('roles.destroy',['id'=>$role->id]) }}"><i class="fa fa-trash"></i> Eliminar</button>
+	                					<button class="btn btn-danger btn-flat btn-sm delete-btn" data-toggle="modal" data-target="#delete-modal"  data-object="{{$role}}" data-message="Está seguro de eliminar el Rol" data-route="{{ route('roles.destroy',$role->id) }}"><i class="fa fa-trash"></i> Eliminar</button>
 	                				</td>
 	                			</tr>
 	                			@endforeach

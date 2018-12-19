@@ -24,7 +24,7 @@ class PermissionController extends Controller
 
     function __construct(PermissionRepositoryInterface $permission, PermissionTypeRepositoryInterface $permissionType, ModuleRepositoryInterface $module)
     {
-        $this->middleware('auth.backend');
+        $this->middleware('auth');
         $this->permission = $permission;
         $this->permissionType = $permissionType;
         $this->module = $module;
@@ -36,7 +36,7 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        $permissions = $this->permission->enum();
+        $permissions = $this->permission->paginate();
         return view('backend.permission.index',compact('permissions'));
     }
 
@@ -72,7 +72,7 @@ class PermissionController extends Controller
     public function store(PermissionRequest $request)
     {
         $message = [
-            'type' => 'success',
+            'type' => 'primary',
             'content' =>'',
         ];
 
@@ -135,7 +135,7 @@ class PermissionController extends Controller
     public function update(PermissionRequest $request, $id)
     {
         $message = [
-            'type' => 'success',
+            'type' => 'primary',
             'content' =>'',
         ];
         try {
@@ -163,7 +163,7 @@ class PermissionController extends Controller
     public function destroy($id)
     {
         $message = [
-            'type' => 'success',
+            'type' => 'primary',
             'content' =>'',
         ];
         try {

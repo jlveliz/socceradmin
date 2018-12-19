@@ -40,10 +40,10 @@ class Permission extends Model
         return $this->belongsTo('HappyFeet\Models\Module','module_id');
     }
 
-    // public function parent()
-    // {
-    //     return $this->belongsTo('HappyFeet\Models\Permission','parent_id');
-    // }
+    public function parent()
+    {
+        return $this->belongsTo('HappyFeet\Models\Permission','parent_id');
+    }
 
     public function type()
     {
@@ -57,7 +57,7 @@ class Permission extends Model
 
     public function roles()
     {
-        return $this->belongsToMany('HappyFeet\Models\Role','role_id');
+        return $this->belongsToMany('HappyFeet\Models\Role','permission_role','permission_id','role_id');
     }
 
     public static function boot()

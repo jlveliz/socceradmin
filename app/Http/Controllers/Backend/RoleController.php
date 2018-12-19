@@ -20,7 +20,7 @@ class RoleController extends Controller
 
     function __construct(RoleRepositoryInterface $role, ModuleRepositoryInterface $module)
     {
-       $this->middleware('auth.backend');
+       $this->middleware('auth');
         $this->role = $role;
         $this->module = $module;
     }
@@ -58,7 +58,7 @@ class RoleController extends Controller
     public function store(RoleRequest $request)
     {
         $message = [
-            'type' => 'success',
+            'type' => 'primary',
             'content' =>'',
         ];
 
@@ -97,7 +97,11 @@ class RoleController extends Controller
     public function edit($id)
     {
         $role = $this->role->find($id);
-        return view('backend.role.create-edit',compact('role'));
+        $paramModule = [
+            'state' => $this->module->getModel()->getActive()
+        ];
+        $modules = $this->module->enum($paramModule);
+        return view('backend.role.create-edit',compact('role','modules'));
     }
 
     /**
@@ -110,7 +114,7 @@ class RoleController extends Controller
     public function update(RoleRequest $request, $id)
     {
         $message = [
-            'type' => 'success',
+            'type' => 'primary',
             'content' =>'',
         ];
         try {
@@ -138,7 +142,7 @@ class RoleController extends Controller
     public function destroy($id)
     {
         $message = [
-            'type' => 'success',
+            'type' => 'primary',
             'content' =>'',
         ];
         try {

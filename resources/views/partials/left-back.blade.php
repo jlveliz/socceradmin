@@ -5,7 +5,7 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li class="nav-devider"></li>
-                       {{--  @foreach ($menu as $module)
+                        @foreach ($menu as $module)
                             <li class="nav-label">{{ $module->name }}</li>
                             @foreach ($module->permissions as $permission)
                                 <li> <a href="@if(Route::has($permission->resource)){{ route($permission->resource) }}@else#{{ str_slug($permission->name) }}@endif" class="@if(count($permission->children) > 0)has-arrow @endif" @if(count($permission->children) > 0) data-toggle="collapse" aria-expanded="false"@endif><i class="fa {{ $permission->fav_icon }}"></i> <span class="hide-menu">{{ $permission->name }}</span></a>
@@ -18,7 +18,7 @@
                                     @endif
                                 </li>
                             @endforeach
-                        @endforeach --}}
+                        @endforeach
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->

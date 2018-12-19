@@ -110,14 +110,14 @@ class ModuleRepository implements ModuleRepositoryInterface
 	{
 		$query  = Module::select('module.*')->with(['permissions'=>function($query) use($userId){
 						$query->selectRaw('distinct permission.*')
-						->leftJoin('role_permission as rPer','rPer.permission_id','=','permission.id')
+						->leftJoin('permission_role as rPer','rPer.permission_id','=','permission.id')
 						->leftJoin('user_role as rolU','rolU.role_id','=','rPer.role_id')
 						->leftJoin('user as usr','usr.id','=','rolU.user_id')
 						->whereRaw('usr.id = "'.$userId.'" and permission.type_id = (select id from permission_type where permission_type.code = "menu" and permission.parent_id is null)')
 						->orderBy('permission.order')
 						->with(['children'=>function($query) use($userId){
 							$query->select('permission.*')
-							->leftJoin('role_permission as rPer','rPer.permission_id','=','permission.id')
+							->leftJoin('permission_role as rPer','rPer.permission_id','=','permission.id')
 							->leftJoin('user_role as rolU','rolU.role_id','=','rPer.role_id')
 							->leftJoin('user as usr','usr.id','=','rolU.user_id')
 							->whereRaw('usr.id = "'.$userId.'" and permission.type_id = (select id from permission_type where permission_type.code = "menu")')
@@ -128,7 +128,7 @@ class ModuleRepository implements ModuleRepositoryInterface
 					}])
 					->leftJoin('permission as parent','parent.module_id','=','module.id')
 					->leftJoin('permission as child','child.parent_id','=','parent.id')
-					->whereRaw("module.state=1 and module.id in (SELECT per.module_id FROM permission per left JOIN role_permission rPer ON rPer.permission_id = per.id left join user_role rolU on rolU.role_id = rPer.role_id left join user on `user`.id = rolU.user_id where user.id = ".$userId.") and parent.type_id = (select id from permission_type where code = 'menu')")
+					->whereRaw("module.state=1 and module.id in (SELECT per.module_id FROM permission per left JOIN permission_role rPer ON rPer.permission_id = per.id left join user_role rolU on rolU.role_id = rPer.role_id left join user on `user`.id = rolU.user_id where user.id = ".$userId.") and parent.type_id = (select id from permission_type where code = 'menu')")
 					->groupBy('module.name')
 					->orderBy('module.order')
 					->orderBy('parent.order')
