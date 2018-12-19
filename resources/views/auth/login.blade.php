@@ -21,11 +21,11 @@
                         </span>
                     @endif
                 </div>
-                <div class="form-group">
+                <div class="form-group {{ $errors->has('password') ? ' is-invalid' : '' }}">
                     <label for="password" class="text-uppercase">Contraseña</label>
                     <input type="password" id="password" name="password" class="form-control">
                     @if ($errors->has('password'))
-                        <span class="help-block">
+                        <span class="invalid-feedback animated fadeInDown">
                             <strong>{{ $errors->first('password') }}</strong>
                         </span>
                     @endif

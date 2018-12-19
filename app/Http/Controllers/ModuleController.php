@@ -12,7 +12,7 @@ class ModuleController extends Controller
     
     protected $moduleRepo; 
 
-    public function __construct(ModuleRepositoryInterface $moduleRepo, Request $request)
+    public function __construct(ModuleRepositoryInterface $moduleRepo)
     {
         $this->middleware('auth');
         $this->moduleRepo = $moduleRepo;

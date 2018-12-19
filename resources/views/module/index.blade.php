@@ -13,7 +13,7 @@
 					<h3>Listado</h3>
 				</div>
 				<div class="col-6 text-right">
-					<a href="{{ route('modules.create') }}" class="btn btn-primary btn-sm">Crear</a>				
+					<a href="{{ route('modules.create') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Crear</a>				
 				</div>
 			</div>
 			<div class="card-body">
@@ -28,6 +28,7 @@
 						<thead>
 							<tr>
 								<th>Nombre</th>
+								<th>Orden</th>
 								<th>Fecha Creación/ Edición</th>
 								<th>Acción</th>
 							</tr>
@@ -37,6 +38,7 @@
 								@foreach ($modules as $module)
 									<tr>
 										<td>{{$module->name}}</td>
+										<td>{{$module->order}}</td>
 										<td>{{$module->created_at->toDateString()}} / {{$module->updated_at->toDateString()}}</td>
 										<td>
 											<a class="btn btn-primary btn-sm" href="{{ route('modules.edit',$module->id) }}">Editar</a>

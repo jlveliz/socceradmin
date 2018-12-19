@@ -3,7 +3,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Eliminar Registro</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close close-modal" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -23,10 +23,10 @@
           <input type="hidden" name="_method" value="DELETE">
            {{ csrf_field() }}
           <input type="hidden" value="" class="modal-item-key" name="id">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-secondary close-modal" data-dismiss="modal">Cerrar</button>
           <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar</button>
         </form>
       </div>
     </div>
   </div>
-</div
+</div>

@@ -28,11 +28,11 @@
 							@endif
 							<div class="row">
 								<div class="col-lg-4 col-7">
-									<div class="form-group">
+									<div class="form-group {{ $errors->has('name') ? ' is-invalid' : '' }}">
 										<label for="name">Nombre <span class="text-danger">*</span></label>
 										<input type="text" class="form-control" name="name" value="@if(isset($module)){{ $module->name }} @else{{ old('name') }} @endif" autofocus="">
 										@if ($errors->has('name'))
-										    <span class="help-block">
+										    <span class="invalid-feedback animated fadeInDown">
 										        <strong>{{ $errors->first('name') }}</strong>
 										    </span>
 										@endif
@@ -40,11 +40,11 @@
 								</div>
 
 								<div class="col-lg-2 col-5">
-									<div class="form-group">
+									<div class="form-group {{ $errors->has('order') ? ' is-invalid' : '' }}">
 										<label for="order">Orden <span class="text-danger">*</span></label>
 										<input type="text" class="form-control" id="order" name="order" value="@if(isset($module)){{ $module->order }} @else{{ old('order') }} @endif">
 										@if ($errors->has('order'))
-										    <span class="help-block">
+										    <span class="invalid-feedback animated fadeInDown">
 										        <strong>{{ $errors->first('order') }}</strong>
 										    </span>
 										@endif

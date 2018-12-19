@@ -19,6 +19,8 @@
 
 </head>
 <body class="fix-header fix-sidebar">
+    @include('partials.modals')
+    
     <div id="main-wrapper">
         <!-- Header -->
         @section('header')
@@ -77,8 +79,8 @@
     {{-- Js --}}
     <script type="text/javascript" src="{{ asset('js/custom.min.js') }}"></script>
 
-    @include('partials.modals')
-
     @yield('js')
+    
+   
 </body>
 </html>

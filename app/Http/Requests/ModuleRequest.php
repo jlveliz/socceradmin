@@ -1,5 +1,4 @@
 <?php
-
 namespace HappyFeet\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -23,8 +22,27 @@ class ModuleRequest extends FormRequest
      */
     public function rules()
     {
+        
+        $rules = [
+            'name' => 'required|unique:module,name',
+            'order' => 'required'
+        ];
+
+        if ($this->method() == 'PUT') {
+           $rules['name'] = 'required|unique:module,name,'.$this->get('key');
+        }
+
+        return $rules;
+
+    }
+
+
+    public function messages()
+    {
         return [
-            //
+            'name.required' => 'Por favor, ingrese un Nombre',
+            'name.unique' => 'El nombre del Módulo ya existe',
+            'order.required' => 'Por favor, ingrese un orden'
         ];
     }
 }
