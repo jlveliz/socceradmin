@@ -26,10 +26,12 @@ class Role extends Model
 
     public function hasPermission($idPermission)
     {
+        $hasPermission  = false;
         foreach ($this->permissions as $key => $permission) {
-            if ($permission->id == $idPermission) return true;
-            return false;
+            if ($permission->id == $idPermission) $hasPermission =  true;
         }
+
+        return $hasPermission;
     }
 
     public function users()

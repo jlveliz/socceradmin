@@ -81,7 +81,7 @@
 							                										<div class="input-group">
 							                											<div class="input-group-prepend col-12">
 							                												<div class="input-group-text">
-							                													 <input type="checkbox" aria-label="Checkbox for following text input" name="permissions[]" value="{{$permission->id}}" id="permission_{{$permission->id}}" @if($role->hasPermission($permission->id)) checked @endif">
+							                													 <input type="checkbox" aria-label="Checkbox for following text input" name="permissions[]" value="{{$permission->id}}" id="permission_{{$permission->id}}" @if($role->hasPermission($permission->id)) checked @endif>
 							                												</div>
 							                												<label for="permission_{{$permission->id}}" class="col-form-label ml-2">{{$permission->name}}</label>
 							                											</div>
