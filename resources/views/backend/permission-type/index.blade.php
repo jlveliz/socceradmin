@@ -43,7 +43,7 @@
                     			@if (count($permissionTypes) > 0)
     	                			@foreach ($permissionTypes as $pType)
     	                			<tr>
-    	                				<td>{{ $pType->name }}</td>
+    	                				<td><a  href="{{ route('permission-types.edit',['id' => $pType->id]) }}" class="text-primary">{{ $pType->name }}</a></td>
     	                				<td>
     	                					@if($pType->state == 1)
     	                						<span class="badge badge-success">Activa</span>

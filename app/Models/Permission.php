@@ -60,6 +60,7 @@ class Permission extends Model
         return $this->belongsToMany('HappyFeet\Models\Role','permission_role','permission_id','role_id');
     }
 
+
     public static function boot()
     {
         $istance = new Static;

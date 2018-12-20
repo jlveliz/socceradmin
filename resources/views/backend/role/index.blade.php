@@ -41,7 +41,7 @@
                 			@if (count($roles) > 0)
 	                			@foreach ($roles as $role)
 	                			<tr>
-                                    <td>{{ $role->name }}</td>
+                                    <td><a href="{{ route('roles.edit',['id' => $role->id]) }}" class="text-primary">{{ $role->name }}</a></td>
                                     <td>@if($role->is_default == 1) Si @else No @endif</td>
 	                				<td>{{ $role->description }}</td>
 	                				<td>

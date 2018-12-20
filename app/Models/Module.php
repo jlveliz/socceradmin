@@ -29,6 +29,13 @@ class Module extends Model
     	return $this->hasMany('HappyFeet\Models\Permission','module_id');
     }
 
+
+    public function getPermissionsType($idType)
+    {
+        return $this->permissions()->where('type_id',$idType)->get();
+    }
+
+
     public function getActive()
     {
         return self::ACTIVE;

@@ -43,7 +43,7 @@
                 			@if (count($modules) > 0)
 	                			@foreach ($modules as $module)
 	                			<tr>
-                                    <td>{{ $module->name }}</td>
+                                    <td><a href="{{ route('modules.edit',['id' => $module->id]) }}" class="text-primary">{{ $module->name }}</a></td>
 	                				<td>{{ $module->order }}</td>
 	                				<td>
 	                					@if($module->state == 1)

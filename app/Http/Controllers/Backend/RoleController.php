@@ -5,6 +5,7 @@ namespace HappyFeet\Http\Controllers\Backend;
 use HappyFeet\Http\Controllers\Controller;
 use HappyFeet\RepositoryInterface\RoleRepositoryInterface;
 use HappyFeet\RepositoryInterface\ModuleRepositoryInterface;
+use HappyFeet\RepositoryInterface\PermissionTypeRepositoryInterface;
 use HappyFeet\Http\Requests\RoleRequest;
 use HappyFeet\Exceptions\RoleException;
 
@@ -15,14 +16,17 @@ class RoleController extends Controller
 
     protected $module;
 
+    protected $perTypes;
+
     protected $routeRedirectIndex = 'roles.index';
 
 
-    function __construct(RoleRepositoryInterface $role, ModuleRepositoryInterface $module)
+    function __construct(RoleRepositoryInterface $role, ModuleRepositoryInterface $module, PermissionTypeRepositoryInterface $perTypes)
     {
        $this->middleware('auth');
         $this->role = $role;
         $this->module = $module;
+        $this->perTypes = $perTypes;
     }
     /**
      * Display a listing of the resource.
@@ -45,8 +49,14 @@ class RoleController extends Controller
         $paramModule = [
             'state' => $this->module->getModel()->getActive()
         ];
+
+        $paramPermissionType = [
+            'state' => $this->perTypes->getModel()->getActive()
+        ];
+
         $modules = $this->module->enum($paramModule);
-        return view('backend.role.create-edit',compact('modules'));
+        $permissionTypes = $this->perTypes->enum($paramPermissionType);
+        return view('backend.role.create-edit',compact('modules','permissionTypes'));
     }
 
     /**
@@ -100,8 +110,14 @@ class RoleController extends Controller
         $paramModule = [
             'state' => $this->module->getModel()->getActive()
         ];
+        $paramPermissionType = [
+            'state' => $this->perTypes->getModel()->getActive()
+        ];
+        
         $modules = $this->module->enum($paramModule);
-        return view('backend.role.create-edit',compact('role','modules'));
+        
+        $permissionTypes = $this->perTypes->enum($paramPermissionType);
+        return view('backend.role.create-edit',compact('role','modules','permissionTypes'));
     }
 
     /**

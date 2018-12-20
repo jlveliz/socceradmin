@@ -24,7 +24,7 @@
             				</div>
             			@endif
             			<div class="form-validation">
-			            	<form action="@if(isset($role)) {{ route('roles.update',['id'=>$role->id]) }} @else {{ route('roles.store') }} @endif" method="POST" class="futbol-crud">
+			            	<form action="@if(isset($role)) {{ route('roles.update',['id'=>$role->id]) }} @else {{ route('roles.store') }} @endif" method="POST" class="crud-futbol">
 			            		{{ csrf_field() }}
 			            		@if (isset($role))
 			            			<input type="hidden" name="_method" value="PUT">
@@ -68,34 +68,59 @@
 					                		<div class="col-12">
 					                			<h4>Permisos  </h4>
 					                			<hr>
-					                			<div class="accordion" id="permissions">
-					                				<div class="row">
-						                				@foreach ($modules as $module)
-						                					<div class="card col-lg-6 col-12">
-						                						<div class="card-header px-2">{{$module->name}}</div>
-						                						<div class="card-body">
-						                							<table class="table">
-						                								@foreach ($module->permissions as $permission)
-							                								<tr>
-							                									<td>
-							                										<div class="input-group">
-							                											<div class="input-group-prepend col-12">
-							                												<div class="input-group-text">
-							                													 <input type="checkbox" aria-label="Checkbox for following text input" name="permissions[]" value="{{$permission->id}}" id="permission_{{$permission->id}}" @if($role->hasPermission($permission->id)) checked @endif>
-							                												</div>
-							                												<label for="permission_{{$permission->id}}" class="col-form-label ml-2">{{$permission->name}}</label>
-							                											</div>
-							                										</div>
-							                									</td>
-							                								</tr>
-						                									
-						                								@endforeach
-						                							</table>
-						                						</div>
-						                					</div>
-						                				@endforeach
-					                				</div>
-					                			</div>
+												{{-- permission types --}}
+												<ul class="nav nav-tabs" id="tabPermissions" role="tablist">
+													@foreach ($permissionTypes as $keyPtype =>  $pType)
+														<li class="nav-item">
+															<a class="nav-link @if($keyPtype == 0) active @endif" id="{{$pType->code}}-tab" data-toggle="tab" href="#{{$pType->code}}-content" role="tab" aria-controls="{{$pType->code}}" aria-selected="@if($keyPtype == 0) true @else false @endif">{{$pType->name}}</a>
+														</li>
+													@endforeach
+												</ul>
+
+												<div class="tab-content" id="myTabContent">
+													@foreach ($permissionTypes as $keyPtype =>  $pType)
+														<div class="tab-pane fade  @if($keyPtype == 0) show active @endif" id="{{$pType->code}}-content" role="tabpanel" aria-labelledby="{{$pType->code}}-tab">
+															
+
+															{{-- content permissions --}}
+
+								                			<div class="accordion" id="accordionpermissions">
+								                				<div class="row">
+									                				@foreach ($modules as $index => $module)
+									                					<div class="card col-lg-6 col-12 pt-0">
+									                						<div class="card-header px-2" id="heading_{{$pType->code.'_'.$index+1}}">
+									                							<a href="#" data-toggle="collapse" data-target="#{{$pType->code.'_'.str_slug($module->name).'_'.$module->id}}" aria-expanded="true" aria-controls="collapse{{$index+1}}">{{$module->name}} </a>
+									                						</div>
+									                						<div id="{{$pType->code.'_'.str_slug($module->name).'_'.$module->id}}" class="collapse" aria-labelledby="heading_{{$pType->code.'_'.$index+1}}" data-parent="#accordionpermissions">
+										                						<div class="card-body">
+										                							<table class="table">
+										                								@foreach ($module->getPermissionsType($pType->id) as $permission)
+											                								<tr>
+											                									<td>
+											                										<div class="input-group">
+											                											<div class="input-group-prepend col-12">
+											                												<div class="input-group-text">
+											                													 <input type="checkbox" aria-label="Checkbox for following text input" name="permissions[]" value="{{$permission->id}}" id="permission_{{$permission->id}}" @if($role->hasPermission($permission->id)) checked @endif>
+											                												</div>
+											                												<label for="permission_{{$permission->id}}" class="col-form-label ml-2">{{$permission->name}}</label>
+											                											</div>
+											                										</div>
+											                									</td>
+											                								</tr>
+										                									
+										                								@endforeach
+										                							</table>
+										                						</div>
+									                						</div>
+									                					</div>
+									                				@endforeach
+								                				</div>
+								                			</div>
+
+														</div>
+													@endforeach
+												</div>
+
 					                		</div>
 					                	</div>
 				                	</div>

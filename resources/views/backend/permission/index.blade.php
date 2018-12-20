@@ -41,7 +41,7 @@
                     			@if (count($permissions) > 0)
     	                			@foreach ($permissions as $permission)
     	                			<tr>
-                                        <td>{{ $permission->name }}</td>
+                                        <td><a href="{{ route('permissions.edit',['id' => $permission->id]) }}" class="text-primary">{{ $permission->name }}</a></td>
                                         <td>{{ $permission->module->name }}</td>
     	                				<td>{{ $permission->type->name }}</td>
     	                				<td>
