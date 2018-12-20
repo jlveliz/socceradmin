@@ -53,8 +53,11 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind('HappyFeet\RepositoryInterface\PermissionRepositoryInterface','HappyFeet\Repository\PermissionRepository');
         
-        $this->app->bind('HappyFeet\RepositoryInterface\ModuleRepositoryInterface','HappyFeet\Repository\ModuleRepository');
         
         $this->app->bind('HappyFeet\RepositoryInterface\RoleRepositoryInterface','HappyFeet\Repository\RoleRepository');
+
+        $this->app->bind('HappyFeet\RepositoryInterface\PersonTypeRepositoryInterface','HappyFeet\Repository\PersonTypeRepository');
+        
+        $this->app->bind('HappyFeet\RepositoryInterface\UserRepositoryInterface','HappyFeet\Repository\UserRepository');
     }
 }

@@ -40,6 +40,12 @@
 	Route::resource('permission-types','Backend\PermissionTypeController',['except'=>['show']]);
 	//Roles
 	Route::resource('roles','Backend\RoleController',['except'=>['show']]);
+
+	//Person Type
+	Route::resource('ptypes','Backend\PersonTypeController',['except'=>['show']]);
+
+	//Users
+	Route::resource('users','Backend\UserController',['except'=>['show']]);
 // });
 
 // Route::group(['prefix' => 'admin'], function () {

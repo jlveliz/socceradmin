@@ -68,10 +68,6 @@ class Permission extends Model
         static::creating(function($permission){
             $permission->code =  str_slug($permission->name);
         });
-
-        // static::updating(function($permission) use($istance) {
-        //     $permission->code =  str_slug($permission->name);
-        // });
     }
 
     

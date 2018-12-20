@@ -43,6 +43,11 @@ class Person extends Model
 
     
 
+    public function personType()
+    {
+        return $this->belongsTo('HappyFeet\Models\PersonType','person_type_id');
+    }
+
     public function province()
     {
         return $this->belongsTo('HappyFeet\Models\Province','province_id');

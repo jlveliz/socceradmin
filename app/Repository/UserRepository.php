@@ -12,6 +12,11 @@ use HappyFeet\Models\PersonType;
 class UserRepository implements UserRepositoryInterface
 {
 	
+	public function paginate()
+	{
+		return User::paginate();
+	}
+
 	public function enum($params = null)
 	{
 		$users = User::all();
@@ -106,6 +111,11 @@ class UserRepository implements UserRepositoryInterface
 			return true;
 		}
 		throw new UserException(['title'=>'Ha ocurrido un error al eliminar el usuario ','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"500");
+	}
+
+	public function getModel()
+	{
+		return new User();
 	}
 
 
