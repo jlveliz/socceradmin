@@ -3,10 +3,28 @@
 namespace HappyFeet\Http\Controllers\Backend;
 
 use HappyFeet\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use HappyFeet\RepositoryInterface\UserRepositoryInterface;
+use HappyFeet\RepositoryInterface\RoleRepositoryInterface;
+use HappyFeet\Exception\UserException;
+use HappyFeet\Http\Requests\UserRequest;
 
 class UserController extends Controller
 {
+    
+    protected $userRepo;
+
+    protected $roleRepo;
+
+    protected $routeRedirectIndex = 'users.index';
+
+    function __construct(UserRepositoryInterface $userRepo, RoleRepositoryInterface  $roleRepo)
+    {
+        $this->middleware('auth');
+        $this->userRepo = $userRepo;
+        $this->roleRepo = $roleRepo;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +32,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = $this->userRepo->paginate();
+        return view('backend.user.index',compact('users'));
     }
 
     /**
@@ -24,7 +43,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $roles = $this->roleRepo->enum();
+        return view('backend.user.create-edit',compact('roles'));
     }
 
     /**
@@ -33,9 +53,26 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        $message = [
+            'type' => 'primary',
+            'content' =>'',
+        ];
+
+        try {
+            $message['content'] = "Se ha creado el usuario satisfactoriamente";
+            $user = $this->userRepo->save($request->all());
+            if ($request->get('redirect-index') == 1) {
+                return redirect()->route($this->routeRedirectIndex)->with($message);
+            } else {
+                return redirect()->route('users.edit',['id'=>$user->id])->with($message);
+            }
+        } catch (UserException $e) {
+            $message['type'] = "error";
+            $message['content'] = $e->getMessage();
+            return back()->with($message);
+        }
     }
 
     /**
@@ -57,7 +94,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = $this->userRepo->find($id);
+        return view('backend.user.create-edit',compact('user'));
     }
 
     /**
@@ -67,9 +105,26 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
-        //
+        $message = [
+            'type' => 'primary',
+            'content' =>'',
+        ];
+        try {
+          $user = $this->userRepo->edit($id,$request->all());
+          $message['content'] = "Se ha Actualizado el usuario satisfactoriamente";
+          
+          if ($request->get('redirect-index') == 1) { 
+            return redirect()->route($this->routeRedirectIndex)->with($message);
+          } else {
+            return back()->with($message);
+          }
+          
+        } catch (UserException $e) {
+            $message['type'] = 'error';
+            $message['content'] = $e->getMessage();
+        }
     }
 
     /**
@@ -80,6 +135,19 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $message = [
+            'type' => 'primary',
+            'content' =>'',
+        ];
+        
+        try {
+            $deleted = $this->userRepo->remove($id);
+            $message['content'] = "Se ha eliminado el usuario satisfactoriamente";
+            return back()->with($message);
+        } catch (UserException $e) {
+            $message['type'] = "error";
+            $message['content'] = $e->getMessage();
+            return back()->with($message);
+        }
     }
 }

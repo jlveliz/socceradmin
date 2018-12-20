@@ -32,6 +32,7 @@
                     		<thead>
                     			<tr>
                                     <th>Nombre</th>
+                                    <th>Padre</th>
                                     <th>Módulo</th>
                                     <th>Tipo</th>
                     				<th>Acción</th>
@@ -42,6 +43,7 @@
     	                			@foreach ($permissions as $permission)
     	                			<tr>
                                         <td><a href="{{ route('permissions.edit',['id' => $permission->id]) }}" class="text-primary">{{ $permission->name }}</a></td>
+                                        <td>{{ $permission->parent ?  $permission->parent->name : '-' }}</td>
                                         <td>{{ $permission->module->name }}</td>
     	                				<td>{{ $permission->type->name }}</td>
     	                				<td>

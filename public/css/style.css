@@ -6949,3 +6949,8 @@ height: 100%
     display: inline-block !important;
   }
 }
+
+/* 27 TABLE*/
+/*.table thead th {
+  text-align: center;
+}*/

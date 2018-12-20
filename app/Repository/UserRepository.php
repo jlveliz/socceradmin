@@ -117,9 +117,4 @@ class UserRepository implements UserRepositoryInterface
 	{
 		return new User();
 	}
-
-
-	public function getPersonType() {
-		return PersonType::select('id')->where('code','usuario')->first()->id;
-	}
 }
