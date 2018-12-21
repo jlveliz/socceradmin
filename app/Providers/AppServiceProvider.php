@@ -34,6 +34,8 @@ class AppServiceProvider extends ServiceProvider
             }
             
         });
+
+        \Carbon\Carbon::setLocale(config('app.locale'));
     }
 
     /**

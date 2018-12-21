@@ -16,6 +16,10 @@ class EventServiceProvider extends ServiceProvider
         'HappyFeet\Events\Event' => [
             'HappyFeet\Listeners\EventListener',
         ],
+
+        'HappyFeet\Events\UserLoginEvent' => [
+            'HappyFeet\Listeners\UpdateLastAccess'
+        ]
     ];
 
     /**

@@ -20,11 +20,9 @@ class Person extends Model
 
     protected $fillable = [
     	'person_type_id',
-        'identification_type_id',
         'num_identification',
     	'name',
     	'last_name',
-    	'email',
     	'genre',
         'age',
         'address',
@@ -87,6 +85,8 @@ class Person extends Model
     {
         return $this->hasOne('HappyFeet\Models\User','person_id');
     }
+
+    
 
 
 

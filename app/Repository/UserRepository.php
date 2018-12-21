@@ -65,8 +65,12 @@ class UserRepository implements UserRepositoryInterface
 			$data['person_id'] = $personId;
 			$user = new User();
 			$user->fill($data);
-			if ($user->save()) {
-				$user->roles()->sync($data['roles']);
+			dd($user);
+			if ($saved = $user->save()) {
+				dd($user);
+				if (array_key_exists('roles', $data)) {
+					$user->roles()->sync($data['roles']);
+				}
 				$key = $user->getKey();
 				return  $this->find($key);
 		} else {
@@ -84,15 +88,20 @@ class UserRepository implements UserRepositoryInterface
 		$data['person_type_id'] = $this->getPersonType();
 		$user = $this->find($id);
 		if ($user) {
-			if(!empty($data['password'])) {
+			if(!is_null($data['password'])) {
 				$data['password'] = \Hash::make($data['password']); 
+   			} else {
+   				unset($data['password']);
    			}
+   			// dd("entra",$data);
    			$user->person->fill($data)->update();
 			$user->fill($data);
 			if($user->update()){
-				$user->roles()->sync($data['roles']);
-				$user->permissions()->delete();
-				$user->permissions()->createMany($data['permissions']);
+				if (array_key_exists('roles', $data)) {
+					$user->roles()->sync($data['roles']);
+				}
+				// $user->permissions()->delete();
+				// $user->permissions()->createMany($data['permissions']);
 				$key = $user->getKey();
 				$user =  $this->find($key);
 				return $user;
@@ -117,4 +126,9 @@ class UserRepository implements UserRepositoryInterface
 	{
 		return new User();
 	}
+
+
+	public function getPersonType($code = null) {
+        return PersonType::select('id')->where('code', $code ? $code : 'persona-natural' )->first()->id;
+    }
 }

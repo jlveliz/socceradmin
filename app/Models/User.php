@@ -5,7 +5,8 @@ namespace HappyFeet\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends \TCG\Voyager\Models\User
+class User extends Authenticatable
+
 {
     use Notifiable;
 
@@ -26,7 +27,7 @@ class User extends \TCG\Voyager\Models\User
      * @var array
      */
     protected $fillable = [
-        'email', 'username', 'password','permission','email',
+        'email', 'username', 'password','permission','email','person_id','last_access'
     ];
 
     /**
@@ -84,12 +85,23 @@ class User extends \TCG\Voyager\Models\User
     }
 
 
-    public function hasRole($role)
+    // public function hasRole($role)
+    // {
+    //     $hasRole = false;
+    //     if ($this->roles()->where('code', $role)->first()) {
+    //         $hasRole = true;
+    //     }
+    //     return $hasRole;
+    // }
+
+    public function hasRole($idRole)
     {
-        if ($this->roles()->where('code', $role)->first()) {
-            return true;
+        $hasRole  = false;
+        foreach ($this->roles as $key => $role) {
+            if ($role->id == $idRole) $hasRole =  true;
         }
-        return false;
+
+        return $hasRole;
     }
 
     protected static function boot()

@@ -23,14 +23,23 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
+       
         $rules = [
-            'name' => 'required|unique:module,name',
-            'order' => 'required',
-            'state' => 'required'
+            'username' => 'required|unique:user,username',
+            'email' => 'required|email|unique:user,email',
+            'name' => 'required',
+            'last_name' => 'required',
+            'password' => 'required',
+            'rep_password' => 'required|same:password',
+            'roles' => 'required_without:super_admin'
+
         ];
         
         if ($this->method() == 'PUT') {
-            $rules['name'] = 'required|unique:module,name,'.$this->get('key');
+            $rules['username'] = 'required|unique:user,username,'.$this->get('key');
+            $rules['email'] = 'required|unique:user,email,'.$this->get('key');
+            $rules['password'] = 'required_with:password';
+            $rules['rep_password'] = 'required_with:password|same:password';
         }
 
         return $rules;
@@ -39,10 +48,17 @@ class UserRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Ingrese un nombre',
-            'order.required' => 'Por favor, ingrese un orden',
-            'name.unique' => 'Ya existe un módulo con el mismo nombre',
-            'state.required' => 'Ingrese un estado'
+            'username.required' => 'Por favor, ingrese un nombre de usuario',
+            'username.unique' => 'Ya se encuentra un usuario registrado con este nombre',
+            'email.required' => 'Por favor ingrese un correo',
+            'email.email' => 'Por favor ingrese un correo válido',
+            'email.unique' => 'ya se encuentra un correo registrado',
+            'name.required' => 'Por favor, ingrese un nombre',
+            'last_name.required' => 'Por favor, ingrese un apellido',
+            'password.required' => 'Ingrese una contraseña',
+            'rep_password.required' => 'Por favor, ingrese la contraseña',
+            'rep_password.same' => 'Las contraseñas no coinciden',
+            'roles.required_without' => 'Por favor, ingrese al menos un rol'
         ];
     }
 }

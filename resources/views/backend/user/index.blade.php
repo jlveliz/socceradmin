@@ -42,7 +42,7 @@
                 			@if (count($users) > 0)
 	                			@foreach ($users as $user)
 	                			<tr>
-                                    <td><a href="{{ route('users.edit',['id' => $user->id]) }}" class="text-primary">{{ $user->name }}</a></td>
+                                    <td><a href="{{ route('users.edit',['id' => $user->id]) }}" class="text-primary">{{ $user->username }}</a></td>
                                     <td>{{$user->person->name .' '. $user->person->last_name}}</td>
                                     <td>
                                     	@if($user->super_admin == 1) 
@@ -51,10 +51,16 @@
                                     		<span class="badge badge-success">No</span> 
                                     	@endif
                                     </td>
-	                				<td>{{ $user->last_access ? $user->last_access->toDateString() : '-' }}</td>
+	                				<td>
+                                        @if ($user->last_access)
+                                            {{ $user->last_access }}
+                                        @else
+                                            -
+                                        @endif
+                                    </td>
 	                				<td>
 	                					<a class="btn btn-warning btn-flat btn-sm" href="{{ route('users.edit',['id' => $user->id]) }}"><i class="fa fa-edit"></i> Editar</a>
-	                					<button class="btn btn-danger btn-flat btn-sm delete-btn" data-toggle="modal" data-target="#delete-modal"  data-object="{{$user}}" data-message="Está seguro de eliminar el Usuario" data-route="{{ route('users.destroy',$user->id) }}"><i class="fa fa-trash"></i> Eliminar</button>
+	                					<button class="btn btn-danger btn-flat btn-sm delete-btn" data-toggle="modal" data-target="#delete-modal"  data-object="{{$user}}" data-fieldname="{{$user->person->name}} {{$user->person->last_name}}" data-message="Está seguro de eliminar el Usuario" data-route="{{ route('users.destroy',$user->id) }}"><i class="fa fa-trash"></i> Eliminar</button>
 	                				</td>
 	                			</tr>
 	                			@endforeach

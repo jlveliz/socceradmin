@@ -63,6 +63,7 @@ class UserController extends Controller
         try {
             $message['content'] = "Se ha creado el usuario satisfactoriamente";
             $user = $this->userRepo->save($request->all());
+            dd("viene aquí");
             if ($request->get('redirect-index') == 1) {
                 return redirect()->route($this->routeRedirectIndex)->with($message);
             } else {
@@ -95,7 +96,8 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = $this->userRepo->find($id);
-        return view('backend.user.create-edit',compact('user'));
+        $roles = $this->roleRepo->enum();
+        return view('backend.user.create-edit',compact('user','roles'));
     }
 
     /**
