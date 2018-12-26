@@ -28,9 +28,15 @@ class Student extends Model
     	'observation'
     ];
 
+
+    public function person()
+    {
+        return $this->belongsTo('HappyFeet\Models\Person','person_id');
+    }
+
     public function representant()
     {
-    	return $this->belongsTo('HappyFeet\Models\Representant','representant_id');
+    	return $this->belongsTo('HappyFeet\Models\Person','representant_id');
     }
 
 
@@ -39,11 +45,11 @@ class Student extends Model
         return $this->belongsToMany('HappyFeet\Models\GroupClass','group_class_student','student_id','group_id');
     }
 
-    public function hasTakenTrialClass()
-    {
-        return $this->groupsClass()->where('group_class_student.type',self::TYPETRIALCLASS)
-               ->where('group_class_student.date','<',date('Y-m-d'))
-               ->where('group_class_student.state',self::STATEINACTIVETRIALLCLASS)->first();
+    // public function hasTakenTrialClass()
+    // {
+    //     return $this->groupsClass()->where('group_class_student.type',self::TYPETRIALCLASS)
+    //            ->where('group_class_student.date','<',date('Y-m-d'))
+    //            ->where('group_class_student.state',self::STATEINACTIVETRIALLCLASS)->first();
         
-    }
+    // }
 }

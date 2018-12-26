@@ -111,7 +111,7 @@
 											                										@foreach ($permission->children as $children)
 										                												<tr>
 										                													<td>
-										                														<div class="form-check"><input type="checkbox" id="children_{{$children->id}}" class="form-check-input" parent="{{$children->parent->id}}"@if($role->hasPermission($children->id)) checked 
+										                														<div class="form-check"><input type="checkbox" id="children_{{$children->id}}" class="form-check-input" parent="{{$children->parent->id}}"@if(isset($role) && $role->hasPermission($children->id)) checked 
 										                														@endif>
 										                														<label for="children_{{$children->id}}" class="form-check-label">{{$children->name}}</label>
 										                														</div>

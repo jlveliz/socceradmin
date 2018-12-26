@@ -49,6 +49,9 @@
 
 	//Fields
 	Route::resource('fields','Backend\FieldController',['except'=>['show']]);
+
+	//Fields
+	Route::resource('students','Backend\StudentController',['except'=>['show']]);
 // });
 
 // Route::group(['prefix' => 'admin'], function () {

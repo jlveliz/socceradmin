@@ -63,5 +63,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('HappyFeet\RepositoryInterface\UserRepositoryInterface','HappyFeet\Repository\UserRepository');
         
         $this->app->bind('HappyFeet\RepositoryInterface\FieldRepositoryInterface','HappyFeet\Repository\FieldRepository');
+
+        $this->app->bind('HappyFeet\RepositoryInterface\StudentRepositoryInterface','HappyFeet\Repository\StudentRepository');
     }
 }
