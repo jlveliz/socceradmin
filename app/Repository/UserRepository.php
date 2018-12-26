@@ -65,9 +65,7 @@ class UserRepository implements UserRepositoryInterface
 			$data['person_id'] = $personId;
 			$user = new User();
 			$user->fill($data);
-			dd($user);
 			if ($saved = $user->save()) {
-				dd($user);
 				if (array_key_exists('roles', $data)) {
 					$user->roles()->sync($data['roles']);
 				}

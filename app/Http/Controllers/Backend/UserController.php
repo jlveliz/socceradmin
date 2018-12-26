@@ -63,7 +63,6 @@ class UserController extends Controller
         try {
             $message['content'] = "Se ha creado el usuario satisfactoriamente";
             $user = $this->userRepo->save($request->all());
-            dd("viene aquí");
             if ($request->get('redirect-index') == 1) {
                 return redirect()->route($this->routeRedirectIndex)->with($message);
             } else {

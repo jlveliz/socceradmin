@@ -100,14 +100,30 @@
 											                										<div class="input-group">
 											                											<div class="input-group-prepend col-12">
 											                												<div class="input-group-text">
-											                													 <input type="checkbox" aria-label="Checkbox for following text input" name="permissions[]" value="{{$permission->id}}" id="permission_{{$permission->id}}" @if(isset($role) && $role->hasPermission($permission->id)) checked @endif>
+											                													<input type="checkbox" aria-label="Checkbox for following text input" name="permissions[]" value="{{$permission->id}}" id="permission_{{$permission->id}}" @if(isset($role) && $role->hasPermission($permission->id)) checked @endif @if(count($permission->children) > 0) class="input-menu-has-children" for="childs-opt-menu-table_{{$permission->id}}" @endif>
 											                												</div>
 											                												<label for="permission_{{$permission->id}}" class="col-form-label ml-2">{{$permission->name}}</label>
 											                											</div>
 											                										</div>
+											                										{{-- have childs --}}
+										                									@if (count($permission->children) > 0)
+										                										<table class="table childs-opt-menu-table" id="childs-opt-menu-table_{{$permission->id}}">
+											                										@foreach ($permission->children as $children)
+										                												<tr>
+										                													<td>
+										                														<div class="form-check"><input type="checkbox" id="children_{{$children->id}}" class="form-check-input" parent="{{$children->parent->id}}"@if($role->hasPermission($children->id)) checked 
+										                														@endif>
+										                														<label for="children_{{$children->id}}" class="form-check-label">{{$children->name}}</label>
+										                														</div>
+										                													</td>
+										                												</tr>
+											                											
+											                										@endforeach
+										                										</table>
+										                									@endif
 											                									</td>
 											                								</tr>
-										                									
+
 										                								@endforeach
 										                							</table>
 										                						</div>

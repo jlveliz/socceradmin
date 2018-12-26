@@ -32,7 +32,7 @@ class Module extends Model
 
     public function getPermissionsType($idType)
     {
-        return $this->permissions()->where('type_id',$idType)->get();
+        return $this->permissions()->where('type_id',$idType)->whereNull('parent_id')->get();
     }
 
 
