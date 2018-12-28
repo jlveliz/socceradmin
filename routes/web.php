@@ -45,6 +45,7 @@
 	Route::resource('ptypes','Backend\PersonTypeController',['except'=>['show']]);
 
 	//Users
+	Route::post('users/representants','Backend\UserController@searchRepresentant')->name('users.representants');
 	Route::resource('users','Backend\UserController',['except'=>['show']]);
 
 	//Fields

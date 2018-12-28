@@ -121,6 +121,11 @@
 		                		  </div>
 		                		</div>
 		                		<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+									<div class="row justify-content-center my-2">
+										<button type="button" data-toggle="modal" data-target="#search-modal" data-route="{{route('users.representants')}}" data-size="modal-lg" data-title="Buscar Representante" class="btn btn-info"><i class="fa fa-search"></i> Buscar Representante</button>
+									</div>
+									
 		                			<div class="row p-2">
 		                				<div class="col-lg-3 col-6">
 					                		<div class="form-group {{ $errors->has('representant_num_identification') ? ' is-invalid' : '' }}">
@@ -147,6 +152,16 @@
 					                			<input type="text" name="representant_last_name" id="representant_last_name" class="form-control"  value="@if(isset($student)){{ $student->representant->last_name }}@else {{ old('representant_last_name') }}@endif">
 					                			@if ($errors->has('representant_last_name'))
 					                				<div class="invalid-feedback animated fadeInDown">{{ $errors->first('representant_last_name') }}</div>
+					                			@endif
+					                		</div>
+										</div>
+										
+										<div class="col-lg-3 col-6">
+					                		<div class="form-group {{ $errors->has('representant_address') ? ' is-invalid' : '' }}">
+					                			<label for="representant_address">Dirección <span class="text-danger">*</span></label>
+					                			<input type="text" name="representant_address" id="representant_address" class="form-control"  value="@if(isset($student)){{ $student->representant->address }}@else {{ old('representant_address') }}@endif">
+					                			@if ($errors->has('representant_address'))
+					                				<div class="invalid-feedback animated fadeInDown">{{ $errors->first('representant_address') }}</div>
 					                			@endif
 					                		</div>
 				                		</div>
@@ -192,14 +207,34 @@
 					                				<div class="invalid-feedback animated fadeInDown">{{ $errors->first('representant_date_birth') }}</div>
 					                			@endif
 					                		</div>
+										</div>
+										
+										<div class="col-lg-1 col-6">
+					                		<div class="form-group {{ $errors->has('representant_age') ? ' is-invalid' : '' }}">
+					                			<label for="representant_age">Edad</label>
+					                			<input type="text" name="representant_age" id="representant_age" class="form-control"  value="@if(isset($student)){{ $student->representant->age }}@else {{ old('representant_age') }}@endif">
+					                			@if ($errors->has('representant_age'))
+					                				<div class="invalid-feedback animated fadeInDown">{{ $errors->first('representant_age') }}</div>
+					                			@endif
+					                		</div>
 				                		</div>
 
-				                		<div class="col-lg-4 col-6">
+				                		<div class="col-lg-6 col-12">
 					                		<div class="form-group {{ $errors->has('representant_activity') ? ' is-invalid' : '' }}">
 					                			<label for="representant_activity">Actividad</label>
-					                			<input type="text" name="representant_activity" id="representant_activity" class="form-control"  value="@if(isset($student)){{ $student->representant->representant_activity }}@else {{ old('representant_activity') }}@endif">
+					                			<textarea name="representant_activity" id="representant_activity" class="form-control">@if(isset($student)){{ $student->representant->activity }}@else {{ old('representant_activity') }}@endif</textarea>
 					                			@if ($errors->has('representant_activity'))
 					                				<div class="invalid-feedback animated fadeInDown">{{ $errors->first('representant_activity') }}</div>
+					                			@endif
+					                		</div>
+										</div>
+										
+										<div class="col-lg-6 col-12">
+					                		<div class="form-group {{ $errors->has('representant_observation') ? ' is-invalid' : '' }}">
+					                			<label for="representant_observation">Observación</label>
+					                			<textarea name="representant_observation" id="representant_observation" class="form-control">@if(isset($student)){{ $student->representant->observation }}@else {{ old('representant_observation') }}@endif</textarea>
+					                			@if ($errors->has('representant_observation'))
+					                				<div class="invalid-feedback animated fadeInDown">{{ $errors->first('representant_observation') }}</div>
 					                			@endif
 					                		</div>
 				                		</div>

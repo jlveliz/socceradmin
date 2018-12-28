@@ -7,6 +7,8 @@ use HappyFeet\RepositoryInterface\UserRepositoryInterface;
 use HappyFeet\RepositoryInterface\RoleRepositoryInterface;
 use HappyFeet\Exception\UserException;
 use HappyFeet\Http\Requests\UserRequest;
+use Illuminate\Http\Request;
+
 
 class UserController extends Controller
 {
@@ -151,4 +153,23 @@ class UserController extends Controller
             return back()->with($message);
         }
     }
+
+     /**
+     * Search a user with role 'Representant'.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function searchRepresentant(Request $request) {
+        
+        if($request->has('query')) {
+
+        } else {
+            return response('Parametros mal enviados',401);
+        }
+
+    }
+
+
+
 }

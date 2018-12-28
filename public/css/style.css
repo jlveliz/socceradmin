@@ -4858,7 +4858,7 @@ footer p {
   margin-bottom: 20px;
 }
 .form-control {
-  height: 42px;
+  /*height: 42px;*/
   border-radius: 0;
   box-shadow: none;
   border-color: #e7e7e7;
@@ -6954,3 +6954,7 @@ height: 100%
 /*.table thead th {
   text-align: center;
 }*/
+
+.btn-search {
+  height: 37px;
+}
