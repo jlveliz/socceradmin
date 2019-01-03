@@ -9,7 +9,6 @@ use HappyFeet\Exception\UserException;
 use HappyFeet\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 
-
 class UserController extends Controller
 {
     
@@ -163,6 +162,8 @@ class UserController extends Controller
     public function searchRepresentant(Request $request) {
         
         if($request->has('query')) {
+            
+            $this->userRepo->getRepresentant($request->get('query'));
 
         } else {
             return response('Parametros mal enviados',401);
