@@ -4,6 +4,7 @@ namespace HappyFeet\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Hash;
 
 class User extends Authenticatable
 
@@ -102,6 +103,11 @@ class User extends Authenticatable
         }
 
         return $hasRole;
+    }
+
+    public function generateGenericPass() {
+        $string = "123";
+        return Hash::make($string);
     }
 
     protected static function boot()

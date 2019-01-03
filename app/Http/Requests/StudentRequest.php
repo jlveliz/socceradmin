@@ -25,22 +25,21 @@ class StudentRequest extends FormRequest
     {
        
         $rules = [
-            'username' => 'required|unique:user,username',
-            'email' => 'required|email|unique:user,email',
             'name' => 'required',
             'last_name' => 'required',
-            'password' => 'required',
-            'rep_password' => 'required|same:password',
-            'roles' => 'required_without:super_admin'
-
+            'date_birth' => 'required|date',
+            'age' => 'required',
+            'genre' => 'required',
+            'representant_num_identification' => 'required',
+            'representant_name' => 'required',
+            'representant_last_name' => 'required',
+            'representant_address' => 'required',
+            'representant_email' => 'required|email',
         ];
         
-        if ($this->method() == 'PUT') {
-            $rules['username'] = 'required|unique:user,username,'.$this->get('key');
-            $rules['email'] = 'required|unique:user,email,'.$this->get('key');
-            $rules['password'] = 'required_with:password';
-            $rules['rep_password'] = 'required_with:password|same:password';
-        }
+        // if ($this->method() == 'PUT') {
+        //     $rules['representant_num_identification'] = 'required|unique:person,num_identification'.$this->get('representant_person_id');
+        // }
 
         return $rules;
     }
@@ -48,17 +47,19 @@ class StudentRequest extends FormRequest
     public function messages()
     {
         return [
-            'username.required' => 'Por favor, ingrese un nombre de usuario',
-            'username.unique' => 'Ya se encuentra un usuario registrado con este nombre',
-            'email.required' => 'Por favor ingrese un correo',
-            'email.email' => 'Por favor ingrese un correo válido',
-            'email.unique' => 'ya se encuentra un correo registrado',
-            'name.required' => 'Por favor, ingrese un nombre',
-            'last_name.required' => 'Por favor, ingrese un apellido',
-            'password.required' => 'Ingrese una contraseña',
-            'rep_password.required' => 'Por favor, ingrese la contraseña',
-            'rep_password.same' => 'Las contraseñas no coinciden',
-            'roles.required_without' => 'Por favor, ingrese al menos un rol'
+            'name.required' => 'Por favor, ingrese un nombre del jugador',
+            'last_name.required' => 'Por favor, ingrese un apellido del jugador',
+            'date_birth.required' => 'Por favor, ingrese una fecha de nacimiento del jugador',
+            'date_birth.date' => 'Por favor, ingrese una fecha de nacimiento válida',
+            'age.required' => 'Por favor, ingrese una edad del jugador',
+            'genre.required' => 'Por favor, ingrese un género del jugador',
+            'representant_num_identification.required' => 'Por favor, ingrese una C.I de Representante',
+            'representant_num_identification.unique' => 'Ya existe una identificación existente',
+            'representant_name.required' => 'Por favor, ingrese el nombre del representante',
+            'representant_last_name.required' => 'Por favor, Ingrese el apellido del representante',
+            'representant_address.required' => 'Por Favor, Ingrese una dirección del representante',
+            'representant_email.required' => 'Por Favor, Ingrese un correo del representante',
+            'representant_email.email' => 'Por Favor, Ingrese un correo del representante válido'
         ];
     }
 }

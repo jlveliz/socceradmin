@@ -2,8 +2,9 @@
 
 namespace HappyFeet\Models;
 
-use  Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
+use Auth;
 
 class Student extends Model
 {
@@ -38,10 +39,16 @@ class Student extends Model
     	return $this->belongsTo('HappyFeet\Models\Person','representant_id');
     }
 
-
     public function groupsClass()
     {
         return $this->belongsToMany('HappyFeet\Models\GroupClass','group_class_student','student_id','group_id');
+    }
+
+    public static function boot() {
+        parent::boot();
+        static::creating(function($field){
+            $field->created_user_id = Auth::user()->id;
+        });
     }
 
     // public function hasTakenTrialClass()

@@ -90,7 +90,7 @@
 					                			@endif
 					                		</div>
 				                		</div>
-			                		  	<div class="col-lg-5 col-12">
+			                		  	<div class="col-lg-6 col-12">
 					                		<div class="form-group  {{ $errors->has('medical_history') ? ' is-invalid' : '' }}">
 					                			<label for="medical_history">Historial Médico </label>
 					                			<textarea name="medical_history" id="medical_history" class="form-control" rows="3">@if(isset($student)){{ $student->medical_history }}@else {{ old('medical_history') }}@endif</textarea>
@@ -100,7 +100,7 @@
 					                		</div>
 					                	</div>
 
-					                	<div class="col-lg-4 col-12">
+					                	<div class="col-lg-6 col-12">
 					                		<div class="form-group  {{ $errors->has('observation') ? ' is-invalid' : '' }}">
 					                			<label for="observation">Observación </label>
 					                			<textarea name="observation" id="observation" class="form-control" rows="3">@if(isset($student)){{ $student->observation }}@else {{ old('observation') }}@endif</textarea>
@@ -119,10 +119,11 @@
 									
 		                			<div class="row p-2">
 										<input type="hidden" name="representant_user_id" id="representant_user_id">
+										<input type="hidden" name="representant_person_id" id="representant_person_id">
 		                				<div class="col-lg-3 col-6">
 					                		<div class="form-group {{ $errors->has('representant_num_identification') ? ' is-invalid' : '' }}">
 					                			<label for="representant_num_identification">Num Identificación <span class="text-danger">*</span></label>
-					                			<input type="number" max="9999999999" minlength="9999999999" name="representant_num_identification" id="representant_num_identification" class="form-control"  autofocus="" value="@if(isset($student)){{ $student->representant->num_identification }}@else {{ old('representant_num_identification') }}@endif">
+					                			<input type="text" max="9999999999" minlength="9999999999" name="representant_num_identification" id="representant_num_identification" class="form-control"  autofocus="" value="@if(isset($student)){{ $student->representant->num_identification }}@else {{ old('representant_num_identification') }}@endif">
 					                			@if ($errors->has('representant_num_identification'))
 					                				<div class="invalid-feedback animated fadeInDown">{{ $errors->first('representant_num_identification') }}</div>
 					                			@endif
@@ -154,6 +155,16 @@
 					                			<input type="text" name="representant_address" id="representant_address" class="form-control"  value="@if(isset($student)){{ $student->representant->address }}@else {{ old('representant_address') }}@endif">
 					                			@if ($errors->has('representant_address'))
 					                				<div class="invalid-feedback animated fadeInDown">{{ $errors->first('representant_address') }}</div>
+					                			@endif
+					                		</div>
+				                		</div>
+										
+										<div class="col-lg-3 col-6">
+					                		<div class="form-group {{ $errors->has('representant_email') ? ' is-invalid' : '' }}">
+					                			<label for="representant_email">Email <span class="text-danger">*</span></label>
+					                			<input type="email" name="representant_email" id="representant_email" class="form-control"  value="@if(isset($student)){{ $student->representant->user->email }}@else {{ old('representant_email') }}@endif">
+					                			@if ($errors->has('representant_email'))
+					                				<div class="invalid-feedback animated fadeInDown">{{ $errors->first('representant_email') }}</div>
 					                			@endif
 					                		</div>
 				                		</div>
@@ -201,15 +212,7 @@
 					                		</div>
 										</div>
 										
-										<div class="col-lg-1 col-6">
-					                		<div class="form-group {{ $errors->has('representant_age') ? ' is-invalid' : '' }}">
-					                			<label for="representant_age">Edad</label>
-					                			<input type="text" name="representant_age" id="representant_age" class="form-control"  value="@if(isset($student)){{ $student->representant->age }}@else {{ old('representant_age') }}@endif">
-					                			@if ($errors->has('representant_age'))
-					                				<div class="invalid-feedback animated fadeInDown">{{ $errors->first('representant_age') }}</div>
-					                			@endif
-					                		</div>
-				                		</div>
+										
 
 				                		<div class="col-lg-6 col-12">
 					                		<div class="form-group {{ $errors->has('representant_activity') ? ' is-invalid' : '' }}">

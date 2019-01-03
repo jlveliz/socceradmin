@@ -138,7 +138,7 @@ class UserRepository implements UserRepositoryInterface
 		} else {
 			$param = "like '%$query%'";
 		}
-		$users = User::selectRaw('user.id as user_id, person.*')
+		$users = User::selectRaw('user.id as user_id, user.email , person.*')
 				->join('person','person.id','=','user.person_id')
 				->leftJoin('user_role','user.id','=','user_role.user_id')
 				->leftJoin('role','role.id','=','user_role.role_id')
