@@ -133,13 +133,19 @@ class UserRepository implements UserRepositoryInterface
 
     public function getRepresentant($query)
     {
-		$sql = User::selectRaw('user.*, person.*')
+		if(is_numeric($query)) {
+			$param = " = ".$query;
+		} else {
+			$param = "like '%$query%'";
+		}
+		$users = User::selectRaw('user.id as user_id, person.*')
 				->join('person','person.id','=','user.person_id')
 				->leftJoin('user_role','user.id','=','user_role.user_id')
 				->leftJoin('role','role.id','=','user_role.role_id')
-				->whereRaw("person.name like '%$query%' or person.last_name like '%$query%' or person.num_identification like '%$query%' and person.person_type_id = ".$this->getPersonType()." and role.code = 'representante' ")
+				->whereRaw("person.name  $param or person.last_name  $param or person.num_identification $param and person.person_type_id = ".$this->getPersonType()." and role.code = 'representante' ")
 				->get();
-		dd($sql);
+
+		return $users;
     }
 
 

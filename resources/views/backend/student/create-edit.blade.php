@@ -23,7 +23,7 @@
 		            		</div>
             			@endif
             			<div class="form-validation">
-			            	<form action="@if(isset($student)) {{ route('students.update',['id'=>$student->id]) }} @else {{ route('students.store') }} @endif" method="POST" class="crud-futbol">
+			            	<form action="@if(isset($student)) {{ route('students.update',['id'=>$student->id]) }} @else {{ route('students.store') }} @endif" method="POST" class="crud-futbol student-form">
 			            		{{ csrf_field() }}
 			            		@if (isset($student))
 			            			<input type="hidden" name="_method" value="PUT">
@@ -42,15 +42,6 @@
 		                		<div class="tab-content" id="myTabContent">
 		                		  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 		                		  	<div class="row p-2">
-				                		<div class="col-lg-3 col-6">
-					                		<div class="form-group {{ $errors->has('num_identification') ? ' is-invalid' : '' }}">
-					                			<label for="num_identification">Num Identificación <span class="text-danger">*</span></label>
-					                			<input type="number" max="9999999999" minlength="9999999999" name="num_identification" id="num_identification" class="form-control"  autofocus="" value="@if(isset($student)){{ $student->person->num_identification }}@else {{ old('num_identification') }}@endif">
-					                			@if ($errors->has('num_identification'))
-					                				<div class="invalid-feedback animated fadeInDown">{{ $errors->first('num_identification') }}</div>
-					                			@endif
-					                		</div>
-				                		</div>
 				                		<div class="col-lg-3 col-6">
 					                		<div class="form-group {{ $errors->has('name') ? ' is-invalid' : '' }}">
 					                			<label for="name">Nombres <span class="text-danger">*</span></label>
@@ -127,6 +118,7 @@
 									</div>
 									
 		                			<div class="row p-2">
+										<input type="hidden" name="representant_user_id" id="representant_user_id">
 		                				<div class="col-lg-3 col-6">
 					                		<div class="form-group {{ $errors->has('representant_num_identification') ? ' is-invalid' : '' }}">
 					                			<label for="representant_num_identification">Num Identificación <span class="text-danger">*</span></label>
@@ -140,8 +132,8 @@
 					                		<div class="form-group {{ $errors->has('representant_name') ? ' is-invalid' : '' }}">
 					                			<label for="representant_name">Nombre <span class="text-danger">*</span></label>
 					                			<input type="text" name="representant_name" id="representant_name" class="form-control"  value="@if(isset($student)){{ $student->representant->name }}@else {{ old('representant_name') }}@endif">
-					                			@if ($errors->has('representant_num_identification'))
-					                				<div class="invalid-feedback animated fadeInDown">{{ $errors->first('representant_num_identification') }}</div>
+					                			@if ($errors->has('representant_name'))
+					                				<div class="invalid-feedback animated fadeInDown">{{ $errors->first('representant_name') }}</div>
 					                			@endif
 					                		</div>
 				                		</div>
@@ -258,3 +250,7 @@
     <!-- End PAge Content -->
 </div>
 @endsection
+
+@section('js')
+<script type="text/javascript" src="{{asset('js/components/student.js')}}"></script>
+@endsection()

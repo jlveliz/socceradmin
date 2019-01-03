@@ -31,7 +31,6 @@
 			            		@endif
 			                	<div class="row">
 			                		<div class="col-lg-3 col-12">
-			                			
 				                		<div class="form-group {{ $errors->has('username') ? ' is-invalid' : '' }}">
 				                			<label for="username">Usuario <span class="text-danger">*</span></label>
 				                			<input type="text" name="username" id="username" class="form-control"  autofocus="" value="@if(isset($user)){{ $user->username }}@else {{ old('username') }}@endif">
@@ -48,7 +47,16 @@
 				                				<div class="invalid-feedback animated fadeInDown">{{ $errors->first('email') }}</div>
 				                			@endif
 				                		</div>
-			                		</div>
+									</div>
+									<div class="col-lg-3 col-12">
+											<div class="form-group {{ $errors->has('num_identification') ? ' is-invalid' : '' }}">
+												<label for="num_identification">Num Identificación <span class="text-danger">*</span></label>
+												<input type="text" name="num_identification" id="num_identification" class="form-control"  autofocus="" value="@if(isset($user)){{ $user->person->num_identification }}@else {{ old('num_identification') }}@endif">
+												@if ($errors->has('num_identification'))
+													<div class="invalid-feedback animated fadeInDown">{{ $errors->first('num_identification') }}</div>
+												@endif
+											</div>
+										</div>
 			                		<div class="col-lg-3 col-6">
 				                		<div class="form-group  {{ $errors->has('name') ? ' is-invalid' : '' }}">
 				                			<label for="name">Nombre <span class="text-danger">*</span></label>

@@ -161,10 +161,9 @@ class UserController extends Controller
      */
     public function searchRepresentant(Request $request) {
         
-        if($request->has('query')) {
-            
-            $this->userRepo->getRepresentant($request->get('query'));
-
+        if($request->has('query')) {       
+            $users = $this->userRepo->getRepresentant($request->get('query'));
+            return response($users,200);
         } else {
             return response('Parametros mal enviados',401);
         }
