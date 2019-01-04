@@ -62,7 +62,7 @@
 						                			<label for="type">Tipo <span class="text-danger">*</span></label>
 						                			<select name="type" id="type" class="form-control custom-select">
 						                				<option value="synthetic" @if( (isset($field) && $field->state == 'synthetic') || ( old('type') == 'synthetic' ) ) selected @endif>Sintética</option>
-						                				<option value="natural" @if( (isset($field) && $field->state == 'natural') || ( old('type') == 'natural' ) ) selected @endif>Natural</option>
+						                				<option value="escuela" @if( (isset($field) && $field->state == 'escuela') || ( old('type') == 'escuela' ) ) selected @endif>Escuela</option>
 						                			</select>
 						                			@if ($errors->has('type'))
 						                				<div id="val-state-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('type') }}</div>
@@ -72,27 +72,24 @@
 					                	</div>
 
 					                	<div class="row">
-					                		<div class="col-lg-2 col-6">
-					                			<div class="form-group @if($errors->has('width')) is-invalid @endif">
-						                			<label for="width">Ancho <span class="text-danger">*</span></label>
-						                			<input type="text" name="width" id="width" class="form-control" value="@if(isset($field)){{ $field->width }}@else{{ old('width') }}@endif ">
-						                			@if ($errors->has('width'))
-							                			<div id="val-width-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('width') }}</div>
-							                		@endif
-					                			</div>
-					                		</div>
-
-					                		<div class="col-lg-2 col-6">
-					                			<div class="form-group @if($errors->has('height')) is-invalid @endif">
-						                			<label for="height">Largo <span class="text-danger">*</span></label>
-						                			<input type="text" name="height" id="height" class="form-control" value="@if(isset($field)){{ $field->height }}@else{{ old('height') }}@endif ">
-						                			@if ($errors->has('height'))
-							                			<div id="val-height-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('height') }}</div>
-							                		@endif
-					                			</div>
-					                		</div>
-
-					                	</div>
+											<div class="col-12">
+												<label for="">Disponibilidad</label>
+											</div>
+										</div>
+										<div class="row justify-content-center">
+											<div class="col-lg-6 col-12">
+												<ul class="list-group">
+													<li class="list-group-item">
+														<div class="form-check">
+															<input class="form-check-input" type="checkbox" value="" id="lunes">
+															<label class="form-check-label" for="lunes">
+																Lunes
+															</label>
+														</div>
+													</li>
+												</ul>	
+											</div>
+										</div>
 				                	</div>
 				                	<hr>
 				                	<div class="form-actions">

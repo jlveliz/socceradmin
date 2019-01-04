@@ -49,6 +49,40 @@ class StudentRepository implements StudentRepositoryInterface
 	//TODO
 	public function save($data)
 	{
+		
+		//save person representant
+		$dataRepresentant = $data['representant'];
+		// dd($dataRepresentant);
+		$existPersonRepresentant = false;
+		if (($dataRepresentant['user_id'] != null) && ($dataRepresentant['person_id'] != null ) ) {
+			$personRepresentant = Person::find($dataRepresentant['person_id']);
+			$existPersonRepresentant = true;
+		} else {
+			$personRepresentant = new Person();
+		}
+		
+		$dataRepresentant['person_type_id'] = $this->getPersonType();
+		$personRepresentant->fill($dataRepresentant);
+		$existPersonRepresentant ? $personRepresentant->update() : $personRepresentant->save();
+		//insert person on data for user represenant
+		$dataRepresentant['person_id'] = $personRepresentant->getKey();
+		if ($existPersonRepresentant) {
+			$userRepresentant = User::find($dataRepresentant['user_id']);
+		} else {
+			$userRepresentant = new User();
+			$dataRepresentant['password'] = (new User())->generateGenericPass();
+			
+		}
+		//save user representant
+		$userRepresentant->fill($dataRepresentant);
+		$existPersonRepresentant ? $userRepresentant->update() :  $userRepresentant->save();
+		if(!$existPersonRepresentant) {
+			//Set Role Representante
+			$roleId = Role::where('code','representant')->first()->id;
+			$userRepresentant->roles()->attach($roleId);
+		}
+		
+		
 		//save student
 		$person = new Person();
 		$data['person_type_id'] = $this->getPersonType();
@@ -57,56 +91,11 @@ class StudentRepository implements StudentRepositoryInterface
 			$personId = $person->getKey();
 			$student = new Student();
 			$data['person_id'] = $personId;
+			$data['representant_id'] = $personRepresentant->getKey();
 			$student->fill($data);
-			if ($saved = $student->save()) {
-				//save representant
-				$existRepresentant = false;
-				if (($data['representant_user_id'] != null) && ($data['representant_person_id'] != null ) ) {
-					$representant = Person::find($data['representant_person_id']);
-					$existRepresentant = true;
-				} else {
-					$representant = new Person();
-				}
-				
-				$representant->person_type_id = $this->getPersonType();
-				$representant->num_identification = $data['representant_num_identification'];
-				$representant->name = $data['representant_name'];
-				$representant->last_name = $data['representant_last_name'];
-				$representant->address = $data['representant_address'];
-				$representant->phone = $data['representant_phone'];
-				$representant->mobile = $data['representant_phone'];
-				$representant->genre = $data['representant_genre'];
-				$representant->date_birth = $data['representant_date_birth'];
-				$representant->activity = $data['representant_activity'];
-				
-				if($representant->save()) {
-					//save user representant
-					$dataUser = [];
-					if ($existRepresentant) {
-						$userRepresentant = User::find($data['representant_user_id']);
-					} else {
-						$userRepresentant = new User();
-						$dataUser['password'] = (new User())->generateGenericPass();
-					}
-					
-					$userRepresentant->person_id = $representant->getKey();
-					$userRepresentant->email = $data['representant_email'];
-					$userRepresentant->username = str_slug($data['representant_name'].''.$data['representant_last_name']);
-					$existRepresentant ? $userRepresentant->update() : $userRepresentant->save();
-					
-					//Set Role Representante
-					$roleId = Role::where('code','representant')->first()->id;
-					$userRepresentant->roles()->attach($roleId);
-					//set representant id to student
-					$student->representant_id = $userRepresentant->getKey();
-					$student->save();
-					return  $this->find($student->getKey());
-					
-				}		
-		} else {
-			throw new StudentException(['title'=>'Ha ocurrido un error al guardar el estudiante '.$data['name'].'','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"500");
-		}
-		
+			if ($saved = $student->save()) {					
+				return  $this->find($student->getKey());
+			}
 		} else {
 			throw new StudentException(['title'=>'Ha ocurrido un error al guardar el estudiante '.$data['name'].'','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"500");
 		}

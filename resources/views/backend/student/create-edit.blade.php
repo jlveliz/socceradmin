@@ -118,12 +118,12 @@
 									</div>
 									
 		                			<div class="row p-2">
-										<input type="hidden" name="representant_user_id" id="representant_user_id">
-										<input type="hidden" name="representant_person_id" id="representant_person_id">
+										<input type="hidden" name="representant[user_id]" id="representant_user_id">
+										<input type="hidden" name="representant[person_id]" id="representant_person_id">
 		                				<div class="col-lg-3 col-6">
 					                		<div class="form-group {{ $errors->has('representant_num_identification') ? ' is-invalid' : '' }}">
 					                			<label for="representant_num_identification">Num Identificación <span class="text-danger">*</span></label>
-					                			<input type="text" max="9999999999" minlength="9999999999" name="representant_num_identification" id="representant_num_identification" class="form-control"  autofocus="" value="@if(isset($student)){{ $student->representant->num_identification }}@else {{ old('representant_num_identification') }}@endif">
+					                			<input type="text" max="9999999999" minlength="9999999999" name="representant[num_identification]" id="representant_num_identification" class="form-control"  autofocus="" value="@if(isset($student)){{ $student->representant->num_identification }}@else {{ old('representant_num_identification') }}@endif">
 					                			@if ($errors->has('representant_num_identification'))
 					                				<div class="invalid-feedback animated fadeInDown">{{ $errors->first('representant_num_identification') }}</div>
 					                			@endif
@@ -132,7 +132,7 @@
 				                		<div class="col-lg-3 col-6">
 					                		<div class="form-group {{ $errors->has('representant_name') ? ' is-invalid' : '' }}">
 					                			<label for="representant_name">Nombre <span class="text-danger">*</span></label>
-					                			<input type="text" name="representant_name" id="representant_name" class="form-control"  value="@if(isset($student)){{ $student->representant->name }}@else {{ old('representant_name') }}@endif">
+					                			<input type="text" name="representant[name]" id="representant_name" class="form-control"  value="@if(isset($student)){{ $student->representant->name }}@else {{ old('representant_name') }}@endif">
 					                			@if ($errors->has('representant_name'))
 					                				<div class="invalid-feedback animated fadeInDown">{{ $errors->first('representant_name') }}</div>
 					                			@endif
@@ -142,7 +142,7 @@
 				                		<div class="col-lg-3 col-6">
 					                		<div class="form-group {{ $errors->has('representant_last_name') ? ' is-invalid' : '' }}">
 					                			<label for="representant_last_name">Apellido <span class="text-danger">*</span></label>
-					                			<input type="text" name="representant_last_name" id="representant_last_name" class="form-control"  value="@if(isset($student)){{ $student->representant->last_name }}@else {{ old('representant_last_name') }}@endif">
+					                			<input type="text" name="representant[last_name]" id="representant_last_name" class="form-control"  value="@if(isset($student)){{ $student->representant->last_name }}@else {{ old('representant_last_name') }}@endif">
 					                			@if ($errors->has('representant_last_name'))
 					                				<div class="invalid-feedback animated fadeInDown">{{ $errors->first('representant_last_name') }}</div>
 					                			@endif
@@ -152,7 +152,7 @@
 										<div class="col-lg-3 col-6">
 					                		<div class="form-group {{ $errors->has('representant_address') ? ' is-invalid' : '' }}">
 					                			<label for="representant_address">Dirección <span class="text-danger">*</span></label>
-					                			<input type="text" name="representant_address" id="representant_address" class="form-control"  value="@if(isset($student)){{ $student->representant->address }}@else {{ old('representant_address') }}@endif">
+					                			<input type="text" name="representant[address]" id="representant_address" class="form-control"  value="@if(isset($student)){{ $student->representant->address }}@else {{ old('representant_address') }}@endif">
 					                			@if ($errors->has('representant_address'))
 					                				<div class="invalid-feedback animated fadeInDown">{{ $errors->first('representant_address') }}</div>
 					                			@endif
@@ -162,7 +162,7 @@
 										<div class="col-lg-3 col-6">
 					                		<div class="form-group {{ $errors->has('representant_email') ? ' is-invalid' : '' }}">
 					                			<label for="representant_email">Email <span class="text-danger">*</span></label>
-					                			<input type="email" name="representant_email" id="representant_email" class="form-control"  value="@if(isset($student)){{ $student->representant->user->email }}@else {{ old('representant_email') }}@endif">
+					                			<input type="email" name="representant[email]" id="representant_email" class="form-control"  value="@if(isset($student)){{ $student->representant->user->email }}@else {{ old('representant_email') }}@endif">
 					                			@if ($errors->has('representant_email'))
 					                				<div class="invalid-feedback animated fadeInDown">{{ $errors->first('representant_email') }}</div>
 					                			@endif
@@ -172,7 +172,7 @@
 				                		<div class="col-lg-2 col-6">
 					                		<div class="form-group {{ $errors->has('representant_phone') ? ' is-invalid' : '' }}">
 					                			<label for="representant_phone">Teléfono</label>
-					                			<input type="text" name="representant_phone" id="representant_phone" class="form-control"  value="@if(isset($student)){{ $student->representant->phone }}@else {{ old('representant_phone') }}@endif">
+					                			<input type="text" name="representant[phone]" id="representant_phone" class="form-control"  value="@if(isset($student)){{ $student->representant->phone }}@else {{ old('representant_phone') }}@endif">
 					                			@if ($errors->has('representant_phone'))
 					                				<div class="invalid-feedback animated fadeInDown">{{ $errors->first('representant_phone') }}</div>
 					                			@endif
@@ -182,7 +182,7 @@
 				                		<div class="col-lg-2 col-6">
 					                		<div class="form-group {{ $errors->has('representant_mobile') ? ' is-invalid' : '' }}">
 					                			<label for="representant_mobile">Móvil</label>
-					                			<input type="text" name="representant_mobile" id="representant_mobile" class="form-control"  value="@if(isset($student)){{ $student->representant->mobile }}@else {{ old('representant_mobile') }}@endif">
+					                			<input type="text" name="representant[mobile]" id="representant_mobile" class="form-control"  value="@if(isset($student)){{ $student->representant->mobile }}@else {{ old('representant_mobile') }}@endif">
 					                			@if ($errors->has('representant_mobile'))
 					                				<div class="invalid-feedback animated fadeInDown">{{ $errors->first('representant_mobile') }}</div>
 					                			@endif
@@ -192,7 +192,7 @@
 				                		<div class="col-lg-2 col-6">
 					                		<div class="form-group {{ $errors->has('representant_genre') ? ' is-invalid' : '' }}">
 					                			<label for="representant_genre">Género</label>
-					                			<select name="representant_genre" id="representant_genre" class="form-control">
+					                			<select name="representant[genre]" id="representant_genre" class="form-control">
 				                				<option value="m" @if( (isset($student) && $student->representant->genre == 'm') || old('genre') == 'm' ) selected @endif>Masculino</option>
 				                				<option value="f" @if( (isset($student) && $student->representant->genre == 'f') || old('genre') == 'f' ) selected @endif>Femenino</option>
 				                			</select>
@@ -205,7 +205,7 @@
 				                		<div class="col-lg-3 col-6">
 					                		<div class="form-group {{ $errors->has('representant_date_birth') ? ' is-invalid' : '' }}">
 					                			<label for="representant_date_birth">Fecha de Nacimiento</label>
-					                			<input type="date" name="representant_date_birth" id="representant_date_birth" class="form-control"  value="@if(isset($student)){{ $student->representant->representant_date_birth }}@else {{ old('representant_date_birth') }}@endif">
+					                			<input type="date" name="representant[date_birth]" id="representant_date_birth" class="form-control"  value="@if(isset($student)){{ $student->representant->representant_date_birth }}@else {{ old('representant_date_birth') }}@endif">
 					                			@if ($errors->has('representant_date_birth'))
 					                				<div class="invalid-feedback animated fadeInDown">{{ $errors->first('representant_date_birth') }}</div>
 					                			@endif
@@ -217,14 +217,14 @@
 				                		<div class="col-lg-6 col-12">
 					                		<div class="form-group {{ $errors->has('representant_activity') ? ' is-invalid' : '' }}">
 					                			<label for="representant_activity">Actividad</label>
-					                			<textarea name="representant_activity" id="representant_activity" class="form-control">@if(isset($student)){{ $student->representant->activity }}@else {{ old('representant_activity') }}@endif</textarea>
+					                			<textarea name="representant[activity]" id="representant_activity" class="form-control">@if(isset($student)){{ $student->representant->activity }}@else {{ old('representant_activity') }}@endif</textarea>
 					                			@if ($errors->has('representant_activity'))
 					                				<div class="invalid-feedback animated fadeInDown">{{ $errors->first('representant_activity') }}</div>
 					                			@endif
 					                		</div>
 										</div>
 										
-										<div class="col-lg-6 col-12">
+										{{-- <div class="col-lg-6 col-12">
 					                		<div class="form-group {{ $errors->has('representant_observation') ? ' is-invalid' : '' }}">
 					                			<label for="representant_observation">Observación</label>
 					                			<textarea name="representant_observation" id="representant_observation" class="form-control">@if(isset($student)){{ $student->representant->observation }}@else {{ old('representant_observation') }}@endif</textarea>
@@ -232,7 +232,7 @@
 					                				<div class="invalid-feedback animated fadeInDown">{{ $errors->first('representant_observation') }}</div>
 					                			@endif
 					                		</div>
-				                		</div>
+				                		</div> --}}
 		                			</div>
 		                		</div>
             			</div>

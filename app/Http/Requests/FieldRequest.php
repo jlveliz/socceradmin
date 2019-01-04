@@ -27,8 +27,6 @@ class FieldRequest extends FormRequest
             'name' => 'required|unique:field,name',
             'address' => 'required',
             'type' => 'required',
-            'width' => 'required',
-            'height' => 'required'
         ];
         
         if ($this->method() == 'PUT') {
@@ -45,8 +43,6 @@ class FieldRequest extends FormRequest
             'name.unique' => 'Ya existe una cancha con este nombre',
             'address.required' => 'Por favor, ingrese una dirección de cancha',
             'type.required' => 'Ingrese un tipo de cancha válido',
-            'width.required' => 'Por favor, Ingrese un ancho de cancha válido',
-            'height.required' => 'Por favor, Ingrese un largo de cancha válido',
         ];
     }
 }

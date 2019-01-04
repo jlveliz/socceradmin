@@ -21,8 +21,6 @@ class Field extends Model
     	'name',
     	'address',
     	'type',
-    	'width',
-    	'height',
     	'created_user_id'
     ];
 
