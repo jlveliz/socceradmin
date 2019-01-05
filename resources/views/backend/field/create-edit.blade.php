@@ -80,12 +80,177 @@
 											<div class="col-lg-6 col-12">
 												<ul class="list-group">
 													<li class="list-group-item">
-														<div class="form-check">
-															<input class="form-check-input" type="checkbox" value="" id="lunes">
-															<label class="form-check-label" for="lunes">
-																Lunes
-															</label>
-														</div>
+														<table class="table">
+															<thead>
+																<tr>
+																	<td class="text-center"><b>	Día</b></td>
+																	<td class="text-center"><b>Horario</b></td>
+																</tr>
+															</thead>
+															<tbody>
+																<tr id="row-lunes">
+																	<td>
+																		<div class="form-check">
+																			<input class="form-check-input select-day" type="checkbox" value="" id="lunes">
+  																			<label class="form-check-label text-secondary" for="lunes">
+    																			Lunes
+																			</label>
+																		</div>
+																	</td>
+																	<td>
+																		<div class="row">
+																			<div class="col-5 form-group">
+																				<input class="form-control form-control-sm" type="time" name="" id="" disabled>
+																			</div>
+																			<div class="col-5 form-group">
+																				<input type="time" class="form-control form-control-sm" name="" id="" disabled>
+																			</div>
+																			<div class="form-group">
+																				<button class="btn btn-link btn-sm add-schedule" disabled><i class="fa fa-plus"></i></button>
+																			</div>
+																		</div>
+																	</td>
+																</tr>
+																<tr id="row-martes">
+																	<td>
+																		<div class="form-check">
+																			<input class="form-check-input select-day" type="checkbox" value="" id="martes">
+  																			<label class="form-check-label text-secondary" for="martes">
+    																			Martes
+																			</label>
+																		</div>
+																	</td>
+																	<td>
+																		<div class="row">
+																			<div class="col-5 form-group">
+																				<input class="form-control form-control-sm" type="time" name="" id="" disabled>
+																			</div>
+																			<div class="col-5 form-group">
+																				<input type="time" class="form-control form-control-sm" name="" id="" disabled>
+																			</div>
+																			<div class="form-group">
+																				<button class="btn btn-link btn-sm add-schedule" disabled><i class="fa fa-plus"></i></button>
+																			</div>
+																		</div>
+																	</td>
+																</tr>
+																<tr id="row-miercoles">
+																	<td>
+																		<div class="form-check">
+																			<input class="form-check-input select-day" type="checkbox" value="" id="miercoles">
+  																			<label class="form-check-label text-secondary" for="miercoles">
+    																			Miercoles
+																			</label>
+																		</div>
+																	</td>
+																	<td>
+																		<div class="row">
+																			<div class="col-5 form-group">
+																				<input class="form-control form-control-sm" type="time" name="" id="" disabled>
+																			</div>
+																			<div class="col-5 form-group">
+																				<input type="time" class="form-control form-control-sm" name="" id="" disabled>
+																			</div>
+																			<div class="form-group">
+																				<button class="btn btn-link btn-sm add-schedule" disabled><i class="fa fa-plus"></i></button>
+																			</div>
+																		</div>
+																	</td>
+																</tr>
+																<tr id="row-jueves">
+																	<td>
+																		<div class="form-check">
+																			<input class="form-check-input select-day" type="checkbox" value="" id="jueves">
+  																			<label class="form-check-label text-secondary" for="jueves">
+    																			Jueves
+																			</label>
+																		</div>
+																	</td>
+																	<td>
+																		<div class="row">
+																			<div class="col-5 form-group">
+																				<input class="form-control form-control-sm" type="time" name="" id="" disabled>
+																			</div>
+																			<div class="col-5 form-group">
+																				<input type="time" class="form-control form-control-sm" name="" id="" disabled>
+																			</div>
+																			<div class="form-group">
+																				<button class="btn btn-link btn-sm add-schedule" disabled><i class="fa fa-plus"></i></button>
+																			</div>
+																		</div>
+																	</td>
+																</tr>
+																<tr id="row-viernes">
+																	<td>
+																		<div class="form-check">
+																			<input class="form-check-input select-day" type="checkbox" value="" id="viernes">
+  																			<label class="form-check-label text-secondary" for="viernes">
+    																			Viernes
+																			</label>
+																		</div>
+																	</td>
+																	<td>
+																		<div class="row">
+																			<div class="col-5 form-group">
+																				<input class="form-control form-control-sm" type="time" name="" id="" disabled>
+																			</div>
+																			<div class="col-5 form-group">
+																				<input type="time" class="form-control form-control-sm" name="" id="" disabled>
+																			</div>
+																			<div class="form-group">
+																				<button class="btn btn-link btn-sm add-schedule" disabled><i class="fa fa-plus"></i></button>
+																			</div>
+																		</div>
+																	</td>
+																</tr>
+																<tr id="row-sabado">
+																	<td>
+																		<div class="form-check">
+																			<input class="form-check-input select-day" type="checkbox" value="" id="sabado">
+  																			<label class="form-check-label text-secondary" for="sabado">
+    																			Sábado
+																			</label>
+																		</div>
+																	</td>
+																	<td>
+																		<div class="row">
+																			<div class="col-5 form-group">
+																				<input class="form-control form-control-sm" type="time" name="" id="" disabled>
+																			</div>
+																			<div class="col-5 form-group">
+																				<input type="time" class="form-control form-control-sm" name="" id="" disabled>
+																			</div>
+																			<div class="form-group">
+																				<button class="btn btn-link btn-sm add-schedule" disabled><i class="fa fa-plus"></i></button>
+																			</div>
+																		</div>
+																	</td>
+																</tr>
+																<tr id="row-domingo">
+																	<td>
+																		<div class="form-check">
+																			<input class="form-check-input select-day" type="checkbox" value="" id="domingo">
+  																			<label class="form-check-label text-secondary" for="domingo">
+    																			Domingo
+																			</label>
+																		</div>
+																	</td>
+																	<td>
+																		<div class="row">
+																			<div class="col-5 form-group">
+																				<input class="form-control form-control-sm" type="time" name="" id="" disabled>
+																			</div>
+																			<div class="col-5 form-group">
+																				<input type="time" class="form-control form-control-sm" name="" id="" disabled>
+																			</div>
+																			<div class="form-group">
+																				<button class="btn btn-link btn-sm add-schedule" disabled><i class="fa fa-plus"></i></button>
+																			</div>
+																		</div>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
 													</li>
 												</ul>	
 											</div>
@@ -110,3 +275,7 @@
     <!-- End PAge Content -->
 </div>
 @endsection
+
+@section('js')
+<script src="{{asset('js/components/field.js')}}" type="text/javascript"></script>
+@endsection()
