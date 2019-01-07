@@ -80,7 +80,7 @@
 											<div class="col-lg-6 col-12">
 												<ul class="list-group">
 													<li class="list-group-item">
-														<table class="table">
+														<table class="table" id="shcedule-field">
 															<thead>
 																<tr>
 																	<td class="text-center"><b>	Día</b></td>
@@ -100,13 +100,13 @@
 																	<td>
 																		<div class="row">
 																			<div class="col-5 form-group">
-																				<input class="form-control form-control-sm" type="time" name="" id="" disabled>
+																				<input class="form-control form-control-sm start-hour" type="time" name="available_days[monday][start][0]" id="" disabled>
 																			</div>
 																			<div class="col-5 form-group">
-																				<input type="time" class="form-control form-control-sm" name="" id="" disabled>
+																				<input type="time" class="form-control form-control-sm end-hour" name="available_days[monday][end][0]" id="" disabled>
 																			</div>
 																			<div class="form-group">
-																				<button class="btn btn-link btn-sm add-schedule" disabled><i class="fa fa-plus"></i></button>
+																				<button type="button" class="btn btn-link btn-sm add-schedule" disabled><i class="fa fa-plus"></i></button>
 																			</div>
 																		</div>
 																	</td>
@@ -123,13 +123,13 @@
 																	<td>
 																		<div class="row">
 																			<div class="col-5 form-group">
-																				<input class="form-control form-control-sm" type="time" name="" id="" disabled>
+																				<input class="form-control form-control-sm start-hour" type="time" name="available_days[tuesday][start][0]" id="" disabled>
 																			</div>
 																			<div class="col-5 form-group">
-																				<input type="time" class="form-control form-control-sm" name="" id="" disabled>
+																				<input type="time" class="form-control form-control-sm end-hour" name="available_days[tuesday][end][0]" id="" disabled>
 																			</div>
 																			<div class="form-group">
-																				<button class="btn btn-link btn-sm add-schedule" disabled><i class="fa fa-plus"></i></button>
+																				<button type="button" class="btn btn-link btn-sm add-schedule" disabled><i class="fa fa-plus"></i></button>
 																			</div>
 																		</div>
 																	</td>
@@ -146,13 +146,13 @@
 																	<td>
 																		<div class="row">
 																			<div class="col-5 form-group">
-																				<input class="form-control form-control-sm" type="time" name="" id="" disabled>
+																				<input class="form-control form-control-sm start-hour" type="time" name="available_days[wednesday][start][0]" id="" disabled>
 																			</div>
 																			<div class="col-5 form-group">
-																				<input type="time" class="form-control form-control-sm" name="" id="" disabled>
+																				<input type="time" class="form-control form-control-sm end-hour" name="available_days[wednesday][end][0]" id="" disabled>
 																			</div>
 																			<div class="form-group">
-																				<button class="btn btn-link btn-sm add-schedule" disabled><i class="fa fa-plus"></i></button>
+																				<button type="button" class="btn btn-link btn-sm add-schedule" disabled><i class="fa fa-plus"></i></button>
 																			</div>
 																		</div>
 																	</td>
@@ -169,13 +169,13 @@
 																	<td>
 																		<div class="row">
 																			<div class="col-5 form-group">
-																				<input class="form-control form-control-sm" type="time" name="" id="" disabled>
+																				<input class="form-control form-control-sm start-hour" type="time" name="available_days[thurd][start][0]" id="" disabled>
 																			</div>
 																			<div class="col-5 form-group">
-																				<input type="time" class="form-control form-control-sm" name="" id="" disabled>
+																				<input type="time" class="form-control form-control-sm end-hour" name="available_days[thurd][end][0]" id="" disabled>
 																			</div>
 																			<div class="form-group">
-																				<button class="btn btn-link btn-sm add-schedule" disabled><i class="fa fa-plus"></i></button>
+																				<button type="button" class="btn btn-link btn-sm add-schedule" disabled><i class="fa fa-plus"></i></button>
 																			</div>
 																		</div>
 																	</td>
@@ -192,13 +192,13 @@
 																	<td>
 																		<div class="row">
 																			<div class="col-5 form-group">
-																				<input class="form-control form-control-sm" type="time" name="" id="" disabled>
+																				<input class="form-control form-control-sm start-hour" type="time" name="available_days[friday][start][0]" id="" disabled>
 																			</div>
 																			<div class="col-5 form-group">
-																				<input type="time" class="form-control form-control-sm" name="" id="" disabled>
+																				<input type="time" class="form-control form-control-sm end-hour" name="available_days[friday][end][0]" id="" disabled>
 																			</div>
 																			<div class="form-group">
-																				<button class="btn btn-link btn-sm add-schedule" disabled><i class="fa fa-plus"></i></button>
+																				<button type="button" class="btn btn-link btn-sm add-schedule" disabled><i class="fa fa-plus"></i></button>
 																			</div>
 																		</div>
 																	</td>
@@ -215,13 +215,13 @@
 																	<td>
 																		<div class="row">
 																			<div class="col-5 form-group">
-																				<input class="form-control form-control-sm" type="time" name="" id="" disabled>
+																				<input class="form-control form-control-sm start-hour" type="time" name="available_days[satu][start][0]" id="" disabled>
 																			</div>
 																			<div class="col-5 form-group">
-																				<input type="time" class="form-control form-control-sm" name="" id="" disabled>
+																				<input type="time" class="form-control form-control-sm end-hour" name="available_days[satu][end][0]" id="" disabled>
 																			</div>
 																			<div class="form-group">
-																				<button class="btn btn-link btn-sm add-schedule" disabled><i class="fa fa-plus"></i></button>
+																				<button type="button" class="btn btn-link btn-sm add-schedule" disabled><i class="fa fa-plus"></i></button>
 																			</div>
 																		</div>
 																	</td>
@@ -238,13 +238,13 @@
 																	<td>
 																		<div class="row">
 																			<div class="col-5 form-group">
-																				<input class="form-control form-control-sm" type="time" name="" id="" disabled>
+																				<input class="form-control form-control-sm start-hour" type="time" name="available_days[sunday][start][0]" id="" disabled>
 																			</div>
 																			<div class="col-5 form-group">
-																				<input type="time" class="form-control form-control-sm" name="" id="" disabled>
+																				<input type="time" class="form-control form-control-sm end-hour" name="available_days[sunday][end][0]" id="" disabled>
 																			</div>
 																			<div class="form-group">
-																				<button class="btn btn-link btn-sm add-schedule" disabled><i class="fa fa-plus"></i></button>
+																				<button type="button" class="btn btn-link btn-sm add-schedule" disabled><i class="fa fa-plus"></i></button>
 																			</div>
 																		</div>
 																	</td>

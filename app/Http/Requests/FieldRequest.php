@@ -23,6 +23,7 @@ class FieldRequest extends FormRequest
      */
     public function rules()
     {
+        // dd($this->all());
         $rules = [
             'name' => 'required|unique:field,name',
             'address' => 'required',

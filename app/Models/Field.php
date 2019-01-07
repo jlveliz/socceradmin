@@ -21,13 +21,23 @@ class Field extends Model
     	'name',
     	'address',
     	'type',
-    	'created_user_id'
+        'created_user_id',
+        'available_days'
     ];
 
 
     public function groups()
     {
     	return $this->hasMany('HappyFeet\Models\GroupClass','field_id');
+    }
+
+
+    public function setAvailableDaysAttribute($data) {
+        $this->attributes['available_days'] = serialize($data);
+    }
+    
+    public function getAvailableDaysAttribute() {
+        return unserialize($this->attributes['available_days']);
     }
 
     public static function boot() {
