@@ -92,6 +92,7 @@ class FieldController extends Controller
     {
         
         $field = $this->field->find($id);
+        // dd($field->available_days);
         $daysOfWeek = days_of_week();
         return view('backend.field.create-edit',compact('field','daysOfWeek'));
     }
