@@ -36,8 +36,8 @@ class Field extends Model
         $this->attributes['available_days'] = serialize($data);
     }
     
-    public function getAvailableDaysAttribute() {
-        return unserialize($this->attributes['available_days']);
+    public function getAvailableDaysAttribute($data) {
+        return  unserialize( $this->attributes['available_days'] );
     }
 
     public static function boot() {

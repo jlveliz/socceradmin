@@ -25,7 +25,10 @@
         ],
         "psr-4": {
             "HappyFeet\\": "app/"
-        }
+        },
+        "files" : [
+            "app/Helpers/app.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

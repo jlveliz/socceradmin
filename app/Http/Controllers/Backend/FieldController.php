@@ -39,7 +39,8 @@ class FieldController extends Controller
      */
     public function create()
     {
-        return view('backend.field.create-edit');
+        $daysOfWeek = days_of_week();
+        return view('backend.field.create-edit',compact('daysOfWeek'));
     }
 
     /**
@@ -91,7 +92,8 @@ class FieldController extends Controller
     {
         
         $field = $this->field->find($id);
-        return view('backend.field.create-edit',compact('field'));
+        $daysOfWeek = days_of_week();
+        return view('backend.field.create-edit',compact('field','daysOfWeek'));
     }
 
     /**

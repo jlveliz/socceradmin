@@ -73,7 +73,13 @@
 
 					                	<div class="row">
 											<div class="col-12">
-												<label for="">Disponibilidad</label>
+												<div class="form-group @if ($errors->has('available_days')) is-invalid @endif">
+													<label for="">Horario <span class="text-danger">*</span></label>
+													
+													@if ($errors->has('available_days'))
+														<div id="val-state-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('available_days') }}</div>
+													@endif
+												</div>
 											</div>
 										</div>
 										<div class="row justify-content-center">
@@ -88,167 +94,72 @@
 																</tr>
 															</thead>
 															<tbody>
-																<tr id="row-lunes">
-																	<td>
-																		<div class="form-check">
-																			<input class="form-check-input select-day" type="checkbox" value="" id="lunes">
-  																			<label class="form-check-label text-secondary" for="lunes">
-    																			Lunes
-																			</label>
-																		</div>
-																	</td>
-																	<td>
-																		<div class="row">
-																			<div class="col-5 form-group">
-																				<input class="form-control form-control-sm start-hour" type="time" name="available_days[monday][start][0]" id="" disabled>
+																@php $countDay = 0; @endphp
+																@foreach ($daysOfWeek as $kday => $day)
+																	<tr id="row-{{$kday}}">
+																		<td>
+																			<div class="form-check">
+																				<input class="form-check-input select-day" type="checkbox" value="" id="{{$kday}}" @if( isset($field) && array_key_exists($kday,$field->available_days)  ) checked @endif>
+																				<label class="form-check-label text-secondary" for="{{$kday}}">
+																					{{$day}}
+																				</label>
 																			</div>
-																			<div class="col-5 form-group">
-																				<input type="time" class="form-control form-control-sm end-hour" name="available_days[monday][end][0]" id="" disabled>
-																			</div>
-																			<div class="form-group">
-																				<button type="button" class="btn btn-link btn-sm add-schedule" disabled><i class="fa fa-plus"></i></button>
-																			</div>
-																		</div>
-																	</td>
-																</tr>
-																<tr id="row-martes">
-																	<td>
-																		<div class="form-check">
-																			<input class="form-check-input select-day" type="checkbox" value="" id="martes">
-  																			<label class="form-check-label text-secondary" for="martes">
-    																			Martes
-																			</label>
-																		</div>
-																	</td>
-																	<td>
-																		<div class="row">
-																			<div class="col-5 form-group">
-																				<input class="form-control form-control-sm start-hour" type="time" name="available_days[tuesday][start][0]" id="" disabled>
-																			</div>
-																			<div class="col-5 form-group">
-																				<input type="time" class="form-control form-control-sm end-hour" name="available_days[tuesday][end][0]" id="" disabled>
-																			</div>
-																			<div class="form-group">
-																				<button type="button" class="btn btn-link btn-sm add-schedule" disabled><i class="fa fa-plus"></i></button>
-																			</div>
-																		</div>
-																	</td>
-																</tr>
-																<tr id="row-miercoles">
-																	<td>
-																		<div class="form-check">
-																			<input class="form-check-input select-day" type="checkbox" value="" id="miercoles">
-  																			<label class="form-check-label text-secondary" for="miercoles">
-    																			Miercoles
-																			</label>
-																		</div>
-																	</td>
-																	<td>
-																		<div class="row">
-																			<div class="col-5 form-group">
-																				<input class="form-control form-control-sm start-hour" type="time" name="available_days[wednesday][start][0]" id="" disabled>
-																			</div>
-																			<div class="col-5 form-group">
-																				<input type="time" class="form-control form-control-sm end-hour" name="available_days[wednesday][end][0]" id="" disabled>
-																			</div>
-																			<div class="form-group">
-																				<button type="button" class="btn btn-link btn-sm add-schedule" disabled><i class="fa fa-plus"></i></button>
-																			</div>
-																		</div>
-																	</td>
-																</tr>
-																<tr id="row-jueves">
-																	<td>
-																		<div class="form-check">
-																			<input class="form-check-input select-day" type="checkbox" value="" id="jueves">
-  																			<label class="form-check-label text-secondary" for="jueves">
-    																			Jueves
-																			</label>
-																		</div>
-																	</td>
-																	<td>
-																		<div class="row">
-																			<div class="col-5 form-group">
-																				<input class="form-control form-control-sm start-hour" type="time" name="available_days[thurd][start][0]" id="" disabled>
-																			</div>
-																			<div class="col-5 form-group">
-																				<input type="time" class="form-control form-control-sm end-hour" name="available_days[thurd][end][0]" id="" disabled>
-																			</div>
-																			<div class="form-group">
-																				<button type="button" class="btn btn-link btn-sm add-schedule" disabled><i class="fa fa-plus"></i></button>
-																			</div>
-																		</div>
-																	</td>
-																</tr>
-																<tr id="row-viernes">
-																	<td>
-																		<div class="form-check">
-																			<input class="form-check-input select-day" type="checkbox" value="" id="viernes">
-  																			<label class="form-check-label text-secondary" for="viernes">
-    																			Viernes
-																			</label>
-																		</div>
-																	</td>
-																	<td>
-																		<div class="row">
-																			<div class="col-5 form-group">
-																				<input class="form-control form-control-sm start-hour" type="time" name="available_days[friday][start][0]" id="" disabled>
-																			</div>
-																			<div class="col-5 form-group">
-																				<input type="time" class="form-control form-control-sm end-hour" name="available_days[friday][end][0]" id="" disabled>
-																			</div>
-																			<div class="form-group">
-																				<button type="button" class="btn btn-link btn-sm add-schedule" disabled><i class="fa fa-plus"></i></button>
-																			</div>
-																		</div>
-																	</td>
-																</tr>
-																<tr id="row-sabado">
-																	<td>
-																		<div class="form-check">
-																			<input class="form-check-input select-day" type="checkbox" value="" id="sabado">
-  																			<label class="form-check-label text-secondary" for="sabado">
-    																			Sábado
-																			</label>
-																		</div>
-																	</td>
-																	<td>
-																		<div class="row">
-																			<div class="col-5 form-group">
-																				<input class="form-control form-control-sm start-hour" type="time" name="available_days[satu][start][0]" id="" disabled>
-																			</div>
-																			<div class="col-5 form-group">
-																				<input type="time" class="form-control form-control-sm end-hour" name="available_days[satu][end][0]" id="" disabled>
-																			</div>
-																			<div class="form-group">
-																				<button type="button" class="btn btn-link btn-sm add-schedule" disabled><i class="fa fa-plus"></i></button>
-																			</div>
-																		</div>
-																	</td>
-																</tr>
-																<tr id="row-domingo">
-																	<td>
-																		<div class="form-check">
-																			<input class="form-check-input select-day" type="checkbox" value="" id="domingo">
-  																			<label class="form-check-label text-secondary" for="domingo">
-    																			Domingo
-																			</label>
-																		</div>
-																	</td>
-																	<td>
-																		<div class="row">
-																			<div class="col-5 form-group">
-																				<input class="form-control form-control-sm start-hour" type="time" name="available_days[sunday][start][0]" id="" disabled>
-																			</div>
-																			<div class="col-5 form-group">
-																				<input type="time" class="form-control form-control-sm end-hour" name="available_days[sunday][end][0]" id="" disabled>
-																			</div>
-																			<div class="form-group">
-																				<button type="button" class="btn btn-link btn-sm add-schedule" disabled><i class="fa fa-plus"></i></button>
-																			</div>
-																		</div>
-																	</td>
-																</tr>
+																		</td>
+																		<td>
+																			
+																			@if (isset($field) && array_key_exists($kday, $field->available_days))
+																				
+																				@php $numSchedule = 0; @endphp
+																				@foreach($field->available_days[$kday] as  $shcheduleNum => $scheduleDetail)
+																					<div class="row">
+																						@foreach ($scheduleDetail as $keyAction => $hours)
+																							<div class="col-5 form-group @if ($errors->has('available_days.'.$kday.'.'.$shcheduleNum.'.'.$keyAction)) is-invalid @endif">
+																								<input class="form-control form-control-sm  @if($keyAction == 'start') start-hour @else end-hour @endif" type="time" name="available_days[{{$kday}}][{{$shcheduleNum}}][{{$keyAction}}]" id="" value="{{$hours}}">
+																								@if ($errors->has('available_days.'.$kday.'.'.$shcheduleNum.'.'.$keyAction))
+																									<div id="val-state-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('available_days.'.$kday.'.'.$shcheduleNum.'.'.$keyAction) }}</div>
+																								@endif
+																							</div>
+																						@endforeach
+																						
+																						@if($numSchedule < 1)
+																							<div class="form-group">
+																								<button type="button" class="btn btn-link btn-sm add-schedule"><i class="fa fa-plus"></i></button>
+																							</div>
+																						@else
+																							<div class="form-group">
+																								<button type="button" class="btn btn-link btn-sm remove-schedule"><i class="fa fa-close"></i></button>
+																							</div>
+																						@endif
+																						@php $numSchedule++; @endphp 
+																					</div>
+																				@endforeach
+																						
+																						
+																			@else
+																				<div class="row">			
+																					<div class="col-5 form-group @if ($errors->has('available_days.'.$kday.'.schedule_0.start')) is-invalid @endif">
+																						<input class="form-control form-control-sm start-hour" type="time" name="available_days[{{$kday}}][schedule_0][start]" id="" @if( isset($field) && isset($field->available_days[$kday]) && isset($field->available_days[$kday]['start']) ) value="{{$field->available_days[$kday]['start'][$countDay]}}"  @endif disabled>
+																						@if ($errors->has('available_days.'.$kday.'.schedule_0.start'))
+																							<div id="val-state-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('available_days.'.$kday.'.schedule_0.start') }}</div>
+																						@endif
+																					</div>
+																					
+																					<div class="col-5 form-group @if ($errors->has('available_days.'.$kday.'.schedule_0.end')) is-invalid @endif">
+																						<input type="time" class="form-control form-control-sm end-hour" name="available_days[{{$kday}}][schedule_0][end]" id="" disabled>
+																						@if ($errors->has('available_days.'.$kday.'.schedule_0.end'))
+																							<div id="val-state-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('available_days.'.$kday.'.schedule_0.end') }}</div>
+																						@endif
+																					</div>
+																					<div class="form-group">
+																						<button type="button" class="btn btn-link btn-sm add-schedule" disabled><i class="fa fa-plus"></i></button>
+																					</div>
+																				</div>
+																			@endif
+																				
+																		</td>
+																	</tr>
+																	@php $countDay++; @endphp
+																@endforeach
 															</tbody>
 														</table>
 													</li>
