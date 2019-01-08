@@ -51,8 +51,11 @@
 	//Fields
 	Route::resource('fields','Backend\FieldController',['except'=>['show']]);
 
-	//Fields
+	//Student
 	Route::resource('students','Backend\StudentController',['except'=>['show']]);
+	
+	//Student
+	Route::resource('ageranges','Backend\AgeRangeController',['except'=>['show']]);
 // });
 
 // Route::group(['prefix' => 'admin'], function () {

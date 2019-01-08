@@ -14,3 +14,16 @@ if(!function_exists('days_of_week')) {
         ];
     }
 }
+
+
+if(!function_exists('range_ages')) {
+
+    function range_ages() {
+        $range = [];
+        for ($i=1; $i <= config('happyfeet.max-age'); $i++) { 
+            $range[$i] = $i; 
+        }
+        return $range;
+    }
+
+}
