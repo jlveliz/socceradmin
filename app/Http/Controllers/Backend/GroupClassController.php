@@ -4,21 +4,24 @@ namespace HappyFeet\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use HappyFeet\Http\Controllers\Controller;
+use HappyFeet\RepositoryInterface\GroupClassRepositoryInterface;
 use HappyFeet\RepositoryInterface\FieldRepositoryInterface;
-use HappyFeet\Http\Requests\FieldRequest;
-use HappyFeet\Exceptions\FieldException;
+use HappyFeet\Http\Requests\GroupClassRequest;
+use HappyFeet\Exceptions\GroupClassException;
 
-class FieldController extends Controller
+class GroupClassController extends Controller
 {
     
+    protected $groupClass;
     protected $field;
 
-    protected $routeRedirectIndex = 'fields.index';
+    protected $routeRedirectIndex = 'groupclass.index';
 
 
-    function __construct(FieldRepositoryInterface $field)
+    function __construct(GroupClassRepositoryInterface $groupClass, FieldRepositoryInterface $field)
     {
         $this->middleware('auth');
+        $this->groupClass = $groupClass;
         $this->field = $field;
     }
     /**
@@ -28,8 +31,8 @@ class FieldController extends Controller
      */
     public function index()
     {
-        $fields = $this->field->paginate();
-        return view('backend.field.index',compact('fields'));
+        $groups = $this->groupClass->paginate();
+        return view('backend.groupclass.index',compact('groups'));
     }
 
     /**
@@ -39,8 +42,8 @@ class FieldController extends Controller
      */
     public function create()
     {
-        $daysOfWeek = days_of_week();
-        return view('backend.field.create-edit',compact('daysOfWeek'));
+        $fields = $this->field->enum();
+        return view('backend.groupclass.create-edit',compact('fields'));
     }
 
     /**
@@ -49,7 +52,7 @@ class FieldController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(FieldRequest $request)
+    public function store(GroupClassRequest $request)
     {
         $message = [
             'type' => 'primary',
@@ -57,14 +60,14 @@ class FieldController extends Controller
         ];
 
         try {
-            $message['content'] = "Se ha creado la cancha Satisfactoriamente";
-            $field = $this->field->save($request->all());
+            $message['content'] = "Se ha creado el Grupo Satisfactoriamente";
+            $groupClass = $this->groupClass->save($request->all());
             if ($request->get('redirect-index') == 1) {
                 return redirect()->route($this->routeRedirectIndex)->with($message);
             } else {
-                return redirect()->route('fields.edit',['id'=>$field->id])->with($message);
+                return redirect()->route('groupclass.edit',['id'=>$groupClass->id])->with($message);
             }
-        } catch (FieldException $e) {
+        } catch (GroupClassException $e) {
             $message['type'] = "error";
             $message['content'] = $e->getMessage();
             return back()->with($message);
@@ -77,9 +80,9 @@ class FieldController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id, Request $request)
+    public function show($id)
     {
-        
+        //
     }
 
     /**
@@ -91,10 +94,8 @@ class FieldController extends Controller
     public function edit($id)
     {
         
-        $field = $this->field->find($id);
-        // dd($field->available_days);
-        $daysOfWeek = days_of_week();
-        return view('backend.field.create-edit',compact('field','daysOfWeek'));
+        $groupClass = $this->groupClass->find($id);
+        return view('backend.groupClass.create-edit',compact('groupClass'));
     }
 
     /**
@@ -104,15 +105,15 @@ class FieldController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(FieldRequest $request, $id)
+    public function update(GroupClassRequest $request, $id)
     {
         $message = [
             'type' => 'primary',
             'content' =>'',
         ];
         try {
-          $field = $this->field->edit($id,$request->all());
-          $message['content'] = "Se ha Actualizado la cancha satisfactoriamente";
+          $groupClass = $this->groupClass->edit($id,$request->all());
+          $message['content'] = "Se ha Actualizado el grupo satisfactoriamente";
           
           if ($request->get('redirect-index') == 1) { 
             return redirect()->route($this->routeRedirectIndex)->with($message);
@@ -120,7 +121,7 @@ class FieldController extends Controller
             return back()->with($message);
           }
           
-        } catch (FieldException $e) {
+        } catch (GroupClassException $e) {
             $message['type'] = 'error';
             $message['content'] = $e->getMessage();
         }
@@ -139,38 +140,13 @@ class FieldController extends Controller
             'content' =>'',
         ];
         try {
-            $deleted = $this->field->remove($id);
-            $message['content'] = "Se ha eliminado la cancha satisfactoriamente";
+            $deleted = $this->groupClass->remove($id);
+            $message['content'] = "Se ha eliminado el grupo satisfactoriamente";
             return back()->with($message);
-        } catch (FieldException $e) {
+        } catch (GroupClassException $e) {
             $message['type'] = "error";
             $message['content'] = $e->getMessage();
             return back()->with($message);
         }
-    }
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function getSchedule($id , Request $request) {
-        
-        if ($request->ajax()) {
-            
-            $schedule = $this->field->findSchedule($id);
-
-            if($schedule) {
-                return response($schedule,200);
-            } else {    
-                return response('no encontrado',404);
-            }
-
-
-        }
-
-        return response('no permitido',401);
     }
 }

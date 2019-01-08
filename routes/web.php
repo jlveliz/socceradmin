@@ -49,13 +49,17 @@
 	Route::resource('users','Backend\UserController',['except'=>['show']]);
 
 	//Fields
+	Route::get('fields/{fieldId}/schedule','Backend\FieldController@getSchedule');
 	Route::resource('fields','Backend\FieldController',['except'=>['show']]);
 
 	//Student
 	Route::resource('students','Backend\StudentController',['except'=>['show']]);
 	
-	//Student
+	//Age Ranges
 	Route::resource('ageranges','Backend\AgeRangeController',['except'=>['show']]);
+	
+	//Groups Class
+	Route::resource('groupclass','Backend\GroupClassController',['except'=>['show']]);
 // });
 
 // Route::group(['prefix' => 'admin'], function () {

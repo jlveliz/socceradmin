@@ -17,9 +17,10 @@ class GroupClass extends Model
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-    	'range_age_id',
-    	'coach_id',
+		'name',
     	'field_id',
+    	'coach_id',
+		'range_age_id',
     	'start_hour',
     	'end_hour',
     	'maximum_capacity',
@@ -30,5 +31,9 @@ class GroupClass extends Model
     public function students()
     {
     	return $this->belongsToMany('HappyFeet\Models\Student','group_class_student','group_id','student_id');
-    }
+	}
+	
+	public function field() {
+		return $this->belongsTo('HappyFeet\Models\Field','field_id');
+	}
 }

@@ -104,4 +104,26 @@ class FieldRepository implements FieldRepositoryInterface
 	{
 		return new Field();
 	}
+
+
+	public function findSchedule($id){
+		$field = $this->find($id);
+		if($field) {
+			$formatted = [];
+			$schedule = $field->available_days;
+			
+			foreach($schedule as $kday => $item ) {
+				
+				$formatted[$kday] = [
+					'label' => days_of_week()[$kday],
+					'schedule' => $item
+				];
+			}
+			
+
+			return $formatted;
+
+		}
+		return false;
+	}
 }
