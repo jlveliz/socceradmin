@@ -33,14 +33,7 @@
 			            			<input type="hidden" name="_method" value="PUT">
 			            			<input type="hidden" name="key" value="{{ $field->id }}">
 								@endif
-								@foreach ($errors->all() as $error)
-									{{$error}}
-								@endforeach
-								
-								@foreach ($errors->keys() as $error)
-									{{$error}}
-								@endforeach
-				                <div class="card-body">
+								<div class="card-body">
 				                	<div class="form-body">
 					                	<div class="row">
 
