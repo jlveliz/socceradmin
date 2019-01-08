@@ -32,7 +32,14 @@
 			            		@if (isset($field))
 			            			<input type="hidden" name="_method" value="PUT">
 			            			<input type="hidden" name="key" value="{{ $field->id }}">
-			            		@endif
+								@endif
+								@foreach ($errors->all() as $error)
+									{{$error}}
+								@endforeach
+								
+								@foreach ($errors->keys() as $error)
+									{{$error}}
+								@endforeach
 				                <div class="card-body">
 				                	<div class="form-body">
 					                	<div class="row">
@@ -99,7 +106,7 @@
 																	<tr id="row-{{$kday}}">
 																		<td>
 																			<div class="form-check">
-																				<input class="form-check-input select-day" type="checkbox" value="" id="{{$kday}}" @if( isset($field) && array_key_exists($kday,$field->available_days)  ) checked @endif>
+																				<input class="form-check-input select-day" type="checkbox" value="" id="{{$kday}}" @if( (isset($field) && is_array($field->available_days) && array_key_exists($kday,$field->available_days) ) || (old('available_days') != null && array_key_exists($kday,old('available_days') ) ) ) checked @endif>
 																				<label class="form-check-label text-secondary" for="{{$kday}}">
 																					{{$day}}
 																				</label>
@@ -107,9 +114,9 @@
 																		</td>
 																		<td>
 																			
-																			@if (isset($field) && array_key_exists($kday, $field->available_days))
-																				
+																			@if ( isset($field) && is_array($field->available_days) && array_key_exists($kday, $field->available_days)  )
 																				@php $numSchedule = 0; @endphp
+																				
 																				@foreach($field->available_days[$kday] as  $shcheduleNum => $scheduleDetail)
 																					<div class="row">
 																						@foreach ($scheduleDetail as $keyAction => $hours)
@@ -133,8 +140,31 @@
 																						@php $numSchedule++; @endphp 
 																					</div>
 																				@endforeach
-																						
-																						
+
+																			@elseif(old('available_days') != null && array_key_exists($kday,old('available_days')))
+																				@php $numSchedule = 0; @endphp
+																				@foreach (old('available_days')[$kday] as $sheduleNum => $scheduleDetail)
+																					<div class="row">
+																						@foreach ($scheduleDetail as $keyAction => $hours)
+																							<div class="col-5 form-group @if ($errors->has('available_days.'.$kday.'.'.$sheduleNum.'.'.$keyAction)) is-invalid @endif">
+																							<input class="form-control form-control-sm  @if($keyAction == 'start') start-hour @else end-hour @endif" type="time" name="available_days[{{$kday}}][{{$sheduleNum}}][{{$keyAction}}]" id="" value="{{$hours}}">
+																								@if ($errors->has('available_days.'.$kday.'.'.$sheduleNum.'.'.$keyAction))
+																									<div id="val-state-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('available_days.'.$kday.'.'.$sheduleNum.'.'.$keyAction) }}</div>
+																								@endif
+																							</div>
+																						@endforeach
+																						@if($numSchedule < 1)
+																							<div class="form-group">
+																								<button type="button" class="btn btn-link btn-sm add-schedule"><i class="fa fa-plus"></i></button>
+																							</div>
+																						@else
+																							<div class="form-group">
+																								<button type="button" class="btn btn-link btn-sm remove-schedule"><i class="fa fa-close"></i></button>
+																							</div>
+																						@endif
+																						@php $numSchedule++; @endphp
+																					</div>
+																				@endforeach
 																			@else
 																				<div class="row">			
 																					<div class="col-5 form-group @if ($errors->has('available_days.'.$kday.'.schedule_0.start')) is-invalid @endif">

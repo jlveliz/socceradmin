@@ -35,25 +35,22 @@ class FieldRequest extends FormRequest
             'available_days' => 'required'
         ];
 
-        // dd($this->get('available_days'));
         
         //insert required on days
         if (count($this->get('available_days')) > 0 ) {
-            foreach(days_of_week() as  $kday => $day) {
-                if(array_key_exists($kday,$this->get('available_days'))) {
-                    $numSchedule = 0;
-                    foreach($this->get('available_days') as $day => $schedule)  {
-                        foreach($schedule as $nameSchedule => $actions) {
-                            foreach($actions as $action => $hours)
-                            $rules['available_days.'.$kday.'.'.$nameSchedule.'.'.$action] = 'required';
-                        }
-                        $numSchedule++;
-                    }  
+           
+            $numSchedule = 0;
+            foreach($this->get('available_days') as $day => $schedule)  {
+                foreach($schedule as $nameSchedule => $actions) {
+                    foreach($actions as $action => $hours)
+                    $rules['available_days.'.$day.'.'.$nameSchedule.'.'.$action] = 'required';
                 }
-            }
+                $numSchedule++;
+            }  
+               
         }
         
-        // dd($rules);
+        // dd($rules,$this->get('available_days'));
         if ($this->method() == 'PUT') {
             $rules['name'] = 'required|unique:field,name,'.$this->get('key');
         }
@@ -72,17 +69,13 @@ class FieldRequest extends FormRequest
         ];
 
         if (count($this->get('available_days')) > 0 ) {
-            foreach(days_of_week() as  $kday => $day) {
-                if(array_key_exists($kday,$this->get('available_days'))) {
-                    $numSchedule = 0;
-                    foreach($this->get('available_days') as $day => $schedule)  {
-                        foreach($schedule as $nameSchedule => $actions) {
-                            foreach($actions as $action => $hours)
-                            $messages['available_days.'.$kday.'.'.$nameSchedule.'.'.$action.'.required'] = 'Ingrese una hora';
-                        }
-                        $numSchedule++;
-                    }  
+            $numSchedule = 0;
+            foreach($this->get('available_days') as $day => $schedule)  {
+                foreach($schedule as $nameSchedule => $actions) {
+                    foreach($actions as $action => $hours)
+                    $messages['available_days.'.$day.'.'.$nameSchedule.'.'.$action.'.required'] = 'Ingrese una hora';
                 }
+                $numSchedule++;
             }
         }
 
