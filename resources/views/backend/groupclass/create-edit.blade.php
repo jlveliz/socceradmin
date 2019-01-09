@@ -101,104 +101,16 @@
                                         
                                         
                                         {{-- Accordeon Data Group --}}
-                                        <div class="accordion d-none">
-                                            <div class="card-header p-0">
-                                                <h2 class="mb-0">
-                                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseDatGroup" aria-expanded="true" aria-controls="collapseDatGroup">
-                                                        Datos del Grupo
-                                                    </button>
-                                                </h2>
-                                            </div>
-                                            <div id="collapseDatGroup" class="collapse show" aria-labelledby="headingOne" data-parent="#collapseDatGroup">
-                                                <div class="card-body form-body p-2">
-                                                    <div class="row">
-                                                        <div class="col-lg-3 col-6">
-                                                            <div class="form-group @if ($errors->has('name')) is-invalid @endif">
-                                                                <label for="name" for="name">Nombre <span class="text-danger">*</span></label>
-                                                                <select name="name" id="name" class="form-control">
-                                                                    @foreach (get_group_names() as $grSlug => $grName)
-                                                                        <option value="{{$grSlug}}" @if( (isset($groupClass) && $groupClass->name == $grSlug) || old('name') == $grSlug)) selected @endif>{{$grName}}</option>
-                                                                    @endforeach
-                                                                </select>
-                                                                @if ($errors->has('name'))
-                                                                    <div id="val-state-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('name') }}</div>
-                                                                @endif
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-3 col-6">
-                                                            <div class="form-group @if ($errors->has('range_age_id')) is-invalid @endif">
-                                                                <label for="range_age_id" for="range_age_id">Rango de Edad <span class="text-danger">*</span></label>
-                                                                <select name="range_age_id" id="range_age_id" class="form-control">
-                                                                    @foreach ($aRanges as $range)
-                                                                        <option value="{{$range->id}}" @if( (isset($groupClass) && $groupClass->range_age_id == $range->id) || old('range_age_id') == $range->id)) selected @endif>{{$range->name}}</option>
-                                                                    @endforeach
-                                                                </select>
-                                                                @if ($errors->has('range_age_id'))
-                                                                    <div id="val-state-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('range_age_id') }}</div>
-                                                                @endif
-                                                            </div>
-                                                        </div>
-                                                        
-                                                        <div class="col-lg-2 col-6">
-                                                            <div class="form-group @if ($errors->has('maximum_capacity')) is-invalid @endif">
-                                                                <label for="maximum_capacity" for="maximum_capacity">Capacidad <span class="text-danger">*</span></label>
-                                                            <input type="number" name="maximum_capacity" id="maximum_capacity" class="form-control" @if( (isset($groupClass)) ) value="{{$groupClass->maximum_capacity}}" @elseif(old('range_age_id') != null) value="{{old('range_age_id')}}" @else value="{{config('happyfeet.group-max-num')}}" @endif max="{{config('happyfeet.group-max-num')}}" min="1">
-                                                                @if ($errors->has('maximum_capacity'))
-                                                                    <div id="val-state-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('maximum_capacity') }}</div>
-                                                                @endif
-                                                            </div>
-                                                        </div>
-                                                        
-                                                        <div class="col-lg-2 col-6">
-                                                            <div class="form-group @if ($errors->has('state')) is-invalid @endif">
-                                                                <label for="state" for='state'>Estado <span class="text-danger">*</span></label>
-                                                                <select name="state" id="state" class="form-control">
-                                                                    @foreach (get_states() as $key => $state)
-                                                                    <option value="{{$key}}">{{$state}}</option>
-                                                                    @endforeach
-                                                                </select>
-                                                                @if ($errors->has('state'))
-                                                                    <div id="val-state-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('state') }}</div>
-                                                                @endif
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                            <div class="form-group @if ($errors->has('schedule')) is-invalid @endif">
-                                                                <label for="">
-                                                                    Horario <span class="text-danger">*</span> <br>
-                                                                </label>
-                                                                <p class="text-mini text-danger font-weight-bold">Los días se han llenado automáticamente de acuerdo a la disponibilidad horaria de la cancha seleccionada</p>
-                                                                
-                                                                @if ($errors->has('schedule'))
-                                                                    <div id="val-state-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('schedule') }}</div>
-                                                                @endif
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row justify-content-center">
-                                                        <div class="col-lg-6 col-12">
-                                                            <ul class="list-group">
-                                                                <li class="list-group-item">
-                                                                    <table class="table" id="shcedule-field">
-                                                                        <thead>
-                                                                            <tr>
-                                                                                <td class="text-center"><b>	Día</b></td>
-                                                                                <td class="text-center"><b>Horario</b></td>
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                        </tbody>
-                                                                    </table>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
+                                        <div class="row d-none pt-4">
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label for="">Detalle de Grupos</label>
                                                 </div>
                                             </div>
                                         </div>
+                                        
+                                        <div id="goups-detail"></div>
+                                        
 				                	</div>
 				                	<hr>
 				                	<div class="form-actions d-none">
