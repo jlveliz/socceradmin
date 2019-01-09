@@ -170,7 +170,7 @@
                                                                 <label for="">
                                                                     Horario <span class="text-danger">*</span> <br>
                                                                 </label>
-                                                                <p class="text-mini text-danger font-weight-bold">Los Horarios Se han llenado automáticamente de acuerdo a la disponibilidad horaria de la cancha seleccionada</p>
+                                                                <p class="text-mini text-danger font-weight-bold">Los días se han llenado automáticamente de acuerdo a la disponibilidad horaria de la cancha seleccionada</p>
                                                                 
                                                                 @if ($errors->has('schedule'))
                                                                     <div id="val-state-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('schedule') }}</div>
