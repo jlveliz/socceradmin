@@ -90,7 +90,7 @@
 															<thead>
 																<tr>
 																	<td class="text-center"><b>	Día</b></td>
-																	<td class="text-center"><b>Horario</b></td>
+																	<td class="text-center"><b>Horario de Atención</b></td>
 																</tr>
 															</thead>
 															<tbody>

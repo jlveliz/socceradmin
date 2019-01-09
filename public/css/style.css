@@ -164,6 +164,19 @@ h6 {
 .display-6 {
   font-size: 36px;
 }
+
+.text-mini {
+  font-size: 0.7rem;
+}
+
+.font-weight-bolder {
+  font-weight: bolder;
+}
+
+.font-weight-bold {
+  font-weight: bold;
+}
+
 .box {
   border-radius: 4px;
   padding: 10px;

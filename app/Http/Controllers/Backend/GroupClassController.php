@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use HappyFeet\Http\Controllers\Controller;
 use HappyFeet\RepositoryInterface\GroupClassRepositoryInterface;
 use HappyFeet\RepositoryInterface\FieldRepositoryInterface;
+use HappyFeet\RepositoryInterface\AgeRangeRepositoryInterface;
 use HappyFeet\Http\Requests\GroupClassRequest;
 use HappyFeet\Exceptions\GroupClassException;
 
@@ -14,15 +15,17 @@ class GroupClassController extends Controller
     
     protected $groupClass;
     protected $field;
+    protected $ageRange;
 
     protected $routeRedirectIndex = 'groupclass.index';
 
 
-    function __construct(GroupClassRepositoryInterface $groupClass, FieldRepositoryInterface $field)
+    function __construct(GroupClassRepositoryInterface $groupClass, FieldRepositoryInterface $field, AgeRangeRepositoryInterface $ageRange)
     {
         $this->middleware('auth');
         $this->groupClass = $groupClass;
         $this->field = $field;
+        $this->ageRange = $ageRange;
     }
     /**
      * Display a listing of the resource.
@@ -43,7 +46,8 @@ class GroupClassController extends Controller
     public function create()
     {
         $fields = $this->field->enum();
-        return view('backend.groupclass.create-edit',compact('fields'));
+        $aRanges = $this->ageRange->enum();
+        return view('backend.groupclass.create-edit',compact('fields','aRanges'));
     }
 
     /**

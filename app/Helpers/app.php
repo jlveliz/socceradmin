@@ -27,3 +27,24 @@ if(!function_exists('range_ages')) {
     }
 
 }
+
+
+if(!function_exists('get_group_names')) {
+    
+    function get_group_names () {
+        return config('happyfeet.group-names');
+    }
+
+}
+
+
+if(!function_exists('get_states')) {
+    
+    function get_states () {
+        return [
+            1 => 'Activo',
+            0 => 'Inactivo'
+        ];
+    }
+
+}
