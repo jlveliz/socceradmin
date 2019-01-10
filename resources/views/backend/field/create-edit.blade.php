@@ -205,18 +205,9 @@
 												</div>
 											</div>
 										</div>
-										<hr>
-										<div class="form-actions">
-											<input type="hidden" value="0" name="redirect-index" id="redirect-index">
-											<button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-save"></i> Guardar</button>
-											<button class="btn btn-success btn-sm save-close" type="submit"><i class="fa fa-save"></i> Guardar y Cerrar</button>
-											<a class="btn btn-inverse btn-sm" href="{{ route('fields.index') }}"><i class="fa fa-ban"></i> Cancelar</a>
-										</div>
+										
 									</div>
-								@if(!isset($field))
 								
-								</form>
-								@endif
 								
 							</div>
 						@if(isset($field))
@@ -225,29 +216,68 @@
 								<div class="form-validation p-2">	
 									<div class="card-body">
 										<div class="row justify-content-center">
-											<p class="text-center">Los Grupos son Creados de acuerdo a la disponibilidad de la Cancha <strong>{{$field->name}}</strong></p>	
+											<p class="text-center mt-4 mb-0">Los Grupos son Creados de acuerdo a la disponibilidad de la Cancha "<strong>{{$field->name}}</strong>"</p>	
 											<div class="col-12">
-												<div class="accordion" id="availableDays">
+												<div class="accordion" id="accordionExample">
 													@foreach ($field->available_days as $kday => $day)
-														<div class="card p-0">
-															<div class="card-header p-0" id="heading{{$kday}}">
-																<h2>
-																	<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#{{$kday}}"> {{days_of_week()[$kday]}}</button>
-																</h2>
+													<div class="card p-0">
+															<div class="card-header p-0" id="headingOne">
+															  <h2 class="mb-0">
+																<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{ucwords($kday)}}" aria-expanded="true" aria-controls="collapse{{ucwords($kday)}}">
+																  {{days_of_week()[$kday]}}
+																</button>
+															  </h2>
 															</div>
-															<div id="{{$kday}}" class="collapse" aria-labelledby="heading{{$kday}}" data-parent="#availableDays">
-																<div class="card-body">
-																	<p class="text-secondary">{{$field->getFormatScheduleDay($day)}}</p>
+														
+															<div id="collapse{{ucwords($kday)}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+															  <div class="card-body p-2">
+																  @foreach ($day as $kSchedule => $schedule)
+																	<p><i class="fa fa-circle f-4 text-warning"></i> Horario de <strong>{{$schedule['start']}}</strong> hasta las <strong>{{$schedule['end']}}</strong></p>   
 																	<table class="table">
 																		<thead>
 																			<tr>
-																				<td colspan="2"></td>
+																				<th>Nombre</th>
+																				<th>Rango</th>
+																				<th>Capacidad</th>
+																				<th colspan="2">Hora Inicio / Hora Fin</th>
+																				<th>Acción</th>
 																			</tr>
 																		</thead>
+																		<tbody>
+																			<tr id="{{$kday}}-group-schedule-{{$kSchedule}}-0">
+																				<td>
+																					<select name="group[{{$kSchedule}}][0][name]" id="group[{{$kSchedule}}][0][name]" class="form-control form-control-sm group-name">
+																						@foreach (get_group_names() as $grkey => $gr)
+																						<option value="{{$grkey}}">{{$gr}}</option>
+																						@endforeach
+																					</select>
+																				</td>
+																				<td>
+																					<select name="group[{{$kSchedule}}][0][range_age_id]" id="group[0][range_age_id]" class="form-control form-control-sm range-name">
+																						@foreach ($aRanges as  $range)
+																						<option value="{{$range->id}}">{{$range->name}}</option>
+																						@endforeach
+																					</select>
+																				</td>
+																				<td>
+																					<input type="number" name="group[{{$kSchedule}}][0][maximum_capacity]" id="group[0][maximum_capacity]" class="form-control form-control-sm capacity" max="{{config('happyfeet.group-max-num')}}" min="1">
+																				</td>
+																				<td>
+																					<input type="time" name="group[{{$kSchedule}}][0][schedule][start]" id="group[0][schedule][start]" min="{{$schedule['start']}}" max="{{$schedule['end']}}" class="form-control form-control-sm start-hour">
+																				</td>
+																				<td>
+																					<input type="time" name="group[{{$kSchedule}}][0][schedule][end]" id="group[0][schedule][end]" min="{{$schedule['start']}}" max="{{$schedule['end']}}" class="form-control form-control-sm end-hour">
+																				</td>
+																				<td>
+																					<button type="button" class="btn btn-link btn-sm add-group-schedule"><i class="fa fa-plus"></i></button>
+																				</td>
+																			</tr>
+																		</tbody>
 																	</table>
-																</div>
+																  @endforeach
+															  </div>
 															</div>
-														</div>
+														  </div>
 													@endforeach
 												</div>
 											</div>			
@@ -256,11 +286,20 @@
 								</div>
 							</div>
 						</div>
-						</form>
 						@endif
 						
-						
+						<hr>
+						<div class="form-actions">
+							<input type="hidden" value="0" name="redirect-index" id="redirect-index">
+							<button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-save"></i> Guardar</button>
+							<button class="btn btn-success btn-sm save-close" type="submit"><i class="fa fa-save"></i> Guardar y Cerrar</button>
+							<a class="btn btn-inverse btn-sm" href="{{ route('fields.index') }}"><i class="fa fa-ban"></i> Cancelar</a>
+						</div>
+						@if(!isset($field))	
+							</form>
+						@endif
             		</div>
+				</form>
             	</div>
             </div>
         </div>

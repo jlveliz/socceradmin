@@ -5,6 +5,7 @@ namespace HappyFeet\Http\Controllers\Backend;
 use Illuminate\Http\Request;
 use HappyFeet\Http\Controllers\Controller;
 use HappyFeet\RepositoryInterface\FieldRepositoryInterface;
+use HappyFeet\RepositoryInterface\AgeRangeRepositoryInterface;
 use HappyFeet\Http\Requests\FieldRequest;
 use HappyFeet\Exceptions\FieldException;
 
@@ -12,14 +13,16 @@ class FieldController extends Controller
 {
     
     protected $field;
+    protected $ageRange;
 
     protected $routeRedirectIndex = 'fields.index';
 
 
-    function __construct(FieldRepositoryInterface $field)
+    function __construct(FieldRepositoryInterface $field, AgeRangeRepositoryInterface $ageRange)
     {
         $this->middleware('auth');
         $this->field = $field;
+        $this->ageRange = $ageRange;
     }
     /**
      * Display a listing of the resource.
@@ -92,9 +95,9 @@ class FieldController extends Controller
     {
         
         $field = $this->field->find($id);
-        // dd($field->available_days);
+        $aRanges = $this->ageRange->enum();
         $daysOfWeek = days_of_week();
-        return view('backend.field.create-edit',compact('field','daysOfWeek'));
+        return view('backend.field.create-edit',compact('field','daysOfWeek','aRanges'));
     }
 
     /**

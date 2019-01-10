@@ -53,6 +53,8 @@ class FieldRequest extends FormRequest
         // dd($rules,$this->get('available_days'));
         if ($this->method() == 'PUT') {
             $rules['name'] = 'required|unique:field,name,'.$this->get('key');
+
+            dd($this->all());
         }
         
         return $rules;
