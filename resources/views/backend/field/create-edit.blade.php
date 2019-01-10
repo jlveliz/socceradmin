@@ -36,6 +36,7 @@
 							</li>
 						</ul>
 						{{-- tab field --}}
+						<form action="{{ route('fields.update',['id'=>$field->id]) }}" method="POST" class="crud-futbol">
 						<div class="tab-content" id="mytabcontent">
 							<div class="tab-pane fade show active" id="field" role="tabpanel" aria-labelledby="field-tab">
 						@endif
@@ -213,6 +214,7 @@
 										</div>
 									</div>
 								@if(!isset($field))
+								
 								</form>
 								@endif
 								
@@ -220,7 +222,38 @@
 						@if(isset($field))
 							</div>
 							<div class="tab-pane fade" id="groups" role="tabpanel" aria-labelledby="groups-tab">
-								
+								<div class="form-validation p-2">	
+									<div class="card-body">
+										<div class="row justify-content-center">
+											<p class="text-center">Los Grupos son Creados de acuerdo a la disponibilidad de la Cancha <strong>{{$field->name}}</strong></p>	
+											<div class="col-12">
+												<div class="accordion" id="availableDays">
+													@foreach ($field->available_days as $kday => $day)
+														<div class="card p-0">
+															<div class="card-header p-0" id="heading{{$kday}}">
+																<h2>
+																	<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#{{$kday}}"> {{days_of_week()[$kday]}}</button>
+																</h2>
+															</div>
+															<div id="{{$kday}}" class="collapse" aria-labelledby="heading{{$kday}}" data-parent="#availableDays">
+																<div class="card-body">
+																	<p class="text-secondary">{{$field->getFormatScheduleDay($day)}}</p>
+																	<table class="table">
+																		<thead>
+																			<tr>
+																				<td colspan="2"></td>
+																			</tr>
+																		</thead>
+																	</table>
+																</div>
+															</div>
+														</div>
+													@endforeach
+												</div>
+											</div>			
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 						</form>

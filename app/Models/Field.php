@@ -46,4 +46,16 @@ class Field extends Model
             $field->created_user_id = Auth::user()->id;
         });
     }
+
+
+    public function getFormatScheduleDay ($day) {
+        $message = "De ";
+        foreach($day as $hour) {
+            // dd($hour);
+            $message.= $hour['start'] . ' hasta las ';
+            $message.= $hour['end'];
+        }
+        var_dump($message);
+        return $message;
+    }
 }
