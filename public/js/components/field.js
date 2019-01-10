@@ -73,11 +73,7 @@ $(document).ready( () => {
         //get new Names
         // let newIdRow = idRow.replace(/.$/,parseInt(idRow.slice(0,idRow.length-1) || 0)) + 1;
 
-        function replaceId(string) {
-            let reverse = string.split("").reverse().join();
-            reverse.replace(/\d+/, parseInt(reverse.match(/\d+/)) + 1);
-            return reverse;
-        }
+       
 
         let letNumRow = idRow[idRow.length -1];
         let newIdRow = idRow.replace(/.$/,parseInt( letNumRow  ) + 1 );
