@@ -246,27 +246,27 @@
 																		<tbody>
 																			<tr id="{{$kday}}-group-schedule-{{$kSchedule}}-0">
 																				<td>
-																					<select name="group[{{$kSchedule}}][0][name]" id="group[{{$kSchedule}}][0][name]" class="form-control form-control-sm group-name">
+																					<select name="groups[{{$kday}}][{{$kSchedule}}][0][name]" id="groups[{{$kday}}][{{$kSchedule}}][0][name]" class="form-control form-control-sm group-name">
 																						@foreach (get_group_names() as $grkey => $gr)
 																						<option value="{{$grkey}}">{{$gr}}</option>
 																						@endforeach
 																					</select>
 																				</td>
 																				<td>
-																					<select name="group[{{$kSchedule}}][0][range_age_id]" id="group[0][range_age_id]" class="form-control form-control-sm range-name">
+																					<select name="groups[{{$kday}}][{{$kSchedule}}][0][range_age_id]" id="groups[{{$kday}}][{{$kSchedule}}][0][range_age_id]" class="form-control form-control-sm range-name">
 																						@foreach ($aRanges as  $range)
 																						<option value="{{$range->id}}">{{$range->name}}</option>
 																						@endforeach
 																					</select>
 																				</td>
 																				<td>
-																					<input type="number" name="group[{{$kSchedule}}][0][maximum_capacity]" id="group[0][maximum_capacity]" class="form-control form-control-sm capacity" max="{{config('happyfeet.group-max-num')}}" min="1">
+																					<input type="number" name="groups[{{$kday}}][{{$kSchedule}}][0][maximum_capacity]" id="groups[{{$kday}}][{{$kSchedule}}][0][maximum_capacity]" class="form-control form-control-sm capacity" max="{{config('happyfeet.group-max-num')}}" min="1">
 																				</td>
 																				<td>
-																					<input type="time" name="group[{{$kSchedule}}][0][schedule][start]" id="group[0][schedule][start]" min="{{$schedule['start']}}" max="{{$schedule['end']}}" class="form-control form-control-sm start-hour">
+																					<input type="time" name="groups[{{$kday}}][{{$kSchedule}}][0][schedule][start]" id="groups[{{$kday}}][{{$kSchedule}}][0][schedule][start]" min="{{$schedule['start']}}" max="{{$schedule['end']}}" class="form-control form-control-sm start-hour">
 																				</td>
 																				<td>
-																					<input type="time" name="group[{{$kSchedule}}][0][schedule][end]" id="group[0][schedule][end]" min="{{$schedule['start']}}" max="{{$schedule['end']}}" class="form-control form-control-sm end-hour">
+																					<input type="time" name="groups[{{$kday}}][{{$kSchedule}}][0][schedule][end]" id="groups[{{$kday}}][{{$kSchedule}}][0][schedule][end]" min="{{$schedule['start']}}" max="{{$schedule['end']}}" class="form-control form-control-sm end-hour">
 																				</td>
 																				<td>
 																					<button type="button" class="btn btn-link btn-sm add-group-schedule"><i class="fa fa-plus"></i></button>

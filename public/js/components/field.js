@@ -77,11 +77,15 @@ $(document).ready( () => {
 
         let letNumRow = idRow[idRow.length -1];
         let newIdRow = idRow.replace(/.$/,parseInt( letNumRow  ) + 1 );
-        groupName = groupName.replace(/\d+/g, parseInt(groupName.match(/\d+/g)) + 1);
-        rangeAge = rangeAge.replace(/\d+/g, parseInt(rangeAge.match(/\d+/g)) + 1);
-        capacity = capacity.replace(/\d+/g, parseInt(capacity.match(/\d+/g)) + 1);
-        startHour = startHour.replace(/\d+/g, parseInt(startHour.match(/\d+/g)) + 1);
-        endHour = endHour.replace(/\d+/g,parseInt(endHour.match(/\d+/g))+ 1);
+        debugger;
+        let match = groupName.match(/\[[0-9]+\]/);
+        // let match = groupName.replace(/\[0]/g,groupName.match(/\[1]/g));
+
+        groupName = groupName.replace(/\[[0-9]+\]/,"["+ (parseInt(letNumRow) + 1) +"]");
+        rangeAge = rangeAge.replace(/\[[0-9]+\]/,"["+ (parseInt(letNumRow) + 1) +"]");
+        capacity = capacity.replace(/\[[0-9]+\]/,"["+ (parseInt(letNumRow) + 1) +"]");
+        startHour = startHour.replace(/\[[0-9]+\]/,"["+ (parseInt(letNumRow) + 1) +"]");
+        endHour = endHour.replace(/\[[0-9]+\]/,"["+ (parseInt(letNumRow) + 1) +"]");
         
         //set new names
         lastChild.find('select.group-name').attr('name',groupName).attr('id',groupName);
