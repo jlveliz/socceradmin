@@ -95,6 +95,7 @@ class FieldController extends Controller
     {
         
         $field = $this->field->find($id);
+        // dd($field->groups[0]->schedule);
         $aRanges = $this->ageRange->enum();
         $daysOfWeek = days_of_week();
         return view('backend.field.create-edit',compact('field','daysOfWeek','aRanges'));

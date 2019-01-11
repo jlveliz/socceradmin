@@ -219,66 +219,7 @@
 											<p class="text-center mt-4 mb-0">Los Grupos son Creados de acuerdo a la disponibilidad de la Cancha "<strong>{{$field->name}}</strong>"</p>	
 											<div class="col-12">
 												<div class="accordion" id="accordionExample">
-													@foreach ($field->available_days as $kday => $day)
-													<div class="card p-0">
-															<div class="card-header p-0" id="headingOne">
-															  <h2 class="mb-0">
-																<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{ucwords($kday)}}" aria-expanded="true" aria-controls="collapse{{ucwords($kday)}}">
-																  {{days_of_week()[$kday]}}
-																</button>
-															  </h2>
-															</div>
-														
-															<div id="collapse{{ucwords($kday)}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-															  <div class="card-body p-2">
-																  @foreach ($day as $kSchedule => $schedule)
-																	<p><i class="fa fa-circle f-4 text-warning"></i> Horario de <strong>{{$schedule['start']}}</strong> hasta las <strong>{{$schedule['end']}}</strong></p>   
-																	<table class="table">
-																		<thead>
-																			<tr>
-																				<th>Nombre</th>
-																				<th>Rango</th>
-																				<th>Capacidad</th>
-																				<th colspan="2">Hora Inicio / Hora Fin</th>
-																				<th>Acción</th>
-																			</tr>
-																		</thead>
-																		<tbody>
-																			<tr id="{{$kday}}-group-schedule-{{$kSchedule}}-0">
-																				<td>
-																					<select name="groups[{{$kday}}][{{$kSchedule}}][0][name]" id="groups[{{$kday}}][{{$kSchedule}}][0][name]" class="form-control form-control-sm group-name">
-																						@foreach (get_group_names() as $grkey => $gr)
-																						<option value="{{$grkey}}">{{$gr}}</option>
-																						@endforeach
-																					</select>
-																				</td>
-																				<td>
-																					<select name="groups[{{$kday}}][{{$kSchedule}}][0][range_age_id]" id="groups[{{$kday}}][{{$kSchedule}}][0][range_age_id]" class="form-control form-control-sm range-name">
-																						@foreach ($aRanges as  $range)
-																						<option value="{{$range->id}}">{{$range->name}}</option>
-																						@endforeach
-																					</select>
-																				</td>
-																				<td>
-																					<input type="number" name="groups[{{$kday}}][{{$kSchedule}}][0][maximum_capacity]" id="groups[{{$kday}}][{{$kSchedule}}][0][maximum_capacity]" class="form-control form-control-sm capacity" max="{{config('happyfeet.group-max-num')}}" min="1">
-																				</td>
-																				<td>
-																					<input type="time" name="groups[{{$kday}}][{{$kSchedule}}][0][schedule][start]" id="groups[{{$kday}}][{{$kSchedule}}][0][schedule][start]" min="{{$schedule['start']}}" max="{{$schedule['end']}}" class="form-control form-control-sm start-hour">
-																				</td>
-																				<td>
-																					<input type="time" name="groups[{{$kday}}][{{$kSchedule}}][0][schedule][end]" id="groups[{{$kday}}][{{$kSchedule}}][0][schedule][end]" min="{{$schedule['start']}}" max="{{$schedule['end']}}" class="form-control form-control-sm end-hour">
-																				</td>
-																				<td>
-																					<button type="button" class="btn btn-link btn-sm add-group-schedule"><i class="fa fa-plus"></i></button>
-																				</td>
-																			</tr>
-																		</tbody>
-																	</table>
-																  @endforeach
-															  </div>
-															</div>
-														  </div>
-													@endforeach
+													@include('backend.field.includes.groups',['availableDays' => $field->available_days,'field' => $field])
 												</div>
 											</div>			
 										</div>

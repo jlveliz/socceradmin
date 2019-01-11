@@ -56,7 +56,7 @@ $(document).ready( () => {
 
    $('#accordionExample').on('click','.add-group-schedule',(event) => {
         let currentTarget = $(event.currentTarget);
-        debugger
+        
         let idRow = currentTarget.parents('tbody').find('tr:last').attr('id');
         if(!idRow) return false;
         let lastChild = $('tr#'+idRow).clone(true);
@@ -65,11 +65,17 @@ $(document).ready( () => {
         /*
             add index to group row
         */
+       debugger;
+        let groupId = lastChild.find('input.group-id').attr('name');
         let groupName = lastChild.find('select.group-name').attr('name');
+        let fieldName = lastChild.find('input.field-name').attr('name');
+        let fielScheduleKey = lastChild.find('input.schedule-key-name').attr('name');
+        let dayName = lastChild.find('input.day-name').attr('name');
         let rangeAge = lastChild.find('select.range-name').attr('name');
         let capacity = lastChild.find('input.capacity').attr('name');
         let startHour = lastChild.find('input.start-hour').attr('name');
         let endHour = lastChild.find('input.end-hour').attr('name');
+        let state = lastChild.find('select.group-state').attr('name');
         //get new Names
         // let newIdRow = idRow.replace(/.$/,parseInt(idRow.slice(0,idRow.length-1) || 0)) + 1;
 
@@ -77,22 +83,32 @@ $(document).ready( () => {
 
         let letNumRow = idRow[idRow.length -1];
         let newIdRow = idRow.replace(/.$/,parseInt( letNumRow  ) + 1 );
-        debugger;
+        
         let match = groupName.match(/\[[0-9]+\]/);
-        // let match = groupName.replace(/\[0]/g,groupName.match(/\[1]/g));
-
-        groupName = groupName.replace(/\[[0-9]+\]/,"["+ (parseInt(letNumRow) + 1) +"]");
+        
+        // remove object
+        debugger;
+        if(groupId) {
+            lastChild.find('input.group-id').remove();
+        }
+        fieldName = fieldName.replace(/\[[0-9]+\]/,"["+ (parseInt(letNumRow) + 1) +"]");
+        fielScheduleKey = fielScheduleKey.replace(/\[[0-9]+\]/,"["+ (parseInt(letNumRow) + 1) +"]");
+        dayName = dayName.replace(/\[[0-9]+\]/,"["+ (parseInt(letNumRow) + 1) +"]");
         rangeAge = rangeAge.replace(/\[[0-9]+\]/,"["+ (parseInt(letNumRow) + 1) +"]");
         capacity = capacity.replace(/\[[0-9]+\]/,"["+ (parseInt(letNumRow) + 1) +"]");
         startHour = startHour.replace(/\[[0-9]+\]/,"["+ (parseInt(letNumRow) + 1) +"]");
         endHour = endHour.replace(/\[[0-9]+\]/,"["+ (parseInt(letNumRow) + 1) +"]");
+        state = state.replace(/\[[0-9]+\]/,"["+ (parseInt(letNumRow) + 1) +"]");
         
-        //set new names
         lastChild.find('select.group-name').attr('name',groupName).attr('id',groupName);
+        lastChild.find('input.field-name').attr('name',fieldName).attr('id',fieldName);
+        lastChild.find('input.schedule-key-name').attr('name',fielScheduleKey).attr('id',fielScheduleKey);
+        lastChild.find('input.day-name').attr('name',dayName).attr('id',dayName);
         lastChild.find('select.range-name').attr('name',rangeAge).attr('id',rangeAge);
         lastChild.find('input.capacity').attr('name',capacity).attr('id',capacity);
         lastChild.find('input.start-hour').attr('name',startHour).attr('id',startHour);
         lastChild.find('input.end-hour').attr('name',endHour).attr('id',endHour);
+        lastChild.find('select.group-state').attr('name',state).attr('id',state);
         lastChild.attr('id',newIdRow);
         
         currentTarget.parents('tbody').append(lastChild);

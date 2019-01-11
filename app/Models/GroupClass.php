@@ -4,6 +4,7 @@ namespace HappyFeet\Models;
 
 use  Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
+use Auth;
 
 class GroupClass extends Model
 {
@@ -17,15 +18,16 @@ class GroupClass extends Model
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-		'name',
+        'name',
+        'day',
+        'schedule_field_parent',
     	'field_id',
     	'coach_id',
 		'range_age_id',
-    	'start_hour',
-    	'end_hour',
     	'maximum_capacity',
     	'state',
-    	'created_user_id',
+		'created_user_id',
+		'schedule'
     ];
 
     public function students()
@@ -36,4 +38,19 @@ class GroupClass extends Model
 	public function field() {
 		return $this->belongsTo('HappyFeet\Models\Field','field_id');
 	}
+
+	public static function boot() {
+        parent::boot();
+        static::creating(function($group){
+            $group->created_user_id = Auth::user()->id;
+        });
+    }
+
+	public function setScheduleAttribute($data) {
+        $this->attributes['schedule'] = serialize($data);
+    }
+    
+    public function getScheduleAttribute($data) {
+        return  unserialize( $this->attributes['schedule'] );
+    }
 }

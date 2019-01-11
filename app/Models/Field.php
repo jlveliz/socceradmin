@@ -15,6 +15,8 @@ class Field extends Model
 
     protected $primaryKey = 'id';
 
+    protected $with = ['groups'];
+
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
