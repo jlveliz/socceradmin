@@ -48,7 +48,7 @@
                                         <td>
                                             <select name="groups[{{$kday}}][{{$kSchedule}}][{{$groupNum}}][range_age_id]" id="groups[{{$kday}}][{{$kSchedule}}][{{$groupNum}}][range_age_id]" class="form-control form-control-sm range-name @if ($errors->has('groups.'.$kday.'.'.$kSchedule.'.'.$groupNum.'.range_age_id')) is-invalid @endif">
                                                 @foreach ($aRanges as  $range)
-                                                <option value="{{$range->id}}">{{$range->name}}</option>
+                                                <option value="{{$range->id}}" @if($range->id == $groupDb->range_age_id) selected @endif>{{$range->name}}</option>
                                                 @endforeach
                                             </select>
                                             @if ($errors->has('groups.'.$kday.'.'.$kSchedule.'.'.$groupNum.'.range_age_id'))
