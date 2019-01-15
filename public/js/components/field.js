@@ -60,12 +60,11 @@ $(document).ready( () => {
         let idRow = currentTarget.parents('tbody').find('tr:last').attr('id');
         if(!idRow) return false;
         let lastChild = $('tr#'+idRow).clone(true);
-        //remove plus for minus icon and add clase remove-schedule 
-        lastChild.find('button').removeClass('add-group-schedule').addClass('remove-group-schedule').find('i').removeClass('fa-plus').addClass('fa-close')
+        //remove plus for minus icon and add clase remove-schedule  //remove class 'remove-live-schedule'
+        lastChild.find('button').removeClass('add-group-schedule remove-live-schedule').addClass('remove-group-schedule').find('i').removeClass('fa-plus').addClass('fa-close')
         /*
             add index to group row
         */
-       debugger;
         let groupId = lastChild.find('input.group-id').attr('name');
         let groupName = lastChild.find('select.group-name').attr('name');
         let fieldName = lastChild.find('input.field-name').attr('name');
@@ -87,7 +86,6 @@ $(document).ready( () => {
         let match = groupName.match(/\[[0-9]+\]/);
         
         // remove object
-        debugger;
         if(groupId) {
             lastChild.find('input.group-id').remove();
         }
@@ -116,9 +114,34 @@ $(document).ready( () => {
 
 
    $('#accordionExample').on('click','.remove-group-schedule',(event) => {
+       debugger
         let btn = $(event.currentTarget);
+        let hasClassLiveRemove = btn.hasClass('remove-live-schedule');
+        if (hasClassLiveRemove)  return false;
         btn.parents('tr').remove();
-   })
+   });
+
+
+
+   //remove live shedule
+    $('#accordionExample').on('click','.remove-live-schedule',(event)=> {
+       debugger
+        let currentTarget = $(event.currentTarget);
+        let groupId = currentTarget.parents('tr').find('.group-id').val();
+        if(!groupId) {
+            return false;
+        }
+
+        $.ajax({
+            url:'/groupclass/'+groupId,
+            type: 'DELETE'
+        }).success((event) => {
+
+        }).fail((fail) => {
+
+        })
+
+    });
 
 
 })
