@@ -24,7 +24,11 @@
 		            			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
 		            			{{ session()->get('content') }}
 		            		</div>
-		            	@endif
+						@endif
+						{{-- message ajax --}}
+						<div class="alert sufee-alert with-close alert-dismissible fade show d-none" id="message-alert-field">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+						</div>
 						
 						@if(isset($field))
 						<ul class="nav nav-tabs customtab">
@@ -121,7 +125,6 @@
 																				</div>
 																			</td>
 																			<td>
-																				
 																				@if ( isset($field) && is_array($field->available_days) && array_key_exists($kday, $field->available_days)  )
 																					@php $numSchedule = 0; @endphp
 																					

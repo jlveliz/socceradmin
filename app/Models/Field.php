@@ -60,7 +60,6 @@ class Field extends Model
             $message.= $hour['start'] . ' hasta las ';
             $message.= $hour['end'];
         }
-        var_dump($message);
         return $message;
     }
 }

@@ -114,7 +114,6 @@ $(document).ready( () => {
 
 
    $('#accordionExample').on('click','.remove-group-schedule',(event) => {
-       debugger
         let btn = $(event.currentTarget);
         let hasClassLiveRemove = btn.hasClass('remove-live-schedule');
         if (hasClassLiveRemove)  return false;
@@ -125,9 +124,9 @@ $(document).ready( () => {
 
    //remove live shedule
     $('#accordionExample').on('click','.remove-live-schedule',(event)=> {
-       debugger
         let currentTarget = $(event.currentTarget);
         let groupId = currentTarget.parents('tr').find('.group-id').val();
+        currentTarget.find('i').removeClass('fa-close fa-plus').addClass('fa-spinner fa-spin')
         if(!groupId) {
             return false;
         }
@@ -135,10 +134,17 @@ $(document).ready( () => {
         $.ajax({
             url:'/groupclass/'+groupId,
             type: 'DELETE'
-        }).success((event) => {
+        })
+        .done( (success) => {
+            $("#message-alert-field").append(success.content)
+            $("#message-alert-field").removeClass('d-none').addClass('alert-'+success.type);
+            currentTarget.parents('tr').remove()
+        })
+        .fail( (err) => {
 
-        }).fail((fail) => {
-
+        })
+        .always( () => {
+            
         })
 
     });

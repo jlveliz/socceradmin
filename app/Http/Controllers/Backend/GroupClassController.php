@@ -137,7 +137,7 @@ class GroupClassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
         $message = [
             'type' => 'primary',
@@ -146,7 +146,14 @@ class GroupClassController extends Controller
         try {
             $deleted = $this->groupClass->remove($id);
             $message['content'] = "Se ha eliminado el grupo satisfactoriamente";
-            return back()->with($message);
+
+            if($request->ajax()) {
+                return response($message,200);
+            } else {
+                return back()->with($message);
+            }
+
+            
         } catch (GroupClassException $e) {
             $message['type'] = "error";
             $message['content'] = $e->getMessage();
