@@ -47,6 +47,9 @@ class Field extends Model
         static::creating(function($field){
             $field->created_user_id = Auth::user()->id;
         });
+        static::deleting(function($field){
+            $field->groups()->delete();
+        });
     }
 
 

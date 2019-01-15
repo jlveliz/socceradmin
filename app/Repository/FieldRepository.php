@@ -99,7 +99,8 @@ class FieldRepository implements FieldRepositoryInterface
 									} else {
 										$grModel = new GroupClass();
 									}
-
+									
+									
 									$grModel->fill($groupData);
 
 									if($existGr) {
@@ -109,6 +110,17 @@ class FieldRepository implements FieldRepositoryInterface
 									}
 
 								}
+
+								//find elements to delete
+								// foreach($field->groups as $gronDb) {
+								// 	foreach($schedule as $grData) {
+								// 		// dd($gronDb->id,$grDbArray);
+								// 		if(!array_search($gronDb->id,$grData)) {
+								// 			// dd($gronDb);
+								// 			$gronDb->delete();
+								// 		}
+								// 	}
+								// }
 							}
 						}
 					}

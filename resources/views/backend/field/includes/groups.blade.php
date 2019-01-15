@@ -24,14 +24,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- <pre>
-                            @php var_dump($field->groups) @endphp
-                        </pre> --}}
                         @if (count($field->groups) > 0) 
-                            @php $groupNum = 0; @endphp
-                            {{--  --}}
-                            @foreach ($field->groups as $groupDb)
-                                {{-- verify shedule key --}}
+                        {{--  --}}
+                        @php $groupNum = 0; @endphp
+                        @foreach ($field->groups as $groupDb)
+                        {{-- verify shedule key --}}
                                 @if($groupDb->schedule_field_parent == $kSchedule && $groupDb->day == $kday)
                                     <tr id="{{$kday}}-group-schedule-{{$kSchedule}}-{{$groupNum}}">
                                         <input type="hidden" name="groups[{{$kday}}][{{$kSchedule}}][{{$groupNum}}][id]" value="{{$groupDb->id}}" class="group-id">
@@ -87,13 +84,19 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-link btn-sm add-group-schedule"><i class="fa fa-plus"></i></button>
+                                            @if($groupNum < 1)
+                                                <button type="button" class="btn btn-link btn-sm add-group-schedule"><i class="fa fa-plus"></i></button>
+                                            @else 
+                                                <button type="button" class="btn btn-link btn-sm remove-group-schedule"><i class="fa fa-close"></i></button>
+                                            @endif
                                         </td>
                                     </tr>
+                                    
+                                    @php $groupNum++ @endphp
                                 @endif
                             @endforeach
-                        @elseif(old('groups') != null)
-                                <h2>hola 2</h2>
+                            @elseif(old('groups') != null)
+                               
                             <tr id="{{$kday}}-group-schedule-{{$kSchedule}}-0">
                                     <input type="hidden" name="groups[{{$kday}}][{{$kSchedule}}][{{$groupNum}}][field_id]" value="{{$field->id}}" class="field-name">
                                     <input type="hidden" name="groups[{{$kday}}][{{$kSchedule}}][{{$groupNum}}][day]" value="{{$kday}}" class="day-name">
@@ -133,7 +136,7 @@
                                 </td>
                             </tr>
                         @else
-                            <h3>Hola 3</h3>
+                            
                             <tr id="{{$kday}}-group-schedule-{{$kSchedule}}-0">
                                     <input type="hidden" name="groups[{{$kday}}][{{$kSchedule}}][0][field_id]" value="{{$field->id}}" class="field-name">
                                     <input type="hidden" name="groups[{{$kday}}][{{$kSchedule}}][0][day]" value="{{$kday}}" class="day-name">
