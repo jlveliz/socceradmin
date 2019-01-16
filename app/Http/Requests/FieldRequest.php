@@ -23,6 +23,11 @@ class FieldRequest extends FormRequest
      */
     public function rules()
     {
+        
+        if($this->has('remove-schedule')) {
+            return [];
+        }
+
         if(!$this->has('available_days')) {
             $this->request->add(['available_days' => []]);
         }

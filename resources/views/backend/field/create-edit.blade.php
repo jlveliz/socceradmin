@@ -59,7 +59,7 @@
 									{{ csrf_field() }}
 									@if (isset($field))
 										<input type="hidden" name="_method" value="PUT">
-										<input type="hidden" name="key" value="{{ $field->id }}">
+										<input type="hidden" name="key" value="{{ $field->id }}" id="key-field">
 									@endif
 									<div class="card-body">
 										<div class="form-body">
@@ -154,7 +154,7 @@
 																								</div>
 																							@else
 																								<div class="form-group">
-																									<button type="button" class="btn btn-link btn-sm remove-schedule"><i class="fa fa-close"></i></button>
+																									<button type="button" class="btn btn-link btn-sm remove-live-schedule"><i class="fa fa-close"></i></button>
 																								</div>
 																							@endif
 																							@php $numSchedule++; @endphp 

@@ -115,9 +115,14 @@ class FieldController extends Controller
             'content' =>'',
         ];
         try {
-          $field = $this->field->edit($id,$request->all());
-          $message['content'] = "Se ha Actualizado la cancha satisfactoriamente";
-          
+
+            if($request->has('remove-schedule')) {
+                dd($request->all());
+            }
+            
+            $field = $this->field->edit($id,$request->all());
+            $message['content'] = "Se ha Actualizado la cancha satisfactoriamente";
+            
           if ($request->get('redirect-index') == 1) { 
             return redirect()->route($this->routeRedirectIndex)->with($message);
           } else {
