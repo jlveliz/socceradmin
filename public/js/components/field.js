@@ -48,6 +48,31 @@ $(document).ready( () => {
         btn.parent('.form-group').parent('.row').remove();
     });
 
+    $('#shcedule-field').on('click','.remove-live-schedule',(event) => {
+        let btn = $(event.currentTarget);
+        let keyField = $('#key-field').val();
+        if(!keyField) return false;
+        btn.parent('.form-group').parent('.row').remove();
+        $.ajax({
+            url:'/fields/'+keyField,
+            data: {
+                'remove-schedule' : true
+            },
+            type: 'PUT'
+        })
+        .done( (success) => {
+            $("#message-alert-field").append(success.content)
+            $("#message-alert-field").removeClass('d-none').addClass('alert-'+success.type);
+            currentTarget.parents('tr').remove()
+        })
+        .fail( (err) => {
+
+        })
+        .always( () => {
+            
+        })
+    });
+
 
 
      /*  
@@ -60,8 +85,8 @@ $(document).ready( () => {
         let idRow = currentTarget.parents('tbody').find('tr:last').attr('id');
         if(!idRow) return false;
         let lastChild = $('tr#'+idRow).clone(true);
-        //remove plus for minus icon and add clase remove-schedule  //remove class 'remove-live-schedule'
-        lastChild.find('button').removeClass('add-group-schedule remove-live-schedule').addClass('remove-group-schedule').find('i').removeClass('fa-plus').addClass('fa-close')
+        //remove plus for minus icon and add clase remove-schedule  //remove class 'remove-group-live-schedule'
+        lastChild.find('button').removeClass('add-group-schedule remove-group-live-schedule').addClass('remove-group-schedule').find('i').removeClass('fa-plus').addClass('fa-close')
         /*
             add index to group row
         */
@@ -115,7 +140,7 @@ $(document).ready( () => {
 
    $('#accordionExample').on('click','.remove-group-schedule',(event) => {
         let btn = $(event.currentTarget);
-        let hasClassLiveRemove = btn.hasClass('remove-live-schedule');
+        let hasClassLiveRemove = btn.hasClass('remove-group-live-schedule');
         if (hasClassLiveRemove)  return false;
         btn.parents('tr').remove();
    });
@@ -123,7 +148,7 @@ $(document).ready( () => {
 
 
    //remove live shedule
-    $('#accordionExample').on('click','.remove-live-schedule',(event)=> {
+    $('#accordionExample').on('click','.remove-group-live-schedule',(event)=> {
         let currentTarget = $(event.currentTarget);
         let groupId = currentTarget.parents('tr').find('.group-id').val();
         currentTarget.find('i').removeClass('fa-close fa-plus').addClass('fa-spinner fa-spin')

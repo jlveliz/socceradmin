@@ -23,6 +23,7 @@ class FieldRequest extends FormRequest
      */
     public function rules()
     {
+        dd($this->all());
         if(!$this->has('available_days')) {
             $this->request->add(['available_days' => []]);
         }

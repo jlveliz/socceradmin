@@ -87,7 +87,7 @@
                                             @if($groupNum < 1)
                                                 <button type="button" class="btn btn-link btn-sm add-group-schedule"><i class="fa fa-plus"></i></button>
                                             @else 
-                                                <button type="button" class="btn btn-link btn-sm  remove-live-schedule"><i class="fa fa-close"></i></button>
+                                                <button type="button" class="btn btn-link btn-sm  remove-group-live-schedule"><i class="fa fa-close"></i></button>
                                             @endif
                                         </td>
                                     </tr>
