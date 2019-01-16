@@ -83,13 +83,14 @@ $(document).ready( () => {
         let letNumRow = idRow[idRow.length -1];
         let newIdRow = idRow.replace(/.$/,parseInt( letNumRow  ) + 1 );
         
-        let match = groupName.match(/\[[0-9]+\]/);
+        //let match = groupName.match(/\[[0-9]+\]/);
         
         // remove object
         if(groupId) {
             lastChild.find('input.group-id').remove();
         }
         fieldName = fieldName.replace(/\[[0-9]+\]/,"["+ (parseInt(letNumRow) + 1) +"]");
+        groupName = groupName.replace(/\[[0-9]+\]/,"["+ (parseInt(letNumRow) + 1) +"]");
         fielScheduleKey = fielScheduleKey.replace(/\[[0-9]+\]/,"["+ (parseInt(letNumRow) + 1) +"]");
         dayName = dayName.replace(/\[[0-9]+\]/,"["+ (parseInt(letNumRow) + 1) +"]");
         rangeAge = rangeAge.replace(/\[[0-9]+\]/,"["+ (parseInt(letNumRow) + 1) +"]");

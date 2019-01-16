@@ -29,6 +29,15 @@
 						<div class="alert sufee-alert with-close alert-dismissible fade show d-none" id="message-alert-field">
 							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
 						</div>
+						{{-- validation errors --}}
+						@if($errors->any())
+							<div class="alert alert-danger sufee-alert alert with-close alert-dismissible fade show">
+		            			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+		            			@foreach ($errors->all() as $error)
+									{{$error}}
+								@endforeach
+							</div>
+						@endif
 						
 						@if(isset($field))
 						<ul class="nav nav-tabs customtab">

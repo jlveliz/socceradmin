@@ -62,4 +62,27 @@ class Field extends Model
         }
         return $message;
     }
+
+
+    public function haveGroupsOnDay($kday) {
+        $exist = false;
+        foreach($this->groups as $grDb) {
+            if($grDb->day == $kday) $exist =  true;
+        }
+        
+        return $exist;
+    }
+
+    public function havGroupOnSchedule($kSchedule) {
+        $exist = false;
+        foreach($this->groups as $grDb) {
+            if($grDb->schedule_field_parent == $kSchedule) $exist =  true;
+        }
+        
+        return $exist;
+    }
+    
+    public function getGroupsOnSchedule($kday,$kSchedule) {
+        return $this->groups()->where('day',$kday)->where('schedule_field_parent',$kSchedule)->get();
+    }
 }

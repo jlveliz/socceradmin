@@ -104,7 +104,7 @@ class FieldRequest extends FormRequest
                         $countGroup = 0;
                         foreach($groups as $kgroup => $group) {
                             foreach($group as $kgrDetail => $detail) {
-                                $messages['groups.'.$kday.'.'.$kschudele.'.'.$countGroup.'.'.$kgrDetail.'.required'] = 'Po favor ingrese un detalle';
+                                $messages['groups.'.$kday.'.'.$kschudele.'.'.$countGroup.'.'.$kgrDetail.'.required'] = 'Por favor ingrese un grupo de detalle';
                             }
                             $countGroup++;
                         }
