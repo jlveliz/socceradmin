@@ -23,8 +23,8 @@ class FieldRequest extends FormRequest
      */
     public function rules()
     {
-        
-        if($this->has('remove-schedule')) {
+       
+        if($this->has('validate-form') && $this->get('validate-form') == 'false') {
             return [];
         }
 

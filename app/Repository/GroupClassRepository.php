@@ -100,4 +100,26 @@ class GroupClassRepository implements GroupClassRepositoryInterface
 	{
 		return new GroupClass();
 	}
+
+
+	public function removeGroupBySchedule($data) {
+
+		$groupClass = GroupClass::where('day',$data['day'])
+						->where('schedule_field_parent',$data['schedule'])
+						->where('field_id',$data['field_id'])
+						->get();
+		$deleteds = false;
+		if(count($groupClass) > 0) {
+			foreach ($groupClass as $key => $group) {
+				if($group->delete()) {
+					$deleteds = true;
+				} else {
+					$deleteds = true;
+				}
+			}
+		}
+
+		return $deleteds ;
+
+	}
 }

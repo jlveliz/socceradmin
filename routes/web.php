@@ -60,6 +60,7 @@
 	
 	//Groups Class
 	Route::resource('groupclass','Backend\GroupClassController',['except'=>['show']]);
+	Route::post('groupclass/remove-all','Backend\GroupClassController@removeAllGroupsBySchedule');
 // });
 
 // Route::group(['prefix' => 'admin'], function () {

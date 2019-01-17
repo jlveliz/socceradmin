@@ -160,4 +160,25 @@ class GroupClassController extends Controller
             return back()->with($message);
         }
     }
+
+
+     /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function removeAllGroupsBySchedule(Request $request) {
+        
+        try {
+            
+            $success = $this->groupClass->removeGroupBySchedule($request->all());
+            if($success) return response(['message' => true],200);
+
+        } catch (GroupClassException $e) {
+            $message['type'] = "error";
+            $message['content'] = $e->getMessage();
+            return back()->with($message);
+        }
+    }
 }

@@ -251,7 +251,8 @@
 						@if(!isset($field))	
 							</form>
 						@endif
-            		</div>
+					</div>
+					<input type="hidden" name="validate-form" id="validate-form" value="true">
 				</form>
             	</div>
             </div>

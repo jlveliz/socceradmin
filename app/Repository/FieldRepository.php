@@ -85,42 +85,33 @@ class FieldRepository implements FieldRepositoryInterface
 				$key = $field->getKey();
 				
 				//groups
-				if(array_key_exists('groups',$data)) {
-					foreach($data['groups'] as $kday => $schedules) {
-						if(array_key_exists($kday,days_of_week())) {
-							foreach ($schedules as $schedule) {
-								foreach($schedule as $groupData) {
-									
-									$existGr = false;
-									
-									if(isset($groupData['id']) && $groupData['id'] != null) {
-										$existGr = true;
-										$grModel = GroupClass::find($groupData['id']);
-									} else {
-										$grModel = new GroupClass();
+				if(array_key_exists('validate-form',$data) && $data['validate-form'] == 'true') {
+					if(array_key_exists('groups',$data)) {
+						foreach($data['groups'] as $kday => $schedules) {
+							if(array_key_exists($kday,days_of_week())) {
+								foreach ($schedules as $schedule) {
+									foreach($schedule as $groupData) {
+										
+										$existGr = false;
+										
+										if(isset($groupData['id']) && $groupData['id'] != null) {
+											$existGr = true;
+											$grModel = GroupClass::find($groupData['id']);
+										} else {
+											$grModel = new GroupClass();
+										}
+										
+										
+										$grModel->fill($groupData);
+	
+										if($existGr) {
+											$grModel->update();
+										} else {
+											$grModel->save();
+										}
+	
 									}
-									
-									
-									$grModel->fill($groupData);
-
-									if($existGr) {
-										$grModel->update();
-									} else {
-										$grModel->save();
-									}
-
 								}
-
-								//find elements to delete
-								// foreach($field->groups as $gronDb) {
-								// 	foreach($schedule as $grData) {
-								// 		// dd($gronDb->id,$grDbArray);
-								// 		if(!array_search($gronDb->id,$grData)) {
-								// 			// dd($gronDb);
-								// 			$gronDb->delete();
-								// 		}
-								// 	}
-								// }
 							}
 						}
 					}

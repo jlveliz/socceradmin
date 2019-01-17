@@ -52,22 +52,26 @@ $(document).ready( () => {
         let btn = $(event.currentTarget);
         let keyField = $('#key-field').val();
         if(!keyField) return false;
-        btn.parent('.form-group').parent('.row').remove();
-        $('form').submit();
-        debugger;
+        // btn.parent('.form-group').parent('.row').remove();
+        let rowDay = btn.parent().parent('.row').find('input.start-hour').attr('name');
+        rowDay = rowDay.match(/\[(.*?)\]/g);
+        let paramsGrupsToDelete = {};
+        let keys = ['day','schedule'];
+        for (let index = 0; index < (rowDay.length - 1) ; index++) {
+            rowDay[index] = rowDay[index].replace('[','');
+            rowDay[index] = rowDay[index].replace(']','');
+            paramsGrupsToDelete[keys[index]] = rowDay[index];
+        }
+        paramsGrupsToDelete['field_id'] = keyField;
         $.ajax({
-            url:'/fields/'+keyField,
-            data: {
-                'remove-schedule' : true,
-                data : form
-            },
-            dataType: "JSON",
-            type: 'PUT'
+            url:'/groupclass/remove-all',
+            data:paramsGrupsToDelete,
+            type: 'POST'
         })
         .done( (success) => {
-            $("#message-alert-field").append(success.content)
-            $("#message-alert-field").removeClass('d-none').addClass('alert-'+success.type);
-            currentTarget.parents('tr').remove()
+            btn.parent('.form-group').parent('.row').remove();
+            $('#validate-form').val(false);
+            $('form.crud-futbol').submit();
         })
         .fail( (err) => {
 
