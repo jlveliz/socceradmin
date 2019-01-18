@@ -61,6 +61,10 @@
 	//Groups Class
 	Route::resource('groupclass','Backend\GroupClassController',['except'=>['show']]);
 	Route::post('groupclass/remove-all','Backend\GroupClassController@removeAllGroupsBySchedule');
+	
+	//seasons
+	Route::resource('seasons','Backend\SeasonController',['except'=>['show']]);
+
 // });
 
 // Route::group(['prefix' => 'admin'], function () {

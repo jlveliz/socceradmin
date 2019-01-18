@@ -48,3 +48,15 @@ if(!function_exists('get_states')) {
     }
 
 }
+
+
+if(!function_exists('get_durations_string')) {
+    
+    function get_durations_string () {
+        return [
+            'Mes(s)',
+            'Año(s)'
+        ];
+    }
+
+}

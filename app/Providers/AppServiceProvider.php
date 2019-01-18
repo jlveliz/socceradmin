@@ -69,5 +69,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('HappyFeet\RepositoryInterface\AgeRangeRepositoryInterface','HappyFeet\Repository\AgeRangeRepository');
 
         $this->app->bind('HappyFeet\RepositoryInterface\GroupClassRepositoryInterface','HappyFeet\Repository\GroupClassRepository');
+
+        $this->app->bind('HappyFeet\RepositoryInterface\SeasonRepositoryInterface','HappyFeet\Repository\SeasonRepository');
     }
 }
