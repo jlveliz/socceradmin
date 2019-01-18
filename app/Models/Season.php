@@ -46,4 +46,13 @@ class Season extends Model
         return self::INACTIVE;
     }
 
+    public function getFormatDuration() {
+        $string = "";
+        $duration = "";
+        if(array_key_exists($this->duration_string_time,get_durations_string())) {
+            $duration = get_durations_string()[$this->duration_string_time];
+        }
+        return $this->duration_num_time . " ".$duration;
+    }
+
 }

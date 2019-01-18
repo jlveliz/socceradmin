@@ -90,9 +90,9 @@ class SeasonController extends Controller
      */
     public function edit($id)
     {
-        
+        $timeStrings = get_durations_string();
         $season = $this->season->find($id);
-        return view('backend.season.create-edit',compact('season'));
+        return view('backend.season.create-edit',compact('season','timeStrings'));
     }
 
     /**

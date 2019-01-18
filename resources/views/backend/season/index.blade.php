@@ -43,11 +43,11 @@
 	                			@foreach ($seasons as $season)
 	                			<tr>
                                     <td><a href="{{ route('seasons.edit',['id' => $season->id]) }}" class="text-primary">{{ $season->name }}</a></td>
-                                    <td>{{ $season->duration_num_time }} {{$season->duration_string_time}}</td>
+                                    <td>{{ $season->getFormatDuration()}}</td>
                                     <td>@if($season->state == 1) <span class="badge badge-success">Activo</span>  @else <span class="badge badge-warning">Inactivo</span>      @endif</td>
 	                				<td>
 	                					<a class="btn btn-warning btn-flat btn-sm" href="{{ route('seasons.edit',['id' => $season->id]) }}"><i class="fa fa-edit"></i> Editar</a>
-	                					<button class="btn btn-danger btn-flat btn-sm delete-btn" data-toggle="modal" data-target="#delete-modal"  data-object="{{$season}}" data-message="Está seguro de eliminar el Rol" data-route="{{ route('seasons.destroy',$season->id) }}"><i class="fa fa-trash"></i> Eliminar</button>
+	                					<button class="btn btn-danger btn-flat btn-sm delete-btn" data-toggle="modal" data-target="#delete-modal"  data-object="{{$season}}" data-message="Está seguro de eliminar la temporada " data-route="{{ route('seasons.destroy',$season->id) }}"><i class="fa fa-trash"></i> Eliminar</button>
 	                				</td>
 	                			</tr>
 	                			@endforeach

@@ -23,11 +23,34 @@ class SeasonRequest extends FormRequest
      */
     public function rules()
     {
-        return [];
+        $rules = [
+            'name' => 'required|unique:season,name',
+            'duration_num_time' => 'required',
+            'duration_string_time' => 'required',
+            'inscription_price' => 'required',
+            'month_price' => 'required'
+        ];
+
+
+        if ($this->method() == 'PUT') {
+            $rules['name'] = "required|unique:season,name,".$this->get('key');
+        }
+
+
+        return $rules;
+
+
     }
 
     public function messages()
     {
-        return []
+        return [
+            'name.required' => 'Por favor ingrese un nombre',
+            'name.unique' => 'Por favor ingrese otro nombre',
+            'duration_num_time.required' => 'Por favor, Ingrese una duración',
+            'duration_string_time.required' => 'Por favor, Ingrese una duración',
+            'inscription_price.required' => 'Por favor, ingrese  un precio',
+            'month_price.required' => 'Por favor, ingrese un precio',
+        ];
     }
 }
