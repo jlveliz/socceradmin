@@ -9,6 +9,14 @@
     <!-- Start Page Content -->
     <div class="row">
         <div class="col-12">
+            <ul class="nav nav-tabs customtab mb-2">
+                <li class="nav-item">
+                    <a class="nav-link" id="field-tab" href="{{route('fields.index')}}">Canchas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" id="range-age-tab" data-toggle="tab" href="#ageranges" role="tab" aria-controls="ageranges" aria-selected="true">Rango de Edades</a>
+                </li>
+            </ul>
             <div class="card p-30">
 
                 <div class="row">

@@ -8,7 +8,7 @@
             </h2>
         </div>
 														
-        <div id="collapse{{ucwords($kday)}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+        <div id="collapse{{ucwords($kday)}}" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
             <div class="card-body p-2">
                 @foreach ($day as $kSchedule => $schedule)
                 <p><i class="fa fa-circle f-4 text-warning"></i> Horario de <strong>{{$schedule['start']}}</strong> hasta las <strong>{{$schedule['end']}}</strong></p>   
