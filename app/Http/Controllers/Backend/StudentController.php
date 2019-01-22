@@ -4,6 +4,8 @@ namespace HappyFeet\Http\Controllers\Backend;
 
 use HappyFeet\Http\Controllers\Controller;
 use HappyFeet\RepositoryInterface\StudentRepositoryInterface;
+use HappyFeet\RepositoryInterface\SeasonRepositoryInterface;
+use HappyFeet\RepositoryInterface\FieldRepositoryInterface;
 use HappyFeet\Exception\StudentException;
 use HappyFeet\Http\Requests\StudentRequest;
 
@@ -11,13 +13,17 @@ class StudentController extends Controller
 {
     
     protected $studentRepo;
+    protected $seasonRepo;
+    protected $fieldRepo;
 
     protected $routeRedirectIndex = 'students.index';
 
-    function __construct(StudentRepositoryInterface $studentRepo)
+    function __construct(StudentRepositoryInterface $studentRepo, SeasonRepositoryInterface $seasonRepo, FieldRepositoryInterface $fieldRepo)
     {
         $this->middleware('auth');
         $this->studentRepo = $studentRepo;
+        $this->seasonRepo = $seasonRepo;
+        $this->fieldRepo = $fieldRepo;
     }
 
 
@@ -39,7 +45,9 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view('backend.student.create-edit');
+        $seasons = $this->seasonRepo->enum(['state'=>$this->seasonRepo->getModel()->getActive()]);
+        $fields = $this->fieldRepo->enum();
+        return view('backend.student.create-edit',compact('seasons','fields'));
     }
 
     /**

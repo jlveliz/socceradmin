@@ -26,6 +26,10 @@ class SeasonRepository implements SeasonRepositoryInterface
 				if (array_key_exists('name', $params)) {
 					return Season::where('name',$params['name'])->get();
 				}
+				
+				if (array_key_exists('state', $params)) {
+					return Season::where('state',$params['state'])->get();
+				}
 
 			} 
 		} else {

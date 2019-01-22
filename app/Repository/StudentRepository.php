@@ -8,6 +8,7 @@ use HappyFeet\Models\Person;
 use HappyFeet\Models\PersonType;
 use HappyFeet\Models\Role;
 use HappyFeet\Models\User;
+use DB;
 
 /**
 * 
@@ -25,7 +26,7 @@ class StudentRepository implements StudentRepositoryInterface
 		$users = Student::all();
 
 		if (!$users) {
-			throw new StudentException(['title'=>'No se han encontrado el listado de  estudiantes','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"404");
+			throw new StudentException('No se han encontrado el listado de  estudiantes',"404");
 		}
 		return $users;
 	}
@@ -37,10 +38,10 @@ class StudentRepository implements StudentRepositoryInterface
 		if(is_int($field) || is_string($field)) {
 			$student = Student::where('id',$field)->first();
 		} else {
-			throw new StudentException(['title'=>'Se ha producido un error al buscar el estudiante','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"500");	
+			throw new StudentException('Se ha producido un error al buscar el estudiante',"500");	
 		}
 
-		if (!$student) throw new StudentException(['title'=>'No se puede buscar al estudiante','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"404");	
+		if (!$student) throw new StudentException('No se puede buscar al estudiante',"404");	
 		
 		return $student;
 
@@ -49,7 +50,9 @@ class StudentRepository implements StudentRepositoryInterface
 	//TODO
 	public function save($data)
 	{
-		
+		//begin transaction
+		// DB::beginTransaction();
+
 		//save person representant
 		$dataRepresentant = $data['representant'];
 		// dd($dataRepresentant);
@@ -63,7 +66,12 @@ class StudentRepository implements StudentRepositoryInterface
 		
 		$dataRepresentant['person_type_id'] = $this->getPersonType();
 		$personRepresentant->fill($dataRepresentant);
-		$existPersonRepresentant ? $personRepresentant->update() : $personRepresentant->save();
+		$existPersonRepresentant ? $savedPersonRepresentant = $personRepresentant->update() : $savedPersonRepresentant = $personRepresentant->save();
+		if(!$savedPersonRepresentant) {
+			// DB::rollBack();
+			throw new StudentException('Ha ocurrido un error al guardar el estudiante '.$data['name'],"500");
+		}
+
 		//insert person on data for user represenant
 		$dataRepresentant['person_id'] = $personRepresentant->getKey();
 		if ($existPersonRepresentant) {
@@ -75,7 +83,14 @@ class StudentRepository implements StudentRepositoryInterface
 		}
 		//save user representant
 		$userRepresentant->fill($dataRepresentant);
-		$existPersonRepresentant ? $userRepresentant->update() :  $userRepresentant->save();
+		$existPersonRepresentant ? $savedUserRepresentant =  $userRepresentant->update() : $savedUserRepresentant = $userRepresentant->save();
+		
+		if(!$savedUserRepresentant) {
+			// DB::rollBack();
+			throw new StudentException('Ha ocurrido un error al guardar el estudiante '.$data['name'],"500");
+		}
+
+
 		if(!$existPersonRepresentant) {
 			//Set Role Representante
 			$roleId = Role::where('code','representant')->first()->id;
@@ -95,10 +110,16 @@ class StudentRepository implements StudentRepositoryInterface
 			$student->fill($data);
 			if ($saved = $student->save()) {					
 				return  $this->find($student->getKey());
+			} else {
+				// DB::rollBack();
+				throw new StudentException('Ha ocurrido un error al guardar el estudiante '.$data['name'],"500");
 			}
 		} else {
-			throw new StudentException(['title'=>'Ha ocurrido un error al guardar el estudiante '.$data['name'].'','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"500");
+			// DB::rollBack();
+			throw new StudentException('Ha ocurrido un error al guardar el estudiante '.$data['name'],"500");
 		}
+
+		// DB::commit();
 		
 	}
 
@@ -123,7 +144,7 @@ class StudentRepository implements StudentRepositoryInterface
 				return $student;
 			}
 		} else {
-			throw new StudentException(['title'=>'Ha ocurrido un error al actualizar el estudiante '.$data['name'].'','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"500");
+			throw new StudentException('Ha ocurrido un error al actualizar el estudiante '.$data['name'],"500");
 		}
 
 
@@ -135,7 +156,7 @@ class StudentRepository implements StudentRepositoryInterface
 			$student->delete();
 			return true;
 		}
-		throw new StudentException(['title'=>'Ha ocurrido un error al eliminar el estudiante ','detail'=>'Intente nuevamente o comuniquese con el administrador','level'=>'error'],"500");
+		throw new StudentException('Ha ocurrido un error al eliminar el estudiante ',"500");
 	}
 
 	public function getModel()
