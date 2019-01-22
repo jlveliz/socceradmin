@@ -19,6 +19,10 @@ class Student extends Model
 
     protected $primaryKey = 'id';
 
+    const ACTIVE = 1;
+
+    const INACTIVE = 0;
+
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
@@ -44,6 +48,19 @@ class Student extends Model
         return $this->belongsToMany('HappyFeet\Models\GroupClass','group_class_student','student_id','group_id');
     }
 
+    public function enrollments() {
+        return $this->hasMany('HappyFeet\Models\Enrollment','student_id');
+    }
+    
+    
+    public function currentEnrollment() {
+        return $this->enrollments()->where('state',self::ACTIVE)->first();
+    }
+
+
+
+    
+
     public static function boot() {
         parent::boot();
         static::creating(function($field){
@@ -51,11 +68,5 @@ class Student extends Model
         });
     }
 
-    // public function hasTakenTrialClass()
-    // {
-    //     return $this->groupsClass()->where('group_class_student.type',self::TYPETRIALCLASS)
-    //            ->where('group_class_student.date','<',date('Y-m-d'))
-    //            ->where('group_class_student.state',self::STATEINACTIVETRIALLCLASS)->first();
-        
-    // }
+  
 }

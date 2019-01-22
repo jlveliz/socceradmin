@@ -8,6 +8,7 @@ use HappyFeet\RepositoryInterface\SeasonRepositoryInterface;
 use HappyFeet\RepositoryInterface\FieldRepositoryInterface;
 use HappyFeet\Exception\StudentException;
 use HappyFeet\Http\Requests\StudentRequest;
+use DB;
 
 class StudentController extends Controller
 {
@@ -63,15 +64,20 @@ class StudentController extends Controller
             'content' =>'',
         ];
 
+        //begin transaction
+		DB::beginTransaction();
+
         try {
             $message['content'] = "Se ha creado el estudiante satisfactoriamente";
             $student = $this->studentRepo->save($request->all());
+            DB::commit();
             if ($request->get('redirect-index') == 1) {
                 return redirect()->route($this->routeRedirectIndex)->with($message);
             } else {
                 return redirect()->route('students.edit',['id'=>$student->id])->with($message);
             }
         } catch (StudentException $e) {
+            DB::rollback();
             $message['type'] = "error";
             $message['content'] = $e->getMessage();
             return back()->with($message);
@@ -98,7 +104,10 @@ class StudentController extends Controller
     public function edit($id)
     {
         $student = $this->studentRepo->find($id);
-        return view('backend.student.create-edit',compact('student'));
+        $seasons = $this->seasonRepo->enum(['state'=>$this->seasonRepo->getModel()->getActive()]);
+        $fields = $this->fieldRepo->enum();
+        
+        return view('backend.student.create-edit',compact('student','seasons','fields'));
     }
 
     /**

@@ -30,6 +30,11 @@ class Person extends Model
         'mobile',
         'activity',
         'facebook_link',
+        'date_birth'
+    ];
+
+    protected $casts = [
+        // 'date_birth' => 'date'
     ];
 
     /**

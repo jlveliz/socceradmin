@@ -21,10 +21,13 @@ class GroupClassRepository implements GroupClassRepositoryInterface
 		if ($params) {			
 			if(is_array($params)) {
 				if (array_key_exists('name', $params)) {
-					return GroupClass::where('name',$params['name'])->get();
+					$groups = GroupClass::where('name',$params['name'])->get();
 				}
-			} 
-		} else {
+			}elseif(is_string($params) || is_int($params)) {
+				$groups = GroupClass::where('field_id',$params)->get();
+			}
+
+		}  else {
 			$groups = GroupClass::all();
 		}
 
@@ -120,6 +123,20 @@ class GroupClassRepository implements GroupClassRepositoryInterface
 		}
 
 		return $deleteds ;
+
+	}
+
+
+	public function enumFormat($fieldId) {
+		
+		$groups = $this->enum($fieldId);
+
+		foreach($groups as $group) {
+			$group->day = days_of_week()[$group->day];
+			$group->name = get_group_names()[$group->name];
+		}
+
+		return $groups;
 
 	}
 }

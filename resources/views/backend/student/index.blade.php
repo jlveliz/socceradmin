@@ -42,13 +42,12 @@
                 			@if (count($students) > 0)
 	                			@foreach ($students as $student)
 	                			<tr>
-                                    <td><a href="{{ route('students.edit',['id' => $student->id]) }}" class="text-primary">{{ $student->studentname }}</a> <br> <small>{{ $student->nickname }}</small> </td>
-                                    <td>{{$student->person->name .' '. $student->person->last_name}}</td>
+                                    <td><a href="{{ route('students.edit',['id' => $student->id]) }}" class="text-primary">{{$student->person->name .' '. $student->person->last_name}}</td>
                                     <td>{{ $student->representant->name .' '.  $student->representant->last_name}}</td>
 	                				<td>
                                         {{ $student->person->genre =='m' ? 'Masculino' : 'Femenino' }}
                                     </td>
-                                    <td>{{ $student->age }}</td>
+                                    <td>{{ $student->person->age }} Año(s)</td>
 	                				<td>
 	                					<a class="btn btn-warning btn-flat btn-sm" href="{{ route('students.edit',['id' => $student->id]) }}"><i class="fa fa-edit"></i> Editar</a>
 	                					<button class="btn btn-danger btn-flat btn-sm delete-btn" data-toggle="modal" data-target="#delete-modal"  data-object="{{$student}}" data-fieldname="{{$student->person->name}} {{$student->person->last_name}}" data-message="Está seguro de eliminar el Estudiante" data-route="{{ route('students.destroy',$student->id) }}"><i class="fa fa-trash"></i> Eliminar</button>

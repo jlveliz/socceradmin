@@ -8,6 +8,7 @@ use HappyFeet\Models\Person;
 use HappyFeet\Models\PersonType;
 use HappyFeet\Models\Role;
 use HappyFeet\Models\User;
+use HappyFeet\Models\Enrollment;
 use DB;
 
 /**
@@ -50,12 +51,9 @@ class StudentRepository implements StudentRepositoryInterface
 	//TODO
 	public function save($data)
 	{
-		//begin transaction
-		// DB::beginTransaction();
-
 		//save person representant
 		$dataRepresentant = $data['representant'];
-		// dd($dataRepresentant);
+		
 		$existPersonRepresentant = false;
 		if (($dataRepresentant['user_id'] != null) && ($dataRepresentant['person_id'] != null ) ) {
 			$personRepresentant = Person::find($dataRepresentant['person_id']);
@@ -108,8 +106,19 @@ class StudentRepository implements StudentRepositoryInterface
 			$data['person_id'] = $personId;
 			$data['representant_id'] = $personRepresentant->getKey();
 			$student->fill($data);
-			if ($saved = $student->save()) {					
-				return  $this->find($student->getKey());
+			if ($saved = $student->save()) {
+				
+				//save Inscription
+				$dataEnrollment = $data['enrollment'];
+				$dataEnrollment['student_id'] = $student->getKey();
+				$dataEnrollment['state'] = Enrollment::ACTIVE;
+				$enrollment = new Enrollment();
+				$enrollment->fill($dataEnrollment);
+
+				if($saveEnrollment =  $enrollment->save() ) {
+					return  $this->find($student->getKey());
+				}
+				
 			} else {
 				// DB::rollBack();
 				throw new StudentException('Ha ocurrido un error al guardar el estudiante '.$data['name'],"500");

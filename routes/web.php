@@ -59,7 +59,7 @@
 	Route::resource('ageranges','Backend\AgeRangeController',['except'=>['show']]);
 	
 	//Groups Class
-	Route::resource('groupclass','Backend\GroupClassController',['except'=>['show']]);
+	Route::resource('fields.groupclass','Backend\GroupClassController',['except'=>['show']]);
 	Route::post('groupclass/remove-all','Backend\GroupClassController@removeAllGroupsBySchedule');
 	
 	//seasons

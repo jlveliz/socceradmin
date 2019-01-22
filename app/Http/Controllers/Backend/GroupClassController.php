@@ -32,10 +32,14 @@ class GroupClassController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($fieldId, Request $request)
     {
-        $groups = $this->groupClass->paginate();
-        return view('backend.groupclass.index',compact('groups'));
+        if($request->ajax()) {
+            $groups = $this->groupClass->enumFormat($fieldId);
+            return response($groups,200);
+        } else {
+            return view('backend.groupclass.index',compact('groups'));
+        }
     }
 
     /**
