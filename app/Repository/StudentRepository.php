@@ -66,7 +66,6 @@ class StudentRepository implements StudentRepositoryInterface
 		$personRepresentant->fill($dataRepresentant);
 		$existPersonRepresentant ? $savedPersonRepresentant = $personRepresentant->update() : $savedPersonRepresentant = $personRepresentant->save();
 		if(!$savedPersonRepresentant) {
-			// DB::rollBack();
 			throw new StudentException('Ha ocurrido un error al guardar el estudiante '.$data['name'],"500");
 		}
 
@@ -84,7 +83,6 @@ class StudentRepository implements StudentRepositoryInterface
 		$existPersonRepresentant ? $savedUserRepresentant =  $userRepresentant->update() : $savedUserRepresentant = $userRepresentant->save();
 		
 		if(!$savedUserRepresentant) {
-			// DB::rollBack();
 			throw new StudentException('Ha ocurrido un error al guardar el estudiante '.$data['name'],"500");
 		}
 
@@ -120,40 +118,93 @@ class StudentRepository implements StudentRepositoryInterface
 				}
 				
 			} else {
-				// DB::rollBack();
+				
 				throw new StudentException('Ha ocurrido un error al guardar el estudiante '.$data['name'],"500");
 			}
 		} else {
-			// DB::rollBack();
+			
 			throw new StudentException('Ha ocurrido un error al guardar el estudiante '.$data['name'],"500");
 		}
-
-		// DB::commit();
 		
 	}
 
 	public function edit($id,$data)
 	{
-		$data['person_type_id'] = $this->getPersonType();
-		$student = $this->find($id);
-		if ($student) {
-			if(!is_null($data['password'])) {
-				$data['password'] = \Hash::make($data['password']); 
-   			} else {
-   				unset($data['password']);
-   			}
-   			$student->person->fill($data)->update();
-			$student->fill($data);
-			if($student->update()){
-				// if (array_key_exists('roles', $data)) {
-				// 	$student->roles()->sync($data['roles']);
-				// }
-				$key = $student->getKey();
-				$student =  $this->find($key);
-				return $student;
-			}
+		//save person representant
+		$dataRepresentant = $data['representant'];
+		
+		$existPersonRepresentant = false;
+		if (($dataRepresentant['user_id'] != null) && ($dataRepresentant['person_id'] != null ) ) {
+			$personRepresentant = Person::find($dataRepresentant['person_id']);
+			$existPersonRepresentant = true;
 		} else {
+			$personRepresentant = new Person();
+		}
+
+		$dataRepresentant['person_type_id'] = $this->getPersonType();
+		$personRepresentant->fill($dataRepresentant);
+		$existPersonRepresentant ? $savedPersonRepresentant = $personRepresentant->update() : $savedPersonRepresentant = $personRepresentant->save();
+		if(!$savedPersonRepresentant) {
 			throw new StudentException('Ha ocurrido un error al actualizar el estudiante '.$data['name'],"500");
+		}
+
+		//insert person on data for user represenant
+		$dataRepresentant['person_id'] = $personRepresentant->getKey();
+		if ($existPersonRepresentant) {
+			$userRepresentant = User::find($dataRepresentant['user_id']);
+		} else {
+			$userRepresentant = new User();
+			$dataRepresentant['password'] = (new User())->generateGenericPass();
+			
+		}
+		//save user representant
+		$userRepresentant->fill($dataRepresentant);
+		$existPersonRepresentant ? $savedUserRepresentant =  $userRepresentant->update() : $savedUserRepresentant = $userRepresentant->save();
+		
+		if(!$savedUserRepresentant) {
+			throw new StudentException('Ha ocurrido un error al actualizar el estudiante '.$data['name'],"500");
+		}
+
+		if(!$existPersonRepresentant) {
+			//Set Role Representante
+			$roleId = Role::where('code','representante')->first()->id;
+			$userRepresentant->roles()->attach($roleId);
+		}
+
+
+
+		//save student
+		$student = Student::find($id);
+		if(!$student) {
+			throw new StudentException('Ha ocurrido un error al actualizar el estudiante '.$data['name'],"500");
+		}
+
+		$data['person_type_id'] = $this->getPersonType();
+		$student->person->fill($data);
+		if($savePerson = $student->person->update()) {
+			$student->fill($data);
+			if ($saveStudent = $student->save()) {
+				$personId = $student->person->getKey();
+				$data['person_id'] = $personId;
+				$data['representant_id'] = $personRepresentant->getKey();
+				$student->fill($data);
+				
+				//save Inscription
+				$dataEnrollment = $data['enrollment'];
+				$dataEnrollment['student_id'] = $student->getKey();
+				//$dataEnrollment['state'] = Enrollment::ACTIVE;
+				$enrollment = $student->currentEnrollment();
+				$enrollment->fill($dataEnrollment);
+
+				if($saveEnrollment =  $enrollment->save() ) {
+					return  $this->find($student->getKey());
+				}
+					
+				
+			} else {
+				
+				throw new StudentException('Ha ocurrido un error al actualizar el estudiante '.$data['name'],"500");
+			}
 		}
 
 

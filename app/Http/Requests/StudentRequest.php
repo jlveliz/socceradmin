@@ -35,6 +35,10 @@ class StudentRequest extends FormRequest
             'representant.last_name' => 'required',
             'representant.address' => 'required',
             'representant.email' => 'required|email',
+            'enrollment.season_id' => 'required',
+            'enrollment.field_id' => 'required',
+            'enrollment.class_type' => 'required',
+            'enrollment.groups' => 'required',
         ];
         
         // if ($this->method() == 'PUT') {
@@ -59,7 +63,11 @@ class StudentRequest extends FormRequest
             'representant.last_name.required' => 'Por favor, Ingrese el apellido del representante',
             'representant.address.required' => 'Por Favor, Ingrese una dirección del representante',
             'representant.email.required' => 'Por Favor, Ingrese un correo del representante',
-            'representant.email.email' => 'Por Favor, Ingrese un correo del representante válido'
+            'representant.email.email' => 'Por Favor, Ingrese un correo del representante válido',
+            'enrollment.season_id.required' => 'Por favor, ingrese una temporada',
+            'enrollment.field_id.required' => 'Por favor, ingrese una cancha',
+            'enrollment.class_type.required' => 'Por favor Ingrese un tipo de clase',
+            'enrollment.groups.required' => 'Por favor ingrese al menos un grupo',
         ];
     }
 }

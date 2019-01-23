@@ -17,6 +17,10 @@ class GroupClass extends Model
 
     protected $dates = ['deleted_at'];
 
+    const ACTIVE = 1;
+
+    const INACTIVE = 0;
+
     protected $fillable = [
         'name',
         'day',

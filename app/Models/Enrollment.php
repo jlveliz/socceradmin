@@ -26,7 +26,8 @@ class Enrollment extends Model
     	'student_id',
         'season_id',
     	'groups',
-        'state'
+        'state',
+        'class_type'
     ];
 
     public function fieldOfGroup() {
@@ -34,7 +35,7 @@ class Enrollment extends Model
         $sameField = false;
         if(count($this->groups) > 0) {
             foreach($this->groups as $key =>  $gr) {
-                if($grf = GroupClass::find($gr)) {
+                if($grf = GroupClass::where('state',GroupClass::ACTIVE)->where('id',$gr)->first()) {
                     $grFounds[] = $grf;
                 }else {
                     //update the group
@@ -42,15 +43,17 @@ class Enrollment extends Model
                     $this->save();
                 }
             }
-            
+            $idField = null;
             for ($i=0; $i < count($grFounds); $i++) {
-                if (($i+1) != count($grFounds)) {
-                    if($grFounds[$i]->field_id == $grFounds[($i+1)]->field_id) {
-                        $sameField = true;
-                    } else {
-                        $sameField = false;
-                    }
+                
+                $idField = $grFounds[$i]->field_id;
+                
+                if($idField == $grFounds[ ($i+1) == count($grFounds) ? $i : ($i+1) ]->field_id) {
+                    $sameField = true;
+                } else {
+                    $sameField = false;
                 }
+                
             }
 
           
