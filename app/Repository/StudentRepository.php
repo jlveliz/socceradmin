@@ -91,7 +91,7 @@ class StudentRepository implements StudentRepositoryInterface
 
 		if(!$existPersonRepresentant) {
 			//Set Role Representante
-			$roleId = Role::where('code','representant')->first()->id;
+			$roleId = Role::where('code','representante')->first()->id;
 			$userRepresentant->roles()->attach($roleId);
 		}
 		

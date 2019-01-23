@@ -43,16 +43,10 @@ class Student extends Model
     	return $this->belongsTo('HappyFeet\Models\Person','representant_id');
     }
 
-    public function groupsClass()
-    {
-        return $this->belongsToMany('HappyFeet\Models\GroupClass','group_class_student','student_id','group_id');
-    }
-
     public function enrollments() {
         return $this->hasMany('HappyFeet\Models\Enrollment','student_id');
     }
-    
-    
+        
     public function currentEnrollment() {
         return $this->enrollments()->where('state',self::ACTIVE)->first();
     }

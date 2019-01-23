@@ -24,15 +24,25 @@ class Enrollment extends Model
 
     protected $fillable = [
     	'student_id',
-    	'group_id',
         'season_id',
-        'state',
-        'inscription_price',
-        'month_price'
+    	'groups',
+        'state'
     ];
 
-    public function group() {
-        return $this->belongsTo('HappyFeet\Models\GroupClass','group_id');
+    public function getFieldOfGroup() {
+        dd($this->groups);
+        // foreach($this->groups as $gr) {
+        //     dd($gr);
+        // }
     }
+
+    public function setGroupsAttribute($data) {
+        $this->attributes['groups'] = serialize($data);
+    }
+    
+    public function getGroupsAttribute($data) {
+        return  unserialize( $this->attributes['groups'] );
+    }
+
 
 }

@@ -265,10 +265,10 @@
 
 					<div class="col-12 form-group {{ $errors->has('representant_activity') ? ' is-invalid' : '' }}"">
 						<label for="grupo-class">Grupos</label>
-						<select name="enrollment[group_id]" id="grupo-class" class="form-control form-control-sm" @if(!isset($student)) disabled @endif>
+						<select name="enrollment[groups][]" id="grupo-class" class="form-control form-control-sm" @if(!isset($student)) disabled @endif>
 							@if(isset($student)) 
-								@foreach ($student->currentEnrollment()->group->field->groups as $group)
-								<option value="{{$group->id}}" @if ($group->id == $student->currentEnrollment()->group_id) selected @endif >{{get_group_names()[$group->name]}} - {{days_of_week()[$group->day]}} - ({{$group->schedule['start']}} -  {{$group->schedule['end']}})</option>
+								@foreach ($student->currentEnrollment()->getFieldOfGroup())
+								<option value="{{$group->id}}" >{{get_group_names()[$group->name]}} - {{days_of_week()[$group->day]}} - ({{$group->schedule['start']}} -  {{$group->schedule['end']}})</option>
 								@endforeach
 							@endif
 							
