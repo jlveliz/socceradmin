@@ -29,11 +29,47 @@ class Enrollment extends Model
         'state'
     ];
 
-    public function getFieldOfGroup() {
-        dd($this->groups);
-        // foreach($this->groups as $gr) {
-        //     dd($gr);
-        // }
+    public function fieldOfGroup() {
+        $grFounds = [];
+        $sameField = false;
+        if(count($this->groups) > 0) {
+            foreach($this->groups as $key =>  $gr) {
+                if($grf = GroupClass::find($gr)) {
+                    $grFounds[] = $grf;
+                }else {
+                    //update the group
+                    unset($this->groups[$key]);
+                    $this->save();
+                }
+            }
+            
+            for ($i=0; $i < count($grFounds); $i++) {
+                if (($i+1) != count($grFounds)) {
+                    if($grFounds[$i]->field_id == $grFounds[($i+1)]->field_id) {
+                        $sameField = true;
+                    } else {
+                        $sameField = false;
+                    }
+                }
+            }
+
+          
+            if($sameField){
+                return $grFounds[0]->field;
+            }
+        }
+        return [];
+    }
+
+
+    public function existGroupOnEnrollment($groupId) {
+        $found = false;
+        
+        foreach($this->groups as $gr) {
+            if($gr == $groupId) $found = true;
+        }
+
+        return $found;
     }
 
     public function setGroupsAttribute($data) {

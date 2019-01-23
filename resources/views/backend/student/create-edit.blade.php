@@ -247,7 +247,7 @@
 						<select name="enrollment[field_id]" id="select-field" class="form-control form-control-sm">
 							<option value="">Seleccione</option>
 							@foreach ($fields as $field)
-							<option value="{{$field->id}}" @if((isset($student) && $student->currentEnrollment()->group->field->id == $field->id) || old('enrollment.field_id') ==  $field->id) selected @endif>{{$field->name}}</option>
+							<option value="{{$field->id}}" @if((isset($student) && $student->currentEnrollment()->fieldOfGroup()->groups[0]->field->id == $field->id) || old('enrollment.field_id') ==  $field->id) selected @endif>{{$field->name}}</option>
 							@endforeach
 						</select>
 					</div>
@@ -265,11 +265,11 @@
 
 					<div class="col-12 form-group {{ $errors->has('representant_activity') ? ' is-invalid' : '' }}"">
 						<label for="grupo-class">Grupos</label>
-						<select name="enrollment[groups][]" id="grupo-class" class="form-control form-control-sm" @if(!isset($student)) disabled @endif>
+						<select @if (count($student->currentEnrollment()->fieldOfGroup()->groups) > 1) multiple @endif name="enrollment[groups][]" id="grupo-class" class="form-control form-control-sm" @if(!isset($student)) disabled @endif>
 							@if(isset($student)) 
-								@foreach ($student->currentEnrollment()->getFieldOfGroup())
-								<option value="{{$group->id}}" >{{get_group_names()[$group->name]}} - {{days_of_week()[$group->day]}} - ({{$group->schedule['start']}} -  {{$group->schedule['end']}})</option>
-								@endforeach
+								@foreach ($student->currentEnrollment()->fieldOfGroup()->groups as $group)
+								<option value="{{$group->id}}" @if($student->currentEnrollment()->existGroupOnEnrollment($group->id)) selected @endif>{{get_group_names()[$group->name]}} - {{days_of_week()[$group->day]}} - ({{$group->schedule['start']}} -  {{$group->schedule['end']}})</option>
+								@endforeach 
 							@endif
 							
 						</select>

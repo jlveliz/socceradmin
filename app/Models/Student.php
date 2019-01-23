@@ -48,8 +48,10 @@ class Student extends Model
     }
         
     public function currentEnrollment() {
-        return $this->enrollments()->where('state',self::ACTIVE)->first();
+       return $this->enrollments()->where('state',self::ACTIVE)->first();
     }
+
+    
 
 
 
