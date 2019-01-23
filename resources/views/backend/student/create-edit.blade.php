@@ -245,23 +245,37 @@
 					<div class="col-12 form-group {{ $errors->has('representant_activity') ? ' is-invalid' : '' }}"">
 						<label for="select-field">Cancha</label>
 						<select name="enrollment[field_id]" id="select-field" class="form-control form-control-sm">
-							<option value="0">Seleccione</option>
+							<option value="">Seleccione</option>
 							@foreach ($fields as $field)
 							<option value="{{$field->id}}" @if((isset($student) && $student->currentEnrollment()->group->field->id == $field->id) || old('enrollment.field_id') ==  $field->id) selected @endif>{{$field->name}}</option>
 							@endforeach
 						</select>
 					</div>
+					
+					<div class="col-12 form-group {{ $errors->has('enrollment.class_type') ? ' is-invalid' : '' }}"">
+						<label for="class-type">Clase</label>
+						<select name="enrollment[class_type]" id="class-type" class="form-control form-control-sm">
+							<option value="">Seleccione</option>
+							@foreach (get_type_class() as $key => $group)
+								<option value="{{$key}}" @if (isset($student) && $key == $student->currentEnrollment()->class_type) selected @endif >{{$group}}</option>
+							@endforeach
+							
+						</select>
+					</div>
+
 					<div class="col-12 form-group {{ $errors->has('representant_activity') ? ' is-invalid' : '' }}"">
-						<label for="grupo-class">Grupo</label>
+						<label for="grupo-class">Grupos</label>
 						<select name="enrollment[group_id]" id="grupo-class" class="form-control form-control-sm" @if(!isset($student)) disabled @endif>
 							@if(isset($student)) 
 								@foreach ($student->currentEnrollment()->group->field->groups as $group)
 								<option value="{{$group->id}}" @if ($group->id == $student->currentEnrollment()->group_id) selected @endif >{{get_group_names()[$group->name]}} - {{days_of_week()[$group->day]}} - ({{$group->schedule['start']}} -  {{$group->schedule['end']}})</option>
 								@endforeach
 							@endif
-							<option value=""></option>
+							
 						</select>
 					</div>
+					
+					
 				</div>
 			</div>
 		</div>

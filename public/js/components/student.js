@@ -20,11 +20,14 @@ $(document).ready(function(){
 
     $("#select-field").on('change',(evet) => {
         $groupSelect = $("#grupo-class");
+        $classType = $("#class-type");
         let fieldId = $(event.currentTarget).find('option:selected').val();
+        $groupSelect.find('option').remove();
+        $groupSelect.prop('disabled','disabled');
         if(parseInt(fieldId) == 0) {
             //reset format
-            $groupSelect.prop('disabled','disabled');
             $groupSelect.find('option').remove();
+            $groupSelect.prop('disabled','disabled');
             return false;
         }
 
@@ -32,7 +35,10 @@ $(document).ready(function(){
             (data) => {
                 formatDomSelect(data).then((formatted) => {
                     $groupSelect.append(formatted)
-                    $groupSelect.removeAttr('disabled');
+                    //if class is selected
+                    if($classType.find('option:selected').val() != '') {
+                        $groupSelect.removeAttr('disabled');
+                    }
                 })
             },
             (reject) => {
@@ -60,7 +66,7 @@ $(document).ready(function(){
 
     formatDomSelect = (data) => {
         var dfd = jQuery.Deferred();
-        let htmlReturn = "";
+        let htmlReturn = "<option value=''>Seleccione</option>";
         data.forEach(element => {
             htmlReturn+="<option value='"+element.id+"'>"; 
             htmlReturn+= element.name+' - <span class="text-secondary"><i>'+element.day  + ' - (' + element.schedule.start +  ' - ' + element.schedule.end + ') </i></span> '
@@ -70,5 +76,25 @@ $(document).ready(function(){
         dfd.resolve(htmlReturn); 
         return dfd.promise();
     }
+
+
+    $("#class-type").on('change',(event) => {
+        let classSelected = $(event.currentTarget).find('option:selected').val();
+        if(classSelected > 0) {
+            $("#grupo-class").prop('multiple','multiple')
+        } else if(classSelected <= 0 || !classSelected ) {
+            $("#grupo-class").removeAttr('multiple')
+        }
+        
+        let fieldId = $("#select-field").find('option:selected').val();
+        if( !classSelected) {
+            $("#grupo-class").prop('disabled','disabled')
+        } else if(fieldId <= 0) {
+            $("#grupo-class").prop('disabled','disabled')
+        } else {
+            $("#grupo-class").removeAttr('disabled')
+        }
+
+    });
 
 })
