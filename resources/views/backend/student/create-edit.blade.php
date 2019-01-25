@@ -17,7 +17,7 @@
 				</div>
 			</div>
 		@endif
-        <div class="col-8">
+        <div class="col-7">
             <div class="card p-2">
 				<div class="card-body col-12">
 					<div class="form-validation">
@@ -231,7 +231,7 @@
 			</div>
 		</div>
 			{{-- matricula --}}
-		<div class="col-4">
+		<div class="col-5">
 			<div class="card p-2">
 				<div class="card-body col-12">
 					<h4 class="text-center"> <strong>Matricula</strong></h4>
@@ -279,7 +279,7 @@
 						@if(isset($student)) 
 							<select @if ( $student->currentEnrollment()->class_type > 0) multiple @endif name="enrollment[groups][]" id="grupo-class" class="form-control form-control-sm" @if(!isset($student)) disabled @endif>
 								@foreach ($student->currentEnrollment()->fieldOfGroup()->groups as $group)
-								<option value="{{$group->id}}" @if($student->currentEnrollment()->existGroupOnEnrollment($group->id)) selected @endif>{{get_group_names()[$group->name]}} - {{days_of_week()[$group->day]}} - ({{$group->schedule['start']}} -  {{$group->schedule['end']}})</option>
+								<option value="{{$group->id}}" @if($student->currentEnrollment()->existGroupOnEnrollment($group->id)) selected @endif>{{get_group_names()[$group->name]}} - {{$group->disponibility}} Cupos Disponibles - {{days_of_week()[$group->day]}} - ({{$group->schedule['start']}} -  {{$group->schedule['end']}})</option>
 								@endforeach 
 							</select>
 						@else 

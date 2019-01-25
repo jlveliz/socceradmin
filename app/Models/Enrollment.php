@@ -4,6 +4,7 @@ namespace HappyFeet\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use  Illuminate\Database\Eloquent\SoftDeletes;
+use HappyFeet\Exceptions\RoleException;
 
 class Enrollment extends Model
 {
@@ -86,12 +87,18 @@ class Enrollment extends Model
 
     public static function boot() {
         parent::boot();
-        static::creating(function($group){
-            $field->created_user_id = Auth::user()->id;
+        static::creating(function($enrollment){
+            foreach ($enrollment->groups as $key => $groupId) {
+                $grf = GroupClass::find($groupId);
+                if ($grf) {
+                    $grf->disponibility = $grf->disponibility - 1;
+                    $grf->update();
+                } else {
+                    throw new RoleException("No se pudo encontrar el grupo Solicitado",500);
+                }
+            }
         });
-        static::deleting(function($field){
-            $field->groups()->delete();
-        });
+        
     }
 
 
