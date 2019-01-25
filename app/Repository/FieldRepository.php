@@ -98,6 +98,8 @@ class FieldRepository implements FieldRepositoryInterface
 											$existGr = true;
 											$grModel = GroupClass::find($groupData['id']);
 										} else {
+											//add disponibility 
+											$groupData['disponibility'] = $groupData['maximum_capacity'];
 											$grModel = new GroupClass();
 										}
 										

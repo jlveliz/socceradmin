@@ -28,7 +28,8 @@ class GroupClass extends Model
     	'field_id',
     	'coach_id',
 		'range_age_id',
-    	'maximum_capacity',
+        'maximum_capacity',
+        'disponibility',
     	'state',
 		'created_user_id',
 		'schedule'

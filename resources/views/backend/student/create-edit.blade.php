@@ -60,7 +60,7 @@
 									<div class="col-lg-4 col-4">
 										<div class="form-group {{ $errors->has('date_birth') ? ' is-invalid' : '' }}">
 											<label for="date_birth">Fecha de Nacimiento <span class="text-danger">*</span></label>
-											<input type="date" name="date_birth" id="date_birth" class="form-control form-control-sm"  value="@if(isset($student)){{ $student->person->date_birth }}@else {{ old('date_birth') }}@endif">
+											<input type="date" name="date_birth" id="date_birth" class="form-control form-control-sm"  value="@if(isset($student)){{ $student->person->date_birth }}@else{{ old('date_birth') }}@endif">
 											@if ($errors->has('date_birth'))
 												<div class="invalid-feedback animated fadeInDown">{{ $errors->first('date_birth') }}</div>
 											@endif
@@ -205,7 +205,7 @@
 									<div class="col-lg-4 col-6">
 										<div class="form-group {{ $errors->has('representant.date_birth') ? ' is-invalid' : '' }}">
 											<label for="representant_date_birth">Fecha de Nacimiento</label>
-											<input type="date" name="representant[date_birth]" id="representant_date_birth" class="form-control form-control-sm"  value="@if(isset($student)){{ $student->representant->date_birth }}@else {{ old('representant.date_birth') }}@endif">
+											<input type="date" name="representant[date_birth]" id="representant_date_birth" class="form-control form-control-sm"  value="@if(isset($student)){{ $student->representant->date_birth }}@else{{ old('representant.date_birth') }}@endif">
 											@if ($errors->has('representant.date_birth'))
 												<div class="invalid-feedback animated fadeInDown">{{ $errors->first('representant.date_birth') }}</div>
 											@endif
@@ -274,10 +274,10 @@
 						@endif
 					</div>
 
-					 <div class="col-12 form-group {{ $errors->has('enrollment.groups') ? ' is-invalid' : '' }}"">
+					 <div class="col-12 form-group {{ $errors->has('enrollment.groups') ? ' is-invalid' : '' }}">
 						<label for="grupo-class">Grupos  <span class="text-danger">*</span></label>
 						@if(isset($student)) 
-							<select @if (count($student->currentEnrollment()->fieldOfGroup()->groups) > 1) multiple @endif name="enrollment[groups][]" id="grupo-class" class="form-control form-control-sm" @if(!isset($student)) disabled @endif>
+							<select @if ( $student->currentEnrollment()->class_type > 0) multiple @endif name="enrollment[groups][]" id="grupo-class" class="form-control form-control-sm" @if(!isset($student)) disabled @endif>
 								@foreach ($student->currentEnrollment()->fieldOfGroup()->groups as $group)
 								<option value="{{$group->id}}" @if($student->currentEnrollment()->existGroupOnEnrollment($group->id)) selected @endif>{{get_group_names()[$group->name]}} - {{days_of_week()[$group->day]}} - ({{$group->schedule['start']}} -  {{$group->schedule['end']}})</option>
 								@endforeach 

@@ -84,4 +84,16 @@ class Enrollment extends Model
     }
 
 
+    public static function boot() {
+        parent::boot();
+        static::creating(function($group){
+            $field->created_user_id = Auth::user()->id;
+        });
+        static::deleting(function($field){
+            $field->groups()->delete();
+        });
+    }
+
+
+
 }
