@@ -59,7 +59,7 @@
 									</div>
 									<div class="col-lg-4 col-4">
 										<div class="form-group {{ $errors->has('date_birth') ? ' is-invalid' : '' }}">
-											<label for="date_birth">Fecha de Nacimiento <span class="text-danger">*</span></label>
+											<label for="date_birth">F. de Nacimiento <span class="text-danger">*</span></label>
 											<input type="date" name="date_birth" id="date_birth" class="form-control form-control-sm"  value="@if(isset($student)){{ $student->person->date_birth }}@else{{ old('date_birth') }}@endif">
 											@if ($errors->has('date_birth'))
 												<div class="invalid-feedback animated fadeInDown">{{ $errors->first('date_birth') }}</div>
@@ -204,7 +204,7 @@
 
 									<div class="col-lg-4 col-6">
 										<div class="form-group {{ $errors->has('representant.date_birth') ? ' is-invalid' : '' }}">
-											<label for="representant_date_birth">Fecha de Nacimiento</label>
+											<label for="representant_date_birth">F. de Nacimiento</label>
 											<input type="date" name="representant[date_birth]" id="representant_date_birth" class="form-control form-control-sm"  value="@if(isset($student)){{ $student->representant->date_birth }}@else{{ old('representant.date_birth') }}@endif">
 											@if ($errors->has('representant.date_birth'))
 												<div class="invalid-feedback animated fadeInDown">{{ $errors->first('representant.date_birth') }}</div>
@@ -277,11 +277,12 @@
 					 <div class="col-12 form-group {{ $errors->has('enrollment.groups') ? ' is-invalid' : '' }}">
 						<label for="grupo-class">Grupos  <span class="text-danger">*</span></label>
 						@if(isset($student)) 
-							<select @if ( $student->currentEnrollment()->class_type > 0) multiple @endif name="enrollment[groups][]" id="grupo-class" class="form-control form-control-sm" @if(!isset($student)) disabled @endif>
+							<select @if ( $student->currentEnrollment()->class_type > 0) multiple @endif name="enrollment[groups][]" id="grupo-class" class="form-control form-control-sm grupo-class-edit" @if(!isset($student)) disabled @endif>
 								@foreach ($student->currentEnrollment()->fieldOfGroup()->groups as $group)
 								<option value="{{$group->id}}" @if($student->currentEnrollment()->existGroupOnEnrollment($group->id)) selected @endif>{{get_group_names()[$group->name]}} - {{$group->disponibility}} Cupos Disponibles - {{days_of_week()[$group->day]}} - ({{$group->schedule['start']}} -  {{$group->schedule['end']}})</option>
 								@endforeach 
 							</select>
+							<input type="hidden" name="is_changing_group" id="is-changing-group" value="0">
 						@else 
 							<select name="enrollment[groups][]" id="grupo-class" class="form-control form-control-sm" disabled>
 							</select>

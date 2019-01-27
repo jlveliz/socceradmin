@@ -35,7 +35,7 @@ class GroupClassController extends Controller
     public function index($fieldId, Request $request)
     {
         if($request->ajax()) {
-            $groups = $this->groupClass->enumFormat($fieldId);
+            $groups = $this->groupClass->enumByField($fieldId);
             return response($groups,200);
         } else {
             return view('backend.groupclass.index',compact('groups'));

@@ -192,11 +192,21 @@ class StudentRepository implements StudentRepositoryInterface
 				//save Inscription
 				$dataEnrollment = $data['enrollment'];
 				$dataEnrollment['student_id'] = $student->getKey();
-				//$dataEnrollment['state'] = Enrollment::ACTIVE;
 				$enrollment = $student->currentEnrollment();
+				//$dataEnrollment['state'] = Enrollment::ACTIVE;
+				//if change a group
+				$updateGroupClass = false;
+				if(array_key_exists('is_changing_group',$data) && $data['is_changing_group'] == '1') {
+					$newGroups = $data['enrollment']['groups'];
+					$oldGroups = $enrollment->replicate()->groups;
+					$updateGroupClass = true;
+				}
 				$enrollment->fill($dataEnrollment);
 
 				if($saveEnrollment =  $enrollment->save() ) {
+					if($updateGroupClass) {
+						$enrollment->updateCapacitiesGroups($oldGroups,$newGroups);
+					}
 					return  $this->find($student->getKey());
 				}
 					

@@ -4,7 +4,7 @@ namespace HappyFeet\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use  Illuminate\Database\Eloquent\SoftDeletes;
-use HappyFeet\Exceptions\RoleException;
+use HappyFeet\Exceptions\GroupClassException;
 
 class Enrollment extends Model
 {
@@ -66,6 +66,7 @@ class Enrollment extends Model
     }
 
 
+
     public function existGroupOnEnrollment($groupId) {
         $found = false;
         
@@ -84,6 +85,37 @@ class Enrollment extends Model
         return  unserialize( $this->attributes['groups'] );
     }
 
+    public function updateCapacitiesGroups(array $oldGroups,array $newGroups) {
+        
+        if (is_array($oldGroups) && is_array($newGroups)) {
+            if($oldGroups  == $newGroups) return true;
+
+            //add capacity to old groups
+            foreach ($oldGroups as $key => $oldGrId) {
+                $grf = GroupClass::find($oldGrId);
+                if ($grf) {
+                    //max capacity 
+                    $grf->disponibility = $grf->disponibility > config('happyfeet.group-max-num') ? $grf->disponibility + 1 : config('happyfeet.group-max-num');
+                    $grf->update();
+                } else {
+                    throw new GroupClassException("No se pudo encontrar el grupo Solicitado",500);
+                }
+            }
+            //substract capacity to new Group
+            foreach ($newGroups as $key => $newGrId) {
+                $grf = GroupClass::find($newGrId);
+                if ($grf) {
+                    $grf->disponibility = $grf->disponibility - 1;
+                    $grf->update();
+                } else {
+                    throw new GroupClassException("No se pudo encontrar el grupo Solicitado",500);
+                }
+            }
+        } else {
+            throw new GroupClassException("No se puede actualizar la disponibilidad de los grupos",500);
+        }
+    }
+
 
     public static function boot() {
         parent::boot();
@@ -94,7 +126,7 @@ class Enrollment extends Model
                     $grf->disponibility = $grf->disponibility - 1;
                     $grf->update();
                 } else {
-                    throw new RoleException("No se pudo encontrar el grupo Solicitado",500);
+                    throw new GroupClassException("No se pudo encontrar el grupo Solicitado",500);
                 }
             }
         });

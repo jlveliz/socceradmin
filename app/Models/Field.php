@@ -33,7 +33,7 @@ class Field extends Model
     	return $this->hasMany('HappyFeet\Models\GroupClass','field_id');
     }
 
-
+   
     public function setAvailableDaysAttribute($data) {
         $this->attributes['available_days'] = serialize($data);
     }

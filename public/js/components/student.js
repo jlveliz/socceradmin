@@ -69,7 +69,7 @@ $(document).ready(function(){
         let htmlReturn = "<option value=''>Seleccione</option>";
         data.forEach(element => {
             htmlReturn+="<option value='"+element.id+"'>"; 
-            htmlReturn+= element.name+' - <span class="text-secondary"><i>'+element.day  + ' - (' + element.schedule.start +  ' - ' + element.schedule.end + ') </i></span> '
+            htmlReturn+= element.name+' - '+ element.disponibility + ' Cupos Disponibles<span class="text-secondary"><i> - '+element.day  + ' - (' + element.schedule.start +  ' - ' + element.schedule.end + ') </i></span> '
             htmlReturn+="</option>";
         });
 
@@ -96,5 +96,12 @@ $(document).ready(function(){
         }
 
     });
+
+
+    //when change of group
+    $('.grupo-class-edit').on('change',(e) => {
+        $target = $(e.currentTarget);
+        $("#is-changing-group").val(1);
+    })
 
 })
