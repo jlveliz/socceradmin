@@ -59,8 +59,12 @@ class Student extends Model
 
     public static function boot() {
         parent::boot();
-        static::creating(function($field){
-            $field->created_user_id = Auth::user()->id;
+        static::creating(function($student){
+            $student->created_user_id = Auth::user()->id;
+        });
+
+        static::deleting(function($student){
+            $student->enrollments()->delete();
         });
     }
 

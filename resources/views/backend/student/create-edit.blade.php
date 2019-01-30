@@ -114,12 +114,12 @@
 							<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 
 								<div class="row justify-content-center my-2">
-									<button type="button" data-toggle="modal" data-target="#search-modal" data-route="{{route('users.representants')}}" data-size="modal-lg" data-title="Buscar Representante" class="btn btn-sm btn-info"><i class="fa fa-search"></i> Buscar Representante</button>
+									<button type="button" data-toggle="modal" data-target="#search-modal" data-route="{{route('users.representants')}}" @if(isset($student)) data-edit="true" @endif data-size="modal-lg" data-title="Buscar Representante" class="btn btn-sm btn-info"><i class="fa fa-search"></i> Buscar Representante</button>
 								</div>
 								
 								<div class="row p-2">
-								<input type="hidden" name="representant[user_id]" id="representant_user_id"  value ="@if(isset($student)) {{$student->representant->user->id}} @else {{old('representant.user_id')}} @endif">
-									<input type="hidden" name="representant[person_id]" id="representant_person_id" value ="@if(isset($student)) {{$student->representant->id}} @else {{old('representant.person_id')}} @endif">
+								<input type="hidden" name="representant[user_id]" id="representant_user_id"  value ="@if(isset($student)){{$student->representant->user->id}}@else{{old('representant.user_id')}}@endif">
+									<input type="hidden" name="representant[person_id]" id="representant_person_id" value ="@if(isset($student)){{$student->representant->id}}@else{{old('representant.person_id')}}@endif">
 									<div class="col-lg-4 col-6">
 										<div class="form-group {{ $errors->has('representant.num_identification') ? ' is-invalid' : '' }}">
 											<label for="representant_num_identification">Num Identificación <span class="text-danger">*</span></label>

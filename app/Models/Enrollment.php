@@ -95,23 +95,25 @@ class Enrollment extends Model
 
     public function updateCapacitiesGroups(array $oldGroups,array $newGroups) {
         
+       
         if (is_array($oldGroups) && is_array($newGroups)) {
             if($oldGroups  == $newGroups) return true;
-
+            // dd($oldGroups,$newGroups);
             //add capacity to old groups
             foreach ($oldGroups as $key => $oldGr) {
-                $grf = GroupClass::find($oldGr->group_id);
+                $grf = GroupClass::find($oldGr);
                 if ($grf) {
                     //max capacity 
-                    $grf->disponibility = $grf->disponibility > config('happyfeet.group-max-num') ? $grf->disponibility + 1 : config('happyfeet.group-max-num');
+                    $grf->disponibility = $grf->disponibility < config('happyfeet.group-max-num') ? $grf->disponibility + 1 : config('happyfeet.group-max-num');
                     $grf->update();
+
                 } else {
                     throw new GroupClassException("No se pudo encontrar el grupo Solicitado",500);
                 }
             }
             //substract capacity to new Group
             foreach ($newGroups as $key => $newGr) {
-                $grf = GroupClass::find($newGr->group_id);
+                $grf = GroupClass::find($newGr);
                 if ($grf) {
                     $grf->disponibility = $grf->disponibility - 1;
                     $grf->update();
@@ -137,6 +139,11 @@ class Enrollment extends Model
                     throw new GroupClassException("No se pudo encontrar el grupo Solicitado",500);
                 }
             }
+        });
+
+
+        static::deleting(function($student){
+            $student->groups()->delete();
         });
         
     }

@@ -123,10 +123,13 @@ class StudentController extends Controller
             'type' => 'primary',
             'content' =>'',
         ];
+
+        //begin transaction
+        DB::beginTransaction();
         try {
           $student = $this->studentRepo->edit($id,$request->all());
           $message['content'] = "Se ha Actualizado el estudiante satisfactoriamente";
-          
+          DB::commit();
           if ($request->get('redirect-index') == 1) { 
             return redirect()->route($this->routeRedirectIndex)->with($message);
           } else {
@@ -134,6 +137,7 @@ class StudentController extends Controller
           }
           
         } catch (StudentException $e) {
+            DB::rollback();
             $message['type'] = 'error';
             $message['content'] = $e->getMessage();
         }

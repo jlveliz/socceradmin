@@ -140,11 +140,11 @@ class UserRepository implements UserRepositoryInterface
 		}
 		$users = User::selectRaw('user.id as user_id, user.email , person.*')
 				->join('person','person.id','=','user.person_id')
-				->leftJoin('user_role','user.id','=','user_role.user_id')
-				->leftJoin('role','role.id','=','user_role.role_id')
+				->join('user_role','user.id','=','user_role.user_id')
+				->join('role','role.id','=','user_role.role_id')
 				->whereRaw("person.name  $param or person.last_name  $param or person.num_identification $param and person.person_type_id = ".$this->getPersonType()." and role.code = 'representante' ")
 				->get();
-
+		
 		return $users;
     }
 

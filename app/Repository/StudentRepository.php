@@ -156,7 +156,7 @@ class StudentRepository implements StudentRepositoryInterface
 		}
 
 		//insert person on data for user represenant
-		$dataRepresentant['person_id'] = $personRepresentant->getKey();
+		// $dataRepresentant['person_id'] = $personRepresentant->getKey();
 		if ($existPersonRepresentant) {
 			$userRepresentant = User::find($dataRepresentant['user_id']);
 		} else {
@@ -189,12 +189,12 @@ class StudentRepository implements StudentRepositoryInterface
 		$data['person_type_id'] = $this->getPersonType();
 		$student->person->fill($data);
 		if($savePerson = $student->person->update()) {
+			//update student
+			$personId = $student->person->getKey();
+			$data['person_id'] = $personId;
+			$data['representant_id'] = $personRepresentant->getKey();
 			$student->fill($data);
-			if ($saveStudent = $student->save()) {
-				$personId = $student->person->getKey();
-				$data['person_id'] = $personId;
-				$data['representant_id'] = $personRepresentant->getKey();
-				$student->fill($data);
+			if ($saveStudent = $student->update()) {
 				
 				//save Inscription
 				$dataEnrollment = $data['enrollment'];
@@ -205,13 +205,22 @@ class StudentRepository implements StudentRepositoryInterface
 				$updateGroupClass = false;
 				if(array_key_exists('is_changing_group',$data) && $data['is_changing_group'] == '1') {
 					$newGroups = $data['enrollment']['groups'];
-					$oldGroups = $enrollment->replicate()->groups;
+					$oldGroups = [];
+					foreach($enrollment->groups as $oldGrObj) {
+						$oldGroups[] = $oldGrObj->group_id;
+					}
+					//remove all groups
+					$enrollment->groups()->delete();
 					$updateGroupClass = true;
 				}
 				$enrollment->fill($dataEnrollment);
 
 				if($saveEnrollment =  $enrollment->save() ) {
 					if($updateGroupClass) {
+						foreach ($newGroups as $key => $newGr) {
+							$enrGroup = new EnrollmentGroup(['group_id' => $newGr]);
+							$enrollment->groups()->save($enrGroup);
+						}
 						$enrollment->updateCapacitiesGroups($oldGroups,$newGroups);
 					}
 					return  $this->find($student->getKey());
