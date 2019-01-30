@@ -293,8 +293,31 @@
 						@endif
 					</div> 
 					
-					<div class="col-lg-4 col-12 form-group {{ $errors->has('enrollment.is_pay_inscription') ? ' is-invalid' : '' }}">
-						
+					<div class="col-12 form-check form-group {{ $errors->has('enrollment.is_pay_inscription') ? ' is-invalid' : '' }}">
+  						<input class="form-check-input" name="enrollment[is_pay_inscription]" type="checkbox" value="1" id="is_pay_inscription" @if((isset($student) && $student->currentEnrollment()->is_pay_inscription == 1) || old('enrollment.is_pay_inscription')) checked="" @endif>
+  						<label class="form-check-label" for="is_pay_inscription">Pagó Inscripción?</label>
+
+  						@if ($errors->has('enrollment.is_pay_inscription'))
+							<div class="invalid-feedback animated fadeInDown">{{ $errors->first('enrollment.is_pay_inscription') }}</div>
+						@endif
+					</div>
+					
+					<div class="col-12 form-check form-group {{ $errors->has('enrollment.is_pay_first_month') ? ' is-invalid' : '' }}">
+  						<input class="form-check-input" name="enrollment[is_pay_first_month]" type="checkbox" value="1" id="is_pay_first_month" @if((isset($student) && $student->currentEnrollment()->is_pay_first_month == 1) || old('enrollment.is_pay_first_month')) checked="" @endif>
+  						<label class="form-check-label" for="is_pay_first_month">Pagó Primer Mes?</label>
+
+  						@if ($errors->has('enrollment.is_pay_first_month'))
+							<div class="invalid-feedback animated fadeInDown">{{ $errors->first('enrollment.is_pay_first_month') }}</div>
+						@endif
+					</div>
+
+					<div class="col-12 form-check form-group {{ $errors->has('enrollment.is_delivered_uniform') ? ' is-invalid' : '' }}">
+  						<input class="form-check-input" name="enrollment[is_delivered_uniform]" type="checkbox" value="1" id="is_delivered_uniform" @if((isset($student) && $student->currentEnrollment()->is_delivered_uniform == 1) || old('enrollment.is_delivered_uniform')) checked="" @endif>
+  						<label class="form-check-label" for="is_delivered_uniform">Se entregó el Uniforme?</label>
+
+  						@if ($errors->has('enrollment.is_delivered_uniform'))
+							<div class="invalid-feedback animated fadeInDown">{{ $errors->first('enrollment.is_delivered_uniform') }}</div>
+						@endif
 					</div>
 					
 				</div>
