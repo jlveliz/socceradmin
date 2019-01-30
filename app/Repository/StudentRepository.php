@@ -3,6 +3,7 @@ namespace HappyFeet\Repository;
 
 use HappyFeet\RepositoryInterface\StudentRepositoryInterface;
 use HappyFeet\Exceptions\StudentException;
+use HappyFeet\Models\EnrollmentGroup;
 use HappyFeet\Models\Student;
 use HappyFeet\Models\Person;
 use HappyFeet\Models\PersonType;
@@ -108,12 +109,18 @@ class StudentRepository implements StudentRepositoryInterface
 				
 				//save Inscription
 				$dataEnrollment = $data['enrollment'];
+				// dd($dataEnrollment);
 				$dataEnrollment['student_id'] = $student->getKey();
 				$dataEnrollment['state'] = Enrollment::ACTIVE;
 				$enrollment = new Enrollment();
 				$enrollment->fill($dataEnrollment);
 
 				if($saveEnrollment =  $enrollment->save() ) {
+					//save groups
+					foreach ($dataEnrollment['groups'] as $key => $gr) {
+						$enrGroup = new EnrollmentGroup(['group_id' => $gr]);
+						$enrollment->groups()->save($enrGroup);
+					}
 					return  $this->find($student->getKey());
 				}
 				

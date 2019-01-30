@@ -44,7 +44,7 @@ class Enrollment extends Model
         $sameField = false;
         if(count($this->groups) > 0) {
             foreach($this->groups as $key =>  $gr) {
-                if($grf = GroupClass::where('state',GroupClass::ACTIVE)->where('id',$gr)->first()) {
+                if($grf = GroupClass::where('state',GroupClass::ACTIVE)->where('id',$gr->group_id)->first()) {
                     $grFounds[] = $grf;
                 }else {
                     //update the group

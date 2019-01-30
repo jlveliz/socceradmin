@@ -4,14 +4,15 @@ namespace HappyFeet\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class EnrollmentGroup extends Models
+class EnrollmentGroup extends Model
 {
     protected $table = "enrollment_groups";
 
     protected $primaryKey = "id";
 
-    protected $fillabe = [
-        'enrollment_id'
+    protected $fillable = [
+        'enrollment_id',
+        'group_id'
     ];
 
 

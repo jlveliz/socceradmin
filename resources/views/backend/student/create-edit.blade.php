@@ -118,8 +118,8 @@
 								</div>
 								
 								<div class="row p-2">
-									<input type="hidden" name="representant[user_id]" id="representant_user_id" @if(isset($student) && $student->representant &&  $student->representant->user && $student->representant->user->id) value ="{{$student->representant->user->id}}" @endif>
-									<input type="hidden" name="representant[person_id]" id="representant_person_id" @if(isset($student) && $student->representant) value ="{{$student->representant->id}}" @endif>
+								<input type="hidden" name="representant[user_id]" id="representant_user_id"  value ="@if(isset($student)) {{$student->representant->user->id}} @else {{old('representant.user_id')}} @endif">
+									<input type="hidden" name="representant[person_id]" id="representant_person_id" value ="@if(isset($student)) {{$student->representant->id}} @else {{old('representant.person_id')}} @endif">
 									<div class="col-lg-4 col-6">
 										<div class="form-group {{ $errors->has('representant.num_identification') ? ' is-invalid' : '' }}">
 											<label for="representant_num_identification">Num Identificación <span class="text-danger">*</span></label>
