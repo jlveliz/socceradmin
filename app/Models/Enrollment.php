@@ -26,10 +26,18 @@ class Enrollment extends Model
     protected $fillable = [
     	'student_id',
         'season_id',
-    	'groups',
-        'state',
-        'class_type'
+    	'state',
+        'class_type',
+        'is_pay_inscription',
+        'is_delivered_uniform',
+        'is_pay_first_month'
     ];
+
+
+    //Relationships
+    public function groups () {
+        return $this->hasMany('HappyFeet\Models\EnrollmentGroup','enrollment_id');
+    }
 
     public function fieldOfGroup() {
         $grFounds = [];
@@ -71,19 +79,19 @@ class Enrollment extends Model
         $found = false;
         
         foreach($this->groups as $gr) {
-            if($gr == $groupId) $found = true;
+            if($gr->group_id == $groupId) $found = true;
         }
 
         return $found;
     }
 
-    public function setGroupsAttribute($data) {
-        $this->attributes['groups'] = serialize($data);
-    }
+    // public function setGroupsAttribute($data) {
+    //     $this->attributes['groups'] = serialize($data);
+    // }
     
-    public function getGroupsAttribute($data) {
-        return  unserialize( $this->attributes['groups'] );
-    }
+    // public function getGroupsAttribute($data) {
+    //     return  unserialize( $this->attributes['groups'] );
+    // }
 
     public function updateCapacitiesGroups(array $oldGroups,array $newGroups) {
         
@@ -91,8 +99,8 @@ class Enrollment extends Model
             if($oldGroups  == $newGroups) return true;
 
             //add capacity to old groups
-            foreach ($oldGroups as $key => $oldGrId) {
-                $grf = GroupClass::find($oldGrId);
+            foreach ($oldGroups as $key => $oldGr) {
+                $grf = GroupClass::find($oldGr->group_id);
                 if ($grf) {
                     //max capacity 
                     $grf->disponibility = $grf->disponibility > config('happyfeet.group-max-num') ? $grf->disponibility + 1 : config('happyfeet.group-max-num');
@@ -102,8 +110,8 @@ class Enrollment extends Model
                 }
             }
             //substract capacity to new Group
-            foreach ($newGroups as $key => $newGrId) {
-                $grf = GroupClass::find($newGrId);
+            foreach ($newGroups as $key => $newGr) {
+                $grf = GroupClass::find($newGr->group_id);
                 if ($grf) {
                     $grf->disponibility = $grf->disponibility - 1;
                     $grf->update();
@@ -120,8 +128,8 @@ class Enrollment extends Model
     public static function boot() {
         parent::boot();
         static::creating(function($enrollment){
-            foreach ($enrollment->groups as $key => $groupId) {
-                $grf = GroupClass::find($groupId);
+            foreach ($enrollment->groups as $key => $group) {
+                $grf = GroupClass::find($group->group_id);
                 if ($grf) {
                     $grf->disponibility = $grf->disponibility - 1;
                     $grf->update();

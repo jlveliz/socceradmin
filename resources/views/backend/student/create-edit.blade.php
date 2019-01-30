@@ -235,7 +235,7 @@
 			<div class="card p-2">
 				<div class="card-body col-12">
 					<h4 class="text-center"> <strong>Matricula</strong></h4>
-					<div class="col-12 form-group {{ $errors->has('enrollment.season_id') ? ' is-invalid' : '' }}"">
+					<div class="col-12 form-group {{ $errors->has('enrollment.season_id') ? ' is-invalid' : '' }}">
 						<label for="season-enrollment">Temporada  <span class="text-danger">*</span></label>
 						<select name="enrollment[season_id]" id="season-enrollment" class="form-control form-control-sm">
 							<option value="">Seleccione</option>
@@ -247,7 +247,7 @@
 							<div class="invalid-feedback animated fadeInDown">{{ $errors->first('enrollment.season_id') }}</div>
 						@endif
 					</div>
-					 <div class="col-12 form-group {{ $errors->has('enrollment.field_id') ? ' is-invalid' : '' }}"">
+					 <div class="col-12 form-group {{ $errors->has('enrollment.field_id') ? ' is-invalid' : '' }}">
 						<label for="select-field">Cancha  <span class="text-danger">*</span></label>
 						
 						<select name="enrollment[field_id]" id="select-field" class="form-control form-control-sm">
@@ -261,7 +261,7 @@
 						@endif
 					</div>
 					
-					<div class="col-12 form-group {{ $errors->has('enrollment.class_type') ? ' is-invalid' : '' }}"">
+					<div class="col-12 form-group {{ $errors->has('enrollment.class_type') ? ' is-invalid' : '' }}">
 						<label for="class-type">Clase  <span class="text-danger">*</span></label>
 						<select name="enrollment[class_type]" id="class-type" class="form-control form-control-sm">
 							<option value="">Seleccione</option>
@@ -274,7 +274,7 @@
 						@endif
 					</div>
 
-					 <div class="col-12 form-group {{ $errors->has('enrollment.groups') ? ' is-invalid' : '' }}">
+					<div class="col-12 form-group {{ $errors->has('enrollment.groups') ? ' is-invalid' : '' }}">
 						<label for="grupo-class">Grupos  <span class="text-danger">*</span></label>
 						@if(isset($student)) 
 							<select @if ( $student->currentEnrollment()->class_type > 0) multiple @endif name="enrollment[groups][]" id="grupo-class" class="form-control form-control-sm grupo-class-edit" @if(!isset($student)) disabled @endif>
@@ -293,6 +293,9 @@
 						@endif
 					</div> 
 					
+					<div class="col-lg-4 col-12 form-group {{ $errors->has('enrollment.is_pay_inscription') ? ' is-invalid' : '' }}">
+						
+					</div>
 					
 				</div>
 			</div>
