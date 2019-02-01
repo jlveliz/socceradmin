@@ -73,6 +73,11 @@ class Enrollment extends Model
         return [];
     }
 
+    public function season()
+    {
+        return $this->belongsTo('HappyFeet\Models\Season','season_id');
+    }
+
 
 
     public function existGroupOnEnrollment($groupId) {

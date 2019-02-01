@@ -24,8 +24,8 @@ class Season extends Model
 
     protected $fillable = [
     	'name',
-    	'duration_num_time',
-        'duration_string_time',
+    	'start_date',
+        'end_date',
         'inscription_price',
         'month_price',
         'state'
@@ -47,12 +47,10 @@ class Season extends Model
     }
 
     public function getFormatDuration() {
-        $string = "";
-        $duration = "";
-        if(array_key_exists($this->duration_string_time,get_durations_string())) {
-            $duration = get_durations_string()[$this->duration_string_time];
+        if (!$this->start_date || !$this->end_date) {
+            return "-";
         }
-        return $this->duration_num_time . " ".$duration;
+        return $this->start_date . " hasta ".$this->end_date;
     }
 
 }

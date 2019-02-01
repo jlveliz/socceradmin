@@ -109,7 +109,7 @@ class StudentRepository implements StudentRepositoryInterface
 				
 				//save Inscription
 				$dataEnrollment = $data['enrollment'];
-				// dd($dataEnrollment);
+				
 				$dataEnrollment['student_id'] = $student->getKey();
 				$dataEnrollment['state'] = Enrollment::ACTIVE;
 				$enrollment = new Enrollment();
@@ -120,6 +120,10 @@ class StudentRepository implements StudentRepositoryInterface
 					foreach ($dataEnrollment['groups'] as $key => $gr) {
 						$enrGroup = new EnrollmentGroup(['group_id' => $gr]);
 						$enrollment->groups()->save($enrGroup);
+					}
+
+					foreach ($enrollment->groups as $key => $group) {
+						$group->saveAndCalculateAssitance();
 					}
 					return  $this->find($student->getKey());
 				}

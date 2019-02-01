@@ -1,6 +1,6 @@
 @extends('layouts.backend')
 
-@section('title', isset($season) ?  'Editar Temporada '. $season->name : 'Crear Temoorada' )
+@section('title', isset($season) ?  'Editar Temporada '. $season->name : 'Crear Temporada' )
 @section('parent-page','Temporadas')
 @section('route-parent',route('seasons.index') )
 
@@ -35,35 +35,30 @@
 			                		<div class="col-lg-3 col-5">
 				                		<div class="form-group {{ $errors->has('name') ? ' is-invalid' : '' }}">
 				                			<label for="name">Nombre <span class="text-danger">*</span></label>
-				                			<input type="text" name="name" id="name" class="form-control"  autofocus="" value="@if(isset($season)){{ $season->name }}@else {{ old('name') }}@endif">
+				                			<input type="text" name="name" id="name" class="form-control"  autofocus="" value="@if(isset($season)){{ $season->name }}@else{{ old('name') }}@endif">
 				                			@if ($errors->has('name'))
 				                				<div class="invalid-feedback animated fadeInDown">{{ $errors->first('name') }}</div>
 				                			@endif
 				                		</div>
 			                		</div>
 			                		<div class="col-lg-3 col-4">
-				                		<div class="form-group  {{ $errors->has('duration_num_time') ? ' is-invalid' : '' }}">
-				                			<label for="duration_num_time">Duración <span class="text-danger">*</span></label>
-                                            <div class="row">
-                                                    <select name="duration_num_time" id="duration_num_time" class="form-control col-4 custom-select">
-                                                        @for ($i = 1; $i < 11; $i++)
-														<option value="{{$i}}" @if( ( isset($season) && $i == $season->duration_num_time) || ( old('duration_num_time') == $i )) selected @endif>{{$i}}</option>
-                                                        @endfor
-                                                    </select>
-                                                    @if ($errors->has('duration_num_time'))
-                                                        <div class="invalid-feedback animated fadeInDown">{{ $errors->first('duration_num_time') }}</div>
-                                                    @endif
-                                                    <select name="duration_string_time" id="duration_string_time" class="form-control custom-select col-8 form-inline">
-                                                        @foreach ($timeStrings as $key => $timestr)
-                                                        <option value="{{$key}}">{{$timestr}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                    @if ($errors->has('duration_string_time'))
-                                                        <div class="invalid-feedback animated fadeInDown">{{ $errors->first('duration_string_time') }}</div>
-                                                    @endif
-
-                                            </div>
+				                		<div class="form-group  {{ $errors->has('start_date') || $errors->has('end_date') ? ' is-invalid' : '' }}">
+				                			<label for="start_date">Desde <span class="text-danger">*</span></label>
+				                			<input type="date" name="start_date" id="start_date" class="form-control" value="@if(isset($season)){{$season->start_date}}@else  {{old('start_date')}}@endif">
+                                            @if ($errors->has('start_date'))
+                                                <div class="invalid-feedback animated fadeInDown">{{ $errors->first('start_date') }}</div>
+                                            @endif
 				                		</div>
+			                		</div>
+
+			                		<div class="col-lg-3 col-4">
+			                			<div class="form-group  {{$errors->has('end_date') ? ' is-invalid' : '' }}">
+			                				<label for="end_date">Hasta <span class="text-danger">*</span></label>
+				                			<input type="date" name="end_date" id="end_date" class="form-control" value="@if(isset($season)){{$season->end_date}}@else{{old('end_date')}}@endif">
+	                                        @if ($errors->has('end_date'))
+	                                            <div class="invalid-feedback animated fadeInDown">{{ $errors->first('end_date') }}</div>
+	                                        @endif
+			                			</div>
 			                		</div>
 			                		<div class="col-lg-2 col-4">
 				                		<div class="form-group  {{ $errors->has('inscription_price') ? ' is-invalid' : '' }}">

@@ -25,8 +25,8 @@ class SeasonRequest extends FormRequest
     {
         $rules = [
             'name' => 'required|unique:season,name',
-            'duration_num_time' => 'required',
-            'duration_string_time' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
             'inscription_price' => 'required',
             'month_price' => 'required'
         ];
@@ -47,8 +47,8 @@ class SeasonRequest extends FormRequest
         return [
             'name.required' => 'Por favor ingrese un nombre',
             'name.unique' => 'Por favor ingrese otro nombre',
-            'duration_num_time.required' => 'Por favor, Ingrese una duración',
-            'duration_string_time.required' => 'Por favor, Ingrese una duración',
+            'start_date.required' => 'Por favor, Ingrese una duración',
+            'end_date.required' => 'Por favor, Ingrese una duración',
             'inscription_price.required' => 'Por favor, ingrese  un precio',
             'month_price.required' => 'Por favor, ingrese un precio',
         ];

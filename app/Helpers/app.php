@@ -15,6 +15,21 @@ if(!function_exists('days_of_week')) {
     }
 }
 
+if(!function_exists('num_days_of_week')) {
+    
+    function num_days_of_week () {
+        return [ 
+            'monday' => 1 ,
+            'tuesday' => 2,
+            'wednesday' => 3,
+            'thursday' => 4,
+            'friday' => 5,
+            'saturday' => 6,
+            'sunday' => 7,
+        ];
+    }
+}
+
 
 if(!function_exists('range_ages')) {
 
