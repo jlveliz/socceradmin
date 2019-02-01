@@ -4,6 +4,7 @@ namespace HappyFeet\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use  Illuminate\Database\Eloquent\SoftDeletes;
+use HappyFeet\Models\Assistance;
 
 
 class EnrollmentGroup extends Model
@@ -59,7 +60,7 @@ class EnrollmentGroup extends Model
         }
 
         foreach ($datesAssistence as $key => $dtAs) {
-            $assistance = new  Assistance(['date' => $dtAs, 'state' => 0]);
+            $assistance = new Assistance(['date' => $dtAs, 'state' => 0]);
             $this->assistances()->save($assistance);
         }
     }

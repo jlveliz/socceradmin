@@ -5,7 +5,7 @@ namespace HappyFeet\Models;
 use Illuminate\Database\Eloquent\Model;
 use Auth;
 
-class Assitance extends Model
+class Assistance extends Model
 {
     
     protected $table = 'assistance';
