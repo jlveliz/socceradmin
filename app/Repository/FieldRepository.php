@@ -30,7 +30,7 @@ class FieldRepository implements FieldRepositoryInterface
 
 			} 
 		} else {
-			$fields = Field::all();
+			$fields = Field::orderBy('name')->get();
 		}
 
 		if (!$fields) {

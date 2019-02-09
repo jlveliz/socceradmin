@@ -88,10 +88,11 @@
 								                				<div class="row">
 									                				@foreach ($modules as $index => $module)
 									                					<div class="card col-lg-6 col-12 pt-0">
-									                						<div class="card-header px-2" id="heading_{{$pType->code.'_'.$index+1}}">
-									                							<a href="#" data-toggle="collapse" data-target="#{{$pType->code.'_'.str_slug($module->name).'_'.$module->id}}" aria-expanded="true" aria-controls="collapse{{$index+1}}">{{$module->name}} </a>
+									                						{{-- {{dd($pType->code.'_'.($index+1))}} --}}
+									                						<div class="card-header px-2" id="heading_{{$pType->code.'_'.($index+1)}}">
+									                							<a href="#" data-toggle="collapse" data-target="#{{$pType->code.'_'.str_slug($module->name).'_'.$module->id}}" aria-expanded="true" aria-controls="collapse{{($index+1)}}">{{$module->name}} </a>
 									                						</div>
-									                						<div id="{{$pType->code.'_'.str_slug($module->name).'_'.$module->id}}" class="collapse" aria-labelledby="heading_{{$pType->code.'_'.$index+1}}" data-parent="#accordionpermissions">
+									                						<div id="{{$pType->code.'_'.str_slug($module->name).'_'.$module->id}}" class="collapse show" aria-labelledby="heading_{{$pType->code.'_'.($index+1)}}" data-parent="#accordionpermissions">
 										                						<div class="card-body">
 										                							<table class="table">
 										                								@foreach ($module->getPermissionsType($pType->id) as $permission)

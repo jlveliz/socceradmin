@@ -40,8 +40,16 @@ class EnrollmentGroup extends Model
 
     private function saveAndCalculateAssitance()
     {
+        
+        $clastype = $this->enrollment->class_type; // determina que tipo de clase es
+        $isFreeClass =  array_key_exists($clastype, get_type_class()) && get_type_class()[$clastype] == 'Demostrativa' ? true : false;
+
+        if($isFreeClass) return true;
+
         $startDate = $this->enrollment->season ? $this->enrollment->season->start_date : null;
         $endDate = $this->enrollment->season ? $this->enrollment->season->end_date :  null;
+
+        
         $group = $this->group;
         $day = $group->day;
 
@@ -60,7 +68,7 @@ class EnrollmentGroup extends Model
         }
 
         foreach ($datesAssistence as $key => $dtAs) {
-            $assistance = new Assistance(['date' => $dtAs, 'state' => 0]);
+            $assistance = new Assistance(['date' => $dtAs]);
             $this->assistances()->save($assistance);
         }
     }

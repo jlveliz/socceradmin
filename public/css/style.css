@@ -927,25 +927,25 @@ h6.h1 {
 /*    Border Mixins
 --------------------------*/
 .border-primary {
-  border-color: #4680ff;
+  border-color: #4680ff!important;
 }
 .border-success {
-  border-color: #26dad2;
+  border-color: #26dad2!important;
 }
 .border-info {
-  border-color: #62d1f3;
+  border-color: #62d1f3!important;
 }
 .border-danger {
-  border-color: #fc6180;
+  border-color: #fc6180!important;
 }
 .border-warning {
-  border-color: #ffb64d;
+  border-color: #ffb64d!important;
 }
 .border-pink {
-  border-color: #e6a1f2;
+  border-color: #e6a1f2!important;
 }
 .border-dark {
-  border-color: #444c67;
+  border-color: #444c67!important;
 }
 .no-border {
   border: 0px!important;
