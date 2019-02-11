@@ -4,4 +4,12 @@ jQuery(document).ready(function($) {
 		$('#filter-assistance').submit();
 	});
 
+	$('#key-day').on('change',function(event) {
+		$('#filter-assistance').submit();
+	});
+
+	$('#group_id').on('change',function(event) {
+		$('#filter-assistance').submit();
+	});
+
 });

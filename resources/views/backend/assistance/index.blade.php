@@ -30,7 +30,7 @@
                                     <div class="card-body pt-2 px-2">
                                         <form id="filter-assistance" action="{{ route('assistances.index') }}" method="GET">
                                             <div class="row">
-                                                <div class="col-lg-3 col-12">
+                                                <div class="col-lg-3 col-4">
                                                     <div class="form-group {{ $errors->has('field_id') ? ' is-invalid' : '' }}">
                                                         <label for="name">Cancha <span class="text-danger">*</span></label>
                                                         <select name="field" id="field-id" class="form-control form-control-sm" name="field_id">
@@ -44,14 +44,34 @@
                                                         @endif
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-4 col-12">
+                                                <div class="col-lg-2 col-4">
                                                     <div class="form-group {{ $errors->has('field_id') ? ' is-invalid' : '' }}">
                                                         <label for="name">Día <span class="text-danger">*</span></label>
                                                         
-                                                        <select id="key-day" class="form-control form-control-sm" name="key_day" @if(!isset($groups) || count($groups) == 0) disabled @endif>
+                                                        <select id="key-day" class="form-control form-control-sm" name="key_day" @if(!isset($days) || count($days) == 0) disabled @endif>
+                                                            <option value="">Seleccione</option>
+                                                            @if (isset($days))
+                                                                @foreach ($days as $keyDay => $day)
+                                                                    <option value="{{ $keyDay }}" @if(old('key_day') == $keyDay || request()->get('key_day') == $keyDay) selected @endif>{{days_of_week()[$keyDay]}}</option>
+                                                                @endforeach
+                                                            @endif
+                                                        </select>
+                                                        @if ($errors->has('key_day'))
+                                                            <div class="invalid-feedback animated fadeInDown">{{ $errors->first('key_day') }}</div>
+                                                        @endif
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-lg-5 col-4">
+                                                    <div class="form-group {{ $errors->has('field_id') ? ' is-invalid' : '' }}">
+                                                        <label for="name">Grupo <span class="text-danger">*</span></label>
+                                                        
+                                                        <select id="group-key" class="form-control form-control-sm" name="group_id" @if(!isset($groups) || count($groups) == 0) disabled @endif>
+                                                            <option value="">Seleccione</option>
                                                             @if (isset($groups))
-                                                                @foreach ($groups as $group)
-                                                                    <option value="{{ $group->id }}">{{days_of_week()[$group->day]}}</option>
+                                                                @foreach ($groups as $keyDay => $group)
+                                                                    <option value="{{ $group->id }}">{{$group->schedule['start'] .' '. $group->schedule['end']}} - {{get_group_names()[$group->name]}} -  {{$group->range ? $group->range->name : '-'}}</option>
                                                                 @endforeach
                                                             @endif
                                                         </select>
@@ -59,6 +79,10 @@
                                                             <div class="invalid-feedback animated fadeInDown">{{ $errors->first('group_id') }}</div>
                                                         @endif
                                                     </div>
+                                                </div>
+
+                                                <div class="col-lg-2 col-4 mt-4">
+                                                    <button class="btn btn-primary btn-sm"><i class="fa fa-search"></i> Buscar</button>
                                                 </div>
                                                 
                                             </div>

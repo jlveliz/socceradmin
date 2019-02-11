@@ -4,6 +4,7 @@ namespace HappyFeet\Models;
 
 use  Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
+use appyFeet\Models\AgeRange;
 use Auth;
 
 class GroupClass extends Model
@@ -37,7 +38,12 @@ class GroupClass extends Model
 
     public function students()
     {
-    	return $this->belongsToMany('HappyFeet\Models\Student','group_class_student','group_id','student_id');
+        return $this->belongsToMany('HappyFeet\Models\Student','group_class_student','group_id','student_id');
+    }
+
+    public function range()
+    {
+    	return $this->belongsTo('HappyFeet\Models\AgeRange','range_age_id');
 	}
 	
 	public function field() {

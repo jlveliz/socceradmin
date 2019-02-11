@@ -141,4 +141,13 @@ class GroupClassRepository implements GroupClassRepositoryInterface
 		return $groups;
 
 	}
+
+
+	public function findByFieldAndDay($fieldId,$keyDay) {
+		$group = GroupClass::where('field_id',$fieldId)->where('day',$keyDay)->where('state',GroupClass::ACTIVE)->get();
+		if (!$group) {
+			throw new GroupClassException('Ha ocurrido un error al encontrar el grupo el grupo ',500);
+		}
+		return $group;
+	}
 }

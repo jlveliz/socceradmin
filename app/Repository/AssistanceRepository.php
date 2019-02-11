@@ -107,7 +107,13 @@ class AssistanceRepository implements AssistanceRepositoryInterface
 
 	public function getAssistanceByGroup($params){
 		
+		$assistances = DB::select("
+							SELECT 
+								
+							FROM 
+							enrollment
 
-		return [];
+						")->get();
+
 	}
 }

@@ -42,13 +42,24 @@ class AssistanceController extends Controller
         } else {
 
             if ($request->has('field')) {
-                $groups = $this->grClass->enum($request->get('field'));
+                $days = $this->field->find($request->get('field'))->available_days;
+            } else {
+                $days = [];
+            }
+
+            if ($request->has('key_day')) {
+                $groups = $this->grClass->findByFieldAndDay($request->get('field'),$request->get('key_day'));
             } else {
                 $groups = [];
             }
 
-            $assistances = $this->assistance->getAssistanceByGroup($request->all());
-            return view('backend.assistance.index',compact('assistances','fields','groups'));
+            if ($request->has('field') && $request->has('key_day') && $request->has('group_id')) {
+                $assistances = $this->assistance->getAssistanceByGroup($request->all());
+            } else {
+                $assistances = [];
+            }
+
+            return view('backend.assistance.index',compact('assistances','fields','days','groups'));
         }
 
     }
