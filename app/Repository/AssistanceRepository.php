@@ -107,13 +107,43 @@ class AssistanceRepository implements AssistanceRepositoryInterface
 
 	public function getAssistanceByGroup($params){
 		
-		$assistances = DB::select("
-							SELECT 
-								
-							FROM 
-							enrollment
+		$assistances = DB::select(DB::raw("
+				SELECT
+	DATE_FORMAT(en.created_at,'%Y-%m-%d') date_inscription,
+	CONCAT( pe.`name`, ' ', pe.last_name ) student_name,
+	concat( pe.age, ' Años' ) age,
+	concat( re.`name`, ' ', re.last_name ) representant,-- field.`name` field_name
+	gc.`day`,
+	en.is_pay_inscription,
+	en.is_pay_first_month,
+	en.is_delivered_uniform,
+	eg.id,
+	( SELECT ifnull( assistance.state, 0 ) FROM assistance WHERE assistance.enrollment_group_id = eg.id AND date = '2019-02-04' ) AS '06',
+	( SELECT ifnull( assistance.state, 0 ) FROM assistance WHERE assistance.enrollment_group_id = eg.id AND date = '2019-02-11' ) AS '11',
+	( SELECT ifnull( assistance.state, 0 ) FROM assistance WHERE assistance.enrollment_group_id = eg.id AND date = '2019-02-18' ) AS '18',
+	( SELECT ifnull( assistance.state, 0 ) FROM assistance WHERE assistance.enrollment_group_id = eg.id AND date = '2019-02-25' ) AS '25' 
+FROM
+	enrollment en
+	INNER JOIN student st ON en.student_id = st.id
+	INNER JOIN person pe ON st.person_id = pe.id -- REPRESENTANTE
+	INNER JOIN person re ON st.representant_id = re.id -- MATRICULA GRUPO
+	INNER JOIN enrollment_groups eg ON en.id = eg.enrollment_id --
+	INNER JOIN group_class gc ON eg.group_id = gc.id 
+WHERE
+	en.state = 1 -- temporada activa
+	
+	AND en.season_id = 1 -- temporada
+	
+	AND en.class_type = 1 -- clase pagada
+	
+	AND gc.field_id = 9 -- la cancha
+	
+	AND st.id > 0 
+	AND re.id > 0 
+	AND eg.group_id = 1 -- group_class que pertenece
+	;
+			"));
 
-						")->get();
-
+		return collect($assistances);
 	}
 }

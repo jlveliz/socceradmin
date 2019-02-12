@@ -129,4 +129,10 @@ class SeasonRepository implements SeasonRepositoryInterface
 		}
 		return false;
 	}
+
+
+	public function getActive()
+	{
+		return $this->getModel()->getSeasonActive();
+	}
 }

@@ -7,6 +7,7 @@ use HappyFeet\Http\Controllers\Controller;
 use HappyFeet\RepositoryInterface\AssistanceRepositoryInterface;
 use HappyFeet\RepositoryInterface\FieldRepositoryInterface;
 use HappyFeet\RepositoryInterface\GroupClassRepositoryInterface;
+use HappyFeet\RepositoryInterface\SeasonRepositoryInterface;
 use HappyFeet\Http\Requests\AssistanceRequest;
 use HappyFeet\Exceptions\AssistanceException;
 
@@ -16,16 +17,18 @@ class AssistanceController extends Controller
     protected $assistance;
     protected $field;
     protected $grClass;
+    protected $seasonRepo;
 
     protected $routeRedirectIndex = 'assistances.index';
 
 
-    function __construct(AssistanceRepositoryInterface $assistance, FieldRepositoryInterface $field, GroupClassRepositoryInterface $grClass)
+    function __construct(AssistanceRepositoryInterface $assistance, FieldRepositoryInterface $field, GroupClassRepositoryInterface $grClass, SeasonRepositoryInterface $seasonRepo)
     {
         $this->middleware('auth');
         $this->assistance = $assistance;
         $this->field = $field;
         $this->grClass = $grClass;
+        $this->seasonRepo = $seasonRepo;
     }
     /**
      * Display a listing of the resource.
@@ -35,6 +38,7 @@ class AssistanceController extends Controller
     public function index(Request $request)
     {
         $fields = $this->field->enum();
+        $currentSeason = $this->seasonRepo->getActive();
         
         if ($request->has('paginate')) {
             $assistances = $this->assistance->paginate();
@@ -59,7 +63,7 @@ class AssistanceController extends Controller
                 $assistances = [];
             }
 
-            return view('backend.assistance.index',compact('assistances','fields','days','groups'));
+            return view('backend.assistance.index',compact('assistances','fields','days','groups','currentSeason'));
         }
 
     }

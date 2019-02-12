@@ -53,4 +53,10 @@ class Season extends Model
         return $this->start_date . " hasta ".$this->end_date;
     }
 
+
+    public function getSeasonActive()
+    {
+        return $this->where('state',$this->getActive())->first();
+    }
+
 }

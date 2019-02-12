@@ -24,6 +24,7 @@
                         @endif
                         
                         <div class="row justify-content-center">
+                            <h4 class="text-center text-uppercase text-info">{{ $currentSeason->name }}</h4>
                             <div class="col-11 ">
                                <div class="card border-none border-warning p-0 m-0">
                                     <div class="card-header">Filtros</div>
@@ -93,6 +94,35 @@
                             </div>
                             
                         </div>
+                        @if(isset($assistances)) 
+                        <div class="row mt-2">
+                            <div class="col-12">
+                                <table class="table table-bordered table-responsive">
+                                    <thead>
+                                        <tr>
+                                            <th>F. de Inscripción</th>
+                                            <th>Nombre</th>
+                                            <th>Edad</th>
+                                            <th>Representante</th>
+                                            <th>I</th>
+                                            <th>M</th>
+                                            <th>C</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($assistances  as $assistance)
+                                            <tr>
+                                                <td>{{ $assistance->date_inscription }}</td>
+                                                <td>{{ $assistance->student_name }}</td>
+                                                <td>{{ $assistance->age }}</td>
+                                                <td>{{ $assistance->representant }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        @endif
                     </div>
                 </div>
 
