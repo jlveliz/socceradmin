@@ -4,6 +4,7 @@ namespace HappyFeet\Repository;
 use HappyFeet\RepositoryInterface\AssistanceRepositoryInterface;
 use HappyFeet\Exceptions\AssistanceException;
 use HappyFeet\Models\Assistance;
+use HappyFeet\Models\Season;
 use DB;
 
 /**
@@ -107,43 +108,81 @@ class AssistanceRepository implements AssistanceRepositoryInterface
 
 	public function getAssistanceByGroup($params){
 		
-		$assistances = DB::select(DB::raw("
-				SELECT
-	DATE_FORMAT(en.created_at,'%Y-%m-%d') date_inscription,
-	CONCAT( pe.`name`, ' ', pe.last_name ) student_name,
-	concat( pe.age, ' Años' ) age,
-	concat( re.`name`, ' ', re.last_name ) representant,-- field.`name` field_name
-	gc.`day`,
-	en.is_pay_inscription,
-	en.is_pay_first_month,
-	en.is_delivered_uniform,
-	eg.id,
-	( SELECT ifnull( assistance.state, 0 ) FROM assistance WHERE assistance.enrollment_group_id = eg.id AND date = '2019-02-04' ) AS '06',
-	( SELECT ifnull( assistance.state, 0 ) FROM assistance WHERE assistance.enrollment_group_id = eg.id AND date = '2019-02-11' ) AS '11',
-	( SELECT ifnull( assistance.state, 0 ) FROM assistance WHERE assistance.enrollment_group_id = eg.id AND date = '2019-02-18' ) AS '18',
-	( SELECT ifnull( assistance.state, 0 ) FROM assistance WHERE assistance.enrollment_group_id = eg.id AND date = '2019-02-25' ) AS '25' 
-FROM
-	enrollment en
-	INNER JOIN student st ON en.student_id = st.id
-	INNER JOIN person pe ON st.person_id = pe.id -- REPRESENTANTE
-	INNER JOIN person re ON st.representant_id = re.id -- MATRICULA GRUPO
-	INNER JOIN enrollment_groups eg ON en.id = eg.enrollment_id --
-	INNER JOIN group_class gc ON eg.group_id = gc.id 
-WHERE
-	en.state = 1 -- temporada activa
-	
-	AND en.season_id = 1 -- temporada
-	
-	AND en.class_type = 1 -- clase pagada
-	
-	AND gc.field_id = 9 -- la cancha
-	
-	AND st.id > 0 
-	AND re.id > 0 
-	AND eg.group_id = 1 -- group_class que pertenece
-	;
-			"));
+		$fieldId = $params['field'];
+		$grId = $params['group_id'];
+		$month = $params['month'];
+		$day = $params['key_day'];
+		$season = (new Season())->getSeasonActive();
 
-		return collect($assistances);
+		$startDate = new \DateTime($season->start_date);
+        $endDate = new \DateTime($season->end_date);
+        $interval = \DateInterval::createFromDateString('1 day');
+
+        $period   = new \DatePeriod($startDate, $interval, $endDate);
+
+
+        $datesAssistence = [];
+
+		foreach ($period as $key => $dt) {
+            //verify the day 
+            if($dt->format('N') == num_days_of_week()[$day] && $dt->format('n') == $month) {
+                $datesAssistence[] = $dt;
+            }
+        }
+		
+
+		
+		$query =" SELECT DATE_FORMAT(en.created_at,'%Y-%m-%d') date_inscription,
+					CONCAT( pe.`name`, ' ', pe.last_name ) student_name,
+					concat( pe.age, ' Años' ) age,
+					concat( re.`name`, ' ', re.last_name ) representant,-- field.`name` field_name
+					gc.`day`,
+					en.is_pay_inscription,
+					en.is_pay_first_month,
+					en.is_delivered_uniform,
+					eg.id,";
+
+
+		foreach ($datesAssistence as $key => $dateAssi) {
+			$date = $dateAssi->format('Y-m-d');
+			$query.="
+					( SELECT ifnull( assistance.state, 0 ) FROM assistance WHERE assistance.enrollment_group_id 		= eg.id AND date = '$date' ) AS '$key' 
+					";
+
+			if (($key+1) < count($datesAssistence)) {
+             	 $query.=" , ";
+          	}
+		}
+		
+		$query.=
+					"FROM
+					enrollment en
+					INNER JOIN student st ON en.student_id = st.id
+					INNER JOIN person pe ON st.person_id = pe.id -- REPRESENTANTE
+					INNER JOIN person re ON st.representant_id = re.id -- MATRICULA GRUPO
+					INNER JOIN enrollment_groups eg ON en.id = eg.enrollment_id --
+					INNER JOIN group_class gc ON eg.group_id = gc.id 
+				WHERE
+					en.state = 1 -- temporada activa
+					
+					AND en.season_id = 1 -- temporada
+					
+					AND en.class_type = 1 -- clase pagada
+					
+					AND gc.field_id = $fieldId -- la cancha
+
+					AND gc.day = '$day' -- la cancha
+					
+					AND st.id > 0 
+					AND re.id > 0 
+					AND eg.group_id =$grId-- group_class que pertenece
+
+					order by student_name; 
+				";
+
+		
+
+		$assistances = DB::select(DB::raw($query));
+		return collect(['dates' =>$datesAssistence,'assistances' =>  $assistances]);
 	}
 }

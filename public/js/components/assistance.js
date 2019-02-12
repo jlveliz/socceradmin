@@ -12,4 +12,8 @@ jQuery(document).ready(function($) {
 		$('#filter-assistance').submit();
 	});
 
+	$('#group-key').on('change',function(event) {
+		$('#filter-assistance').submit();
+	});
+
 });

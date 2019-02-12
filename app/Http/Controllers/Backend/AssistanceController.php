@@ -57,13 +57,19 @@ class AssistanceController extends Controller
                 $groups = [];
             }
 
-            if ($request->has('field') && $request->has('key_day') && $request->has('group_id')) {
+            if ($request->has('group_id')) {
+                $months = $this->seasonRepo->getMonthForSeason($currentSeason->id);
+            } else {
+                $months = [];
+            }
+
+            if ($request->has('field') && $request->has('key_day') && $request->has('group_id') && $request->has('month')) {
                 $assistances = $this->assistance->getAssistanceByGroup($request->all());
             } else {
                 $assistances = [];
             }
 
-            return view('backend.assistance.index',compact('assistances','fields','days','groups','currentSeason'));
+            return view('backend.assistance.index',compact('assistances','fields','days','groups','currentSeason','months'));
         }
 
     }

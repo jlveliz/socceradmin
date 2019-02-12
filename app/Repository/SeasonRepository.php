@@ -135,4 +135,16 @@ class SeasonRepository implements SeasonRepositoryInterface
 	{
 		return $this->getModel()->getSeasonActive();
 	}
+
+
+
+	public function getMonthForSeason($id)
+	{
+		$season = Season::selectRaw(" month(start_date) start, month(end_date) end")->where('id',$id)->first();
+		if ($season->start == $season->end) {
+			return [$season->start];
+		}
+
+		return [$season->start,$season->end];
+	}
 }

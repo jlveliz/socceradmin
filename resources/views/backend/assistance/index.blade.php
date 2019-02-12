@@ -24,7 +24,8 @@
                         @endif
                         
                         <div class="row justify-content-center">
-                            <h4 class="text-center text-uppercase text-info">{{ $currentSeason->name }}</h4>
+                            <h4 class="col-12 text-center text-uppercase text-info">{{ $currentSeason->name }} </h4> 
+                            <h6 class="col-12 text-center text-muted">{{$currentSeason->getFormatDuration()}}</h6>
                             <div class="col-11 ">
                                <div class="card border-none border-warning p-0 m-0">
                                     <div class="card-header">Filtros</div>
@@ -45,6 +46,7 @@
                                                         @endif
                                                     </div>
                                                 </div>
+                                                
                                                 <div class="col-lg-2 col-4">
                                                     <div class="form-group {{ $errors->has('field_id') ? ' is-invalid' : '' }}">
                                                         <label for="name">Día <span class="text-danger">*</span></label>
@@ -66,13 +68,13 @@
 
                                                 <div class="col-lg-5 col-4">
                                                     <div class="form-group {{ $errors->has('field_id') ? ' is-invalid' : '' }}">
-                                                        <label for="name">Grupo <span class="text-danger">*</span></label>
+                                                        <label for="group-key">Grupo <span class="text-danger">*</span></label>
                                                         
                                                         <select id="group-key" class="form-control form-control-sm" name="group_id" @if(!isset($groups) || count($groups) == 0) disabled @endif>
                                                             <option value="">Seleccione</option>
                                                             @if (isset($groups))
-                                                                @foreach ($groups as $keyDay => $group)
-                                                                    <option value="{{ $group->id }}">{{$group->schedule['start'] .' '. $group->schedule['end']}} - {{get_group_names()[$group->name]}} -  {{$group->range ? $group->range->name : '-'}}</option>
+                                                                @foreach ($groups as $grIdx => $group)
+                                                                    <option value="{{ $group->id }}" @if(request()->get('group_id') == $group->id) selected @endif>{{$group->schedule['start'] .' '. $group->schedule['end']}} - {{get_group_names()[$group->name]}} -  {{$group->range ? $group->range->name : '-'}}</option>
                                                                 @endforeach
                                                             @endif
                                                         </select>
@@ -82,8 +84,27 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-lg-2 col-4 mt-4">
-                                                    <button class="btn btn-primary btn-sm"><i class="fa fa-search"></i> Buscar</button>
+                                                <div class="col-lg-2 col-4">
+                                                    <div class="form-group {{ $errors->has('month') ? ' is-invalid' : '' }}">
+                                                        <label for="month">Mes <span class="text-danger">*</span></label>
+                                                        <select id="month" class="form-control form-control-sm" name="month" @if(!isset($months) || count($months) == 0) disabled @endif>
+                                                            <option value="">Seleccione</option>
+                                                            @if (isset($months))
+                                                                @foreach ($months as $keyMonth => $month)
+                                                                    <option value="{{ $month }}" @if(request()->get('month') == $month) selected @endif>{{month_of_year()[$month]}}</option>
+                                                                @endforeach
+                                                            @endif
+                                                        </select>
+                                                        @if ($errors->has('month'))
+                                                            <div class="invalid-feedback animated fadeInDown">{{ $errors->first('month') }}</div>
+                                                        @endif
+                                                    </div>
+
+                                                </div>
+
+
+                                                <div class="col-12 mb-2 text-center">
+                                                    <button class="btn btn-primary btn-sm" @if(!request()->has('field') && !request()->has('key_day') && !request()->has('group_id') && !request()->has('month')) disabled @endif><i class="fa fa-search"></i> Buscar</button>
                                                 </div>
                                                 
                                             </div>
@@ -94,35 +115,56 @@
                             </div>
                             
                         </div>
-                        @if(isset($assistances)) 
-                        <div class="row mt-2">
-                            <div class="col-12">
-                                <table class="table table-bordered table-responsive">
-                                    <thead>
-                                        <tr>
-                                            <th>F. de Inscripción</th>
-                                            <th>Nombre</th>
-                                            <th>Edad</th>
-                                            <th>Representante</th>
-                                            <th>I</th>
-                                            <th>M</th>
-                                            <th>C</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($assistances  as $assistance)
+                        <div class="row mt-2 justify-content-center">
+                            <div class="col-11">
+                                @if(isset($assistances) && count($assistances) > 0) 
+                                    <table class="table table-bordered ">
+                                        <thead class="text-center">
                                             <tr>
-                                                <td>{{ $assistance->date_inscription }}</td>
-                                                <td>{{ $assistance->student_name }}</td>
-                                                <td>{{ $assistance->age }}</td>
-                                                <td>{{ $assistance->representant }}</td>
+                                                <th>F. de Inscripción</th>
+                                                <th>Nombre</th>
+                                                <th>Edad</th>
+                                                <th>Representante</th>
+                                                <th>I</th>
+                                                <th>M</th>
+                                                <th>C</th>
+                                                @for($i = 0; $i < count($assistances['dates']); $i++)
+                                                <th>{{$assistances['dates'][$i]->format('d')}}</th>
+                                                @endfor
                                             </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            @if (count($assistances['assistances']) > 0)
+                                                @foreach ($assistances['assistances']  as $key =>  $assistance)
+                                                    <tr>
+                                                        <td>{{ $assistance->date_inscription }}</td>
+                                                        <td>{{ $assistance->student_name }}</td>
+                                                        <td>{{ $assistance->age }}</td>
+                                                        <td>{{ $assistance->representant }}</td>
+                                                        <td>{{ $assistance->is_pay_inscription == '1' ? 'Si' : 'No' }}</td>
+                                                        <td>{{ $assistance->is_pay_first_month == '1' ? 'Si' : 'No' }}</td>
+                                                        <td>{{ $assistance->is_delivered_uniform == '1' ? 'Si' : 'No' }}</td>
+                                                        @for ($i = 0; $i < count($assistances['dates']); $i++)
+                                                        <td class="text-center">
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox" id="{{$assistance->student_name}}_{{$i}}" value="{{$assistance->$i == null || $assistance->$i == 0 ? 0 : $assistance->$i}}" @if($assistance->$i == 1) checked @endif @if($assistances['dates'][$i]->format('Y-m-d') < date('Y-m-d'))) disabled @endif>
+                                                            </div>
+                                                        </td>
+                                                        @endfor
+                                                    </tr>
+                                                @endforeach
+                                            @else
+                                                <tr>
+                                                    <td colspan="{{ (7  + count($assistances['dates'])) }}"><p class="text-center align-middle">No existen datos</p></td>
+                                                </tr>
+                                            @endif
+                                        </tbody>
+                                    </table>
+                                @else
+                                    <p class="text-center mt-2">Seleccione cada uno de los filtros para continuar</p>
+                                @endif
                             </div>
                         </div>
-                        @endif
                     </div>
                 </div>
 
