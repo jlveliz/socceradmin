@@ -60,7 +60,7 @@
 	                			@endforeach
 	                		@else
 	                			<tr>
-	                				<td class="text-center" colspan="5">
+	                				<td class="text-center" colspan="6">
 	                					<p class="text-primary">No existen estudiantes a consultar</p>
 	                				</td>
 	                			</tr>

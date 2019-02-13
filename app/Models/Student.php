@@ -65,6 +65,7 @@ class Student extends Model
 
         static::deleting(function($student){
             $student->enrollments()->delete();
+            $student->person()->delete();
         });
     }
 

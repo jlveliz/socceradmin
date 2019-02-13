@@ -82,6 +82,7 @@ class EnrollmentGroup extends Model
 
         static::deleting(function($student){
             $student->enrollments()->delete();
+            $student->assistances()->delete();
         });
     }
 

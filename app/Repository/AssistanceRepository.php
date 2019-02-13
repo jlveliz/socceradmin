@@ -146,7 +146,8 @@ class AssistanceRepository implements AssistanceRepositoryInterface
 		foreach ($datesAssistence as $key => $dateAssi) {
 			$date = $dateAssi->format('Y-m-d');
 			$query.="
-					( SELECT ifnull( assistance.state, 0 ) FROM assistance WHERE assistance.enrollment_group_id 		= eg.id AND date = '$date' ) AS '$key' 
+					( SELECT ifnull( assistance.state, 0 ) FROM assistance WHERE assistance.enrollment_group_id 		= eg.id AND date = '$date' ) AS '$key' ,
+					( SELECT assistance.id FROM assistance WHERE assistance.enrollment_group_id 		= eg.id AND date = '$date' ) AS id_$key
 					";
 
 			if (($key+1) < count($datesAssistence)) {
@@ -172,16 +173,18 @@ class AssistanceRepository implements AssistanceRepositoryInterface
 					AND gc.field_id = $fieldId -- la cancha
 
 					AND gc.day = '$day' -- la cancha
+
+					and st.deleted_at is null
 					
 					AND st.id > 0 
 					AND re.id > 0 
-					AND eg.group_id =$grId-- group_class que pertenece
+					AND eg.group_id =$grId -- group_class que pertenece
 
-					order by student_name; 
+					order by student_name;
 				";
 
 		
-
+				// dd($query);
 		$assistances = DB::select(DB::raw($query));
 		return collect(['dates' =>$datesAssistence,'assistances' =>  $assistances]);
 	}

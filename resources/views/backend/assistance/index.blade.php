@@ -145,8 +145,10 @@
                                                         <td>{{ $assistance->is_pay_first_month == '1' ? 'Si' : 'No' }}</td>
                                                         <td>{{ $assistance->is_delivered_uniform == '1' ? 'Si' : 'No' }}</td>
                                                         @for ($i = 0; $i < count($assistances['dates']); $i++)
+                                                        @php $idAssistance = 'id_'.$i; @endphp
                                                         <td class="text-center">
                                                             <div class="form-check form-check-inline">
+                                                                <input type="hidden" value="{{$assistance->$idAssistance}}" name="id_assistance">
                                                                 <input class="form-check-input" type="checkbox" id="{{$assistance->student_name}}_{{$i}}" value="{{$assistance->$i == null || $assistance->$i == 0 ? 0 : $assistance->$i}}" @if($assistance->$i == 1) checked @endif @if($assistances['dates'][$i]->format('Y-m-d') < date('Y-m-d'))) disabled @endif>
                                                             </div>
                                                         </td>
@@ -159,6 +161,13 @@
                                                 </tr>
                                             @endif
                                         </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="{{ (7  + count($assistances['dates'])) }}" class="text-center">
+                                                    <button class="btn btn-primary btn-sm"><i class="fa fa-save"></i> Procesar</button>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
                                     </table>
                                 @else
                                     <p class="text-center mt-2">Seleccione cada uno de los filtros para continuar</p>
