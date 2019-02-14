@@ -19,6 +19,10 @@ class EventServiceProvider extends ServiceProvider
 
         'HappyFeet\Events\UserLoginEvent' => [
             'HappyFeet\Listeners\UpdateLastAccess'
+        ],
+
+        'HappyFeet\Events\DeleteEnrollmentGroup' => [
+            'HappyFeet\Listeners\DeleteAssistances'
         ]
     ];
 

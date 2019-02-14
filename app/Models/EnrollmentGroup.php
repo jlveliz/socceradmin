@@ -80,9 +80,11 @@ class EnrollmentGroup extends Model
            $enrollmentGroup->saveAndCalculateAssitance();
         });
 
-        static::deleting(function($student){
-            $student->enrollments()->delete();
-            $student->assistances()->delete();
+        static::updating(function($enrollmentGroup){
+            dd($enrollmentGroup);
+            if (count($enrollmentGroup->assistances) == 0) {
+                $enrollmentGroup->saveAndCalculateAssitance();
+            }
         });
     }
 

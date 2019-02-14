@@ -6,8 +6,11 @@ use HappyFeet\Http\Controllers\Controller;
 use HappyFeet\RepositoryInterface\StudentRepositoryInterface;
 use HappyFeet\RepositoryInterface\SeasonRepositoryInterface;
 use HappyFeet\RepositoryInterface\FieldRepositoryInterface;
-use HappyFeet\Exception\StudentException;
 use HappyFeet\Http\Requests\StudentRequest;
+use HappyFeet\Exception\StudentException;
+use HappyFeet\Exceptions\GroupClassException;
+use HappyFeet\Exceptions\EnrollmentGroupException;
+use Exception;
 use DB;
 
 class StudentController extends Controller
@@ -81,6 +84,21 @@ class StudentController extends Controller
             $message['type'] = "error";
             $message['content'] = $e->getMessage();
             return back()->with($message);
+        } catch (GroupClassException $e) {
+            DB::rollback();
+            $message['type'] = "error";
+            $message['content'] = $e->getMessage();
+            return back()->with($message);
+        } catch (EnrollmentGroupException $e) {
+            DB::rollback();
+            $message['type'] = "error";
+            $message['content'] = $e->getMessage();
+            return back()->with($message);
+        } catch (Exception $e) {
+            DB::rollback();
+            $message['type'] = "error";
+            $message['content'] = $e->getMessage();
+            return back()->with($message);
         }
     }
 
@@ -138,8 +156,24 @@ class StudentController extends Controller
           
         } catch (StudentException $e) {
             DB::rollback();
-            $message['type'] = 'error';
+            $message['type'] = "error";
             $message['content'] = $e->getMessage();
+            return back()->with($message);
+        } catch (GroupClassException $e) {
+            DB::rollback();
+            $message['type'] = "error";
+            $message['content'] = $e->getMessage();
+            return back()->with($message);
+        } catch (EnrollmentGroupException $e) {
+            DB::rollback();
+            $message['type'] = "error";
+            $message['content'] = $e->getMessage();
+            return back()->with($message);
+        } catch (Exception $e) {
+            DB::rollback();
+            $message['type'] = "error";
+            $message['content'] = $e->getMessage();
+            return back()->with($message);
         }
     }
 

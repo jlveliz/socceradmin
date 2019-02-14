@@ -2,6 +2,7 @@
 namespace HappyFeet\Repository;
 
 use HappyFeet\RepositoryInterface\StudentRepositoryInterface;
+use HappyFeet\Events\DeleteEnrollmentGroup;
 use HappyFeet\Exceptions\StudentException;
 use HappyFeet\Models\EnrollmentGroup;
 use HappyFeet\Models\Student;
@@ -122,11 +123,9 @@ class StudentRepository implements StudentRepositoryInterface
 						$enrollment->groups()->save($enrGroup);
 					}
 					//update capacity
+					// dd($dataEnrollment['groups']);
 					$enrollment->insertCapacitiesGroups($dataEnrollment['groups']);
 
-					foreach ($enrollment->groups as $key => $group) {
-						$group->saveAndCalculateAssitance();
-					}
 					return  $this->find($student->getKey());
 				}
 				
@@ -207,6 +206,7 @@ class StudentRepository implements StudentRepositoryInterface
 				$dataEnrollment['student_id'] = $student->getKey();
 				$enrollment = $student->currentEnrollment();
 				//$dataEnrollment['state'] = Enrollment::ACTIVE;
+				
 				//if change a group
 				$updateGroupClass = false;
 				if(array_key_exists('is_changing_group',$data) && $data['is_changing_group'] == '1') {
@@ -215,18 +215,18 @@ class StudentRepository implements StudentRepositoryInterface
 					foreach($enrollment->groups as $oldGrObj) {
 						$oldGroups[] = $oldGrObj->group_id;
 					}
-					//remove all groups
-					$enrollment->groups()->delete();
+					
+					event(new DeleteEnrollmentGroup($newGroups, $oldGroups, $enrollment->id));
 					$updateGroupClass = true;
 				}
 				$enrollment->fill($dataEnrollment);
 
 				if($saveEnrollment =  $enrollment->save() ) {
 					if($updateGroupClass) {
-						foreach ($newGroups as $key => $newGr) {
-							$enrGroup = new EnrollmentGroup(['group_id' => $newGr]);
-							$enrollment->groups()->save($enrGroup);
-						}
+						// foreach ($newGroups as $key => $newGr) {
+						// 	$enrGroup = new EnrollmentGroup(['group_id' => $newGr]);
+						// 	$enrollment->groups()->save($enrGroup);
+						// }
 						$enrollment->updateCapacitiesGroups($oldGroups,$newGroups);
 					}
 					return  $this->find($student->getKey());
