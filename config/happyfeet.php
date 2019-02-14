@@ -52,8 +52,8 @@ return [
     */
 
     'class-types' => [
-        'Demostrativa',
-        'Pagada'
+        1 => 'Demostrativa',
+        2 => 'Pagada'
     ]
 
 ];

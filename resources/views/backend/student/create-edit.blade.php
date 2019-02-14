@@ -27,22 +27,23 @@
 							<input type="hidden" name="key" value="{{ $student->id }}">
 						@endif
 						
+						
 						<ul class="nav nav-tabs customtab" id="myTab" role="tablist">
 							<li class="nav-item">
-								<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Estudiante</a>
+								<a class="nav-link @if(!$errors->has('representant.num_identification') || !$errors->has('representant.name') || !$errors->has('representant.last_name') || !$errors->has('representant.address') || !$errors->has('representant.email')) active @endif" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="@if(!$errors->has('representant.num_identification') || !$errors->has('representant.name') || !$errors->has('representant.last_name') || !$errors->has('representant.address') || !$errors->has('representant.email')) active @endif">Estudiante</a>
 							</li>
 
 							<li class="nav-item">
-								<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Representante</a>
+								<a class="nav-link @if($errors->has('representant.num_identification') || $errors->has('representant.name') || $errors->has('representant.last_name') || $errors->has('representant.address') || $errors->has('representant.email')) active @endif" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="@if($errors->has('representant')) true @else false @endif">Representante</a>
 							</li>
 						</ul>
 						<div class="tab-content" id="myTabContent">
-							<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+							<div class="tab-pane fade show @if(!$errors->has('representant.num_identification') || !$errors->has('representant.name') || !$errors->has('representant.last_name') || !$errors->has('representant.address') || !$errors->has('representant.email')) active @endif" id="home" role="tabpanel" aria-labelledby="home-tab">
 								<div class="row p-2">
 									<div class="col-lg-4 col-6">
 										<div class="form-group {{ $errors->has('name') ? ' is-invalid' : '' }}">
 											<label for="name">Nombres <span class="text-danger">*</span></label>
-											<input type="text" name="name" id="name" class="form-control form-control-sm" value="@if(isset($student)){{ $student->person->name }}@else {{ old('name') }}@endif" autofocus>
+											<input type="text" name="name" id="name" class="form-control form-control-sm" value="@if(isset($student)){{ $student->person->name }}@else{{ old('name') }}@endif" autofocus>
 											@if ($errors->has('name'))
 												<div class="invalid-feedback animated fadeInDown">{{ $errors->first('name') }}</div>
 											@endif
@@ -51,7 +52,7 @@
 									<div class="col-lg-4 col-6">
 										<div class="form-group {{ $errors->has('last_name') ? ' is-invalid' : '' }}">
 											<label for="last_name">Apellidos <span class="text-danger">*</span></label>
-											<input type="text" name="last_name" id="last_name" class="form-control form-control-sm"  value="@if(isset($student)){{ $student->person->last_name }}@else {{ old('last_name') }}@endif">
+											<input type="text" name="last_name" id="last_name" class="form-control form-control-sm"  value="@if(isset($student)){{ $student->person->last_name }}@else{{ old('last_name') }}@endif">
 											@if ($errors->has('last_name'))
 												<div class="invalid-feedback animated fadeInDown">{{ $errors->first('last_name') }}</div>
 											@endif
@@ -69,7 +70,7 @@
 									<div class="col-lg-2 col-4">
 										<div class="form-group {{ $errors->has('age') ? ' is-invalid' : '' }}">
 											<label for="age">Edad <span class="text-danger">*</span></label>
-											<input type="text" name="age" id="age" class="form-control form-control-sm"  value="@if(isset($student)){{ $student->person->age }}@else {{ old('age') }}@endif">
+											<input type="number" name="age" id="age" class="form-control form-control-sm"  value="@if(isset($student)){{ $student->person->age }}@else{{ old('age') }}@endif" pattern="\d+" min="0" max="{{ config('happyfeet.max-age') }}">
 											@if ($errors->has('age'))
 												<div class="invalid-feedback animated fadeInDown">{{ $errors->first('age') }}</div>
 											@endif
@@ -111,7 +112,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+							<div class="tab-pane @if($errors->has('representant.num_identification') || $errors->has('representant.name') || $errors->has('representant.last_name') || $errors->has('representant.address') || $errors->has('representant.email')) active @endif" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 
 								<div class="row justify-content-center my-2">
 									<button type="button" data-toggle="modal" data-target="#search-modal" data-route="{{route('users.representants')}}" @if(isset($student)) data-edit="true" @endif data-size="modal-lg" data-title="Buscar Representante" class="btn btn-sm btn-info"><i class="fa fa-search"></i> Buscar Representante</button>
@@ -266,7 +267,7 @@
 						<select name="enrollment[class_type]" id="class-type" class="form-control form-control-sm">
 							<option value="">Seleccione</option>
 							@foreach (get_type_class() as $key => $group)
-								<option value="{{$key}}" @if (isset($student) && $key == $student->currentEnrollment()->class_type) selected @endif >{{$group}}</option>
+								<option value="{{$key}}" @if ((isset($student) && $key == $student->currentEnrollment()->class_type) || (old('enrollment.class_type') == $key)) selected @endif >{{$group}}</option>
 							@endforeach
 						</select>
 						@if ($errors->has('enrollment.class_type'))
@@ -277,14 +278,14 @@
 					<div class="col-12 form-group {{ $errors->has('enrollment.groups') ? ' is-invalid' : '' }}">
 						<label for="grupo-class">Grupos  <span class="text-danger">*</span></label>
 						@if(isset($student)) 
-							<select @if ( $student->currentEnrollment()->class_type > 0) multiple @endif name="enrollment[groups][]" id="grupo-class" class="form-control form-control-sm grupo-class-edit" @if(!isset($student)) disabled @endif>
+							<select @if ( $student->currentEnrollment()->class_type > 0) multiple @endif name="enrollment[groups][]" id="grupo-class" class="form-control form-control-sm grupo-class-edit" @if(!old('enrollment.field_id')) disabled @endif>
 								@foreach ($student->currentEnrollment()->fieldOfGroup()->groups as $group)
 								<option value="{{$group->id}}" @if($student->currentEnrollment()->existGroupOnEnrollment($group->id)) selected @endif>{{get_group_names()[$group->name]}} - {{$group->disponibility}} Cupos Disponibles - {{days_of_week()[$group->day]}} - ({{$group->schedule['start']}} -  {{$group->schedule['end']}})</option>
 								@endforeach 
 							</select>
 							<input type="hidden" name="is_changing_group" id="is-changing-group" value="0">
 						@else 
-							<select name="enrollment[groups][]" id="grupo-class" class="form-control form-control-sm" disabled>
+							<select name="enrollment[groups][]" id="grupo-class" class="form-control form-control-sm grupo-class-create" @if( !old('enrollment.class_type') ||  !old('enrollment.field_id'))disabled @endif @if(old('enrollment.class_type') == 2 ) multiple @endif>
 							</select>
 						@endif
 
