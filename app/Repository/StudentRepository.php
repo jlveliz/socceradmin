@@ -121,6 +121,8 @@ class StudentRepository implements StudentRepositoryInterface
 						$enrGroup = new EnrollmentGroup(['group_id' => $gr]);
 						$enrollment->groups()->save($enrGroup);
 					}
+					//update capacity
+					$enrollment->insertCapacitiesGroups($dataEnrollment['groups']);
 
 					foreach ($enrollment->groups as $key => $group) {
 						$group->saveAndCalculateAssitance();

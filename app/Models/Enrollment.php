@@ -98,6 +98,23 @@ class Enrollment extends Model
     //     return  unserialize( $this->attributes['groups'] );
     // }
 
+
+    public function insertCapacitiesGroups(array $newGroups)
+    {
+        if (is_array($newGroups)) {
+            //substract capacity to new Group
+            foreach ($newGroups as $key => $newGr) {
+                $grf = GroupClass::find($newGr);
+                if ($grf) {
+                    $grf->disponibility = $grf->disponibility - 1;
+                    $grf->update();
+                } else {
+                    throw new GroupClassException("No se pudo encontrar el grupo Solicitado",500);
+                }
+            }
+        }
+    }
+
     public function updateCapacitiesGroups(array $oldGroups,array $newGroups) {
         
        
@@ -134,19 +151,6 @@ class Enrollment extends Model
 
     public static function boot() {
         parent::boot();
-        static::creating(function($enrollment){
-            foreach ($enrollment->groups as $key => $group) {
-                $grf = GroupClass::find($group->group_id);
-                if ($grf) {
-                    $grf->disponibility = $grf->disponibility - 1;
-                    $grf->update();
-                } else {
-                    throw new GroupClassException("No se pudo encontrar el grupo Solicitado",500);
-                }
-            }
-        });
-
-
         static::deleting(function($student){
             $student->groups()->delete();
         });

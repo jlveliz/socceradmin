@@ -104,7 +104,7 @@
 
 
                                                 <div class="col-12 mb-2 text-center">
-                                                    <button class="btn btn-primary btn-sm" @if(!request()->has('field') && !request()->has('key_day') && !request()->has('group_id') && !request()->has('month')) disabled @endif><i class="fa fa-search"></i> Buscar</button>
+                                                    <button class="btn btn-primary btn-sm" @if(!request()->has('field') || !request()->has('key_day') || !request()->has('group_id')) disabled @endif><i class="fa fa-search"></i> Buscar</button>
                                                 </div>
                                                 
                                             </div>
@@ -161,6 +161,7 @@
                                                 </tr>
                                             @endif
                                         </tbody>
+                                        @if (count($assistances['assistances']) > 0)
                                         <tfoot>
                                             <tr>
                                                 <td colspan="{{ (7  + count($assistances['dates'])) }}" class="text-center">
@@ -168,6 +169,7 @@
                                                 </td>
                                             </tr>
                                         </tfoot>
+                                        @endif
                                     </table>
                                 @else
                                     <p class="text-center mt-2">Seleccione cada uno de los filtros para continuar</p>

@@ -168,7 +168,7 @@ class AssistanceRepository implements AssistanceRepositoryInterface
 					
 					AND en.season_id = 1 -- temporada
 					
-					AND en.class_type = 1 -- clase pagada
+					AND en.class_type = 2 -- clase pagada
 					
 					AND gc.field_id = $fieldId -- la cancha
 
@@ -179,12 +179,13 @@ class AssistanceRepository implements AssistanceRepositoryInterface
 					AND st.id > 0 
 					AND re.id > 0 
 					AND eg.group_id =$grId -- group_class que pertenece
-
+					and en.deleted_at is null
+					and st.deleted_at is null
 					order by student_name;
 				";
 
 		
-				// dd($query);
+
 		$assistances = DB::select(DB::raw($query));
 		return collect(['dates' =>$datesAssistence,'assistances' =>  $assistances]);
 	}

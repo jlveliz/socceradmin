@@ -278,7 +278,7 @@
 					<div class="col-12 form-group {{ $errors->has('enrollment.groups') ? ' is-invalid' : '' }}">
 						<label for="grupo-class">Grupos  <span class="text-danger">*</span></label>
 						@if(isset($student)) 
-							<select @if ( $student->currentEnrollment()->class_type > 0) multiple @endif name="enrollment[groups][]" id="grupo-class" class="form-control form-control-sm grupo-class-edit" @if(!old('enrollment.field_id')) disabled @endif>
+							<select @if ( $student->currentEnrollment()->class_type > 0) multiple @endif name="enrollment[groups][]" id="grupo-class" class="form-control form-control-sm grupo-class-edit">
 								@foreach ($student->currentEnrollment()->fieldOfGroup()->groups as $group)
 								<option value="{{$group->id}}" @if($student->currentEnrollment()->existGroupOnEnrollment($group->id)) selected @endif>{{get_group_names()[$group->name]}} - {{$group->disponibility}} Cupos Disponibles - {{days_of_week()[$group->day]}} - ({{$group->schedule['start']}} -  {{$group->schedule['end']}})</option>
 								@endforeach 
