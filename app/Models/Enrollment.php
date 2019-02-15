@@ -151,8 +151,8 @@ class Enrollment extends Model
 
     public static function boot() {
         parent::boot();
-        static::deleting(function($student){
-            $student->groups()->delete();
+        static::deleting(function($enrollment){
+            $enrollment->groups()->delete();
         });
         
     }

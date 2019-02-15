@@ -245,6 +245,12 @@ class StudentRepository implements StudentRepositoryInterface
 	public function remove($id)
 	{
 		if ($student = $this->find($id)) {
+			foreach ($student->enrollments as $key => $enrollment) {
+				foreach ($enrollment->groups as $key => $group) {
+					$group->assistances()->delete();
+				}
+				$enrollment->delete();
+			}
 			$student->delete();
 			return true;
 		}
