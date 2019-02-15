@@ -44,7 +44,7 @@
 	                			@foreach ($students as $student)
 	                			<tr>
                                     <td>
-                                        <div class="badge @if($student->currentEnrollment()->class_type == 1)  text-success @else text-warning @endif" >{{ $student->currentEnrollment()->class_type == 1 ? 'Pagada' : 'Demostrativa' }}</div>
+                                        <div class="badge @if($student->currentEnrollment()->class_type == 2)  text-success @else text-warning @endif" >{{ $student->currentEnrollment()->class_type == 2 ? 'Pagada' : 'Demostrativa' }}</div>
                                     </td>
                                     <td><a href="{{ route('students.edit',['id' => $student->id]) }}" class="text-primary">{{$student->person->name .' '. $student->person->last_name}}</td>
                                     <td>{{ $student->representant ? $student->representant->name .' '.  $student->representant->last_name : '-'}}</td>
