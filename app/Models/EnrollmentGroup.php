@@ -79,13 +79,6 @@ class EnrollmentGroup extends Model
         static::created(function($enrollmentGroup){
            $enrollmentGroup->saveAndCalculateAssitance();
         });
-
-        static::updating(function($enrollmentGroup){
-            dd($enrollmentGroup);
-            if (count($enrollmentGroup->assistances) == 0) {
-                $enrollmentGroup->saveAndCalculateAssitance();
-            }
-        });
     }
 
 

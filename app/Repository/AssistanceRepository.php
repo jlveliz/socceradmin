@@ -30,46 +30,46 @@ class AssistanceRepository implements AssistanceRepositoryInterface
 
 			} 
 		} else {
-			$fields = Assistance::all();
+			$assistances = Assistance::all();
 		}
 
-		if (!$fields) {
+		if (!$assistances) {
 			throw new AssistanceException('No se han encontrado el listado de asistencias',404);
 		}
-		return $fields;
+		return $assistances;
 	}
 
 
 
-	public function find($field)
+	public function find($assistance)
 	{
-		if (is_array($field)) {
-			if (array_key_exists('name', $field)) { 
-				$field = Assistance::where('name',$field['name'])->first();	
+		if (is_array($assistance)) {
+			if (array_key_exists('name', $assistance)) { 
+				$assistance = Assistance::where('name',$assistance['name'])->first();	
 			} else {
 
 				throw new AssistanceException('No se puede buscar la asistencia',404);	
 			}
 
-		} elseif (is_string($field) || is_int($field)) {
-			$field = Assistance::where('id',$field)->first();
+		} elseif (is_string($assistance) || is_int($assistance)) {
+			$assistance = Assistance::where('id',$assistance)->first();
 		} else {
 			throw new AssistanceException('Se ha producido un error al buscar la asistencia',500);	
 		}
 
-		if (!$field) throw new AssistanceException('No se puede buscar la asistencia',404);	
+		if (!$assistance) throw new AssistanceException('No se puede buscar la asistencia',404);	
 		
-		return $field;
+		return $assistance;
 
 	}
 
 	//TODO
 	public function save($data)
 	{
-		$field = new Assistance();
-		$field->fill($data);
-		if ($field->save()) {
-			$key = $field->getKey();
+		$assistance = new Assistance();
+		$assistance->fill($data);
+		if ($assistance->save()) {
+			$key = $assistance->getKey();
 			return  $this->find($key);
 		} else {
 			throw new AssistanceException('Ha ocurrido un error al guardar la asistencia '.$data['name'],500);
@@ -78,14 +78,15 @@ class AssistanceRepository implements AssistanceRepositoryInterface
 
 	public function edit($id,$data)
 	{
-		$field = Assistance::find($id);
-		if ($field) {
-			$field->fill($data);
-			if($field->update()){
+		$assistance = Assistance::find($id);
+		if ($assistance) {
+			$assistance->fill($data);
+			if($assistance->update()){
+				$key = $assistance->getKey();
 				return $this->find($key);
 			}
 		} else {
-			throw new AssistanceException('Ha ocurrido un error al actualizar la asistencia '.$data['name'],500);
+			throw new AssistanceException('Ha ocurrido un error al actualizar la asistencia',500);
 		}
 
 
@@ -93,8 +94,8 @@ class AssistanceRepository implements AssistanceRepositoryInterface
 
 	public function remove($id)
 	{
-		if ($field = $this->find($id)) {
-			$field->delete();
+		if ($assistance = $this->find($id)) {
+			$assistance->delete();
 			return true;
 		}
 		throw new AssistanceException('Ha ocurrido un error al eliminar la asistencia ',500);
@@ -135,7 +136,7 @@ class AssistanceRepository implements AssistanceRepositoryInterface
 		$query =" SELECT DATE_FORMAT(en.created_at,'%Y-%m-%d') date_inscription,
 					CONCAT( pe.`name`, ' ', pe.last_name ) student_name,
 					concat( pe.age, ' Años' ) age,
-					concat( re.`name`, ' ', re.last_name ) representant,-- field.`name` field_name
+					concat( re.`name`, ' ', re.last_name ) representant,-- assistance.`name` assistance_name
 					gc.`day`,
 					en.is_pay_inscription,
 					en.is_pay_first_month,
@@ -188,5 +189,29 @@ class AssistanceRepository implements AssistanceRepositoryInterface
 
 		$assistances = DB::select(DB::raw($query));
 		return collect(['dates' =>$datesAssistence,'assistances' =>  $assistances]);
+	}
+
+	public function saveMany($assistances)
+	{
+		$allSuccess = false;
+		
+		foreach($assistances as $key => $assis) {
+			$dataUpdate = [];
+			if (array_key_exists('value',$assis)  && $assis['value'] == 'on') {	
+				$dataUpdate['state'] = 1;
+			} else {
+				$dataUpdate['state'] = 0; 
+			}
+			
+			if($update = $this->edit($assis['assistance_id'],$dataUpdate)) {
+
+				$allSuccess =  true;
+			}
+		}
+		if(!$allSuccess) {
+			throw new AssistanceException('Ha ocurrido un error al actualizar la asistencia ',500);
+		}
+		
+		return $allSuccess;
 	}
 }

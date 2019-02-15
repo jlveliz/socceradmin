@@ -10,6 +10,8 @@ use HappyFeet\RepositoryInterface\GroupClassRepositoryInterface;
 use HappyFeet\RepositoryInterface\SeasonRepositoryInterface;
 use HappyFeet\Http\Requests\AssistanceRequest;
 use HappyFeet\Exceptions\AssistanceException;
+use DB;
+use Exception;
 
 class AssistanceController extends Controller
 {
@@ -96,16 +98,21 @@ class AssistanceController extends Controller
             'type' => 'primary',
             'content' =>'',
         ];
-
+        
+        //begin transaction
+        DB::beginTransaction();
         try {
-            $message['content'] = "Se ha creado la cancha Satisfactoriamente";
-            $assistance = $this->assistance->save($request->all());
-            if ($request->get('redirect-index') == 1) {
-                return redirect()->route($this->routeRedirectIndex)->with($message);
-            } else {
-                return redirect()->route('assistances.edit',['id'=>$assistance->id])->with($message);
-            }
+            $message['content'] = "Se han guardado las asistencias Satisfactoriamente";
+            $assistance = $this->assistance->saveMany($request->get('assistances'));
+            DB::commit();
+            return back()->with($message);
         } catch (AssistanceException $e) {
+            DB::rollback();
+            $message['type'] = "error";
+            $message['content'] = $e->getMessage();
+            return back()->with($message);
+        } catch (Exception $e) {
+            DB::rollback();
             $message['type'] = "error";
             $message['content'] = $e->getMessage();
             return back()->with($message);
@@ -133,7 +140,6 @@ class AssistanceController extends Controller
     {
         
         $assistance = $this->assistance->find($id);
-        // dd($assistance->groups[0]->schedule);
         $aRanges = $this->ageRange->enum();
         $daysOfWeek = days_of_week();
         return view('backend.assistance.create-edit',compact('assistance','daysOfWeek','aRanges'));

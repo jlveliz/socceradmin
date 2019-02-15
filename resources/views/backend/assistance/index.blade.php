@@ -133,42 +133,45 @@
                                                 @endfor
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            @if (count($assistances['assistances']) > 0)
-                                                @foreach ($assistances['assistances']  as $key =>  $assistance)
+                                        <form action="{{ route('assistances.store') }}" method="POST">
+                                            {{ csrf_field() }}
+                                            <tbody>
+                                                @if (count($assistances['assistances']) > 0)
+                                                    @foreach ($assistances['assistances']  as $key =>  $assistance)
+                                                        <tr>
+                                                            <td>{{ $assistance->date_inscription }}</td>
+                                                            <td>{{ $assistance->student_name }}</td>
+                                                            <td>{{ $assistance->age }}</td>
+                                                            <td>{{ $assistance->representant }}</td>
+                                                            <td>{{ $assistance->is_pay_inscription == '1' ? 'Si' : 'No' }}</td>
+                                                            <td>{{ $assistance->is_pay_first_month == '1' ? 'Si' : 'No' }}</td>
+                                                            <td>{{ $assistance->is_delivered_uniform == '1' ? 'Si' : 'No' }}</td>
+                                                            @for ($i = 0; $i < count($assistances['dates']); $i++)
+                                                                @php $idAssistance = 'id_'.$i; @endphp
+                                                                <td class="text-center">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input type="hidden" value="{{$assistance->$idAssistance}}" name="assistances[{{$i}}][assistance_id]"/>
+                                                                        <input class="form-check-input"  name="assistances[{{$i}}][value]"  type="checkbox" id="{{$assistance->student_name}}_{{$i}}"  @if($assistance->$i == 1) checked @endif @if($assistances['dates'][$i]->format('Y-m-d') < date('Y-m-d'))) disabled @endif/>
+                                                                    </div>
+                                                                </td>
+                                                            @endfor;
+                                                        </tr>
+                                                    @endforeach
+                                                @else
                                                     <tr>
-                                                        <td>{{ $assistance->date_inscription }}</td>
-                                                        <td>{{ $assistance->student_name }}</td>
-                                                        <td>{{ $assistance->age }}</td>
-                                                        <td>{{ $assistance->representant }}</td>
-                                                        <td>{{ $assistance->is_pay_inscription == '1' ? 'Si' : 'No' }}</td>
-                                                        <td>{{ $assistance->is_pay_first_month == '1' ? 'Si' : 'No' }}</td>
-                                                        <td>{{ $assistance->is_delivered_uniform == '1' ? 'Si' : 'No' }}</td>
-                                                        @for ($i = 0; $i < count($assistances['dates']); $i++)
-                                                        @php $idAssistance = 'id_'.$i; @endphp
-                                                        <td class="text-center">
-                                                            <div class="form-check form-check-inline">
-                                                                <input type="hidden" value="{{$assistance->$idAssistance}}" name="id_assistance">
-                                                                <input class="form-check-input" type="checkbox" id="{{$assistance->student_name}}_{{$i}}" value="{{$assistance->$i == null || $assistance->$i == 0 ? 0 : $assistance->$i}}" @if($assistance->$i == 1) checked @endif @if($assistances['dates'][$i]->format('Y-m-d') < date('Y-m-d'))) disabled @endif>
-                                                            </div>
-                                                        </td>
-                                                        @endfor
+                                                        <td colspan="{{ (7  + count($assistances['dates'])) }}"><p class="text-center align-middle">No existen datos</p></td>
                                                     </tr>
-                                                @endforeach
-                                            @else
+                                                @endif
+                                            </tbody>
+                                            @if (count($assistances['assistances']) > 0)
+                                            <tfoot>
                                                 <tr>
-                                                    <td colspan="{{ (7  + count($assistances['dates'])) }}"><p class="text-center align-middle">No existen datos</p></td>
+                                                    <td colspan="{{ (7  + count($assistances['dates']) ) }}" class="text-center">
+                                                        <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-save"></i> Procesar</button>
+                                                    </td>
                                                 </tr>
-                                            @endif
-                                        </tbody>
-                                        @if (count($assistances['assistances']) > 0)
-                                        <tfoot>
-                                            <tr>
-                                                <td colspan="{{ (7  + count($assistances['dates'])) }}" class="text-center">
-                                                    <button class="btn btn-primary btn-sm"><i class="fa fa-save"></i> Procesar</button>
-                                                </td>
-                                            </tr>
-                                        </tfoot>
+                                            </tfoot>
+                                        </form>
                                         @endif
                                     </table>
                                 @else

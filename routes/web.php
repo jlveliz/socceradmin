@@ -67,7 +67,7 @@
 	Route::resource('seasons','Backend\SeasonController',['except'=>['show']]);
 
 	//Assitance
-	Route::resource('assistances','Backend\AssistanceController',['except'=>['show','create','edit']]);
+	Route::resource('assistances','Backend\AssistanceController',['except'=>['show','create','edit','update']]);
 
 // });
 
