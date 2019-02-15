@@ -25,9 +25,7 @@ class Season extends Model
     protected $fillable = [
     	'name',
     	'start_date',
-        'end_date',
-        'inscription_price',
-        'month_price',
+        'end_date',        
         'state'
     ];
 

@@ -24,7 +24,9 @@ class Field extends Model
     	'address',
     	'type',
         'created_user_id',
-        'available_days'
+        'available_days',
+        'inscription_price',
+        'month_price',
     ];
 
 

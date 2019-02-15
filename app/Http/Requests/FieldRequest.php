@@ -37,7 +37,9 @@ class FieldRequest extends FormRequest
             'name' => 'required|unique:field,name',
             'address' => 'required',
             'type' => 'required',
-            'available_days' => 'required'
+            'available_days' => 'required',
+            'inscription_price' => 'required',
+            'month_price' => 'required'
         ];
 
         
@@ -86,7 +88,9 @@ class FieldRequest extends FormRequest
             'address.required' => 'Por favor, ingrese una dirección de cancha',
             'type.required' => 'Ingrese un tipo de cancha válido',
             'available_days.required' => 'Por favor, Ingrese algún horario',
-            'groups' => 'Por favor, ingrese al menos un grupo'
+            'groups.required' => 'Por favor, ingrese al menos un grupo',
+            'inscription_price.required' => 'Por favor, ingrese  un precio',
+            'month_price.required' => 'Por favor, ingrese un precio',
         ];
 
         //schedule field

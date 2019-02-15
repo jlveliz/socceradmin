@@ -60,24 +60,7 @@
 	                                        @endif
 			                			</div>
 			                		</div>
-			                		<div class="col-lg-2 col-4">
-				                		<div class="form-group  {{ $errors->has('inscription_price') ? ' is-invalid' : '' }}">
-				                			<label for="inscription_price">P. de Inscripción <span class="text-danger">*</span></label>
-				                			<input type="number" name="inscription_price" id="inscription_price" class="form-control" value="@if( isset($season) ){{$season->inscription_price}}@else{{ old('inscription_price') }}@endif">
-				                			@if ($errors->has('inscription_price'))
-				                				<div  class="invalid-feedback animated fadeInDown">{{ $errors->first('inscription_price') }}</div>
-				                			@endif
-				                		</div>
-			                		</div>
-			                		<div class="col-lg-2 col-4">
-				                		<div class="form-group  {{ $errors->has('month_price') ? ' is-invalid' : '' }}">
-				                			<label for="month_price">P. Mensual <span class="text-danger">*</span></label>
-				                			<input type="number" name="month_price" id="month_price" class="form-control" value="@if(isset($season) ){{$season->month_price}}@else{{ old('month_price') }}@endif">
-				                			@if ($errors->has('month_price'))
-				                				<div  class="invalid-feedback animated fadeInDown">{{ $errors->first('month_price') }}</div>
-				                			@endif
-				                		</div>
-			                		</div>
+			                		
 			                		<div class="col-lg-2 col-4">
 				                		<div class="form-group  {{ $errors->has('state') ? ' is-invalid' : '' }}">
 				                			<label for="state">Estado</label>
