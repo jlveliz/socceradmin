@@ -35,7 +35,7 @@
 			                		<div class="col-lg-4 col-7">
 				                		<div class="form-group {{ $errors->has('name') ? ' is-invalid' : '' }}">
 				                			<label for="name">Nombre <span class="text-danger">*</span></label>
-				                			<input type="text" name="name" id="name" class="form-control"  autofocus="" value="@if(isset($module)){{ $module->name }}@else {{ old('name') }}@endif">
+				                			<input type="text" name="name" id="name" class="form-control"  autofocus="" value="@if(isset($module)){{ $module->name }}@else{{ old('name') }}@endif">
 				                			@if ($errors->has('name'))
 				                				<div class="invalid-feedback animated fadeInDown">{{ $errors->first('name') }}</div>
 				                			@endif
@@ -44,7 +44,7 @@
 			                		<div class="col-lg-2 col-5">
 				                		<div class="form-group  {{ $errors->has('order') ? ' is-invalid' : '' }}">
 				                			<label for="order">Orden <span class="text-danger">*</span></label>
-				                			<input type="text" name="order" id="order" class="form-control"  autofocus="" value="@if(isset($module)){{ $module->order }}@else {{ old('order') }}@endif" >
+				                			<input type="text" name="order" id="order" class="form-control"  autofocus="" value="@if(isset($module)){{ $module->order }}@else{{ old('order') }}@endif" >
 				                			@if ($errors->has('order'))
 				                				<div class="invalid-feedback animated fadeInDown">{{ $errors->first('order') }}</div>
 				                			@endif

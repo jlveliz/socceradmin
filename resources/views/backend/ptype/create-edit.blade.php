@@ -34,7 +34,7 @@
 			                		<div class="col-lg-4 col-6">
 				                		<div class="form-group {{ $errors->has('name') ? ' is-invalid' : '' }}">
 				                			<label for="name">Nombre <span class="text-danger">*</span></label>
-				                			<input type="text" name="name" id="name" class="form-control"  autofocus="" value="@if(isset($ptype)){{ $ptype->name }}@else {{ old('name') }}@endif">
+				                			<input type="text" name="name" id="name" class="form-control"  autofocus="" value="@if(isset($ptype)){{ $ptype->name }}@else{{ old('name') }}@endif">
 				                			@if ($errors->has('name'))
 				                				<div class="invalid-feedback animated fadeInDown">{{ $errors->first('name') }}</div>
 				                			@endif

@@ -27,7 +27,17 @@
                             </div>
                         @endif
 
-                        {{$permissions->links()}}
+                        <div class="row my-1 justify-content-end">
+                            <div class="col-lg-3 col-12">
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text"><i class="fa fa-search"></i></div>
+                                    </div>
+                                    <input type="text" name="" id="" class="form-control form-control-sm" placeholder="Buscar">
+                                </div>
+                            </div>
+                        </div>
+
                     	<table class="table table-hover">
                     		<thead>
                     			<tr>

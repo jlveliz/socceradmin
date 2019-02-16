@@ -65,7 +65,7 @@
 					                		<div class="col-lg-3 col-6">
 						                		<div class="form-group @if ($errors->has('name')) is-invalid @endif">
 						                			<label for="name">Nombre <span class="text-danger">*</span></label>
-						                			<input type="text" name="name" id="name" class="form-control"  autofocus="" value="@if(isset($permission)){{ $permission->name }}@else {{ old('name') }}@endif">
+						                			<input type="text" name="name" id="name" class="form-control"  autofocus="" value="@if(isset($permission)){{ $permission->name }}@else{{ old('name') }}@endif">
 						                			@if ($errors->has('name'))
 						                				<div id="val-username-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('name') }}</div>
 						                			@endif
@@ -124,7 +124,7 @@
 					                		<div class="col-lg-1 col-6">
 					                			<div class="form-group @if($errors->has('order')) is-invalid @endif">
 						                			<label for="order">Orden</label>
-						                			<input type="text" name="order" id="order" class="form-control" value="@if(isset($permission)) {{ $permission->order }} @else {{ old('order') }} @endif">
+						                			<input type="text" name="order" id="order" class="form-control" value="@if(isset($permission)){{ $permission->order }}@else{{ old('order') }} @endif">
 						                			@if ($errors->has('order'))
 							                			<div id="val-order-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('order') }}</div>
 							                		@endif
@@ -134,7 +134,7 @@
 					                		<div class="col-lg-2 col-6">
 					                			<div class="form-group @if($errors->has('fav_icon')) is-invalid @endif">
 						                			<label for="fav_icon">ícono</label>
-						                			<input type="text" name="fav_icon" id="fav_icon" class="form-control" value="@if(isset($permission)) {{ $permission->fav_icon }} @else {{ old('fav_icon') }} @endif">
+						                			<input type="text" name="fav_icon" id="fav_icon" class="form-control" value="@if(isset($permission)){{ $permission->fav_icon }}@else{{ old('fav_icon') }} @endif">
 						                			@if ($errors->has('fav_icon'))
 							                			<div id="val-order-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('fav_icon') }}</div>
 							                		@endif

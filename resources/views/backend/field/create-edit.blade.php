@@ -68,7 +68,7 @@
 												<div class="col-lg-3 col-6">
 													<div class="form-group @if ($errors->has('name')) is-invalid @endif">
 														<label for="name">Nombre <span class="text-danger">*</span></label>
-														<input type="text" name="name" id="name" class="form-control"  autofocus="" value="@if(isset($field)){{ $field->name }}@else {{ old('name') }}@endif">
+														<input type="text" name="name" id="name" class="form-control"  autofocus="" value="@if(isset($field)){{ $field->name }}@else{{ old('name') }}@endif">
 														@if ($errors->has('name'))
 															<div id="val-username-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('name') }}</div>
 														@endif
@@ -78,7 +78,7 @@
 												<div class="col-lg-7 col-6">
 													<div class="form-group @if ($errors->has('address')) is-invalid @endif">
 														<label for="address">Dirección <span class="text-danger">*</span></label>
-														<input type="text" name="address" id="address" class="form-control"  autofocus="" value="@if(isset($field)){{ $field->address }}@else {{ old('address') }}@endif">
+														<input type="text" name="address" id="address" class="form-control"  autofocus="" value="@if(isset($field)){{ $field->address }}@else{{ old('address') }}@endif">
 														@if ($errors->has('address'))
 															<div id="val-username-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('address') }}</div>
 														@endif
@@ -89,8 +89,8 @@
 													<div class="form-group @if ($errors->has('type')) is-invalid @endif">
 														<label for="type">Tipo <span class="text-danger">*</span></label>
 														<select name="type" id="type" class="form-control custom-select">
-															<option value="synthetic" @if( (isset($field) && $field->state == 'synthetic') || ( old('type') == 'synthetic' ) ) selected @endif>Sintética</option>
-															<option value="escuela" @if( (isset($field) && $field->state == 'escuela') || ( old('type') == 'escuela' ) ) selected @endif>Escuela</option>
+															<option value="synthetic" @if( (isset($field) && $field->type == 'synthetic') || ( old('type') == 'synthetic' ) ) selected @endif>Sintética</option>
+															<option value="escuela" @if( (isset($field) && $field->type == 'escuela') || ( old('type') == 'escuela' ) ) selected @endif>Escuela</option>
 														</select>
 														@if ($errors->has('type'))
 															<div id="val-state-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('type') }}</div>
