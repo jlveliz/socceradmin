@@ -5,7 +5,7 @@ namespace HappyFeet\Models;
 use Illuminate\Database\Eloquent\Model;
 use Auth;
 
-class FIeldType extends Model
+class FieldType extends Model
 {
     
     protected $table = 'field_type';
