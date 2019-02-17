@@ -51,6 +51,9 @@
 	//Fields
 	Route::get('fields/{fieldId}/schedule','Backend\FieldController@getSchedule');
 	Route::resource('fields','Backend\FieldController',['except'=>['show']]);
+	
+	//ftypes
+	Route::resource('ftypes','Backend\FieldTypeController',['except'=>['show']]);
 
 	//Student
 	Route::resource('students','Backend\StudentController',['except'=>['show']]);

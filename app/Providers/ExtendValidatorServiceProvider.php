@@ -24,6 +24,12 @@ class ExtendValidatorServiceProvider extends ServiceProvider
 
             return false;
         });
+
+
+        Validator::extend('is_used', function ($attribute, $value, $parameters, $validator) {
+            dd($attribute,$value,$parameters);
+            return $value == 'foo';
+        });
     }
 
     /**

@@ -15,10 +15,16 @@
                 <li class="nav-item">
                     <a class="nav-link active" id="field-tab" data-toggle="tab" href="#fields" role="tab" aria-controls="field" aria-selected="true">Canchas</a>
                 </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" id="range-age-tab"  href="{{route('ftypes.index')}}">Tipos de Cancha</a>
+                </li>
+
                 <li class="nav-item">
                     <a class="nav-link" id="range-age-tab"  href="{{route('ageranges.index')}}">Rango de Edades</a>
                 </li>
             </ul>
+
             <div class="card p-30">
                 <div class="tab-content" id="mytabcontent">
                     <div class="tab-pane fade show active" id="fields" role="tabpanel" aria-labelledby="field-tab">
@@ -54,7 +60,7 @@
                                             <tr>
                                                 <td><a href="{{ route('fields.edit',['id' => $field->id]) }}" class="text-primary">{{ $field->name }}</a></td>
                                                 <td>{{ $field->address}}</td>
-                                                <td>{{ $field->type == 'synthetic' ?  'Sintética' : 'Natural' }}</td>
+                                                <td>{{ $field->type ? $field->type->name : '-' }}</td>
                                                 <td>
                                                     <a class="btn btn-warning btn-flat btn-sm" href="{{ route('fields.edit',['id' => $field->id]) }}"><i class="fa fa-edit"></i> Editar</a>
                                                     <button class="btn btn-danger btn-flat btn-sm delete-btn" data-toggle="modal" data-target="#delete-modal" data-object="{{$field}}" data-message="Está seguro de eliminar la cancha " data-route="{{ route('fields.destroy',$field->id) }}"><i class="fa fa-trash"></i> Eliminar</button>

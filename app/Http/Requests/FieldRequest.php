@@ -36,7 +36,7 @@ class FieldRequest extends FormRequest
         $rules = [
             'name' => 'required|unique:field,name',
             'address' => 'required',
-            'type' => 'required',
+            'type_field_id' => 'required|exists:field_type,id',
             'available_days' => 'required',
             'inscription_price' => 'required',
             'month_price' => 'required'
@@ -86,7 +86,8 @@ class FieldRequest extends FormRequest
             'name.required' => 'Ingrese un nombre válido',
             'name.unique' => 'Ya existe una cancha con este nombre',
             'address.required' => 'Por favor, ingrese una dirección de cancha',
-            'type.required' => 'Ingrese un tipo de cancha válido',
+            'type_field_id.required' => 'Ingrese un tipo de cancha válido',
+            'type_field_id.exists' => 'Por favor ingrese un tipo válido',
             'available_days.required' => 'Por favor, Ingrese algún horario',
             'groups.required' => 'Por favor, ingrese al menos un grupo',
             'inscription_price.required' => 'Por favor, ingrese  un precio',

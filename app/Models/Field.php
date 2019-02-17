@@ -22,13 +22,18 @@ class Field extends Model
     protected $fillable = [
     	'name',
     	'address',
-    	'type',
+    	'type_field_id',
         'created_user_id',
         'available_days',
         'inscription_price',
         'month_price',
     ];
 
+
+    public function type()
+    {
+        return $this->belongsTo('HappyFeet\Models\FieldType','type_field_id');
+    }
 
     public function groups()
     {

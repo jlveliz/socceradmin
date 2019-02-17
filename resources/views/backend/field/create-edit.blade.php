@@ -11,6 +11,21 @@
     <!-- Start Page Content -->
     <div class="row">
         <div class="col-12">
+
+			<ul class="nav nav-tabs customtab mb-2">
+                <li class="nav-item">
+                    <a class="nav-link active" id="field-tab" data-toggle="tab" href="#fields" role="tab" aria-controls="field" aria-selected="true">Canchas</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" id="range-age-tab"  href="{{route('ftypes.index')}}">Tipos de Cancha</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" id="range-age-tab"  href="{{route('ageranges.index')}}">Rango de Edades</a>
+                </li>
+            </ul>
+
             <div class="card p-30">
 
             	<div class="row">
@@ -86,14 +101,16 @@
 												</div>
 												
 												<div class="col-lg-2 col-6">
-													<div class="form-group @if ($errors->has('type')) is-invalid @endif">
-														<label for="type">Tipo <span class="text-danger">*</span></label>
-														<select name="type" id="type" class="form-control custom-select">
-															<option value="synthetic" @if( (isset($field) && $field->type == 'synthetic') || ( old('type') == 'synthetic' ) ) selected @endif>Sintética</option>
-															<option value="escuela" @if( (isset($field) && $field->type == 'escuela') || ( old('type') == 'escuela' ) ) selected @endif>Escuela</option>
+													<div class="form-group @if ($errors->has('type_field_id')) is-invalid @endif">
+														<label for="type_field_id">Tipo <span class="text-danger">*</span></label>
+														<select name="type_field_id" id="type_field_id" class="form-control custom-select">
+															<option value="">Seleccione</option>
+															@foreach ($types as $type)
+																<option value="{{ $type->id }}" @if( (isset($field) && $type->id == $field->type_field_id) || (old('type_field_id') == $type->id) ) selected @endif>{{ $type->name }}</option>
+															@endforeach
 														</select>
-														@if ($errors->has('type'))
-															<div id="val-state-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('type') }}</div>
+														@if ($errors->has('type_field_id'))
+															<div id="val-state-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('type_field_id') }}</div>
 														@endif
 													</div>
 												</div>

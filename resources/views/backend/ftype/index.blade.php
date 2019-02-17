@@ -1,5 +1,5 @@
 @extends('layouts.backend')
-@section('title','Rangos de Edad')
+@section('title','Tipos de Cancha')
 @section('parent-page','Escritorio')
 @section('route-parent',route('home'))
 
@@ -9,20 +9,22 @@
     <!-- Start Page Content -->
     <div class="row">
         <div class="col-12">
+
             <ul class="nav nav-tabs customtab mb-2">
                 <li class="nav-item">
                     <a class="nav-link" id="field-tab" href="{{route('fields.index')}}">Canchas</a>
                 </li>
                 
                 <li class="nav-item">
-                    <a class="nav-link" id="range-age-tab"  href="{{route('ftypes.index')}}">Tipos de Cancha</a>
+                    <a class="nav-link active"  id="range-age-tab"  data-toggle="tab" href="#ageranges" role="tab" aria-controls="ageranges" aria-selected="true"> Tipos de Cancha</a>
                 </li>
 
 
                 <li class="nav-item">
-                    <a class="nav-link active" id="range-age-tab" data-toggle="tab" href="#ageranges" role="tab" aria-controls="ageranges" aria-selected="true">Rango de Edades</a>
+                    <a class="nav-link" id="range-age-tab" href="{{route('ageranges.index')}}">Rango de Edades</a>
                 </li>
             </ul>
+
             <div class="card p-30">
 
                 <div class="row">
@@ -30,7 +32,7 @@
                         <h3>Listado</h3>
                     </div>
                     <div class="col-6 text-right">
-                        <a href="{{ route('ageranges.create') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Crear</a>             
+                        <a href="{{ route('ftypes.create') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Crear</a>             
                     </div>
                 </div>
 
@@ -43,37 +45,34 @@
                         </div>
                     @endif
 
-                    {{ $ageRanges->links() }}
-                	<table class="table table-hover">
+                    <table class="table table-hover">
                 		<thead>
                 			<tr>
                                 <th>Nombre</th>
-                				<th>Edades</th>
                 				<th>Acción</th>
                 			</tr>
                 		</thead>
                 		<tbody>
-                			@if (count($ageRanges) > 0)
-	                			@foreach ($ageRanges as $range)
+                			@if (count($fieldTypes) > 0)
+	                			@foreach ($fieldTypes as $ftype)
 	                			<tr>
-                                    <td><a href="{{ route('ageranges.edit',['id' => $range->id]) }}" class="text-primary">{{ $range->name }}</a></td>
-	                				<td>{{ $range->min_age }} - {{$range->max_age}} Años</td>
+                                    <td><a href="{{ route('ftypes.edit',['id' => $ftype->id]) }}" class="text-primary">{{ $ftype->name }}</a></td>
 	                				<td>
-	                					<a class="btn btn-warning btn-flat btn-sm" href="{{ route('ageranges.edit',['id' => $range->id]) }}"><i class="fa fa-edit"></i> Editar</a>
-	                					<button class="btn btn-danger btn-flat btn-sm delete-btn text-light" data-toggle="modal" data-target="#delete-modal" data-object="{{$range}}" data-message="Está seguro de eliminar el Rango" data-route="{{ route('ageranges.destroy',$range->id) }}"><i class="fa fa-trash"></i> Eliminar</button>
+	                					<a class="btn btn-warning btn-flat btn-sm" href="{{ route('ftypes.edit',['id' => $ftype->id]) }}"><i class="fa fa-edit"></i> Editar</a>
+	                					<button class="btn btn-danger btn-flat btn-sm delete-btn text-light" data-toggle="modal" data-target="#delete-modal" data-object="{{$ftype}}" data-message="Está seguro de eliminar el Tipo de " data-route="{{ route('ftypes.destroy',$ftype->id) }}"><i class="fa fa-trash"></i> Eliminar</button>
 	                				</td>
 	                			</tr>
 	                			@endforeach
 	                		@else
 	                			<tr>
 	                				<td class="text-center" colspan="4">
-	                					<p class="text-primary">No existen Rangos de Edad a consultar</p>
+	                					<p class="text-primary">No existen Tipos de Cancha a consultar</p>
 	                				</td>
 	                			</tr>
                 			@endif
                 		</tbody>
                 	</table>
-                    {{ $ageRanges->links() }}
+                    {{ $fieldTypes->links() }}
                 </div>
             </div>
         </div>

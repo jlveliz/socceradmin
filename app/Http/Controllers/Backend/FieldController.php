@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use HappyFeet\Http\Controllers\Controller;
 use HappyFeet\RepositoryInterface\FieldRepositoryInterface;
 use HappyFeet\RepositoryInterface\AgeRangeRepositoryInterface;
+use HappyFeet\RepositoryInterface\FieldTypeRepositoryInterface;
 use HappyFeet\Http\Requests\FieldRequest;
 use HappyFeet\Exceptions\FieldException;
 
@@ -14,15 +15,17 @@ class FieldController extends Controller
     
     protected $field;
     protected $ageRange;
+    protected $ftype;
 
     protected $routeRedirectIndex = 'fields.index';
 
 
-    function __construct(FieldRepositoryInterface $field, AgeRangeRepositoryInterface $ageRange)
+    function __construct(FieldRepositoryInterface $field, AgeRangeRepositoryInterface $ageRange, FieldTypeRepositoryInterface $ftype)
     {
         $this->middleware('auth');
         $this->field = $field;
         $this->ageRange = $ageRange;
+        $this->ftype = $ftype;
     }
     /**
      * Display a listing of the resource.
@@ -43,7 +46,8 @@ class FieldController extends Controller
     public function create()
     {
         $daysOfWeek = days_of_week();
-        return view('backend.field.create-edit',compact('daysOfWeek'));
+        $types = $this->ftype->enum();
+        return view('backend.field.create-edit',compact('daysOfWeek','types'));
     }
 
     /**
@@ -97,8 +101,9 @@ class FieldController extends Controller
         $field = $this->field->find($id);
         // dd($field->groups[0]->schedule);
         $aRanges = $this->ageRange->enum();
+        $types = $this->ftype->enum();
         $daysOfWeek = days_of_week();
-        return view('backend.field.create-edit',compact('field','daysOfWeek','aRanges'));
+        return view('backend.field.create-edit',compact('field','daysOfWeek','aRanges','types'));
     }
 
     /**

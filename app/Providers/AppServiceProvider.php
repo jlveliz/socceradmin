@@ -15,6 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        //menu
         view()->composer('*',function($view) {
 
             $user = Auth::user();
@@ -34,6 +35,8 @@ class AppServiceProvider extends ServiceProvider
             }
             
         });
+
+        //set hour
 
         \Carbon\Carbon::setLocale(config('app.locale'));
     }
@@ -73,5 +76,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('HappyFeet\RepositoryInterface\SeasonRepositoryInterface','HappyFeet\Repository\SeasonRepository');
 
         $this->app->bind('HappyFeet\RepositoryInterface\AssistanceRepositoryInterface','HappyFeet\Repository\AssistanceRepository');
+
+        $this->app->bind('HappyFeet\RepositoryInterface\FieldTypeRepositoryInterface','HappyFeet\Repository\FieldTypeRepository');
     }
 }
