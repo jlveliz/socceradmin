@@ -15,7 +15,7 @@ class FieldTypeController extends Controller
 
     protected $fieldType;
 
-    protected $routeRedirectIndex = 'fieldtypes.index';
+    protected $routeRedirectIndex = 'ftypes.index';
 
 
     public function __construct(FieldTypeRepositoryInterface $fieldType)

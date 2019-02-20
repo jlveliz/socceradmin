@@ -4,6 +4,7 @@ namespace HappyFeet\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use HappyFeet\Repository\ModuleRepository;
+use Validator;
 use Auth;
 
 class AppServiceProvider extends ServiceProvider
@@ -39,6 +40,7 @@ class AppServiceProvider extends ServiceProvider
         //set hour
 
         \Carbon\Carbon::setLocale(config('app.locale'));
+
     }
 
     /**

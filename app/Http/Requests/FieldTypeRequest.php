@@ -23,19 +23,20 @@ class FieldTypeRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = [
-            'name' => 'required|unique:field_type,name',
-        ];
+        if ($this->method() == 'POST') {
+            $rules = [
+                'name' => 'required|unique:field_type,name',
+            ];
+        }
         
         if ($this->method() == 'PUT') {
             $rules['name'] = 'required|unique:field_type,name,'.$this->get('key');
         }
 
-        if ($this->method() == 'DELETE') {
-            
-            $rules['name'] = 'is_used';
-        }
 
+        if ($this->method() == 'DELETE') {
+            $rules['id'] = 'is_used:field,type_field_id';
+        }
         return $rules;
     }
 
@@ -44,7 +45,7 @@ class FieldTypeRequest extends FormRequest
         return [
             'name.required' => 'Por favor, Ingrese un nombre',
             'name.unique' => 'Ya existe un tipo de cancha con este nombre',
-
+            'id.is_used' => 'El tipo de cancha se encuentra usado'
         ];
     }
 }
