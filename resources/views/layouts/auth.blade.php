@@ -1,20 +1,30 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="en">
+
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="csrf-token" content="{{ csrf_token() }}">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title> @yield('title') | {{ config('app.name')}} </title>
-	<!-- app -->
-	<link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}">
-	<link href="{{asset('css/style.css')}}" rel="stylesheet" media="all">
-	{{-- <link href="{{asset('css/custom-frontend.css')}}" rel="stylesheet" media="all"> --}}
-	@yield('css')
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Gull - Laravel + Bootstrap 4 admin template</title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('assets/styles/css/themes/lite-purple.min.css')}}">
 </head>
-<body class="bg">
-	@yield('content')
-	<script src="{{ asset('js/vendors.js') }}" type="text/javascript"></script>
-	@yield('js')
+
+<body>
+    <div class="auth-layout-wrap" style="background-image: url({{asset('assets/images/bg_1.jpg')}})">
+        <div class="auth-content">
+            <div class="card o-hidden">
+                <div class="row justify-content-center">
+                    @yield('content')
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{asset('assets/js/common-bundle-script.js')}}"></script>
+
+    <script src="{{asset('assets/js/script.js')}}"></script>
+    @yield('js')
 </body>
+
 </html>
