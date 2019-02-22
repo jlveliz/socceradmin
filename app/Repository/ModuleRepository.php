@@ -132,30 +132,48 @@ class ModuleRepository implements ModuleRepositoryInterface
 					->groupBy('module.name')
 					->orderBy('module.order')
 					->orderBy('parent.order')
-					->get();
+					->toSql();
+
+			dd($query);
 		return $query;
 	}
 
 
 	public function loadAdminMenu()
 	{
-		$query = Module::select('module.*')->with(['permissions'=>function($query){
-			$query->selectRaw('distinct permission.* ')
-			->whereRaw('permission.type_id = (select id from permission_type where permission_type.code = "menu")')
-			->whereNull('permission.parent_id')
-			->with(['children'=>function($query){
-				$query->select('permission.*')
-				->whereRaw('permission.type_id = (select id from permission_type where permission_type.code = "menu")')
-				->orderBy('permission.order')
-				->get();
-			}])->orderBy('permission.order')->get();
-		}])
-		->whereRaw('module.state=1 ')
-		->leftJoin('permission as parent','parent.module_id','=','module.id')
-		->groupBy('module.name')
-		->orderBy('module.order')
-		->orderBy('parent.order')
-		->get();
+		// $query = Module::select('module.*')->with(['permissions'=>function($query){
+		// 	$query->selectRaw('distinct permission.* ')
+		// 	->whereRaw('permission.type_id = (select id from permission_type where permission_type.code = "menu")')
+		// 	->whereNull('permission.parent_id')
+		// 	->with(['children'=>function($query){
+		// 		$query->select('permission.*')
+		// 		->whereRaw('permission.type_id = (select id from permission_type where permission_type.code = "menu")')
+		// 		->orderBy('permission.order')
+		// 		->toSql();
+		// 	}])->orderBy('permission.order')->toSql();
+		// }])
+		// ->whereRaw('module.state=1 ')
+		// ->leftJoin('permission as parent','parent.module_id','=','module.id')
+		// ->groupBy('module.name')
+		// ->orderBy('module.order')
+		// ->orderBy('parent.order')
+		// ->toSql();
+		// dd($query);
+		// return $query;
+
+		$query = Permission::select('permission.*')->with('children')->join('module','module.id','=','permission.module_id')->whereRaw("permission.type_id = (
+						SELECT
+							permission_type.id
+						FROM
+							permission_type
+						WHERE
+						permission_type.`code` = 'menu') AND permission.parent_id IS NULL
+
+						ORDER BY
+							module.`order`,
+							permission.`order`"
+				)->get();
+		
 		return $query;
 	}
 }

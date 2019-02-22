@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}">
 
 <head>
     <meta charset="UTF-8">
@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <div class="auth-layout-wrap" style="background-image: url({{asset('assets/images/bg_1.jpg')}})">
+    <div class="auth-layout-wrap">
         <div class="auth-content">
             <div class="card o-hidden">
                 <div class="row justify-content-center">
