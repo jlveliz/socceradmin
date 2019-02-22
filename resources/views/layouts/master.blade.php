@@ -9,13 +9,12 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Gull - Laravel + Bootstrap 4 admin template</title>
     <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700,800,900" rel="stylesheet">
-    @yield('before-css')
+@yield('before-css')
     {{-- theme css --}}
-    <link id="gull-theme" rel="stylesheet" href="{{asset('assets/fonts/iconsmind/iconsmind.css')}}">
-    <link id="gull-theme" rel="stylesheet" href="{{asset('assets/styles/css/themes/lite-purple.min.css')}}">
-     <link rel="stylesheet" href="{{asset('assets/styles/vendor/perfect-scrollbar.css')}}">
-     {{-- page specific css --}}
-     @yield('page-css')
+<link id="gull-theme" rel="stylesheet" href="{{mix('assets/styles/css/themes/lite-purple.min.css')}}">
+ <link rel="stylesheet" href="{{asset('assets/styles/vendor/perfect-scrollbar.css')}}">
+ {{-- page specific css --}}
+ @yield('page-css')
 </head>
 
 <body class="text-left">
@@ -167,7 +166,7 @@
 
 
 {{-- common js --}}
-<script src="{{asset('assets/js/common-bundle-script.js')}}"></script>
+<script src="{{mix('assets/js/common-bundle-script.js')}}"></script>
     {{-- page specific javascript --}}
     @yield('page-js')
 
