@@ -31,7 +31,7 @@
             <ul class="childNav" data-parent="{{str_slug($menuItem[$key]->parent->name)}}">
                 @foreach ($menuItem as $item)
                     <li class="nav-item">                       
-                        <a class="{{ Route::currentRouteName()=='dashboard_version_1' ? 'open' : '' }}" title="{{$item->description}}" alt="{{$item->name}}" href="">
+                        <a class="{{ Route::currentRouteName()=='dashboard_version_1' ? 'open' : '' }}" title="{{$item->description}}" alt="{{$item->name}}" href="@if($item->resource){{route($item->resource) }}@else#@endif">
                             <i class="nav-icon i-Clock-3"></i>
                             <span class="item-name">{{$item->name}}</span>
                         </a>

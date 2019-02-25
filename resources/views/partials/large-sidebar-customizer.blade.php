@@ -15,8 +15,8 @@
                     <div id="collapseOne" class="collapse show" aria-labelledby="headingThree" data-parent="#accordionCustomizer">
                         <div class="card-body">
                             <div class="">
-                            {{-- <a title="Compact Sidebar" href="{{route('compact')}}" class="btn btn-primary"> Compact Sidebar </a> --}}
-  {{-- <a title="Horizontal Layout" href="{{route('horizontal')}}" class="btn btn-primary"> Horizontal Layout </a> --}}
+                            <a title="Compact Sidebar" href="{{route('compact')}}" class="btn btn-primary"> Compact Sidebar </a>
+  <a title="Horizontal Layout" href="{{route('horizontal')}}" class="btn btn-primary"> Horizontal Layout </a>
                             </div>
                         </div>
                     </div>

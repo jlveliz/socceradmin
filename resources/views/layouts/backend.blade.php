@@ -19,36 +19,35 @@
 </head>
 
 <body class="text-left">
-    @php
-        $layout = session('layout');
-        
+    @php 
+      $layout = session('layout');  
     @endphp
 
   <!-- ============ Compact Layout start ============= -->
     @if ($layout=="compact")
         {{-- compact layout --}}
         <div class="app-admin-wrap layout-sidebar-compact sidebar-dark-purple sidenav-open clearfix">
-            @include('layouts.sidebar-compact')
+            @include('partials.sidebar-compact')
             {{-- end of left sidebar --}}
             <!-- ============ Body content start ============= -->
             <div class="main-content-wrap d-flex flex-column">
-                @include('layouts.header-menu')
+                @include('partials.header-menu')
                 {{-- end of header menu --}}
                 <div class="main-content">
-                  @yield('main-content')
+                  @yield('content')
                 </div>
 
-                @include('layouts.footer')
+                @include('partials.footer')
             </div>
         <!-- ============ Body content End ============= -->
         </div>
         <!--=============== End app-admin-wrap ================-->
 
           <!-- ============ Search UI Start ============= -->
-        @include('layouts.search')
+        @include('partials.search')
           <!-- ============ Search UI End ============= -->
 
-        @include('layouts.compact-sidebar-customizer')
+        @include('partials.compact-sidebar-customizer')
        <!-- ============ Compact Layout End ============= -->
 
 
@@ -58,27 +57,27 @@
     @elseif($layout=="horizontal")
         {{-- normal layout --}}
         <div class="app-admin-wrap layout-horizontal-bar clearfix">
-            @include('layouts.header-menu')
+            @include('partials.header-menu')
             {{-- end of header menu --}}
 
             {{-- end of left sidebar --}}
-            @include('layouts.horizontal-bar')
+            @include('partials.horizontal-bar')
             <!-- ============ Body content start ============= -->
             <div class="main-content-wrap  d-flex flex-column">
               <div class="main-content">
-                  @yield('main-content')
+                  @yield('content')
               </div>
             
-              @include('layouts.footer')
+              @include('partials.footer')
             </div>
 
             <!-- ============ Body content End ============= -->
         </div>
         <!--=============== End app-admin-wrap ================-->
         <!-- ============ Search UI Start ============= -->
-        @include('layouts.search')
+        @include('partials.search')
         <!-- ============ Search UI End ============= -->
-        @include('layouts.horizontal-customizer')
+        @include('partials.horizontal-customizer')
 
         <!-- ============ Horizontal Layout End ============= -->
 
@@ -87,28 +86,28 @@
     @elseif($layout=="normal")
         {{-- normal layout --}}
         <div class="app-admin-wrap layout-sidebar-large clearfix">
-            @include('layouts.header-menu')
+            @include('partials.header-menu')
             {{-- end of header menu --}}
-            @include('layouts.sidebar')
+            @include('partials.sidebar')
             {{-- end of left sidebar --}}
 
             <!-- ============ Body content start ============= -->
             <div class="main-content-wrap sidenav-open d-flex flex-column">
               <div class="main-content">
-                  @yield('main-content')
+                  @yield('content')
               </div>
 
-              @include('layouts.footer')
+              @include('partials.footer')
             </div>
             <!-- ============ Body content End ============= -->
         </div>
         <!--=============== End app-admin-wrap ================-->
 
         <!-- ============ Search UI Start ============= -->
-        @include('layouts.search')
+        @include('partials.search')
         <!-- ============ Search UI End ============= -->
 
-        @include('layouts.large-sidebar-customizer')
+        @include('partials.large-sidebar-customizer')
 
 
         <!-- ============ Large Sidebar Layout End ============= -->
@@ -118,27 +117,27 @@
         
       {{-- normal layout --}}
           <div class="app-admin-wrap layout-sidebar-large clearfix">
-              @include('layouts.header-menu')
+              @include('partials.header-menu')
               {{-- end of header menu --}}
 
-              @include('layouts.sidebar')
+              @include('partials.sidebar')
               {{-- end of left sidebar --}}
               <!-- ============ Body content start ============= -->
               <div class="main-content-wrap sidenav-open d-flex flex-column">
                 <div class="main-content">
-                    @yield('main-content')
+                    @yield('content')
                 </div>
-                @include('layouts.footer')
+                @include('partials.footer')
               </div>
           <!-- ============ Body content End ============= -->
           </div>
           <!--=============== End app-admin-wrap ================-->
 
           <!-- ============ Search UI Start ============= -->
-          @include('layouts.search')
+          @include('partials.search')
           <!-- ============ Search UI End ============= -->
 
-          @include('layouts.large-sidebar-customizer')
+          @include('partials.large-sidebar-customizer')
 
           <!-- ============ Large Sidebar Layout End ============= -->
     @endif
