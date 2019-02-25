@@ -12,8 +12,19 @@
     @yield('before-css')
     {{-- theme css --}}
     <link id="gull-theme" rel="stylesheet" href="{{asset('assets/fonts/iconsmind/iconsmind.css')}}">
-    <link id="gull-theme" rel="stylesheet" href="{{asset('assets/styles/css/themes/lite-purple.min.css')}}">
-     <link rel="stylesheet" href="{{asset('assets/styles/vendor/perfect-scrollbar.css')}}">
+    
+    {{-- colors --}}
+    @php 
+      $color = session('color');  
+    @endphp  
+    
+    @if ($color=="blue")
+      <link id="gull-theme" rel="stylesheet" href="{{asset('assets/styles/css/themes/lite-blue.min.css')}}">
+    @elseif(!$color || $color=="purple")
+      <link id="gull-theme" rel="stylesheet" href="{{asset('assets/styles/css/themes/lite-purple.min.css')}}">
+    @endif
+    
+    <link rel="stylesheet" href="{{asset('assets/styles/vendor/perfect-scrollbar.css')}}">
      {{-- page specific css --}}
      @yield('page-css')
 </head>
@@ -44,7 +55,7 @@
         <!--=============== End app-admin-wrap ================-->
 
           <!-- ============ Search UI Start ============= -->
-        @include('partials.search')
+        {{-- @include('partials.search') --}}
           <!-- ============ Search UI End ============= -->
 
         @include('partials.compact-sidebar-customizer')
@@ -75,7 +86,7 @@
         </div>
         <!--=============== End app-admin-wrap ================-->
         <!-- ============ Search UI Start ============= -->
-        @include('partials.search')
+        {{-- @include('partials.search') --}}
         <!-- ============ Search UI End ============= -->
         @include('partials.horizontal-customizer')
 
@@ -104,7 +115,7 @@
         <!--=============== End app-admin-wrap ================-->
 
         <!-- ============ Search UI Start ============= -->
-        @include('partials.search')
+        {{-- @include('partials.search') --}}
         <!-- ============ Search UI End ============= -->
 
         @include('partials.large-sidebar-customizer')
@@ -134,7 +145,7 @@
           <!--=============== End app-admin-wrap ================-->
 
           <!-- ============ Search UI Start ============= -->
-          @include('partials.search')
+          {{-- @include('partials.search') --}}
           <!-- ============ Search UI End ============= -->
 
           @include('partials.large-sidebar-customizer')

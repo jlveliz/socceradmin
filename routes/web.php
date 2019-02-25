@@ -26,6 +26,43 @@
 	// Route::post('/login','Backend\Auth\LoginController@login')->name('backend-login');
 	// Route::get('/logout','Backend\Auth\LoginController@logout')->name('backend-logout');
 
+	/*
+		LAYOUTS
+	*/
+	Route::get('compact',function(){
+		session(['layout' => 'compact']);
+		return back();
+	})->name('compact');
+
+	Route::get('horizontal',function(){
+		session(['layout' => 'compact']);
+		return back();
+	})->name('horizontal');
+
+	Route::get('normal',function(){
+		session(['layout' => 'normal']);
+		return back();
+	})->name('normal');
+
+	Route::get('horizontal',function(){
+		session(['layout' => 'horizontal']);
+		return back();
+	})->name('horizontal');
+
+	Route::get('color-blue',function(){
+		session(['color' => 'blue']);
+		return back();
+	})->name('blue');
+	
+	Route::get('color-purple',function(){
+		session(['color' => 'purple']);
+		return back();
+	})->name('purple');
+
+
+
+	//LAYOUTS
+
 	Auth::routes();
 
 	Route::get('/','HomeController@index')->name('home');

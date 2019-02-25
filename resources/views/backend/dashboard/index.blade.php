@@ -10,6 +10,8 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
+            	
+                   {{session('color')}}  
                 <div class="card-body"> Hola {{ Auth::user()->email }}. </div>
             </div>
         </div>
