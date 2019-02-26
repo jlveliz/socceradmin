@@ -49,7 +49,7 @@
 							<div class="alert alert-danger sufee-alert alert with-close alert-dismissible fade show">
 		            			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
 		            			@foreach ($errors->all() as $error)
-									{{$error}}
+									{{$error}} <br>
 								@endforeach
 							</div>
 						@endif
@@ -280,8 +280,8 @@
 						<hr>
 						<div class="form-actions">
 							<input type="hidden" value="0" name="redirect-index" id="redirect-index">
-							<button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-save"></i> Guardar</button>
-							<button class="btn btn-success btn-sm save-close" type="submit"><i class="fa fa-save"></i> Guardar y Cerrar</button>
+							<button class="btn btn-primary btn-sm" type="submit"><i class="i-Data-Save"></i> Guardar</button>
+							<button class="btn btn-secondary btn-sm save-close" type="submit"><i class="i-Data-Save"></i> Guardar y Cerrar</button>
 							<a class="btn btn-inverse btn-sm" href="{{ route('fields.index') }}"><i class="fa fa-ban"></i> Cancelar</a>
 						</div>
 						@if(!isset($field))	

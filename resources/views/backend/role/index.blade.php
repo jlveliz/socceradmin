@@ -45,8 +45,8 @@
                                     <td>@if($role->is_default == 1) Si @else No @endif</td>
 	                				<td>{{ $role->description }}</td>
 	                				<td>
-	                					<a class="btn btn-warning btn-flat btn-sm" href="{{ route('roles.edit',['id' => $role->id]) }}"><i class="fa fa-edit"></i> Editar</a>
-	                					<button class="btn btn-danger btn-flat btn-sm delete-btn" data-toggle="modal" data-target="#delete-modal"  data-object="{{$role}}" data-message="Está seguro de eliminar el Rol" data-route="{{ route('roles.destroy',$role->id) }}"><i class="fa fa-trash"></i> Eliminar</button>
+	                					<a class="btn btn-warning btn-flat btn-sm" href="{{ route('roles.edit',['id' => $role->id]) }}"><i class="i-Pen-2"></i> Editar</a>
+	                					<button class="btn btn-danger btn-flat btn-sm delete-btn" data-toggle="modal" data-target="#delete-modal"  data-object="{{$role}}" data-message="Está seguro de eliminar el Rol" data-route="{{ route('roles.destroy',$role->id) }}"><i class="i-File-Trash"></i> Eliminar</button>
 	                				</td>
 	                			</tr>
 	                			@endforeach

@@ -14,7 +14,7 @@
                   <div class="form-group col-5 mx-sm-3 mb-2">
                       <input type="text" class="form-control col-12" id="search-input" placeholder="Cédula, nombres o apellidos" autofocus="autofocus">
                   </div>
-                  <button type="submit" class="btn btn-primary mb-2 btn-search"><i class="fa fa-search"></i></button>
+                  <button type="submit" class="btn btn-primary mb-2 btn-search"><i class="i-Data-Search"></i></button>
               </form>
             </div>
             <div class="col-12">

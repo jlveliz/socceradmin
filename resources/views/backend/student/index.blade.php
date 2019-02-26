@@ -53,8 +53,8 @@
                                     </td>
                                     <td>{{ $student->person->age }} Año(s)</td>
 	                				<td>
-	                					<a class="btn btn-warning btn-flat btn-sm" href="{{ route('students.edit',['id' => $student->id]) }}"><i class="fa fa-edit"></i> Editar</a>
-	                					<button class="btn btn-danger btn-flat btn-sm delete-btn" data-toggle="modal" data-target="#delete-modal"  data-object="{{$student}}" data-fieldname="{{$student->person->name}} {{$student->person->last_name}}" data-message="Está seguro de eliminar el Estudiante" data-route="{{ route('students.destroy',$student->id) }}"><i class="fa fa-trash"></i> Eliminar</button>
+	                					<a class="btn btn-warning btn-flat btn-sm" href="{{ route('students.edit',['id' => $student->id]) }}"><i class="i-Pen-2"></i> Editar</a>
+	                					<button class="btn btn-danger btn-flat btn-sm delete-btn" data-toggle="modal" data-target="#delete-modal"  data-object="{{$student}}" data-fieldname="{{$student->person->name}} {{$student->person->last_name}}" data-message="Está seguro de eliminar el Estudiante" data-route="{{ route('students.destroy',$student->id) }}"><i class="i-File-Trash"></i> Eliminar</button>
 	                				</td>
 	                			</tr>
 	                			@endforeach

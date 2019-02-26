@@ -69,8 +69,8 @@
 	                			<tr>
                                     <td><a href="{{ route('ftypes.edit',['id' => $ftype->id]) }}" class="text-primary">{{ $ftype->name }}</a></td>
 	                				<td>
-	                					<a class="btn btn-warning btn-flat btn-sm" href="{{ route('ftypes.edit',['id' => $ftype->id]) }}"><i class="fa fa-edit"></i> Editar</a>
-	                					<button class="btn btn-danger btn-flat btn-sm delete-btn text-light" data-toggle="modal" data-target="#delete-modal" data-object="{{$ftype}}" data-message="Está seguro de eliminar el Tipo de " data-route="{{ route('ftypes.destroy',$ftype->id) }}"><i class="fa fa-trash"></i> Eliminar</button>
+	                					<a class="btn btn-warning btn-flat btn-sm" href="{{ route('ftypes.edit',['id' => $ftype->id]) }}"><i class="i-Pen-2"></i> Editar</a>
+	                					<button class="btn btn-danger btn-flat btn-sm delete-btn text-light" data-toggle="modal" data-target="#delete-modal" data-object="{{$ftype}}" data-message="Está seguro de eliminar el Tipo de " data-route="{{ route('ftypes.destroy',$ftype->id) }}"><i class="i-File-Trash"></i> Eliminar</button>
 	                				</td>
 	                			</tr>
 	                			@endforeach
