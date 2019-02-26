@@ -62,8 +62,8 @@
                                                 <td>{{ $field->address}}</td>
                                                 <td>{{ $field->type ? $field->type->name : '-' }}</td>
                                                 <td>
-                                                    <a class="btn btn-warning btn-flat btn-sm" href="{{ route('fields.edit',['id' => $field->id]) }}"><i class="fa fa-edit"></i> Editar</a>
-                                                    <button class="btn btn-danger btn-flat btn-sm delete-btn" data-toggle="modal" data-target="#delete-modal" data-object="{{$field}}" data-message="Está seguro de eliminar la cancha " data-route="{{ route('fields.destroy',$field->id) }}"><i class="fa fa-trash"></i> Eliminar</button>
+                                                    <a class="btn btn-warning btn-flat btn-sm" href="{{ route('fields.edit',['id' => $field->id]) }}"><i class="i-Pen-2"></i> Editar</a>
+                                                    <button class="btn btn-danger btn-flat btn-sm delete-btn" data-toggle="modal" data-target="#delete-modal" data-object="{{$field}}" data-message="Está seguro de eliminar la cancha " data-route="{{ route('fields.destroy',$field->id) }}"><i class="i-File-Trash"></i> Eliminar</button>
                                                 </td>
                                             </tr>
                                             @endforeach

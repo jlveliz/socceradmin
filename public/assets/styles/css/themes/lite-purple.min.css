@@ -6807,6 +6807,7 @@ textarea.form-control {
 
 .custom-select.is-invalid,
 .form-control.is-invalid,
+.form-group.is-invalid,
 .was-validated .custom-select:invalid,
 .was-validated .form-control:invalid {
     border-color: #d22346
@@ -6826,6 +6827,7 @@ textarea.form-control {
 .form-control-file.is-invalid~.invalid-tooltip,
 .form-control.is-invalid~.invalid-feedback,
 .form-control.is-invalid~.invalid-tooltip,
+.form-group.is-invalid~.invalid-feedback, 
 .was-validated .custom-select:invalid~.invalid-feedback,
 .was-validated .custom-select:invalid~.invalid-tooltip,
 .was-validated .form-control-file:invalid~.invalid-feedback,

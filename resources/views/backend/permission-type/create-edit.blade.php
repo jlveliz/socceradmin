@@ -66,8 +66,8 @@
             		<div class="card-footer col-12">
             			<div class="form-actions">
 	                		<input type="hidden" value="0" name="redirect-index" id="redirect-index">
-	                		<button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-save"></i> Guardar</button>
-	                		<button class="btn btn-secondary btn-sm save-close" type="submit"><i class="fa fa-save"></i> Guardar y Cerrar</button>
+	                		<button class="btn btn-primary btn-sm" type="submit"><i class="i-Data-Save"></i> Guardar</button>
+	                		<button class="btn btn-secondary btn-sm save-close" type="submit"><i class="i-Data-Save"></i> Guardar y Cerrar</button>
 	                		<a class="btn btn-inverse btn-sm" href="{{ route('permission-types.index') }}"><i class="fa fa-ban"></i> Cancelar</a>
 	                	</div>
 			            	</form>

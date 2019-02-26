@@ -34,18 +34,18 @@
 				                	<div class="form-body">
 					                	<div class="row">
 					                		<div class="col-lg-3 col-6">
-						                		<div class="form-group @if ($errors->has('name')) is-invalid @endif">
+						                		<div class="form-group">
 						                			<label for="name">Nombre <span class="text-danger">*</span></label>
-						                			<input type="text" name="name" id="name" class="form-control"  autofocus="" value="@if(isset($role)){{ $role->name }}@else{{ old('name') }}@endif">
+						                			<input type="text" name="name" id="name" class="form-control @if ($errors->has('name')) is-invalid @endif"  autofocus="" value="@if(isset($role)){{ $role->name }}@else{{ old('name') }}@endif">
 						                			@if ($errors->has('name'))
 						                				<div id="val-username-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('name') }}</div>
 						                			@endif
 						                		</div>
 					                		</div>
 					                		<div class="col-lg-3 col-6">
-						                		<div class="form-group @if ($errors->has('is_default')) is-invalid @endif">
+						                		<div class="form-group">
 						                			<label for="is_default">Predeterminado <span class="text-danger">*</span></label>
-						                			<select name="is_default" id="is_default" class="form-control custom-select">
+						                			<select name="is_default" id="is_default" class="form-control custom-select @if ($errors->has('is_default')) is-invalid @endif">
 						                				<option value="1" @if( (isset($role) && $role->is_default == '1') || ( old('is_default') == '1' ) ) selected @endif>Si</option>
 						                				<option value="0" @if( (isset($role) && $role->is_default == '0') || ( old('is_default') == '0' ) ) selected @endif>No</option>
 						                			</select>
@@ -87,7 +87,7 @@
 								                			<div class="accordion" id="accordionpermissions">
 								                				<div class="row">
 									                				@foreach ($modules as $index => $module)
-									                					<div class="card col-lg-6 col-12 pt-0">
+									                					<div class="card col-lg-6 col-12 p-0">
 									                						{{-- {{dd($pType->code.'_'.($index+1))}} --}}
 									                						<div class="card-header px-2" id="heading_{{$pType->code.'_'.($index+1)}}">
 									                							<a href="#" data-toggle="collapse" data-target="#{{$pType->code.'_'.str_slug($module->name).'_'.$module->id}}" aria-expanded="true" aria-controls="collapse{{($index+1)}}">{{$module->name}} </a>
@@ -99,7 +99,7 @@
 											                								<tr>
 											                									<td>
 											                										<div class="input-group">
-											                											<div class="input-group-prepend col-12">
+											                											<div class="input-group-prepend col-12 px-0">
 											                												<div class="input-group-text">
 											                													<input type="checkbox" aria-label="Checkbox for following text input" name="permissions[]" value="{{$permission->id}}" id="permission_{{$permission->id}}" @if(isset($role) && $role->hasPermission($permission->id)) checked @endif @if(count($permission->children) > 0) class="input-menu-has-children" for="childs-opt-menu-table_{{$permission->id}}" @endif>
 											                												</div>
@@ -108,7 +108,7 @@
 											                										</div>
 											                										{{-- have childs --}}
 										                									@if (count($permission->children) > 0)
-										                										<table class="table childs-opt-menu-table" id="childs-opt-menu-table_{{$permission->id}}">
+										                										<table class="table ml-3" id="childs-opt-menu-table_{{$permission->id}}">
 											                										@foreach ($permission->children as $children)
 										                												<tr>
 										                													<td>
@@ -144,8 +144,8 @@
 				                	<hr>
 				                	<div class="form-actions">
 				                		<input type="hidden" value="0" name="redirect-index" id="redirect-index">
-				                		<button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-save"></i> Guardar</button>
-				                		<button class="btn btn-success btn-sm save-close" type="submit"><i class="fa fa-save"></i> Guardar y Cerrar</button>
+				                		<button class="btn btn-primary btn-sm" type="submit"><i class="i-Data-Save"></i> Guardar</button>
+				                		<button class="btn btn-secondary btn-sm save-close" type="submit"><i class="i-Data-Save"></i> Guardar y Cerrar</button>
 				                		<a class="btn btn-inverse btn-sm" href="{{ route('roles.index') }}"><i class="fa fa-ban"></i> Cancelar</a>
 				                	</div>
 				                </div>

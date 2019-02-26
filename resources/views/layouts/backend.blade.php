@@ -45,6 +45,9 @@
                 @include('partials.header-menu')
                 {{-- end of header menu --}}
                 <div class="main-content">
+
+                  @include('partials.breadcrump')
+
                   @yield('content')
                 </div>
 
@@ -76,6 +79,9 @@
             <!-- ============ Body content start ============= -->
             <div class="main-content-wrap  d-flex flex-column">
               <div class="main-content">
+                  
+                  @include('partials.breadcrump')
+                  
                   @yield('content')
               </div>
             
@@ -105,6 +111,9 @@
             <!-- ============ Body content start ============= -->
             <div class="main-content-wrap sidenav-open d-flex flex-column">
               <div class="main-content">
+                  
+                  @include('partials.breadcrump')
+
                   @yield('content')
               </div>
 
@@ -136,6 +145,8 @@
               <!-- ============ Body content start ============= -->
               <div class="main-content-wrap sidenav-open d-flex flex-column">
                 <div class="main-content">
+                    @include('partials.breadcrump')
+                    
                     @yield('content')
                 </div>
                 @include('partials.footer')
@@ -159,8 +170,7 @@
   {{-- common js --}}
   <script src="{{asset('assets/js/common-bundle-script.js')}}"></script>
     {{-- page specific javascript --}}
-    @yield('page-js')
-
+    
     {{-- theme javascript --}}
     {{-- <script src="{{mix('assets/js/es5/script.js')}}"></script> --}}
     <script src="{{asset('assets/js/es5/script.min.js')}}"></script>
@@ -176,10 +186,19 @@
 
     <script src="{{asset('assets/js/es5/customizer.script.min.js')}}"></script>
 
+    <script src="{{ asset('js/custom.min.js') }}"></script>
+
+    @yield('js')
+
+
     {{-- laravel js --}}
     {{-- <script src="{{mix('assets/js/laravel/app.js')}}"></script> --}}
 
-    @yield('bottom-js')
+    {{-- @yield('bottom-js') --}}
+
+    {{-- modals --}}
+    @include('partials.modals-delete')
+    @include('partials.modals-search')
 </body>
 
 </html>

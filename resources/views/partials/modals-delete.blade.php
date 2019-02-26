@@ -10,7 +10,7 @@
       <div class="modal-body">
         <div class="row">
           <div class="col-md-4 col-lg-4 d-none d-sm-block text-danger text-center">
-            <i class="fa fa-trash fa-4x"></i>
+            <i class="display-4 i-File-Trash"></i>
           </div>
           <div class="col-md-8 col-lg-8 col-12 d-none d-sm-block">
             <span class="modal-message"></span>
@@ -24,7 +24,7 @@
            {{ csrf_field() }}
           <input type="hidden" value="" class="modal-item-key" name="id">
           <button type="button" class="btn btn-secondary btn-sm close-modal" data-dismiss="modal">Cerrar</button>
-          <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Eliminar</button>
+          <button type="submit" class="btn btn-danger btn-sm"><i class="i-File-Trash"></i> Eliminar</button>
         </form>
       </div>
     </div>

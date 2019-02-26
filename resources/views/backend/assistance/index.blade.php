@@ -167,7 +167,7 @@
                                             <tfoot>
                                                 <tr>
                                                     <td colspan="{{ (7  + count($assistances['dates']) ) }}" class="text-center">
-                                                        <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-save"></i> Procesar</button>
+                                                        <button type="submit" class="btn btn-primary btn-sm"><i class="i-Data-Save"></i> Procesar</button>
                                                     </td>
                                                 </tr>
                                             </tfoot>

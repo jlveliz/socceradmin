@@ -53,8 +53,8 @@
 	                					@endif
 	                				</td>
 	                				<td>
-	                					<a class="btn btn-warning btn-flat btn-sm" href="{{ route('modules.edit',['id' => $module->id]) }}"><i class="fa fa-edit"></i> Editar</a>
-	                					<button class="btn btn-danger btn-flat btn-sm delete-btn text-light" data-toggle="modal" data-target="#delete-modal" data-object="{{$module}}" data-message="Está seguro de eliminar el Módulo" data-route="{{ route('modules.destroy',$module->id) }}"><i class="fa fa-trash"></i> Eliminar</button>
+	                					<a class="btn btn-warning btn-flat btn-sm" href="{{ route('modules.edit',['id' => $module->id]) }}"><i class="i-Pen-2"></i> Editar</a>
+	                					<button class="btn btn-danger btn-flat btn-sm delete-btn text-light" data-toggle="modal" data-target="#delete-modal" data-object="{{$module}}" data-message="Está seguro de eliminar el Módulo" data-route="{{ route('modules.destroy',$module->id) }}"><i class="i-File-Trash"></i> Eliminar</button>
 	                				</td>
 	                			</tr>
 	                			@endforeach
