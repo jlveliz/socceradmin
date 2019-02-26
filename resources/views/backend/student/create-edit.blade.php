@@ -115,7 +115,7 @@
 							<div class="tab-pane @if($errors->has('representant.num_identification') || $errors->has('representant.name') || $errors->has('representant.last_name') || $errors->has('representant.address') || $errors->has('representant.email')) active @endif" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 
 								<div class="row justify-content-center my-2">
-									<button type="button" data-toggle="modal" data-target="#search-modal" data-route="{{route('users.representants')}}" @if(isset($student)) data-edit="true" @endif data-size="modal-lg" data-title="Buscar Representante" class="btn btn-sm btn-info"><i class="fa fa-search"></i> Buscar Representante</button>
+									<button type="button" data-toggle="modal" data-target="#search-modal" data-route="{{route('users.representants')}}" @if(isset($student)) data-edit="true" @endif data-size="modal-lg" data-title="Buscar Representante" class="btn btn-sm btn-info"><i class="i-Data-Search"></i> Buscar Representante</button>
 								</div>
 								
 								<div class="row p-2">

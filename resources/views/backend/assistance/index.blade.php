@@ -104,7 +104,7 @@
 
 
                                                 <div class="col-12 mb-2 text-center">
-                                                    <button class="btn btn-primary btn-sm" @if(!request()->has('field') || !request()->has('key_day') || !request()->has('group_id')) disabled @endif><i class="fa fa-search"></i> Buscar</button>
+                                                    <button class="btn btn-primary btn-sm" @if(!request()->has('field') || !request()->has('key_day') || !request()->has('group_id')) disabled @endif><i class="i-Data-Search"></i> Buscar</button>
                                                 </div>
                                                 
                                             </div>
