@@ -72,9 +72,9 @@
 									<div class="row">
 
 										<div class="col-lg-3 col-6">
-											<div class="form-group @if ($errors->has('name')) is-invalid @endif">
+											<div class="form-group">
 												<label for="name">Nombre <span class="text-danger">*</span></label>
-												<input type="text" name="name" id="name" class="form-control"  autofocus="" value="@if(isset($field)){{ $field->name }}@else{{ old('name') }}@endif">
+												<input type="text" name="name" id="name" class="form-control @if ($errors->has('name')) is-invalid @endif"  autofocus="" value="@if(isset($field)){{ $field->name }}@else{{ old('name') }}@endif">
 												@if ($errors->has('name'))
 													<div id="val-username-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('name') }}</div>
 												@endif
@@ -82,9 +82,9 @@
 										</div>
 										
 										<div class="col-lg-7 col-6">
-											<div class="form-group @if ($errors->has('address')) is-invalid @endif">
+											<div class="form-group">
 												<label for="address">Dirección <span class="text-danger">*</span></label>
-												<input type="text" name="address" id="address" class="form-control"  autofocus="" value="@if(isset($field)){{ $field->address }}@else{{ old('address') }}@endif">
+												<input type="text" name="address" id="address" class="form-control @if ($errors->has('address')) is-invalid @endif" value="@if(isset($field)){{ $field->address }}@else{{ old('address') }}@endif">
 												@if ($errors->has('address'))
 													<div id="val-username-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('address') }}</div>
 												@endif
@@ -92,9 +92,9 @@
 										</div>
 										
 										<div class="col-lg-2 col-6">
-											<div class="form-group @if ($errors->has('type_field_id')) is-invalid @endif">
+											<div class="form-group">
 												<label for="type_field_id">Tipo <span class="text-danger">*</span></label>
-												<select name="type_field_id" id="type_field_id" class="form-control custom-select">
+												<select name="type_field_id" id="type_field_id" class="form-control custom-select @if ($errors->has('type_field_id')) is-invalid @endif">
 													<option value="">Seleccione</option>
 													@foreach ($types as $type)
 														<option value="{{ $type->id }}" @if( (isset($field) && $type->id == $field->type_field_id) || (old('type_field_id') == $type->id) ) selected @endif>{{ $type->name }}</option>
@@ -107,18 +107,18 @@
 										</div>
 
 										<div class="col-lg-2 col-4">
-											<div class="form-group  {{ $errors->has('inscription_price') ? ' is-invalid' : '' }}">
+											<div class="form-group">
 												<label for="inscription_price">P. de Inscripción <span class="text-danger">*</span></label>
-												<input type="number" name="inscription_price" id="inscription_price" class="form-control" value="@if( isset($field) ){{$field->inscription_price}}@else{{ old('inscription_price') }}@endif">
+												<input type="number" name="inscription_price" id="inscription_price" class="form-control {{ $errors->has('inscription_price') ? ' is-invalid' : '' }}" value="@if( isset($field) ){{$field->inscription_price}}@else{{ old('inscription_price') }}@endif">
 												@if ($errors->has('inscription_price'))
 													<div  class="invalid-feedback animated fadeInDown">{{ $errors->first('inscription_price') }}</div>
 												@endif
 											</div>
 	                					</div>
 				                		<div class="col-lg-2 col-4">
-					                		<div class="form-group  {{ $errors->has('month_price') ? ' is-invalid' : '' }}">
+					                		<div class="form-group">
 					                			<label for="month_price">P. Mensual <span class="text-danger">*</span></label>
-					                			<input type="number" name="month_price" id="month_price" class="form-control" value="@if(isset($field) ){{$field->month_price}}@else{{ old('month_price') }}@endif">
+					                			<input type="number" name="month_price" id="month_price" class="form-control {{ $errors->has('month_price') ? ' is-invalid' : '' }}" value="@if(isset($field) ){{$field->month_price}}@else{{ old('month_price') }}@endif">
 					                			@if ($errors->has('month_price'))
 					                				<div  class="invalid-feedback animated fadeInDown">{{ $errors->first('month_price') }}</div>
 					                			@endif
@@ -128,11 +128,11 @@
 
 									<div class="row">
 										<div class="col-12">
-											<div class="form-group @if ($errors->has('available_days')) is-invalid @endif">
+											<div class="form-group">
 												<label for="">Horario <span class="text-danger">*</span></label>
 												
 												@if ($errors->has('available_days'))
-													<div id="val-state-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('available_days') }}</div>
+													<div id="val-state-error" class="invalid-feedback animated fadeInDown @if ($errors->has('available_days')) is-invalid @endif">{{ $errors->first('available_days') }}</div>
 												@endif
 											</div>
 										</div>
@@ -167,8 +167,8 @@
 																			@foreach($field->available_days[$kday] as  $shcheduleNum => $scheduleDetail)
 																				<div class="row">
 																					@foreach ($scheduleDetail as $keyAction => $hours)
-																						<div class="col-5 form-group @if ($errors->has('available_days.'.$kday.'.'.$shcheduleNum.'.'.$keyAction)) is-invalid @endif">
-																							<input class="form-control form-control-sm  @if($keyAction == 'start') start-hour @else end-hour @endif" type="time" name="available_days[{{$kday}}][{{$shcheduleNum}}][{{$keyAction}}]" id="" value="{{$hours}}">
+																						<div class="col-5 form-group ">
+																							<input class="form-control @if ($errors->has('available_days.'.$kday.'.'.$shcheduleNum.'.'.$keyAction)) is-invalid @endifform-control-sm  @if($keyAction == 'start') start-hour @else end-hour @endif" type="time" name="available_days[{{$kday}}][{{$shcheduleNum}}][{{$keyAction}}]" id="" value="{{$hours}}">
 																							@if ($errors->has('available_days.'.$kday.'.'.$shcheduleNum.'.'.$keyAction))
 																								<div id="val-state-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('available_days.'.$kday.'.'.$shcheduleNum.'.'.$keyAction) }}</div>
 																							@endif
