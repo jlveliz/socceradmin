@@ -34,7 +34,7 @@ class FieldController extends Controller
      */
     public function index()
     {
-        $fields = $this->field->paginate();
+        $fields = $this->field->enum();
         return view('backend.field.index',compact('fields'));
     }
 

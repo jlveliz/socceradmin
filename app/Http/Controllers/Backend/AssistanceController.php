@@ -43,7 +43,7 @@ class AssistanceController extends Controller
         $currentSeason = $this->seasonRepo->getActive();
         
         if ($request->has('paginate')) {
-            $assistances = $this->assistance->paginate();
+            $assistances = $this->assistance->enum();
             return view('backend.assistance.index',compact('assistances','fields'));
         } else {
 

@@ -170,25 +170,25 @@
 
 
   {{-- common js --}}
-  <script src="{{asset('assets/js/common-bundle-script.js')}}"></script>
+  <script src="{{asset('assets/js/common-bundle-script.js')}}" type="text/javascript"></script>
     {{-- page specific javascript --}}
     
     {{-- theme javascript --}}
     {{-- <script src="{{mix('assets/js/es5/script.js')}}"></script> --}}
-    <script src="{{asset('assets/js/es5/script.min.js')}}"></script>
+    <script src="{{asset('assets/js/es5/script.min.js')}}" type="text/javascript"></script>
     @if ($layout=='compact')
-      <script src="{{asset('assets/js/es5/sidebar.compact.script.min.js')}}"></script>
+      <script src="{{asset('assets/js/es5/sidebar.compact.script.min.js')}}" type="text/javascript"></script>
     @elseif($layout=='normal' || !$layout)
-      <script src="{{asset('assets/js/es5/sidebar.large.script.min.js')}}"></script>
+      <script src="{{asset('assets/js/es5/sidebar.large.script.min.js')}}" type="text/javascript"></script>
     @elseif($layout=='horizontal')
-      <script src="{{asset('assets/js/sidebar-horizontal.script.js')}}"></script>
+      <script src="{{asset('assets/js/sidebar-horizontal.script.js')}}" type="text/javascript"></script>
     @endif
 
 
 
-    <script src="{{asset('assets/js/es5/customizer.script.min.js')}}"></script>
+    <script src="{{asset('assets/js/es5/customizer.script.min.js')}}" type="text/javascript"></script>
 
-    <script src="{{ asset('js/custom.min.js') }}"></script>
+    <script src="{{ asset('js/custom.min.js') }}" type="text/javascript"></script>
 
     @yield('js')
 

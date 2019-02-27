@@ -3,6 +3,15 @@
 @section('parent-page','Escritorio')
 @section('route-parent',route('home'))
 
+@section('js')
+<script type="text/javascript" src="{{ asset('js/data-table/datatables.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/components/ftype.js') }}"></script>
+@endsection
+
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/data-table/datatables.min.css') }}">
+@endsection
+
 @section('content')
 <ul class="nav nav-tabs customtab mb-2">
     <li class="nav-item">
@@ -50,7 +59,7 @@
             </div>
         @endif
 
-        <table class="table table-hover table-responsive-lg">
+        <table class="table table-hover table-responsive-lg" id="list-ftypes">
     		<thead>
     			<tr>
                     <th>Nombre</th>
@@ -58,26 +67,17 @@
     			</tr>
     		</thead>
     		<tbody>
-    			@if (count($fieldTypes) > 0)
-        			@foreach ($fieldTypes as $ftype)
-        			<tr>
-                        <td><a href="{{ route('ftypes.edit',['id' => $ftype->id]) }}" class="text-primary">{{ $ftype->name }}</a></td>
-        				<td>
-        					<a class="btn btn-warning btn-flat btn-sm" href="{{ route('ftypes.edit',['id' => $ftype->id]) }}"><i class="i-Pen-2"></i> Editar</a>
-        					<button class="btn btn-danger btn-flat btn-sm delete-btn text-light" data-toggle="modal" data-target="#delete-modal" data-object="{{$ftype}}" data-message="Está seguro de eliminar el Tipo de " data-route="{{ route('ftypes.destroy',$ftype->id) }}"><i class="i-File-Trash"></i> Eliminar</button>
-        				</td>
-        			</tr>
-        			@endforeach
-        		@else
-        			<tr>
-        				<td class="text-center" colspan="4">
-        					<p class="text-primary">No existen Tipos de Cancha a consultar</p>
-        				</td>
-        			</tr>
-    			@endif
+				@foreach ($fieldTypes as $ftype)
+    			<tr>
+                    <td><a href="{{ route('ftypes.edit',['id' => $ftype->id]) }}" class="text-primary">{{ $ftype->name }}</a></td>
+    				<td>
+    					<a class="btn btn-warning btn-flat btn-sm" href="{{ route('ftypes.edit',['id' => $ftype->id]) }}"><i class="i-Pen-2"></i> Editar</a>
+    					<button class="btn btn-danger btn-flat btn-sm delete-btn text-light" data-toggle="modal" data-target="#delete-modal" data-object="{{$ftype}}" data-message="Está seguro de eliminar el Tipo de " data-route="{{ route('ftypes.destroy',$ftype->id) }}"><i class="i-File-Trash"></i> Eliminar</button>
+    				</td>
+    			</tr>
+    			@endforeach
     		</tbody>
     	</table>
-        {{ $fieldTypes->links() }}
     </div>
 </div>
 @endsection

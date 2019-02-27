@@ -31,7 +31,7 @@ class FieldTypeController extends Controller
     public function index()
     {
         
-        $fieldTypes = $this->fieldType->paginate();
+        $fieldTypes = $this->fieldType->enum();
         return view('backend.ftype.index',compact('fieldTypes'));
     }
 

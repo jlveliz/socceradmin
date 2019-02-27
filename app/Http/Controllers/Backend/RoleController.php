@@ -35,7 +35,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = $this->role->paginate();
+        $roles = $this->role->enum();
         return view('backend.role.index',compact('roles'));
     }
 

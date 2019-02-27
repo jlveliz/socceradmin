@@ -95,28 +95,32 @@ class FieldRequest extends FormRequest
         ];
 
         //schedule field
-        if (count($this->get('available_days')) > 0 ) {
-            $numSchedule = 0;
-            foreach($this->get('available_days') as $day => $schedule)  {
-                foreach($schedule as $nameSchedule => $actions) {
-                    foreach($actions as $action => $hours)
-                    $messages['available_days.'.$day.'.'.$nameSchedule.'.'.$action.'.required'] = 'Ingrese una hora';
+        if ($this->has('available_days')) {
+            if (count($this->get('available_days')) > 0 ) {
+                $numSchedule = 0;
+                foreach($this->get('available_days') as $day => $schedule)  {
+                    foreach($schedule as $nameSchedule => $actions) {
+                        foreach($actions as $action => $hours)
+                        $messages['available_days.'.$day.'.'.$nameSchedule.'.'.$action.'.required'] = 'Ingrese una hora';
+                    }
+                    $numSchedule++;
                 }
-                $numSchedule++;
             }
         }
 
         //group chedule field
-        if( count($this->get('groups')) > 0 ){
-            foreach($this->get('groups') as $kday => $schedules) {
-                if(array_key_exists($kday,days_of_week())) {
-                    foreach($schedules as $kschudele => $groups) {
-                        $countGroup = 0;
-                        foreach($groups as $kgroup => $group) {
-                            foreach($group as $kgrDetail => $detail) {
-                                $messages['groups.'.$kday.'.'.$kschudele.'.'.$countGroup.'.'.$kgrDetail.'.required'] = 'Por favor ingrese un grupo de detalle';
+        if ($this->has('groups')) {
+            if( count($this->get('groups')) > 0 ){
+                foreach($this->get('groups') as $kday => $schedules) {
+                    if(array_key_exists($kday,days_of_week())) {
+                        foreach($schedules as $kschudele => $groups) {
+                            $countGroup = 0;
+                            foreach($groups as $kgroup => $group) {
+                                foreach($group as $kgrDetail => $detail) {
+                                    $messages['groups.'.$kday.'.'.$kschudele.'.'.$countGroup.'.'.$kgrDetail.'.required'] = 'Por favor ingrese un grupo de detalle';
+                                }
+                                $countGroup++;
                             }
-                            $countGroup++;
                         }
                     }
                 }

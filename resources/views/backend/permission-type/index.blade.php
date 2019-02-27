@@ -3,6 +3,15 @@
 @section('parent-page','Escritorio')
 @section('route-parent',route('home'))
 
+@section('js')
+<script type="text/javascript" src="{{ asset('js/data-table/datatables.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/components/permissiontype.js') }}"></script>
+@endsection
+
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/data-table/datatables.min.css') }}">
+@endsection
+
 @section('content')
 
 <div class="card">
@@ -24,8 +33,8 @@
             </div>
         @endif
         
-        {{ $permissionTypes->links() }}
-    	<table class="table table-hover table-responsive-lg">
+       
+    	<table class="table table-hover table-responsive-lg" id="list-pertypes">
     		<thead>
     			<tr>
     				<th>Nombre</th>
@@ -34,8 +43,7 @@
     			</tr>
     		</thead>
     		<tbody>
-    			@if (count($permissionTypes) > 0)
-        			@foreach ($permissionTypes as $pType)
+				@foreach ($permissionTypes as $pType)
         			<tr>
         				<td><a  href="{{ route('permission-types.edit',['id' => $pType->id]) }}" class="text-primary">{{ $pType->name }}</a></td>
         				<td>
@@ -47,20 +55,13 @@
         				</td>
         				<td>
         					<a class="btn btn-warning btn-flat btn-sm" href="{{ route('permission-types.edit',['id' => $pType->id]) }}"><i class="i-Pen-2"></i> Editar</a>
-        					<button class="btn btn-danger btn-flat btn-sm delete-btn" data-toggle="modal" data-target="#delete-modal" data-component="Tipo de Permiso" data-component-name="{{ $pType->name }}" data-url="{{ route('permission-types.destroy',['id'=>$pType->id]) }}"><i class="i-File-Trash"></i> Eliminar</button>
+        					<button class="btn btn-danger btn-flat btn-sm delete-btn" data-toggle="modal" data-target="#delete-modal" data-object="{{$pType}}" data-message="Está seguro que desea eliminar el tipo de permiso " data-component="Tipo de Permiso" data-component-name="{{ $pType->name }}" data-route="{{ route('permission-types.destroy',['id'=>$pType->id]) }}"><i class="i-File-Trash"></i> Eliminar</button>
         				</td>
         			</tr>
-        			@endforeach
-        		@else
-        			<tr>
-        				<td class="text-center" colspan="3">
-        					<p class="text-primary">No existen Tipos de Permiso a consultar</p>
-        				</td>
-        			</tr>
-    			@endif
+    			@endforeach
+        		
     		</tbody>
     	</table>
-        {{ $permissionTypes->links() }}
     </div>
 </div>
 @endsection

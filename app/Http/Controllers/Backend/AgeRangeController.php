@@ -31,7 +31,7 @@ class AgeRangeController extends Controller
     public function index()
     {
         
-        $ageRanges = $this->ageRange->paginate();
+        $ageRanges = $this->ageRange->enum();
         return view('backend.agerange.index',compact('ageRanges'));
     }
 

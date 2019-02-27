@@ -3,6 +3,15 @@
 @section('parent-page','Escritorio')
 @section('route-parent',route('home'))
 
+@section('js')
+<script type="text/javascript" src="{{ asset('js/data-table/datatables.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/components/ptype.js') }}"></script>
+@endsection
+
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/data-table/datatables.min.css') }}">
+@endsection
+
 @section('content')
 <div class="card">
     <div class="row">
@@ -22,8 +31,7 @@
             </div>
         @endif
 
-        {{ $personTypes->links() }}
-    	<table class="table table-hover table-responsive-lg">
+        <table class="table table-hover table-responsive-lg" id="list-ptypes">
     		<thead>
     			<tr>
                     <th>Nombre</th>
@@ -33,34 +41,25 @@
     			</tr>
     		</thead>
     		<tbody>
-    			@if (count($personTypes) > 0)
-        			@foreach ($personTypes as $ptype)
-        			<tr>
-                        <td><a href="{{ route('ptypes.edit',['id' => $ptype->id]) }}" class="text-primary">{{ $ptype->name }}</a></td>
-        				<td>{{ $ptype->code }}</td>
-        				<td>
-        					@if($ptype->state == 1)
-        						<span class="badge badge-success">Activa</span>
-        					@else 
-        						<span class="badge badge-danger">Inactiva</span>
-        					@endif
-        				</td>
-        				<td>
-        					<a class="btn btn-warning btn-flat btn-sm" href="{{ route('ptypes.edit',['id' => $ptype->id]) }}"><i class="i-Pen-2"></i> Editar</a>
-        					<button class="btn btn-danger btn-flat btn-sm delete-btn text-light" data-toggle="modal" data-target="#delete-modal" data-object="{{$ptype}}" data-message="Está seguro de eliminar el Tipo de " data-route="{{ route('ptypes.destroy',$ptype->id) }}"><i class="i-File-Trash"></i> Eliminar</button>
-        				</td>
-        			</tr>
-        			@endforeach
-        		@else
-        			<tr>
-        				<td class="text-center" colspan="4">
-        					<p class="text-primary">No existen Tipos de Persona a consultar</p>
-        				</td>
-        			</tr>
-    			@endif
+    			@foreach ($personTypes as $ptype)
+    			<tr>
+                    <td><a href="{{ route('ptypes.edit',['id' => $ptype->id]) }}" class="text-primary">{{ $ptype->name }}</a></td>
+    				<td>{{ $ptype->code }}</td>
+    				<td>
+    					@if($ptype->state == 1)
+    						<span class="badge badge-success">Activa</span>
+    					@else 
+    						<span class="badge badge-danger">Inactiva</span>
+    					@endif
+    				</td>
+    				<td>
+    					<a class="btn btn-warning btn-flat btn-sm" href="{{ route('ptypes.edit',['id' => $ptype->id]) }}"><i class="i-Pen-2"></i> Editar</a>
+    					<button class="btn btn-danger btn-flat btn-sm delete-btn text-light" data-toggle="modal" data-target="#delete-modal" data-object="{{$ptype}}" data-message="Está seguro de eliminar el Tipo de " data-route="{{ route('ptypes.destroy',$ptype->id) }}"><i class="i-File-Trash"></i> Eliminar</button>
+    				</td>
+    			</tr>
+    			@endforeach
     		</tbody>
     	</table>
-        {{ $personTypes->links() }}
     </div>
 </div>
 @endsection

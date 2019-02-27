@@ -36,7 +36,7 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        $permissions = $this->permission->paginate();
+        $permissions = $this->permission->enum();
         return view('backend.permission.index',compact('permissions'));
     }
 

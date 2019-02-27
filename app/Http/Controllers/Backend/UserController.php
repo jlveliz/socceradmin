@@ -33,7 +33,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = $this->userRepo->paginate();
+        $users = $this->userRepo->enum();
         return view('backend.user.index',compact('users'));
     }
 

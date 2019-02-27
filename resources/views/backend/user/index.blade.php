@@ -4,6 +4,15 @@
 @section('route-parent',route('home'))
 @section('current-page','Listado')
 
+@section('js')
+<script type="text/javascript" src="{{ asset('js/data-table/datatables.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/components/user.js') }}"></script>
+@endsection
+
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/data-table/datatables.min.css') }}">
+@endsection
+
 @section('content')
 
 <div class="card">
@@ -24,8 +33,7 @@
             </div>
         @endif
 
-        {{ $users->links() }}
-    	<table class="table table-hover table-responsive-lg">
+        <table class="table table-hover table-responsive-lg" id="list-users">
     		<thead>
     			<tr>
                     <th>Usuario</th>
@@ -36,41 +44,33 @@
     			</tr>
     		</thead>
     		<tbody>
-    			@if (count($users) > 0)
-        			@foreach ($users as $user)
-        			<tr>
-                        <td><a href="{{ route('users.edit',['id' => $user->id]) }}" class="text-primary">{{ $user->username }}</a></td>
-                        <td>{{$user->person->name .' '. $user->person->last_name}}</td>
-                        <td>
-                        	@if($user->super_admin == 1) 
-                        		<span class="badge badge-success">Si</span> 
-                        	@else 
-                        		<span class="badge badge-info">No</span> 
-                        	@endif
-                        </td>
-        				<td>
-                            @if ($user->last_access)
-                                {{ $user->last_access }}
-                            @else
-                                -
-                            @endif
-                        </td>
-        				<td>
-        					<a class="btn btn-warning btn-flat btn-sm" href="{{ route('users.edit',['id' => $user->id]) }}"><i class="i-Pen-2"></i> Editar</a>
-        					<button class="btn btn-danger btn-flat btn-sm delete-btn" data-toggle="modal" data-target="#delete-modal"  data-object="{{$user}}" data-fieldname="{{$user->person->name}} {{$user->person->last_name}}" data-message="Está seguro de eliminar el Usuario" data-route="{{ route('users.destroy',$user->id) }}"><i class="i-File-Trash"></i> Eliminar</button>
-        				</td>
-        			</tr>
-        			@endforeach
-        		@else
-        			<tr>
-        				<td class="text-center" colspan="4">
-        					<p class="text-primary">No existen usuarios a consultar</p>
-        				</td>
-        			</tr>
-    			@endif
+				@foreach ($users as $user)
+    			<tr>
+                    <td><a href="{{ route('users.edit',['id' => $user->id]) }}" class="text-primary">{{ $user->username }}</a></td>
+                    <td>{{$user->person->name .' '. $user->person->last_name}}</td>
+                    <td>
+                    	@if($user->super_admin == 1) 
+                    		<span class="badge badge-success">Si</span> 
+                    	@else 
+                    		<span class="badge badge-info">No</span> 
+                    	@endif
+                    </td>
+    				<td>
+                        @if ($user->last_access)
+                            {{ $user->last_access }}
+                        @else
+                            -
+                        @endif
+                    </td>
+    				<td>
+    					<a class="btn btn-warning btn-flat btn-sm" href="{{ route('users.edit',['id' => $user->id]) }}"><i class="i-Pen-2"></i> Editar</a>
+    					<button class="btn btn-danger btn-flat btn-sm delete-btn" data-toggle="modal" data-target="#delete-modal"  data-object="{{$user}}" data-fieldname="{{$user->person->name}} {{$user->person->last_name}}" data-message="Está seguro de eliminar el Usuario" data-route="{{ route('users.destroy',$user->id) }}"><i class="i-File-Trash"></i> Eliminar</button>
+    				</td>
+    			</tr>
+    			@endforeach
+        		
     		</tbody>
     	</table>
-        {{ $users->links() }}
     </div>
 </div>
 @endsection

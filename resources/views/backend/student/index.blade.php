@@ -3,6 +3,15 @@
 @section('parent-page','Escritorio')
 @section('route-parent',route('home'))
 
+@section('js')
+<script type="text/javascript" src="{{ asset('js/data-table/datatables.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/components/student.js') }}"></script>
+@endsection
+
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/data-table/datatables.min.css') }}">
+@endsection
+
 @section('content')
 <div class="card">
     <div class="row">
@@ -21,9 +30,7 @@
                 {{ session()->get('content') }}
             </div>
         @endif
-
-        {{ $students->links() }}
-    	<table class="table table-hover table-responsive-lg">
+    	<table class="table table-hover table-responsive-lg" id="list-students">
     		<thead>
     			<tr>
                     <th>Clase</th>
@@ -35,11 +42,10 @@
     			</tr>
     		</thead>
     		<tbody>
-    			@if (count($students) > 0)
-        			@foreach ($students as $student)
+    			@foreach ($students as $student)
         			<tr>
                         <td>
-                            <div class="badge @if($student->currentEnrollment()->class_type == 2)  text-success @else text-warning @endif" >{{ $student->currentEnrollment()->class_type == 2 ? 'Pagada' : 'Demostrativa' }}</div>
+                            <div class="@if($student->currentEnrollment()->class_type == 2)  text-success @else text-warning @endif" >{{ $student->currentEnrollment()->class_type == 2 ? 'Pagada' : 'Demostrativa' }}</div>
                         </td>
                         <td><a href="{{ route('students.edit',['id' => $student->id]) }}" class="text-primary">{{$student->person->name .' '. $student->person->last_name}}</td>
                         <td>{{ $student->representant ? $student->representant->name .' '.  $student->representant->last_name : '-'}}</td>
@@ -52,17 +58,10 @@
         					<button class="btn btn-danger btn-flat btn-sm delete-btn" data-toggle="modal" data-target="#delete-modal"  data-object="{{$student}}" data-fieldname="{{$student->person->name}} {{$student->person->last_name}}" data-message="Está seguro de eliminar el Estudiante" data-route="{{ route('students.destroy',$student->id) }}"><i class="i-File-Trash"></i> Eliminar</button>
         				</td>
         			</tr>
-        			@endforeach
-        		@else
-        			<tr>
-        				<td class="text-center" colspan="6">
-        					<p class="text-primary">No existen estudiantes a consultar</p>
-        				</td>
-        			</tr>
-    			@endif
+    		  @endforeach
+        		
     		</tbody>
     	</table>
-        {{ $students->links() }}
     </div>
 </div>
 @endsection

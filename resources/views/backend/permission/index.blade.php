@@ -3,6 +3,15 @@
 @section('parent-page','Escritorio')
 @section('route-parent',route('home'))
 
+@section('js')
+<script type="text/javascript" src="{{ asset('js/data-table/datatables.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/components/permission.js') }}"></script>
+@endsection
+
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/data-table/datatables.min.css') }}">
+@endsection
+
 @section('content')
 
 <!-- Container fluid  -->
@@ -24,18 +33,7 @@
                 </div>
             @endif
 
-            <div class="row my-1 justify-content-end">
-                <div class="col-lg-3 col-12">
-                    <div class="input-group mb-2">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text"><i class="i-Data-Search"></i></div>
-                        </div>
-                        <input type="text" name="" id="" class="form-control form-control-sm" placeholder="Buscar">
-                    </div>
-                </div>
-            </div>
-
-            <table class="table table-hover table-responsive-lg">
+            <table class="table table-hover table-responsive-lg" id="list-permissions">
                 <thead>
                     <tr>
                         <th>Nombre</th>
@@ -46,29 +44,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if (count($permissions) > 0)
-                        @foreach ($permissions as $permission)
-                        <tr>
-                            <td><a href="{{ route('permissions.edit',['id' => $permission->id]) }}" class="text-primary">{{ $permission->name }}</a></td>
-                            <td>{{ $permission->parent ?  $permission->parent->name : '-' }}</td>
-                            <td>{{ $permission->module->name }}</td>
-                            <td>{{ $permission->type->name }}</td>
-                            <td>
-                                <a class="btn btn-warning btn-flat btn-sm" href="{{ route('permissions.edit',['id' => $permission->id]) }}"><i class="i-Pen-2"></i> Editar</a>
-                                <button class="btn btn-danger btn-flat btn-sm delete-btn" data-toggle="modal" data-target="#delete-modal" data-object="{{$permission}}" data-message="Está seguro de eliminar el Permiso" data-route="{{ route('permissions.destroy',$permission->id) }}"><i class="i-File-Trash"></i> Eliminar</button>
-                            </td>
-                        </tr>
-                        @endforeach
-                    @else
-                        <tr>
-                            <td class="text-center" colspan="4">
-                                <p class="text-primary">No existen Permisos a consultar</p>
-                            </td>
-                        </tr>
-                    @endif
+                    @foreach ($permissions as $permission)
+                    <tr>
+                        <td><a href="{{ route('permissions.edit',['id' => $permission->id]) }}" class="text-primary">{{ $permission->name }}</a></td>
+                        <td>{{ $permission->parent ?  $permission->parent->name : '-' }}</td>
+                        <td>{{ $permission->module->name }}</td>
+                        <td>{{ $permission->type->name }}</td>
+                        <td>
+                            <a class="btn btn-warning btn-flat btn-sm" href="{{ route('permissions.edit',['id' => $permission->id]) }}"><i class="i-Pen-2"></i> Editar</a>
+                            <button class="btn btn-danger btn-flat btn-sm delete-btn" data-toggle="modal" data-target="#delete-modal" data-object="{{$permission}}" data-message="Está seguro de eliminar el Permiso" data-route="{{ route('permissions.destroy',$permission->id) }}"><i class="i-File-Trash"></i> Eliminar</button>
+                        </td>
+                    </tr>
+                    @endforeach
                 </tbody>
             </table>
-            {{$permissions->links()}}
         </div>
 </div>
 <!-- End PAge Content -->

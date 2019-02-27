@@ -25,7 +25,7 @@ class PersonTypeController extends Controller
      */
     public function index()
     {
-        $personTypes = $this->personType->paginate();
+        $personTypes = $this->personType->enum();
         return view('backend.ptype.index',compact('personTypes'));
     }
 

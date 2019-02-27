@@ -1,5 +1,27 @@
 $(document).ready(function() {
 
+
+    if ($("#list-students").length > 0) {
+        $("#list-students").DataTable({
+            language: {
+                url: 'js/data-table/spanish.json'
+            },
+            orderable: false,
+            columnDefs: [{
+                orderable: false,
+                targets: 5
+            }],
+            order: [
+                [0, 'asc'],
+                [1, 'asc'],
+                [2, 'asc'],
+                [3, 'asc'],
+                [4, 'asc'],
+            ]
+        })
+    }
+
+
     loadGroups = (fieldId) => {
         var dfd = jQuery.Deferred();
         $.ajax({
@@ -65,7 +87,7 @@ $(document).ready(function() {
             return false;
             return false;
         }
-        
+
         loadGroups(fieldId).then(
             (data) => {
                 formatDomSelect(data).then((formatted) => {

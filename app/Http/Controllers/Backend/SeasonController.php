@@ -28,7 +28,7 @@ class SeasonController extends Controller
      */
     public function index()
     {
-        $seasons = $this->season->paginate();
+        $seasons = $this->season->enum();
         return view('backend.season.index',compact('seasons'));
     }
 

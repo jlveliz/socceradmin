@@ -23,13 +23,20 @@ class PermissionTypeRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = [
-            'name' => 'required|unique:permission_type,name',
-            'state' => 'required'
-        ];
+        
+        if ($this->method() == 'POST') {
+            $rules = [
+                'name' => 'required|unique:permission_type,name',
+                'state' => 'required'
+            ];
+        }
 
         if ($this->method() == 'PUT') {
             $rules['name'] = 'required|unique:permission_type,name,'.$this->get('key');
+        }
+
+        if ($this->method() == 'DELETE') {
+            $rules['id'] = 'is_used:permission,type_id';
         }
         
         return $rules;

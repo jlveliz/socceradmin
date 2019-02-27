@@ -31,7 +31,7 @@ class ModuleController extends Controller
     public function index()
     {
         
-        $modules = $this->module->paginate();
+        $modules = $this->module->enum();
         return view('backend.module.index',compact('modules'));
     }
 

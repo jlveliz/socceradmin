@@ -3,6 +3,15 @@
 @section('parent-page','Escritorio')
 @section('route-parent',route('home'))
 
+@section('js')
+<script type="text/javascript" src="{{ asset('js/data-table/datatables.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/components/field.js') }}"></script>
+@endsection
+
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/data-table/datatables.min.css') }}">
+@endsection
+
 @section('content')
 <ul class="nav nav-tabs customtab mb-2">
     <li class="nav-item">
@@ -38,8 +47,7 @@
                         </div>
                     @endif
 
-                    {{$fields->links()}}
-                    <table class="table table-hover table-responsive-lg">
+                    <table class="table table-hover table-responsive-lg" id="list-fields">
                         <thead>
                             <tr>
                                 <th>Nombre</th>
@@ -49,28 +57,20 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if (count($fields) > 0)
-                                @foreach ($fields as $field)
-                                <tr>
-                                    <td><a href="{{ route('fields.edit',['id' => $field->id]) }}" class="text-primary">{{ $field->name }}</a></td>
-                                    <td>{{ $field->address}}</td>
-                                    <td>{{ $field->type ? $field->type->name : '-' }}</td>
-                                    <td>
-                                        <a class="btn btn-warning btn-flat btn-sm" href="{{ route('fields.edit',['id' => $field->id]) }}"><i class="i-Pen-2"></i> Editar</a>
-                                        <button class="btn btn-danger btn-flat btn-sm delete-btn" data-toggle="modal" data-target="#delete-modal" data-object="{{$field}}" data-message="Está seguro de eliminar la cancha " data-route="{{ route('fields.destroy',$field->id) }}"><i class="i-File-Trash"></i> Eliminar</button>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            @else
-                                <tr>
-                                    <td class="text-center" colspan="4">
-                                        <p class="text-primary">No existen Canchas a consultar</p>
-                                    </td>
-                                </tr>
-                            @endif
+                            @foreach ($fields as $field)
+                            <tr>
+                                <td><a href="{{ route('fields.edit',['id' => $field->id]) }}" class="text-primary">{{ $field->name }}</a></td>
+                                <td>{{ $field->address}}</td>
+                                <td>{{ $field->type ? $field->type->name : '-' }}</td>
+                                <td>
+                                    <a class="btn btn-warning btn-flat btn-sm" href="{{ route('fields.edit',['id' => $field->id]) }}"><i class="i-Pen-2"></i> Editar</a>
+                                    <button class="btn btn-danger btn-flat btn-sm delete-btn" data-toggle="modal" data-target="#delete-modal" data-object="{{$field}}" data-message="Está seguro de eliminar la cancha " data-route="{{ route('fields.destroy',$field->id) }}"><i class="i-File-Trash"></i> Eliminar</button>
+                                </td>
+                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
-                    {{$fields->links()}}
+                    
                 </div>
             
         </div>

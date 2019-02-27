@@ -35,8 +35,19 @@
             </div>
         @endif
 
-        {{ $modules->links() }}
-    	<table class="table table-hover table-responsive-lg" id="list-modules">
+        {{-- validation errors --}}
+        @if($errors->any())
+            <div class="alert alert-danger sufee-alert alert with-close alert-dismissible fade show">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{$error}}</li><br>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <table class="table table-hover table-responsive-lg" id="list-modules">
     		<thead>
     			<tr>
                     <th>Nombre</th>
@@ -46,34 +57,26 @@
     			</tr>
     		</thead>
     		<tbody>
-    			@if (count($modules) > 0)
-        			@foreach ($modules as $module)
-        			<tr>
-                        <td><a href="{{ route('modules.edit',['id' => $module->id]) }}" class="text-primary">{{ $module->name }}</a></td>
-        				<td>{{ $module->order }}</td>
-        				<td>
-        					@if($module->state == 1)
-        						<span class="badge badge-success">Activa</span>
-        					@else 
-        						<span class="badge badge-danger">Inactiva</span>
-        					@endif
-        				</td>
-        				<td>
-        					<a class="btn btn-warning btn-flat btn-sm" href="{{ route('modules.edit',['id' => $module->id]) }}"><i class="i-Pen-2"></i> Editar</a>
-        					<button class="btn btn-danger btn-flat btn-sm delete-btn text-light" data-toggle="modal" data-target="#delete-modal" data-object="{{$module}}" data-message="Está seguro de eliminar el Módulo" data-route="{{ route('modules.destroy',$module->id) }}"><i class="i-File-Trash"></i> Eliminar</button>
-        				</td>
-        			</tr>
-        			@endforeach
-        		@else
-        			<tr>
-        				<td class="text-center" colspan="4">
-        					<p class="text-primary">No existen módulos a consultar</p>
-        				</td>
-        			</tr>
-    			@endif
+				@foreach ($modules as $module)
+    			<tr>
+                    <td><a href="{{ route('modules.edit',['id' => $module->id]) }}" class="text-primary">{{ $module->name }}</a></td>
+    				<td>{{ $module->order }}</td>
+    				<td>
+    					@if($module->state == 1)
+    						<p><span class="badge badge-success">Activa</span></p>
+    					@else 
+    						<p><span class="badge badge-danger">Inactiva</span></p>
+    					@endif
+    				</td>
+    				<td>
+    					<a class="btn btn-warning btn-flat btn-sm" href="{{ route('modules.edit',['id' => $module->id]) }}"><i class="i-Pen-2"></i> Editar</a>
+    					<button class="btn btn-danger btn-flat btn-sm delete-btn text-light" data-toggle="modal" data-target="#delete-modal" data-object="{{$module}}" data-message="Está seguro de eliminar el Módulo" data-route="{{ route('modules.destroy',$module->id) }}"><i class="i-File-Trash"></i> Eliminar</button>
+    				</td>
+    			</tr>
+    			@endforeach
+        		
     		</tbody>
     	</table>
-        {{ $modules->links() }}
     </div>
 </div>
 @endsection

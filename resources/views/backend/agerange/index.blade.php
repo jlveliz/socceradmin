@@ -3,6 +3,15 @@
 @section('parent-page','Escritorio')
 @section('route-parent',route('home'))
 
+@section('js')
+<script type="text/javascript" src="{{ asset('js/data-table/datatables.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/components/agerange.js') }}"></script>
+@endsection
+
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/data-table/datatables.min.css') }}">
+@endsection
+
 @section('content')
 <ul class="nav nav-tabs customtab mb-2">
     <li class="nav-item">
@@ -38,8 +47,8 @@
             </div>
         @endif
 
-        {{ $ageRanges->links() }}
-    	<table class="table table-hover table-responsive-lg">
+        
+    	<table class="table table-hover table-responsive-lg" id="list-ageranges">
     		<thead>
     			<tr>
                     <th>Nombre</th>
@@ -48,27 +57,19 @@
     			</tr>
     		</thead>
     		<tbody>
-    			@if (count($ageRanges) > 0)
-        			@foreach ($ageRanges as $range)
-        			<tr>
-                        <td><a href="{{ route('ageranges.edit',['id' => $range->id]) }}" class="text-primary">{{ $range->name }}</a></td>
-        				<td>{{ $range->min_age }} - {{$range->max_age}} Años</td>
-        				<td>
-        					<a class="btn btn-warning btn-flat btn-sm" href="{{ route('ageranges.edit',['id' => $range->id]) }}"><i class="i-Pen-2"></i> Editar</a>
-        					<button class="btn btn-danger btn-flat btn-sm delete-btn text-light" data-toggle="modal" data-target="#delete-modal" data-object="{{$range}}" data-message="Está seguro de eliminar el Rango" data-route="{{ route('ageranges.destroy',$range->id) }}"><i class="i-File-Trash"></i> Eliminar</button>
-        				</td>
-        			</tr>
-        			@endforeach
-        		@else
-        			<tr>
-        				<td class="text-center" colspan="4">
-        					<p class="text-primary">No existen Rangos de Edad a consultar</p>
-        				</td>
-        			</tr>
-    			@endif
+				@foreach ($ageRanges as $range)
+    			<tr>
+                    <td><a href="{{ route('ageranges.edit',['id' => $range->id]) }}" class="text-primary">{{ $range->name }}</a></td>
+    				<td>{{ $range->min_age }} - {{$range->max_age}} Años</td>
+    				<td>
+    					<a class="btn btn-warning btn-flat btn-sm" href="{{ route('ageranges.edit',['id' => $range->id]) }}"><i class="i-Pen-2"></i> Editar</a>
+    					<button class="btn btn-danger btn-flat btn-sm delete-btn text-light" data-toggle="modal" data-target="#delete-modal" data-object="{{$range}}" data-message="Está seguro de eliminar el Rango" data-route="{{ route('ageranges.destroy',$range->id) }}"><i class="i-File-Trash"></i> Eliminar</button>
+    				</td>
+    			</tr>
+    			@endforeach
     		</tbody>
     	</table>
-        {{ $ageRanges->links() }}
+        
     </div>
 </div>
 @endsection

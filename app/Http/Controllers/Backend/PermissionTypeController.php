@@ -28,7 +28,7 @@ class PermissionTypeController extends Controller
      */
     public function index()
     {
-        $permissionTypes = $this->permissionType->paginate();
+        $permissionTypes = $this->permissionType->enum();
         return view('backend.permission-type.index',compact('permissionTypes'));
     }
 
@@ -128,7 +128,7 @@ class PermissionTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(PermissionTypeRequest $request, $id)
     {
         $message = [
             'type' => 'primary',

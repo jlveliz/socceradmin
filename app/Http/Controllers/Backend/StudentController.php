@@ -38,7 +38,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = $this->studentRepo->paginate();
+        $students = $this->studentRepo->enum();
         return view('backend.student.index',compact('students'));
     }
 
