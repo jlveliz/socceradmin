@@ -130,9 +130,10 @@
 										<div class="col-12">
 											<div class="form-group">
 												<label for="">Horario <span class="text-danger">*</span></label>
-												
 												@if ($errors->has('available_days'))
-													<div id="val-state-error" class="invalid-feedback animated fadeInDown @if ($errors->has('available_days')) is-invalid @endif">{{ $errors->first('available_days') }}</div>
+													<div class="form-group form-control is-invalid">
+														<div class="invalid-feedback animated fadeInDown" style="display: block">{{ $errors->first('available_days') }}</div>
+		                							</div>
 												@endif
 											</div>
 										</div>
@@ -168,7 +169,7 @@
 																				<div class="row">
 																					@foreach ($scheduleDetail as $keyAction => $hours)
 																						<div class="col-5 form-group ">
-																							<input class="form-control @if ($errors->has('available_days.'.$kday.'.'.$shcheduleNum.'.'.$keyAction)) is-invalid @endifform-control-sm  @if($keyAction == 'start') start-hour @else end-hour @endif" type="time" name="available_days[{{$kday}}][{{$shcheduleNum}}][{{$keyAction}}]" id="" value="{{$hours}}">
+																							<input class="form-control @if ($errors->has('available_days.'.$kday.'.'.$shcheduleNum.'.'.$keyAction)) is-invalid @endif form-control-sm  @if($keyAction == 'start') start-hour @else end-hour @endif" type="time" name="available_days[{{$kday}}][{{$shcheduleNum}}][{{$keyAction}}]" id="" value="{{$hours}}">
 																							@if ($errors->has('available_days.'.$kday.'.'.$shcheduleNum.'.'.$keyAction))
 																								<div id="val-state-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('available_days.'.$kday.'.'.$shcheduleNum.'.'.$keyAction) }}</div>
 																							@endif
@@ -193,8 +194,8 @@
 																			@foreach (old('available_days')[$kday] as $sheduleNum => $scheduleDetail)
 																				<div class="row">
 																					@foreach ($scheduleDetail as $keyAction => $hours)
-																						<div class="col-5 form-group @if ($errors->has('available_days.'.$kday.'.'.$sheduleNum.'.'.$keyAction)) is-invalid @endif">
-																						<input class="form-control form-control-sm  @if($keyAction == 'start') start-hour @else end-hour @endif" type="time" name="available_days[{{$kday}}][{{$sheduleNum}}][{{$keyAction}}]" id="" value="{{$hours}}">
+																						<div class="col-5 form-group">
+																						<input class="form-control form-control-sm @if ($errors->has('available_days.'.$kday.'.'.$sheduleNum.'.'.$keyAction)) is-invalid @endif  @if($keyAction == 'start') start-hour @else end-hour @endif" type="time" name="available_days[{{$kday}}][{{$sheduleNum}}][{{$keyAction}}]" id="" value="{{$hours}}">
 																							@if ($errors->has('available_days.'.$kday.'.'.$sheduleNum.'.'.$keyAction))
 																								<div id="val-state-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('available_days.'.$kday.'.'.$sheduleNum.'.'.$keyAction) }}</div>
 																							@endif
@@ -214,15 +215,15 @@
 																			@endforeach
 																		@else
 																			<div class="row">			
-																				<div class="col-5 form-group @if ($errors->has('available_days.'.$kday.'.schedule_0.start')) is-invalid @endif">
-																					<input class="form-control form-control-sm start-hour" type="time" name="available_days[{{$kday}}][schedule_0][start]" id="" @if( isset($field) && isset($field->available_days[$kday]) && isset($field->available_days[$kday]['start']) ) value="{{$field->available_days[$kday]['start'][$countDay]}}"  @endif disabled>
+																				<div class="col-5 form-group">
+																					<input class="form-control form-control-sm start-hour  @if ($errors->has('available_days.'.$kday.'.schedule_0.start')) is-invalid @endif" type="time" name="available_days[{{$kday}}][schedule_0][start]" id="" @if( isset($field) && isset($field->available_days[$kday]) && isset($field->available_days[$kday]['start']) ) value="{{$field->available_days[$kday]['start'][$countDay]}}"  @endif disabled>
 																					@if ($errors->has('available_days.'.$kday.'.schedule_0.start'))
 																						<div id="val-state-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('available_days.'.$kday.'.schedule_0.start') }}</div>
 																					@endif
 																				</div>
 																				
-																				<div class="col-5 form-group @if ($errors->has('available_days.'.$kday.'.schedule_0.end')) is-invalid @endif">
-																					<input type="time" class="form-control form-control-sm end-hour" name="available_days[{{$kday}}][schedule_0][end]" id="" disabled>
+																				<div class="col-5 form-group">
+																					<input type="time" class="form-control form-control-sm end-hour @if ($errors->has('available_days.'.$kday.'.schedule_0.end')) is-invalid @endif" name="available_days[{{$kday}}][schedule_0][end]" id="" disabled>
 																					@if ($errors->has('available_days.'.$kday.'.schedule_0.end'))
 																						<div id="val-state-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('available_days.'.$kday.'.schedule_0.end') }}</div>
 																					@endif
