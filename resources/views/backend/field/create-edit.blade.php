@@ -178,7 +178,7 @@
 																					
 																					@if($numSchedule < 1)
 																						<div class="form-group">
-																							<button type="button" class="btn btn-link btn-sm add-schedule"><i class="fa fa-plus"></i></button>
+																							<button type="button" class="btn btn-link btn-sm add-schedule"><i class="i-Add"></i></button>
 																						</div>
 																					@else
 																						<div class="form-group">
@@ -203,7 +203,7 @@
 																					@endforeach
 																					@if($numSchedule < 1)
 																						<div class="form-group">
-																							<button type="button" class="btn btn-link btn-sm add-schedule"><i class="fa fa-plus"></i></button>
+																							<button type="button" class="btn btn-link btn-sm add-schedule"><i class="i-Add"></i></button>
 																						</div>
 																					@else
 																						<div class="form-group">
@@ -229,7 +229,7 @@
 																					@endif
 																				</div>
 																				<div class="form-group">
-																					<button type="button" class="btn btn-link btn-sm add-schedule" disabled><i class="fa fa-plus"></i></button>
+																					<button type="button" class="btn btn-link btn-sm add-schedule" disabled><i class="i-Add"></i></button>
 																				</div>
 																			</div>
 																		@endif

@@ -88,7 +88,7 @@
                                     </td>
                                     <td>
                                         @if($groupNum < 1)
-                                            <button type="button" class="btn btn-link btn-sm add-group-schedule"><i class="fa fa-plus"></i></button>
+                                            <button type="button" class="btn btn-link btn-sm add-group-schedule"><i class="i-Add"></i></button>
                                         @else 
                                             <button type="button" class="btn btn-link btn-sm  remove-group-live-schedule"><i class="fa fa-close"></i></button>
                                         @endif
@@ -133,7 +133,7 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <button type="button" class="btn btn-link btn-sm add-group-schedule"><i class="fa fa-plus"></i></button>
+                                        <button type="button" class="btn btn-link btn-sm add-group-schedule"><i class="i-Add"></i></button>
                                     </td>
                                 </tr>
                             @endif
@@ -182,7 +182,7 @@
                                             </td>
                                             <td>
                                                 @if($groupNum < 1)
-                                                    <button type="button" class="btn btn-link btn-sm add-group-schedule"><i class="fa fa-plus"></i></button>
+                                                    <button type="button" class="btn btn-link btn-sm add-group-schedule"><i class="i-Add"></i></button>
                                                 @else 
                                                     <button type="button" class="btn btn-link btn-sm  remove-group-live-schedule"><i class="fa fa-close"></i></button>
                                                 @endif
@@ -229,7 +229,7 @@
                                     </select>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-link btn-sm add-group-schedule"><i class="fa fa-plus"></i></button>
+                                    <button type="button" class="btn btn-link btn-sm add-group-schedule"><i class="i-Add"></i></button>
                                 </td>
                             </tr>
                         @endif

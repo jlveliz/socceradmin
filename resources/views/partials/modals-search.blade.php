@@ -22,7 +22,7 @@
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
                 
               </div>
-              <table class="table table-hover" id="table-results-search">
+              <table class="table table-hover table-responsive-lg" id="table-results-search">
                 <thead>
                   <tr>
                     <th>Nombre</th>

@@ -16,7 +16,7 @@
                         <h3>Listado</h3>
                     </div>
                     <div class="col-6 text-right">
-                        <a href="{{ route('seasons.create') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Crear</a>
+                        <a href="{{ route('seasons.create') }}" class="btn btn-primary btn-sm"><i class="i-Add"></i> Crear</a>
                     </div>
                 </div>
 
@@ -29,7 +29,7 @@
                     @endif
 
                     {{ $seasons->links() }}
-                	<table class="table table-hover">
+                	<table class="table table-hover table-responsive-lg">
                 		<thead>
                 			<tr>
                                 <th>Nombre</th>
