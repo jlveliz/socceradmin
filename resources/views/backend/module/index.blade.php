@@ -3,6 +3,16 @@
 @section('parent-page','Escritorio')
 @section('route-parent',route('home'))
 
+@section('js')
+<script type="text/javascript" src="{{ asset('js/data-table/datatables.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/components/module.js') }}"></script>
+@endsection
+
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/data-table/datatables.min.css') }}">
+@endsection
+
+
 @section('content')
 <!-- Container fluid  -->
 <div class="card">
@@ -26,7 +36,7 @@
         @endif
 
         {{ $modules->links() }}
-    	<table class="table table-hover table-responsive-lg">
+    	<table class="table table-hover table-responsive-lg" id="list-modules">
     		<thead>
     			<tr>
                     <th>Nombre</th>
