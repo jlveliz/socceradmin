@@ -2,6 +2,7 @@
 @section('title', isset($ptype) ?  'Editar Tipo de Persona '. $ptype->name : 'Crear Tipo de Persona' )
 @section('parent-page','Tipos de Persona')
 @section('route-parent',route('ptypes.index') )
+@section('current-page', isset($ptype) ?  'Editar Tipo de Persona '. $ptype->name : 'Crear Tipo de Persona' )
 
 @section('content')
 <!-- Start Page Content -->

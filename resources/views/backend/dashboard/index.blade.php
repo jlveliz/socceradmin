@@ -1,6 +1,7 @@
 @extends('layouts.backend')
-
+@section('parent-page','Escritorio')
 @section('title','Escritorio')
+@section('route-parent',route('home'))
 
 @section('content')
 

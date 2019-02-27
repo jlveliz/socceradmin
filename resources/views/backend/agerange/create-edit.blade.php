@@ -3,6 +3,7 @@
 @section('title', isset($agerange) ?  'Editar Rango '. $agerange->name : 'Crear Rango de Edad' )
 @section('parent-page','Rangos de Edad')
 @section('route-parent',route('ageranges.index') )
+@section('current-page', isset($agerange) ?  'Editar Rango '. $agerange->name : 'Crear Rango de Edad' )
 
 @section('content')
 

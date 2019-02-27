@@ -2,7 +2,7 @@
 @section('title','Usuarios')
 @section('parent-page','Escritorio')
 @section('route-parent',route('home'))
-@section('current-page','Listado')
+@section('current-page','Usuarios')
 
 @section('js')
 <script type="text/javascript" src="{{ asset('js/data-table/datatables.min.js') }}"></script>

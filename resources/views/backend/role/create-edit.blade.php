@@ -3,6 +3,7 @@
 @section('title', isset($role) ?  'Editar Rol '. $role->name : 'Crear Rol' )
 @section('parent-page','Roles')
 @section('route-parent',route('roles.index') )
+@section('current-page', isset($role) ?  'Editar Rol '. $role->name : 'Crear Rol' )
 
 @section('content')
 

@@ -4,6 +4,7 @@
 @section('route-parent',route('users.index') )
 @section('current-page',isset($user) ?  'Editar Usuario '. $user->name : 'Crear Usuario' )
 
+
 @section('content')
 <!-- Container fluid  -->
 <!-- Start Page Content -->

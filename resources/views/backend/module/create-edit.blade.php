@@ -3,6 +3,7 @@
 @section('title', isset($module) ?  'Editar Módulo '. $module->name : 'Crear Modulo' )
 @section('parent-page','Módulos')
 @section('route-parent',route('modules.index') )
+@section('current-page', isset($module) ?  'Editar Módulo '. $module->name : 'Crear Modulo' )
 
 @section('content')
 

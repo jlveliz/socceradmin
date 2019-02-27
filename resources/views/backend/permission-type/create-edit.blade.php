@@ -3,6 +3,7 @@
 @section('title', isset($permissionType) ?  'Editar Tipo de Permiso '. $permissionType->name : 'Crear Tipo de Permiso' )
 @section('parent-page','Tipos de Permiso')
 @section('route-parent',route('permission-types.index') )
+@section('current-page', isset($permissionType) ?  'Editar Tipo de Permiso '. $permissionType->name : 'Crear Tipo de Permiso' )
 
 
 @section('content')

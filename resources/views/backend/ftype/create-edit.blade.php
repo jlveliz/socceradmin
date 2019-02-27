@@ -2,6 +2,7 @@
 @section('title', isset($ftype) ?  'Editar Tipo de Cancha '. $ftype->name : 'Crear Tipo de Cancha' )
 @section('parent-page','Tipos de Cancha')
 @section('route-parent',route('ftypes.index') )
+@section('current-page', isset($ftype) ?  'Editar Tipo de Cancha '. $ftype->name : 'Crear Tipo de Cancha' )
 
 @section('content')
 <!-- Start Page Content -->

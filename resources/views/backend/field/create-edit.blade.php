@@ -3,6 +3,9 @@
 @section('title', isset($field) ?  'Editar Cancha '. $field->name : 'Crear Cancha' )
 @section('parent-page','Canchas')
 @section('route-parent',route('fields.index') )
+@section('current-page', isset($field) ?  'Editar Cancha '. $field->name : 'Crear Cancha' )
+
+
 
 @section('content')
 

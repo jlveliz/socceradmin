@@ -2,7 +2,7 @@
 @section('title','Asistencias')
 @section('parent-page','Escritorio')
 @section('route-parent',route('home'))
-
+@section('current-page','Horarios')
 @section('content')
 
 

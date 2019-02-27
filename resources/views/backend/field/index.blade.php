@@ -2,6 +2,7 @@
 @section('title','Canchas')
 @section('parent-page','Escritorio')
 @section('route-parent',route('home'))
+@section('current-page','Canchas')
 
 @section('js')
 <script type="text/javascript" src="{{ asset('js/data-table/datatables.min.js') }}"></script>

@@ -2,6 +2,7 @@
 @section('title', isset($student) ?  'Editar Estudiante '. $student->person->name .' '.  $student->person->last_name: 'Crear Estudiante' )
 @section('parent-page','Estudiantes')
 @section('route-parent',route('students.index') )
+@section('current-page', isset($student) ?  'Editar Estudiante '. $student->person->name .' '.  $student->person->last_name: 'Crear Estudiante' )
 
 @section('content')
 	<!-- Start Page Content -->

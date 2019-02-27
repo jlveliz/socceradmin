@@ -3,6 +3,7 @@
 @section('title', isset($permission) ?  'Editar Permiso '. $permission->name : 'Crear Permiso' )
 @section('parent-page','Permisos')
 @section('route-parent',route('permissions.index') )
+@section('current-page', isset($permission) ?  'Editar Permiso '. $permission->name : 'Crear Permiso' )
 
 @section('content')
 
