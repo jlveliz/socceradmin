@@ -32,7 +32,7 @@
                 @foreach ($menuItem as $item)
                     <li class="nav-item">                       
                         <a class="{{ Route::currentRouteName()=='dashboard_version_1' ? 'open' : '' }}" title="{{$item->description}}" alt="{{$item->name}}" href="@if($item->resource){{route($item->resource) }}@else#@endif">
-                            <i class="nav-icon i-Clock-3"></i>
+                            <i class="nav-icon {{$item->fav_icon}}"></i>
                             <span class="item-name">{{$item->name}}</span>
                         </a>
                     </li>
