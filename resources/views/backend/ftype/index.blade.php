@@ -23,10 +23,6 @@
         <a class="nav-link active"  id="range-age-tab"  data-toggle="tab" href="#ageranges" role="tab" aria-controls="ageranges" aria-selected="true"> Tipos de Cancha</a>
     </li>
 
-
-    <li class="nav-item">
-        <a class="nav-link" id="range-age-tab" href="{{route('ageranges.index')}}">Rango de Edades</a>
-    </li>
 </ul>
 
 <div class="car">
@@ -52,7 +48,7 @@
         @if($errors->any())
             <div class="alert alert-danger sufee-alert alert with-close alert-dismissible fade show">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-                <ul>
+                <ul class="mb-0">
                     @foreach ($errors->all() as $error)
                         <li>{{$error}}</li>
                     @endforeach

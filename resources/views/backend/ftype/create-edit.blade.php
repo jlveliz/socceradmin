@@ -17,10 +17,6 @@
                 <a class="nav-link active"  id="range-age-tab"  data-toggle="tab" href="#ageranges" role="tab" aria-controls="ageranges" aria-selected="true"> Tipos de Cancha</a>
             </li>
 
-
-            <li class="nav-item">
-                <a class="nav-link" id="range-age-tab" href="{{route('ageranges.index')}}">Rango de Edades</a>
-            </li>
         </ul>
 
         <div class="card">

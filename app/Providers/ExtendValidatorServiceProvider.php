@@ -34,7 +34,7 @@ class ExtendValidatorServiceProvider extends ServiceProvider
                 return true;
             }
 
-            if ($data->deleted_at && $data->deleted_at != null) {
+            if ( ( property_exists($data, 'deleted_at') ) && ($data->deleted_at != null)) {
                 return true;
             }
 

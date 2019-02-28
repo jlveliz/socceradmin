@@ -47,7 +47,8 @@ class PermissionTypeRequest extends FormRequest
         return [
             'name.required' => 'Ingrese un nombre',
             'name.unique' => 'Ya existe un tipo de permiso con el mismo nombre',
-            'state.required' => 'Ingrese un estado'
+            'state.required' => 'Ingrese un estado',
+            'id.is_used' => 'El tipo de permiso se encuentra usado'
         ];
     }
 }

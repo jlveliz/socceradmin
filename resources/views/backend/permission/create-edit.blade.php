@@ -6,6 +6,23 @@
 @section('current-page', isset($permission) ?  'Editar Permiso '. $permission->name : 'Crear Permiso' )
 
 @section('content')
+<ul class="nav nav-tabs customtab mb-2">
+    <li class="nav-item">
+        <a class="nav-link" id="users-tab"  href="{{route('users.index')}}">Usuarios</a>
+    </li>
+    
+    <li class="nav-item">
+        <a class="nav-link" id="roles-tab"  href="{{route('roles.index')}}">Roles</a>
+    </li>
+
+     <li class="nav-item">
+        <a class="nav-link active" id="permissions-tab" data-toggle="tab" href="#permissions" role="tab" aria-controls="permmission" aria-selected="true">Permisos</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" id="permissionstype-tab"  href="{{route('permission-types.index')}}">Tipos de Permisos</a>
+    </li>
+</ul>
 
 <!-- Start Page Content -->
 <div class="row">

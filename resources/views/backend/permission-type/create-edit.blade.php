@@ -7,6 +7,23 @@
 
 
 @section('content')
+<ul class="nav nav-tabs customtab mb-2">
+    <li class="nav-item">
+        <a class="nav-link" id="users-tab"  href="{{route('users.index')}}">Usuarios</a>
+    </li>
+    
+    <li class="nav-item">
+        <a class="nav-link" id="roles-tab"  href="{{route('roles.index')}}">Roles</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" id="permissions-tab"  href="{{route('permissions.index')}}">Permisos</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link active" id="permissionstype-tab" data-toggle="tab" href="#permissionstype" role="tab" aria-controls="permissiontype" aria-selected="true">Tipos de Permisos</a>
+    </li>
+</ul>
 <!-- Start Page Content -->
 <div class="row">
     <div class="col-12">

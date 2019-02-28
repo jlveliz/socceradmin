@@ -7,6 +7,8 @@ use HappyFeet\Http\Controllers\Controller;
 use HappyFeet\RepositoryInterface\PermissionTypeRepositoryInterface;
 use HappyFeet\Http\Requests\PermissionTypeRequest;
 use HappyFeet\Exceptions\PermissionTypeException;
+use Exception;
+use DB;
 
 class PermissionTypeController extends Controller
 {
@@ -54,16 +56,25 @@ class PermissionTypeController extends Controller
             'type' => 'primary',
             'content' =>'',
         ];
+        //begin transaction
+        DB::beginTransaction();
 
         try {
             $message['content'] = "Se ha creado el tipo de permiso satisfactoriamente";
             $permissionType = $this->permissionType->save($request->all());
+            DB::commit();
             if ($request->get('redirect-index') == 1) {
                 return redirect()->route($this->routeRedirectIndex)->with($message);
             } else {
                 return redirect()->route('permission-types.edit',['id'=>$permissionType->id])->with($message);
             }
         } catch (PermissionTypeException $e) {
+            DB::rollback();
+            $message['type'] = "error";
+            $message['content'] = $e->getMessage();
+            return back()->with($message);
+        } catch (Exception $e) {
+            DB::rollback();
             $message['type'] = "error";
             $message['content'] = $e->getMessage();
             return back()->with($message);

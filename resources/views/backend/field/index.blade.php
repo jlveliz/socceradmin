@@ -22,13 +22,6 @@
     <li class="nav-item">
         <a class="nav-link" id="range-age-tab"  href="{{route('ftypes.index')}}">Tipos de Cancha</a>
     </li>
-
-    <li class="nav-item">
-        <a class="nav-link" id="range-age-tab"  href="{{route('ageranges.index')}}">Rango de Edades</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" id="permissionstype-tab"  href="{{route('permission-types.index')}}">Tipos de Permisos</a>
-    </li>
 </ul>
 
 <div class="card">
