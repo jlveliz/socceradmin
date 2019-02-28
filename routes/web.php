@@ -65,8 +65,8 @@
 
 	Auth::routes();
 
-	Route::get('/','HomeController@index')->name('home');
-	Route::get('/dashboard','HomeController@index')->name('dashboard');
+	Route::get('/','Backend\DashboardController@showDash')->name('home');
+	Route::get('/dashboard','Backend\DashboardController@showDash')->name('dashboard');
 
 
 	//modules
