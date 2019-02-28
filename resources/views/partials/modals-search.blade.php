@@ -43,8 +43,8 @@
             <input type="hidden" name="_method" value="DELETE">
             {{ csrf_field() }}
             <input type="hidden" value="" class="modal-item-key" name="id">
-            <button type="button" class="btn btn-secondary btn-sm close-modal" data-dismiss="modal">Cerrar</button>
-            {{-- <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-check-circle"></i> Aceptar</button> --}}
+            <button type="button" class="btn btn-secondary  close-modal" data-dismiss="modal">Cerrar</button>
+            {{-- <button type="submit" class="btn btn-primary "><i class="fa fa-check-circle"></i> Aceptar</button> --}}
           </form>
         </div>
       </div>

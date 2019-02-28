@@ -35,7 +35,7 @@
             <h3>Listado</h3>
         </div>
         <div class="col-5 mt-4 ml-4 text-right">
-            <a href="{{ route('ageranges.create') }}" class="btn btn-primary btn-sm"><i class="i-Add"></i> Crear</a>             
+            <a href="{{ route('ageranges.create') }}" class="btn btn-primary "><i class="i-Add"></i> Crear</a>             
         </div>
     </div>
 
@@ -63,8 +63,8 @@
                     <td><a href="{{ route('ageranges.edit',['id' => $range->id]) }}" class="text-primary">{{ $range->name }}</a></td>
     				<td>{{ $range->min_age }} - {{$range->max_age}} Años</td>
     				<td>
-    					<a class="btn btn-warning btn-flat btn-sm" href="{{ route('ageranges.edit',['id' => $range->id]) }}"><i class="i-Pen-2"></i> Editar</a>
-    					<button class="btn btn-danger btn-flat btn-sm delete-btn text-light" data-toggle="modal" data-target="#delete-modal" data-object="{{$range}}" data-message="Está seguro de eliminar el Rango" data-route="{{ route('ageranges.destroy',$range->id) }}"><i class="i-File-Trash"></i> Eliminar</button>
+    					<a class="btn btn-warning btn-flat " href="{{ route('ageranges.edit',['id' => $range->id]) }}"><i class="i-Pen-2"></i> Editar</a>
+    					<button class="btn btn-danger btn-flat  delete-btn text-light" data-toggle="modal" data-target="#delete-modal" data-object="{{$range}}" data-message="Está seguro de eliminar el Rango" data-route="{{ route('ageranges.destroy',$range->id) }}"><i class="i-File-Trash"></i> Eliminar</button>
     				</td>
     			</tr>
     			@endforeach

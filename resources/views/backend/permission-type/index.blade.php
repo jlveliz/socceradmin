@@ -41,7 +41,7 @@
                 <h3>Listado</h3>
             </div>
             <div class="col-5 mt-4 ml-4 text-right">
-                <a href="{{ route('permission-types.create') }}" class="btn btn-primary btn-sm"><i class="i-Add"></i> Crear</a>             
+                <a href="{{ route('permission-types.create') }}" class="btn btn-primary "><i class="i-Add"></i> Crear</a>             
             </div>
         </div>
         
@@ -75,8 +75,8 @@
             					@endif
             				</td>
             				<td>
-            					<a class="btn btn-warning btn-flat btn-sm" href="{{ route('permission-types.edit',['id' => $pType->id]) }}"><i class="i-Pen-2"></i> Editar</a>
-            					<button class="btn btn-danger btn-flat btn-sm delete-btn" data-toggle="modal" data-target="#delete-modal" data-object="{{$pType}}" data-message="Está seguro que desea eliminar el tipo de permiso " data-component="Tipo de Permiso" data-component-name="{{ $pType->name }}" data-route="{{ route('permission-types.destroy',['id'=>$pType->id]) }}"><i class="i-File-Trash"></i> Eliminar</button>
+            					<a class="btn btn-warning btn-flat " href="{{ route('permission-types.edit',['id' => $pType->id]) }}"><i class="i-Pen-2"></i> Editar</a>
+            					<button class="btn btn-danger btn-flat  delete-btn" data-toggle="modal" data-target="#delete-modal" data-object="{{$pType}}" data-message="Está seguro que desea eliminar el tipo de permiso " data-component="Tipo de Permiso" data-component-name="{{ $pType->name }}" data-route="{{ route('permission-types.destroy',['id'=>$pType->id]) }}"><i class="i-File-Trash"></i> Eliminar</button>
             				</td>
             			</tr>
         			@endforeach

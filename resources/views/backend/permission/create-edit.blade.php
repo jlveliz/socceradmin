@@ -126,9 +126,9 @@
             	
             	<div class="form-actions">
             		<input type="hidden" value="0" name="redirect-index" id="redirect-index">
-            		<button class="btn btn-primary btn-sm" type="submit"><i class="i-Data-Save"></i> Guardar</button>
-            		<button class="btn btn-secondary btn-sm save-close" type="submit"><i class="i-Data-Save"></i> Guardar y Cerrar</button>
-            		<a class="btn btn-inverse btn-sm" href="{{ route('permissions.index') }}"><i class="fa fa-ban"></i> Cancelar</a>
+            		<button class="btn btn-primary " type="submit"><i class="i-Data-Save"></i> Guardar</button>
+            		<button class="btn btn-secondary  save-close" type="submit"><i class="i-Data-Save"></i> Guardar y Cerrar</button>
+            		<a class="btn btn-dark" href="{{ route('permissions.index') }}"><i class="i-Arrow-Back-2"></i> Cancelar</a>
             	</div>
             </div>
 	            	</form>

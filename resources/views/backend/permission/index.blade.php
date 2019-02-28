@@ -39,7 +39,7 @@
                 <h3>Listado</h3>
             </div>
             <div class="col-5 mt-4 ml-4 text-right">
-               <a href="{{ route('permissions.create') }}" class="btn btn-primary btn-sm pull-right"><i class="i-Add"></i> Crear</a><br>           
+               <a href="{{ route('permissions.create') }}" class="btn btn-primary  pull-right"><i class="i-Add"></i> Crear</a><br>           
             </div>
         </div>
             <div class="card-body"> 
@@ -69,8 +69,8 @@
                             <td>{{ $permission->module->name }}</td>
                             <td>{{ $permission->type->name }}</td>
                             <td>
-                                <a class="btn btn-warning btn-flat btn-sm" href="{{ route('permissions.edit',['id' => $permission->id]) }}"><i class="i-Pen-2"></i> Editar</a>
-                                <button class="btn btn-danger btn-flat btn-sm delete-btn" data-toggle="modal" data-target="#delete-modal" data-object="{{$permission}}" data-message="Está seguro de eliminar el Permiso" data-route="{{ route('permissions.destroy',$permission->id) }}"><i class="i-File-Trash"></i> Eliminar</button>
+                                <a class="btn btn-warning btn-flat " href="{{ route('permissions.edit',['id' => $permission->id]) }}"><i class="i-Pen-2"></i> Editar</a>
+                                <button class="btn btn-danger btn-flat  delete-btn" data-toggle="modal" data-target="#delete-modal" data-object="{{$permission}}" data-message="Está seguro de eliminar el Permiso" data-route="{{ route('permissions.destroy',$permission->id) }}"><i class="i-File-Trash"></i> Eliminar</button>
                             </td>
                         </tr>
                         @endforeach

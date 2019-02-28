@@ -16,7 +16,7 @@
                         <h3>Listado</h3>
                     </div>
                     <div class="col-6 text-right">
-                        <a href="{{ route('seasons.create') }}" class="btn btn-primary btn-sm"><i class="i-Add"></i> Crear</a>
+                        <a href="{{ route('seasons.create') }}" class="btn btn-primary "><i class="i-Add"></i> Crear</a>
                     </div>
                 </div>
 
@@ -46,8 +46,8 @@
                                     <td>{{ $season->getFormatDuration()}}</td>
                                     <td>@if($season->state == 1) <span class="badge badge-success">Activo</span>  @else <span class="badge badge-warning">Inactivo</span>      @endif</td>
 	                				<td>
-	                					<a class="btn btn-warning btn-flat btn-sm" href="{{ route('seasons.edit',['id' => $season->id]) }}"><i class="i-Pen-2"></i> Editar</a>
-	                					<button class="btn btn-danger btn-flat btn-sm delete-btn" data-toggle="modal" data-target="#delete-modal"  data-object="{{$season}}" data-message="Está seguro de eliminar la temporada " data-route="{{ route('seasons.destroy',$season->id) }}"><i class="i-File-Trash"></i> Eliminar</button>
+	                					<a class="btn btn-warning btn-flat " href="{{ route('seasons.edit',['id' => $season->id]) }}"><i class="i-Pen-2"></i> Editar</a>
+	                					<button class="btn btn-danger btn-flat  delete-btn" data-toggle="modal" data-target="#delete-modal"  data-object="{{$season}}" data-message="Está seguro de eliminar la temporada " data-route="{{ route('seasons.destroy',$season->id) }}"><i class="i-File-Trash"></i> Eliminar</button>
 	                				</td>
 	                			</tr>
 	                			@endforeach

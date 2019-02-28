@@ -181,11 +181,11 @@
 																					
 																					@if($numSchedule < 1)
 																						<div class="form-group">
-																							<button type="button" class="btn btn-link btn-sm add-schedule"><i class="i-Add"></i></button>
+																							<button type="button" class="btn btn-link  add-schedule"><i class="i-Add"></i></button>
 																						</div>
 																					@else
 																						<div class="form-group">
-																							<button type="button" class="btn btn-link btn-sm remove-live-schedule"><i class="fa fa-close"></i></button>
+																							<button type="button" class="btn btn-link  remove-live-schedule"><i class="fa fa-close"></i></button>
 																						</div>
 																					@endif
 																					@php $numSchedule++; @endphp 
@@ -206,11 +206,11 @@
 																					@endforeach
 																					@if($numSchedule < 1)
 																						<div class="form-group">
-																							<button type="button" class="btn btn-link btn-sm add-schedule"><i class="i-Add"></i></button>
+																							<button type="button" class="btn btn-link  add-schedule"><i class="i-Add"></i></button>
 																						</div>
 																					@else
 																						<div class="form-group">
-																							<button type="button" class="btn btn-link btn-sm remove-schedule"><i class="fa fa-close"></i></button>
+																							<button type="button" class="btn btn-link  remove-schedule"><i class="fa fa-close"></i></button>
 																						</div>
 																					@endif
 																					@php $numSchedule++; @endphp
@@ -232,7 +232,7 @@
 																					@endif
 																				</div>
 																				<div class="form-group">
-																					<button type="button" class="btn btn-link btn-sm add-schedule" disabled><i class="i-Add"></i></button>
+																					<button type="button" class="btn btn-link  add-schedule" disabled><i class="i-Add"></i></button>
 																				</div>
 																			</div>
 																		@endif
@@ -272,9 +272,9 @@
 				</div>
 				<div class="card-footer">
 					<input type="hidden" value="0" name="redirect-index" id="redirect-index">
-					<button class="btn btn-primary btn-sm" type="submit"><i class="i-Data-Save"></i> Guardar</button>
-					<button class="btn btn-secondary btn-sm save-close" type="submit"><i class="i-Data-Save"></i> Guardar y Cerrar</button>
-					<a class="btn btn-inverse btn-sm" href="{{ route('fields.index') }}"><i class="fa fa-ban"></i> Cancelar</a>
+					<button class="btn btn-primary " type="submit"><i class="i-Data-Save"></i> Guardar</button>
+					<button class="btn btn-secondary  save-close" type="submit"><i class="i-Data-Save"></i> Guardar y Cerrar</button>
+					<a class="btn btn-dark" href="{{ route('fields.index') }}"><i class="i-Arrow-Back-2"></i> Cancelar</a>
 				</div>
 				@if(!isset($field))	
 					</form>

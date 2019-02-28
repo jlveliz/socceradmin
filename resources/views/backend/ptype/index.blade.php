@@ -20,7 +20,7 @@
             <h3>Listado</h3>
         </div>
         <div class="col-5 mt-4 ml-4 text-right">
-            <a href="{{ route('ptypes.create') }}" class="btn btn-primary btn-sm"><i class="i-Add"></i> Crear</a>             
+            <a href="{{ route('ptypes.create') }}" class="btn btn-primary "><i class="i-Add"></i> Crear</a>             
         </div>
     </div>
     <div class="card-body"> 
@@ -54,8 +54,8 @@
     					@endif
     				</td>
     				<td>
-    					<a class="btn btn-warning btn-flat btn-sm" href="{{ route('ptypes.edit',['id' => $ptype->id]) }}"><i class="i-Pen-2"></i> Editar</a>
-    					<button class="btn btn-danger btn-flat btn-sm delete-btn text-light" data-toggle="modal" data-target="#delete-modal" data-object="{{$ptype}}" data-message="Está seguro de eliminar el Tipo de " data-route="{{ route('ptypes.destroy',$ptype->id) }}"><i class="i-File-Trash"></i> Eliminar</button>
+    					<a class="btn btn-warning btn-flat " href="{{ route('ptypes.edit',['id' => $ptype->id]) }}"><i class="i-Pen-2"></i> Editar</a>
+    					<button class="btn btn-danger btn-flat  delete-btn text-light" data-toggle="modal" data-target="#delete-modal" data-object="{{$ptype}}" data-message="Está seguro de eliminar el Tipo de " data-route="{{ route('ptypes.destroy',$ptype->id) }}"><i class="i-File-Trash"></i> Eliminar</button>
     				</td>
     			</tr>
     			@endforeach

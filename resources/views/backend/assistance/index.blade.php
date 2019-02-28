@@ -104,7 +104,7 @@
 
 
                                                 <div class="col-12 mb-2 text-center">
-                                                    <button class="btn btn-primary btn-sm" @if(!request()->has('field') || !request()->has('key_day') || !request()->has('group_id')) disabled @endif><i class="i-Data-Search"></i> Buscar</button>
+                                                    <button class="btn btn-primary " @if(!request()->has('field') || !request()->has('key_day') || !request()->has('group_id')) disabled @endif><i class="i-Data-Search"></i> Buscar</button>
                                                 </div>
                                                 
                                             </div>
@@ -167,7 +167,7 @@
                                             <tfoot>
                                                 <tr>
                                                     <td colspan="{{ (7  + count($assistances['dates']) ) }}" class="text-center">
-                                                        <button type="submit" class="btn btn-primary btn-sm"><i class="i-Data-Save"></i> Procesar</button>
+                                                        <button type="submit" class="btn btn-primary "><i class="i-Data-Save"></i> Procesar</button>
                                                     </td>
                                                 </tr>
                                             </tfoot>

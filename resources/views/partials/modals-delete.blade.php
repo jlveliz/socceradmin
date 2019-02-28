@@ -23,8 +23,8 @@
           <input type="hidden" name="_method" value="DELETE">
            {{ csrf_field() }}
           <input type="hidden" value="" class="modal-item-key" name="id">
-          <button type="button" class="btn btn-secondary btn-sm close-modal" data-dismiss="modal">Cerrar</button>
-          <button type="submit" class="btn btn-danger btn-sm"><i class="i-File-Trash"></i> Eliminar</button>
+          <button type="button" class="btn btn-secondary  close-modal" data-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-danger "><i class="i-File-Trash"></i> Eliminar</button>
         </form>
       </div>
     </div>

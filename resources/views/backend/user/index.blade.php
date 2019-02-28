@@ -40,7 +40,7 @@
                 <h3>Listado</h3>
             </div>
             <div class="col-5 mt-4 ml-4 text-right">
-                <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm"><i class="i-Add"></i> Crear</a>             
+                <a href="{{ route('users.create') }}" class="btn btn-primary "><i class="i-Add"></i> Crear</a>             
             </div>
         </div>
 
@@ -82,8 +82,8 @@
                             @endif
                         </td>
         				<td>
-        					<a class="btn btn-warning btn-flat btn-sm" href="{{ route('users.edit',['id' => $user->id]) }}"><i class="i-Pen-2"></i> Editar</a>
-        					<button class="btn btn-danger btn-flat btn-sm delete-btn" data-toggle="modal" data-target="#delete-modal"  data-object="{{$user}}" data-fieldname="{{$user->person->name}} {{$user->person->last_name}}" data-message="Está seguro de eliminar el Usuario" data-route="{{ route('users.destroy',$user->id) }}"><i class="i-File-Trash"></i> Eliminar</button>
+        					<a class="btn btn-warning btn-flat " href="{{ route('users.edit',['id' => $user->id]) }}"><i class="i-Pen-2"></i> Editar</a>
+        					<button class="btn btn-danger btn-flat  delete-btn" data-toggle="modal" data-target="#delete-modal"  data-object="{{$user}}" data-fieldname="{{$user->person->name}} {{$user->person->last_name}}" data-message="Está seguro de eliminar el Usuario" data-route="{{ route('users.destroy',$user->id) }}"><i class="i-File-Trash"></i> Eliminar</button>
         				</td>
         			</tr>
         			@endforeach
