@@ -63,18 +63,6 @@
 		                			@endif
 		                		</div>
 	                		</div>
-	                		<div class="col-lg-2 col-6">
-		                		<div class="form-group">
-		                			<label for="state">Estado <span class="text-danger">*</span></label>
-		                			<select name="state" id="state" class="form-control @if ($errors->has('state')) is-invalid @endif custom-select">
-		                				<option value="1" @if( (isset($permission) && $permission->state == '1') || ( old('state') == '1' ) ) selected @endif>Activo</option>
-		                				<option value="0" @if( (isset($permission) && $permission->state == '0') || ( old('state') == '0' ) ) selected @endif>Inactivo</option>
-		                			</select>
-		                			@if ($errors->has('state'))
-		                				<div id="val-state-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('state') }}</div>
-		                			@endif
-		                		</div>
-	                		</div>
 	                	</div>
 
 	                	<div class="row">

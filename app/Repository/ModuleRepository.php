@@ -161,7 +161,12 @@ class ModuleRepository implements ModuleRepositoryInterface
 
 	public function loadAdminMenu()
 	{
-		$query = Permission::select('permission.*')->with('children')->join('module','module.id','=','permission.module_id')->whereRaw("permission.type_id = (SELECT permission_type.id FROM permission_type WHERE permission_type.`code` = 'menu') AND permission.parent_id IS NULL ORDER BY module.`order`, permission.`order`")->get();
+		$query = Permission::select('permission.*')->with(['children' => function($query) {
+			$query->select('permission.*')
+			->join('module','module.id','=','permission.module_id')
+			->join('permission as parent','parent.id','=','permission.parent_id')
+			->whereRaw("permission.type_id = (SELECT permission_type.id FROM permission_type WHERE permission_type.`code` = 'menu') ORDER BY module.`order`, permission.`order`")->get();
+		}])->join('module','module.id','=','permission.module_id')->whereRaw("permission.type_id = (SELECT permission_type.id FROM permission_type WHERE permission_type.`code` = 'menu') AND permission.parent_id IS NULL ORDER BY module.`order`, permission.`order`")->get();
 		
 		return $query;
 	}
