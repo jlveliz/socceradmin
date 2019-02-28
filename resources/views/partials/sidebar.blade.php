@@ -26,19 +26,18 @@
     
     <div class="sidebar-left-secondary rtl-ps-none" data-perfect-scrollbar data-suppress-scroll-x="true">
         <!-- Submenu Dashboards -->
-        
-        @foreach ($menuItems as $key => $menuItem)
-            <ul class="childNav" data-parent="{{str_slug($menuItem[$key]->parent->name)}}">
-                @foreach ($menuItem as $item)
-                    <li class="nav-item">                       
-                        <a class="{{ Route::currentRouteName()=='dashboard_version_1' ? 'open' : '' }}" title="{{$item->description}}" alt="{{$item->name}}" href="@if($item->resource){{route($item->resource) }}@else#@endif">
-                            <i class="nav-icon {{$item->fav_icon}}"></i>
-                            <span class="item-name">{{$item->name}}</span>
-                        </a>
-                    </li>
-                @endforeach
+        @for ($i = 0; $i < count($menuItems) ; $i++)
+            <ul class="childNav" data-parent="{{str_slug($menuItems[$i][0]->parent->name)}}">
+            @for ($y = 0; $y < count($menuItems[$i]) ; $y++)
+                <li class="nav-item">                       
+                    <a class="{{ Route::currentRouteName()=='dashboard_version_1' ? 'open' : '' }}" title="{{$menuItems[$i][$y]->description}}" alt="{{$menuItems[$i][$y]->name}}" href="@if($menuItems[$i][$y]->resource){{route($menuItems[$i][$y]->resource) }}@else#@endif">
+                        <i class="nav-icon {{$menuItems[$i][$y]->fav_icon}}"></i>
+                        <span class="item-name">{{$menuItems[$i][$y]->name}}</span>
+                    </a>
+                </li>   
+            @endfor
             </ul>
-        @endforeach
+        @endfor
     </div>
     <div class="sidebar-overlay"></div>
 </div>

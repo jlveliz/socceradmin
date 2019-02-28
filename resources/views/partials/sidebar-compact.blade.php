@@ -4,8 +4,8 @@
             $menuItems = [];
         @endphp
         <ul class="navigation-left">
-            @php $idx = 0; @endphp
                 
+            @php $idx = 0; @endphp
             @foreach ($menu as $key => $me)
                 @if (count($me->children) > 0)
                     @php
@@ -33,14 +33,14 @@
         </header>
 
         <!-- Submenu Dashboards -->
-        @foreach ($menuItems  as $key => $menuItem)
-            <div class="submenu-area" data-parent="{{str_slug($menuItem[$key]->parent->name)}}">
+        @for ($i = 0; $i < count($menuItems) ; $i++)
+            <div class="submenu-area" data-parent="{{str_slug($menuItems[$i][0]->parent->name)}}">
                 <header>
-                        <h6>{{$menuItem[$key]->parent->name}}</h6>
-                        <p>{{$menuItem[$key]->parent->description}}</p>
+                        <h6>{{$menuItems[$i][0]->parent->name}}</h6>
+                        <p>{{$menuItems[$i][0]->parent->description}}</p>
                 </header>
-                <ul class="childNav" data-parent="{{str_slug($menuItem[$key]->parent->name)}}">
-                    @foreach ($menuItem as $item)
+                <ul class="childNav" data-parent="{{str_slug($menuItems[$i][0]->parent->name)}}">
+                    @foreach ($menuItems[$i] as $item)
                         <li class="nav-item">
                             <a class="{{ Route::is($item->resource) ? 'open' : '' }}"  href="@if($item->resource){{ route($item->resource) }}@else#@endif">
                                 <i class="nav-icon {{$item->fav_icon}}"></i>
@@ -50,7 +50,7 @@
                     @endforeach
                 </ul>
             </div>
-        @endforeach
+        @endfor
         <div class="sidebar-overlay"></div>
     </div>
 </div>
