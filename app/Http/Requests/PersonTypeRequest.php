@@ -23,13 +23,22 @@ class PersonTypeRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = [
-            'name' => 'required|unique:person_type,name',
-            'state' => 'required'
-        ];
+        
+        if ($this->method() == 'POST') {
+            $rules = [
+                'name' => 'required|unique:person_type,name',
+                'state' => 'required'
+            ];
+            
+        }
         
         if ($this->method() == 'PUT') {
             $rules['name'] = 'required|unique:person_type,name,'.$this->get('key');
+        }
+
+
+        if ($this->method() == 'DELETE') {
+            $rules['id'] = 'is_used:person,person_type_id';
         }
 
         return $rules;
@@ -40,7 +49,8 @@ class PersonTypeRequest extends FormRequest
         return [
             'name.required' => 'Ingrese un nombre',
             'name.unique' => 'Ya existe un tipo de persona con el mismo nombre',
-            'state.required' => 'Ingrese un estado'
+            'state.required' => 'Ingrese un estado',
+            'id.is_used' => 'Ya existen usuarios registrados con este tipo de persona'
         ];
     }
 }

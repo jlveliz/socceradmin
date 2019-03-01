@@ -32,6 +32,18 @@
             </div>
         @endif
 
+         {{-- validation errors --}}
+        @if($errors->any())
+            <div class="alert alert-danger sufee-alert alert with-close alert-dismissible fade show">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <ul class="mb-0">
+                    @foreach ($errors->all() as $error)
+                        <li>{{$error}}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <table class="table table-hover table-responsive-lg" id="list-ptypes">
     		<thead>
     			<tr>

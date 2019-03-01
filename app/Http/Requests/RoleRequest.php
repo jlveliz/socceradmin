@@ -23,13 +23,19 @@ class RoleRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = [
-            'name' => 'required|unique:role,name',
-            'is_default' => 'required',
-        ];
+        if ($this->method() == 'POST') {
+            $rules = [
+                'name' => 'required|unique:role,name',
+                'is_default' => 'required',
+            ];
+        }
         
         if ($this->method() == 'PUT') {
             $rules['name'] = 'required|unique:role,name,'.$this->get('key');
+        }
+
+        if ($this->method() == 'DELETE') {
+            $rules['id'] = 'is_used:user_role,role_id';
         }
         return $rules;
         
@@ -41,7 +47,8 @@ class RoleRequest extends FormRequest
             'name.required' => 'Ingrese un nombre válido',
             'name.unique' => 'Ya existe un rol con este nombre',
             'is_default.required' => 'Identifique si es default',
-            'description.required' => 'Ingrese una descripción'
+            'description.required' => 'Ingrese una descripción',
+            'id.is_used' => 'El Rol ya se encuentra usado por algún usuario'
         ];
     }
 }

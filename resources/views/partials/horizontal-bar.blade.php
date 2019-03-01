@@ -10,7 +10,7 @@
                                     @if (count($item->children) > 0)
                                         <label class="toggle" for="drop-2">{{$item->name}}</label>
                                     @endif
-                                    <a href="@if(count($item->children) > 0)#@else{{ route($item->resource) }}@endif">
+                                    <a href="@if(count($item->children) > 0)#@elseif($item->resource){{ route($item->resource) }}@endif">
                                         <i class="nav-icon mr-2 {{$item->fav_icon}}"></i>
                                          {{$item->name}}
                                     </a>

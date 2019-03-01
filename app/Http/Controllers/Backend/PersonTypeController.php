@@ -2,10 +2,10 @@
 
 namespace HappyFeet\Http\Controllers\Backend;
 
-use HappyFeet\Http\Requests\PersonTypeRequest;
 use HappyFeet\Http\Controllers\Controller;
 use HappyFeet\RepositoryInterface\PersonTypeRepositoryInterface;
 use HappyFeet\Exceptions\PersonTypeException;
+use HappyFeet\Http\Requests\PersonTypeRequest;
 
 class PersonTypeController extends Controller
 {
@@ -126,7 +126,7 @@ class PersonTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(PersonTypeRequest $request,$id)
     {
         $message = [
             'type' => 'primary',

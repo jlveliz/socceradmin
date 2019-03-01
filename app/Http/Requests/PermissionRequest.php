@@ -23,15 +23,22 @@ class PermissionRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = [
-            'module_id' => 'required|exists:module,id',
-            'name' => 'required|unique:permission,name',
-            'type_id' => 'required|exists:permission_type,id',
-            'description' => 'required'
-        ];
+        if ($this->method() == 'POST') {
+            $rules = [
+                'module_id' => 'required|exists:module,id',
+                'name' => 'required|unique:permission,name',
+                'type_id' => 'required|exists:permission_type,id',
+                'description' => 'required'
+            ];
+        }
         
         if ($this->method() == 'PUT') {
             $rules['name'] = 'required|unique:permission,name,'.$this->get('key');
+        }
+
+
+        if ($this->method() == 'DELETE') {
+            $rules['id'] = 'is_used:permission_role,permission_id';
         }
         
         return $rules;
@@ -48,7 +55,8 @@ class PermissionRequest extends FormRequest
             'name.unique' => 'Ya existe un permiso con este nombre',
             'type_id.required' => 'Ingrese un tipo de permiso',
             'type_id.exists'=>'Ingrese un tipo de permiso válido',
-            'description.required' => 'Ingrese una descripción'
+            'description.required' => 'Ingrese una descripción',
+            'id.is_used' => 'El permiso ya se encuentra usado por un rol'
         ];
     }
 }

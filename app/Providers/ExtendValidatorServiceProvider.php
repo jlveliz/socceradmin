@@ -29,7 +29,7 @@ class ExtendValidatorServiceProvider extends ServiceProvider
 
          Validator::extendImplicit('is_used', function ($attribute, $value, $parameters, $validator) {
             $data = DB::table($parameters[0])->where($parameters[1],$value)->first();
-            
+           
             if (!$data) {
                 return true;
             }
