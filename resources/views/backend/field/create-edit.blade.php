@@ -181,7 +181,7 @@
 																						</div>
 																					@else
 																						<div class="form-group">
-																							<button type="button" class="btn btn-link  remove-live-schedule"><i class="fa fa-close"></i></button>
+																							<button type="button" class="btn btn-link  remove-live-schedule"><i class="i-Close"></i></button>
 																						</div>
 																					@endif
 																					@php $numSchedule++; @endphp 
@@ -206,7 +206,7 @@
 																						</div>
 																					@else
 																						<div class="form-group">
-																							<button type="button" class="btn btn-link  remove-schedule"><i class="fa fa-close"></i></button>
+																							<button type="button" class="btn btn-link  remove-schedule"><i class="i-Close"></i></button>
 																						</div>
 																					@endif
 																					@php $numSchedule++; @endphp

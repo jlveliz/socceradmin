@@ -112,7 +112,7 @@ $(document).ready( () => {
         if(!idRow) return false;
         let lastChild = $('tr#'+idRow).clone(true);
         //remove plus for minus icon and add clase remove-schedule  //remove class 'remove-group-live-schedule'
-        lastChild.find('button').removeClass('add-group-schedule remove-group-live-schedule').addClass('remove-group-schedule').find('i').removeClass('fa-plus').addClass('fa-close')
+        lastChild.find('button').removeClass('add-group-schedule remove-group-live-schedule').addClass('remove-group-schedule').find('i').removeClass('i-Add').addClass('i-Close')
         /*
             add index to group row
         */
@@ -178,7 +178,7 @@ $(document).ready( () => {
     $('#accordionExample').on('click','.remove-group-live-schedule',(event)=> {
         let currentTarget = $(event.currentTarget);
         let groupId = currentTarget.parents('tr').find('.group-id').val();
-        currentTarget.find('i').removeClass('fa-close fa-plus').addClass('fa-spinner fa-spin')
+        currentTarget.find('i').removeClass('i-Close i-Add').addClass('fa-spinner fa-spin')
         if(!groupId) {
             return false;
         }

@@ -141,7 +141,7 @@ class GroupClassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id, Request $request)
+    public function destroy($id, GroupClassRequest $request)
     {
         $message = [
             'type' => 'primary',
