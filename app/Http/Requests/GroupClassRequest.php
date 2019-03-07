@@ -26,7 +26,8 @@ class GroupClassRequest extends FormRequest
         $rules = [];
         
         if ($this->method() == 'DELETE') {
-            dd("entra");
+            dd($this->all());
+            $rules['id'] = 'is_used:enrollment_groups,group_id';
         }
         
         return $rules;
@@ -35,6 +36,10 @@ class GroupClassRequest extends FormRequest
     public function messages()
     {
        
+        $messages = [
+            'id.is_used' => 'El grupo está siendo usado en alguna matricula'
+        ];
+
         return $messages;
     }
 }

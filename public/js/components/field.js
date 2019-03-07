@@ -193,7 +193,8 @@ $(document).ready( () => {
             currentTarget.parents('tr').remove()
         })
         .fail( (err) => {
-
+            $("#message-alert-field").append(success.content)
+            $("#message-alert-field").removeClass('d-none').addClass('alert-'+success.type);
         })
         .always( () => {
             
