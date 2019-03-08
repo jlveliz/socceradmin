@@ -23,15 +23,22 @@ class SeasonRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = [
-            'name' => 'required|unique:season,name',
-            'start_date' => 'required',
-            'end_date' => 'required'
-        ];
+        
+        if ($this->method() == 'POST') {
+            $rules = [
+                'name' => 'required|unique:season,name',
+                'start_date' => 'required',
+                'end_date' => 'required'
+            ];
+        }
 
 
         if ($this->method() == 'PUT') {
             $rules['name'] = "required|unique:season,name,".$this->get('key');
+        }
+
+        if ($this->method() == 'DELETE') {
+            $rules['id'] = "is_active:season";
         }
 
 
@@ -46,7 +53,8 @@ class SeasonRequest extends FormRequest
             'name.required' => 'Por favor ingrese un nombre',
             'name.unique' => 'Por favor ingrese otro nombre',
             'start_date.required' => 'Por favor, Ingrese una duración',
-            'end_date.required' => 'Por favor, Ingrese una duración'
+            'end_date.required' => 'Por favor, Ingrese una duración',
+            'is_active' => 'La sesión que intenta eliminar se encuentra activa'
         ];
     }
 }

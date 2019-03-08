@@ -7,6 +7,8 @@ use HappyFeet\Http\Controllers\Controller;
 use HappyFeet\Http\Requests\ModuleRequest;
 use HappyFeet\RepositoryInterface\ModuleRepositoryInterface;
 use HappyFeet\Exceptions\ModuleException;
+use Exception;
+use DB;
 
 
 class ModuleController extends Controller
@@ -58,15 +60,25 @@ class ModuleController extends Controller
             'content' =>'',
         ];
 
+          //begin transaction
+        DB::beginTransaction();
+
         try {
             $message['content'] = "Se ha creado el módulo satisfactoriamente";
             $module = $this->module->save($request->all());
+            DB::commit();
             if ($request->get('redirect-index') == 1) {
                 return redirect()->route($this->routeRedirectIndex)->with($message);
             } else {
                 return redirect()->route('modules.edit',['id'=>$module->id])->with($message);
             }
         } catch (ModuleException $e) {
+             DB::rollback();
+            $message['type'] = "error";
+            $message['content'] = $e->getMessage();
+            return back()->with($message);
+        }catch (Exception $e) {
+             DB::rollback();
             $message['type'] = "error";
             $message['content'] = $e->getMessage();
             return back()->with($message);
@@ -110,10 +122,12 @@ class ModuleController extends Controller
             'type' => 'primary',
             'content' =>'',
         ];
+          //begin transaction
+        DB::beginTransaction();
         try {
           $module = $this->module->edit($id,$request->all());
           $message['content'] = "Se ha Actualizado el módulo satisfactoriamente";
-          
+          DB::commit();
           if ($request->get('redirect-index') == 1) { 
             return redirect()->route($this->routeRedirectIndex)->with($message);
           } else {
@@ -121,9 +135,16 @@ class ModuleController extends Controller
           }
           
         } catch (ModuleException $e) {
+            DB::rollback();
             $message['type'] = 'error';
             $message['content'] = $e->getMessage();
+        } catch (Exception $e) {
+            DB::rollback();
+            $message['type'] = "error";
+            $message['content'] = $e->getMessage();
+            return back()->with($message);
         }
+            
     }
 
     /**
@@ -138,15 +159,25 @@ class ModuleController extends Controller
             'type' => 'primary',
             'content' =>'',
         ];
+           //begin transaction
+        DB::beginTransaction();
         try {
             $deleted = $this->module->remove($id);
+            DB::commit();
             $message['content'] = "Se ha eliminado el módulo satisfactoriamente";
             return back()->with($message);
         } catch (ModuleException $e) {
+             DB::rollback();
+            $message['type'] = "error";
+            $message['content'] = $e->getMessage();
+            return back()->with($message);
+        } catch (Exception $e) {
+            DB::rollback();
             $message['type'] = "error";
             $message['content'] = $e->getMessage();
             return back()->with($message);
         }
+            
         
     }
 }

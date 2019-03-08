@@ -117,10 +117,12 @@ class PermissionTypeController extends Controller
             'type' => 'primary',
             'content' =>'',
         ];
+         //begin transaction
+        DB::beginTransaction();
         try {
           $permissionType = $this->permissionType->edit($id,$request->all());
           $message['content'] = "Se ha Actualizado el tipo de permiso satisfactoriamente";
-          
+          DB::commit();
           if ($request->get('redirect-index') == 1) { 
             return redirect()->route($this->routeRedirectIndex)->with($message);
           } else {
@@ -128,8 +130,14 @@ class PermissionTypeController extends Controller
           }
           
         } catch (PermissionTypeException $e) {
+            DB::rollback();
             $message['type'] = 'error';
             $message['content'] = $e->getMessage();
+        } catch (Exception $e) {
+            DB::rollback();
+            $message['type'] = "error";
+            $message['content'] = $e->getMessage();
+            return back()->with($message);
         }
     }
 
@@ -144,12 +152,22 @@ class PermissionTypeController extends Controller
         $message = [
             'type' => 'primary',
             'content' =>'',
-        ];
+        ]; 
+        
+        DB::beginTransaction();
+ 
         try {
             $deleted = $this->permissionType->remove($id);
+            DB::commit();
             $message['content'] = "Se ha eliminado el tipo de permiso satisfactoriamente";
             return back()->with($message);
         } catch (PermissionTypeException $e) {
+            $message['type'] = "error";
+            DB::rollback();
+            $message['content'] = $e->getMessage();
+            return back()->with($message);
+        }catch (Exception $e) {
+            DB::rollback();
             $message['type'] = "error";
             $message['content'] = $e->getMessage();
             return back()->with($message);

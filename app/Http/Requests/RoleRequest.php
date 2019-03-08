@@ -35,7 +35,7 @@ class RoleRequest extends FormRequest
         }
 
         if ($this->method() == 'DELETE') {
-            dd($this->all());
+           
             $rules['id'] = 'is_used:user_role,role_id';
         }
         return $rules;

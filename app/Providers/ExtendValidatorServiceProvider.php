@@ -27,7 +27,7 @@ class ExtendValidatorServiceProvider extends ServiceProvider
         });
 
 
-         Validator::extendImplicit('is_used', function ($attribute, $value, $parameters, $validator) {
+        Validator::extendImplicit('is_used', function ($attribute, $value, $parameters, $validator) {
             $data = DB::table($parameters[0])->where($parameters[1],$value)->first();
            
             if (!$data) {
@@ -35,6 +35,27 @@ class ExtendValidatorServiceProvider extends ServiceProvider
             }
 
             if ( ( property_exists($data, 'deleted_at') ) && ($data->deleted_at != null)) {
+                return true;
+            }
+
+            return false;
+        });
+
+        Validator::extendImplicit('is_active', function ($attribute, $value, $parameters, $validator) {
+            $column = isset($parameters[1]) ? $parameters[1] : 'state';
+            $data = DB::table($parameters[0])->where($column,$value)->first();
+
+
+
+            if (!$data) {
+                return true;
+            }
+
+            if ( ( property_exists($data, 'deleted_at') ) && ($data->deleted_at != null)) {
+                return true;
+            }
+
+            if ($data->state == 0) {
                 return true;
             }
 

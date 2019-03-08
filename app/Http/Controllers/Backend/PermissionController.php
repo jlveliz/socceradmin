@@ -9,6 +9,8 @@ use HappyFeet\RepositoryInterface\PermissionTypeRepositoryInterface;
 use HappyFeet\RepositoryInterface\ModuleRepositoryInterface;
 use HappyFeet\Http\Requests\PermissionRequest;
 use HappyFeet\Exceptions\PermissionException;
+use Exception;
+use DB;
 
 class PermissionController extends Controller
 {
@@ -76,15 +78,25 @@ class PermissionController extends Controller
             'content' =>'',
         ];
 
+        DB::beginTransaction();
+ 
+
         try {
             $message['content'] = "Se ha creado el permiso Satisfactoriamente";
             $permission = $this->permission->save($request->all());
+            DB::commit();
             if ($request->get('redirect-index') == 1) {
                 return redirect()->route($this->routeRedirectIndex)->with($message);
             } else {
                 return redirect()->route('permissions.edit',['id'=>$permission->id])->with($message);
             }
         } catch (PermissionException $e) {
+             DB::rollback();
+            $message['type'] = "error";
+            $message['content'] = $e->getMessage();
+            return back()->with($message);
+        }catch (Exception $e) {
+            DB::rollback();
             $message['type'] = "error";
             $message['content'] = $e->getMessage();
             return back()->with($message);
@@ -138,8 +150,10 @@ class PermissionController extends Controller
             'type' => 'primary',
             'content' =>'',
         ];
+        DB::beginTransaction();
         try {
           $permission = $this->permission->edit($id,$request->all());
+          DB::commit();
           $message['content'] = "Se ha Actualizado el permiso satisfactoriamente";
           
           if ($request->get('redirect-index') == 1) { 
@@ -149,8 +163,14 @@ class PermissionController extends Controller
           }
           
         } catch (PermissionException $e) {
+            DB::rollback();
             $message['type'] = 'error';
             $message['content'] = $e->getMessage();
+        }catch (Exception $e) {
+            DB::rollback();
+            $message['type'] = "error";
+            $message['content'] = $e->getMessage();
+            return back()->with($message);
         }
     }
 
@@ -166,11 +186,20 @@ class PermissionController extends Controller
             'type' => 'primary',
             'content' =>'',
         ];
+        DB::beginTransaction();
+
         try {
             $deleted = $this->permission->remove($id);
+            DB::commit();
             $message['content'] = "Se ha eliminado el permiso satisfactoriamente";
             return back()->with($message);
         } catch (PermissionException $e) {
+            DB::rollback();
+            $message['type'] = "error";
+            $message['content'] = $e->getMessage();
+            return back()->with($message);
+        }catch (Exception $e) {
+            DB::rollback();
             $message['type'] = "error";
             $message['content'] = $e->getMessage();
             return back()->with($message);

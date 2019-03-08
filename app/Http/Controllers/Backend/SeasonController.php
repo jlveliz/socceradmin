@@ -7,6 +7,8 @@ use HappyFeet\Http\Controllers\Controller;
 use HappyFeet\RepositoryInterface\SeasonRepositoryInterface;
 use HappyFeet\Http\Requests\SeasonRequest;
 use HappyFeet\Exceptions\SeasonException;
+use Exception;
+use DB;
 
 class SeasonController extends Controller
 {
@@ -55,16 +57,25 @@ class SeasonController extends Controller
             'type' => 'primary',
             'content' =>'',
         ];
+          //begin transaction
+        DB::beginTransaction();
 
         try {
             $message['content'] = "Se ha creado la temporada Satisfactoriamente";
             $season = $this->season->save($request->all());
+            DB::commit();
             if ($request->get('redirect-index') == 1) {
                 return redirect()->route($this->routeRedirectIndex)->with($message);
             } else {
                 return redirect()->route('seasons.edit',['id'=>$season->id])->with($message);
             }
         } catch (SeasonException $e) {
+            DB::rollback();
+            $message['type'] = "error";
+            $message['content'] = $e->getMessage();
+            return back()->with($message);
+        }catch (Exception $e) {
+             DB::rollback();
             $message['type'] = "error";
             $message['content'] = $e->getMessage();
             return back()->with($message);
@@ -108,9 +119,13 @@ class SeasonController extends Controller
             'type' => 'primary',
             'content' =>'',
         ];
+          //begin transaction
+        DB::beginTransaction();
+
         try {
 
             $season = $this->season->edit($id,$request->all());
+            DB::commit();
             $message['content'] = "Se ha Actualizado la temporada satisfactoriamente";
             
           if ($request->get('redirect-index') == 1) { 
@@ -120,8 +135,14 @@ class SeasonController extends Controller
           }
           
         } catch (SeasonException $e) {
+            DB::rollback();
             $message['type'] = 'error';
             $message['content'] = $e->getMessage();
+        } catch (Exception $e) {
+             DB::rollback();
+            $message['type'] = "error";
+            $message['content'] = $e->getMessage();
+            return back()->with($message);
         }
     }
 
@@ -131,17 +152,26 @@ class SeasonController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, SeasonRequest $request)
     {
         $message = [
             'type' => 'primary',
             'content' =>'',
         ];
+          //begin transaction
+        DB::beginTransaction();
         try {
             $deleted = $this->season->remove($id);
+            DB::commit();
             $message['content'] = "Se ha eliminado la temporada satisfactoriamente";
             return back()->with($message);
         } catch (SeasonException $e) {
+            DB::rollback();
+            $message['type'] = "error";
+            $message['content'] = $e->getMessage();
+            return back()->with($message);
+        }catch (Exception $e) {
+             DB::rollback();
             $message['type'] = "error";
             $message['content'] = $e->getMessage();
             return back()->with($message);

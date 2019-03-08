@@ -8,7 +8,8 @@ use HappyFeet\RepositoryInterface\ModuleRepositoryInterface;
 use HappyFeet\RepositoryInterface\PermissionTypeRepositoryInterface;
 use HappyFeet\Http\Requests\RoleRequest;
 use HappyFeet\Exceptions\RoleException;
-
+use Exception;
+use DB;
 class RoleController extends Controller
 {
     
@@ -71,16 +72,23 @@ class RoleController extends Controller
             'type' => 'primary',
             'content' =>'',
         ];
-
+         DB::beginTransaction();
         try {
             $message['content'] = "Se ha creado el rol satisfactoriamente";
             $role = $this->role->save($request->all());
+             DB::commit();
             if ($request->get('redirect-index') == 1) {
                 return redirect()->route($this->routeRedirectIndex)->with($message);
             } else {
                 return redirect()->route('roles.edit',['id'=>$role->id])->with($message);
             }
         } catch (RoleException $e) {
+             DB::rollback();
+            $message['type'] = "error";
+            $message['content'] = $e->getMessage();
+            return back()->with($message);
+        }catch (Exception $e) {
+            DB::rollback();
             $message['type'] = "error";
             $message['content'] = $e->getMessage();
             return back()->with($message);
@@ -155,7 +163,7 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, RoleRequest $request)
     {
         $message = [
             'type' => 'primary',

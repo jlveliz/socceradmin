@@ -8,6 +8,9 @@ use HappyFeet\RepositoryInterface\RoleRepositoryInterface;
 use HappyFeet\Exception\UserException;
 use HappyFeet\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
+use Exception;
+use DB;
+
 
 class UserController extends Controller
 {
@@ -60,16 +63,23 @@ class UserController extends Controller
             'type' => 'primary',
             'content' =>'',
         ];
-
+        DB::beginTransaction();
         try {
             $message['content'] = "Se ha creado el usuario satisfactoriamente";
             $user = $this->userRepo->save($request->all());
+            DB::commit();
             if ($request->get('redirect-index') == 1) {
                 return redirect()->route($this->routeRedirectIndex)->with($message);
             } else {
                 return redirect()->route('users.edit',['id'=>$user->id])->with($message);
             }
         } catch (UserException $e) {
+             DB::rollback();
+            $message['type'] = "error";
+            $message['content'] = $e->getMessage();
+            return back()->with($message);
+        } catch (Exception $e) {
+            DB::rollback();
             $message['type'] = "error";
             $message['content'] = $e->getMessage();
             return back()->with($message);
@@ -113,19 +123,27 @@ class UserController extends Controller
             'type' => 'primary',
             'content' =>'',
         ];
+         DB::beginTransaction();
         try {
-          $user = $this->userRepo->edit($id,$request->all());
-          $message['content'] = "Se ha Actualizado el usuario satisfactoriamente";
+            $user = $this->userRepo->edit($id,$request->all());
+            DB::commit();
+            $message['content'] = "Se ha Actualizado el usuario satisfactoriamente";
           
-          if ($request->get('redirect-index') == 1) { 
-            return redirect()->route($this->routeRedirectIndex)->with($message);
-          } else {
-            return back()->with($message);
-          }
+              if ($request->get('redirect-index') == 1) { 
+                return redirect()->route($this->routeRedirectIndex)->with($message);
+              } else {
+                return back()->with($message);
+              }
           
         } catch (UserException $e) {
+            DB::rollback();
             $message['type'] = 'error';
             $message['content'] = $e->getMessage();
+        }catch (Exception $e) {
+            DB::rollback();
+            $message['type'] = "error";
+            $message['content'] = $e->getMessage();
+            return back()->with($message);
         }
     }
 
@@ -141,12 +159,20 @@ class UserController extends Controller
             'type' => 'primary',
             'content' =>'',
         ];
-        
+         DB::beginTransaction();
+
         try {
             $deleted = $this->userRepo->remove($id);
+            DB::commit();
             $message['content'] = "Se ha eliminado el usuario satisfactoriamente";
             return back()->with($message);
         } catch (UserException $e) {
+            DB::rollback();
+            $message['type'] = "error";
+            $message['content'] = $e->getMessage();
+            return back()->with($message);
+        }catch (Exception $e) {
+            DB::rollback();
             $message['type'] = "error";
             $message['content'] = $e->getMessage();
             return back()->with($message);
