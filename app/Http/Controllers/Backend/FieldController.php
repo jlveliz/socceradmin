@@ -9,6 +9,8 @@ use HappyFeet\RepositoryInterface\AgeRangeRepositoryInterface;
 use HappyFeet\RepositoryInterface\FieldTypeRepositoryInterface;
 use HappyFeet\Http\Requests\FieldRequest;
 use HappyFeet\Exceptions\FieldException;
+use Exception;
+use DB;
 
 class FieldController extends Controller
 {
@@ -63,15 +65,26 @@ class FieldController extends Controller
             'content' =>'',
         ];
 
+        //begin transaction
+        DB::beginTransaction();
+
+
         try {
             $message['content'] = "Se ha creado la cancha Satisfactoriamente";
             $field = $this->field->save($request->all());
+            DB::commit();
             if ($request->get('redirect-index') == 1) {
                 return redirect()->route($this->routeRedirectIndex)->with($message);
             } else {
                 return redirect()->route('fields.edit',['id'=>$field->id])->with($message);
             }
         } catch (FieldException $e) {
+            DB::rollback();
+            $message['type'] = "error";
+            $message['content'] = $e->getMessage();
+            return back()->with($message);
+        } catch (Exception $e) {
+            DB::rollback();
             $message['type'] = "error";
             $message['content'] = $e->getMessage();
             return back()->with($message);
@@ -119,6 +132,7 @@ class FieldController extends Controller
             'type' => 'primary',
             'content' =>'',
         ];
+        DB::beginTransaction();
         try {
 
             if($request->has('remove-schedule')) {
@@ -126,6 +140,7 @@ class FieldController extends Controller
             }
             
             $field = $this->field->edit($id,$request->all());
+            DB::commit();
             $message['content'] = "Se ha Actualizado la cancha satisfactoriamente";
             
           if ($request->get('redirect-index') == 1) { 
@@ -135,8 +150,14 @@ class FieldController extends Controller
           }
           
         } catch (FieldException $e) {
+            DB::rollback();
             $message['type'] = 'error';
             $message['content'] = $e->getMessage();
+        } catch (Exception $e) {
+            DB::rollback();
+            $message['type'] = "error";
+            $message['content'] = $e->getMessage();
+            return back()->with($message);
         }
     }
 
@@ -152,11 +173,19 @@ class FieldController extends Controller
             'type' => 'primary',
             'content' =>'',
         ];
+        DB::beginTransaction();
         try {
             $deleted = $this->field->remove($id);
+            DB::commit();
             $message['content'] = "Se ha eliminado la cancha satisfactoriamente";
             return back()->with($message);
         } catch (FieldException $e) {
+            DB::rollback();
+            $message['type'] = "error";
+            $message['content'] = $e->getMessage();
+            return back()->with($message);
+        } catch (Exception $e) {
+            DB::rollback();
             $message['type'] = "error";
             $message['content'] = $e->getMessage();
             return back()->with($message);

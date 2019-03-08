@@ -146,12 +146,11 @@ class ModuleRepository implements ModuleRepositoryInterface
 							->join('user_role as rolU','rolU.role_id','=','rPer.role_id')
 							->join('user as usr','usr.id','=','rolU.user_id')
 							->whereRaw('usr.id = "'.$userId.'" and permission.type_id = (select id from permission_type where permission_type.code = "menu")')
-							->orderBy('permission.order')
+							->orderBy('permission.order asc')
 							->get();
 					}])
 					->whereRaw("module.state=1 and module.id in (select module.id from module where module.state = 1) and permission.type_id = (select id from permission_type where code = 'menu') and usr.id = ".$userId." AND permission.parent_id IS NULL")
 					->groupBy('module.name')
-					->orderBy('module.order')
 					->orderBy('permission.order')
 					->get();
 
@@ -165,8 +164,8 @@ class ModuleRepository implements ModuleRepositoryInterface
 			$query->select('permission.*')
 			->join('module','module.id','=','permission.module_id')
 			->join('permission as parent','parent.id','=','permission.parent_id')
-			->whereRaw("permission.type_id = (SELECT permission_type.id FROM permission_type WHERE permission_type.`code` = 'menu') ORDER BY module.`order`, permission.`order`")->get();
-		}])->join('module','module.id','=','permission.module_id')->whereRaw("permission.type_id = (SELECT permission_type.id FROM permission_type WHERE permission_type.`code` = 'menu') AND permission.parent_id IS NULL ORDER BY module.`order`, permission.`order`")->get();
+			->whereRaw("permission.type_id = (SELECT permission_type.id FROM permission_type WHERE permission_type.`code` = 'menu') order by permission.`order` asc")->get();
+		}])->join('module','module.id','=','permission.module_id')->whereRaw("permission.type_id = (SELECT permission_type.id FROM permission_type WHERE permission_type.`code` = 'menu') AND permission.parent_id IS NULL ORDER BY permission.`order` asc")->get();
 		
 		return $query;
 	}

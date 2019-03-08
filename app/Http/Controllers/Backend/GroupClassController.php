@@ -9,6 +9,8 @@ use HappyFeet\RepositoryInterface\FieldRepositoryInterface;
 use HappyFeet\RepositoryInterface\AgeRangeRepositoryInterface;
 use HappyFeet\Http\Requests\GroupClassRequest;
 use HappyFeet\Exceptions\GroupClassException;
+use Exception;
+use DB;
 
 class GroupClassController extends Controller
 {
