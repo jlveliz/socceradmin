@@ -54,7 +54,7 @@ class FieldRepository implements FieldRepositoryInterface
 		} elseif (is_string($field) || is_int($field)) {
 			$field = Field::where('id',$field)->first();
 		} else {
-			throw new FieldException('Se ha producido un error al buscar la cancha',500);	
+			throw new FieldException('Se ha producido un error al buscar la cancha',404);	
 		}
 
 		if (!$field) throw new FieldException('No se puede buscar la cancha',404);	
@@ -161,6 +161,14 @@ class FieldRepository implements FieldRepositoryInterface
 
 		}
 		return false;
+	}
+
+
+	public function getNumActives()
+	{
+		$sql = " SELECT COUNT(*) count_fields FROM field WHERE deleted_at IS NULL ";
+		$count = DB::select($sql);
+		return $count;
 	}
 
 }

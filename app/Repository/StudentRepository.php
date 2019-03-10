@@ -266,4 +266,32 @@ class StudentRepository implements StudentRepositoryInterface
 	public function getPersonType($code = null) {
         return PersonType::select('id')->where('code', $code ? $code : 'persona-natural' )->first()->id;
     }
+
+
+    /**
+     * extrae el total de estudiantes activos
+       en la temporada actual
+     */
+    public function getTotalStudents()
+    {
+    	$sql =  "SELECT COUNT(*) total_students
+    	 			FROM student
+					WHERE id IN 
+						(
+							SELECT enrollment.student_id
+							FROM enrollment
+							WHERE enrollment.deleted_at IS NULL AND enrollment.state = 1 AND enrollment.season_id 
+							IN (
+								SELECT id
+								FROM season
+								WHERE season.state = 1 AND season.deleted_at IS NULL
+							)
+						) 
+					AND student.deleted_at IS NULL ;";
+
+		$total = DB::select(DB::raw($sql));
+		
+		return $total;
+
+    }
 }

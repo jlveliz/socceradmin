@@ -99,7 +99,17 @@ class FieldController extends Controller
      */
     public function show($id, Request $request)
     {
-        
+        if ($request->ajax()) {
+
+            try {
+                $field = $this->field->find($id);
+                return response($field,200);
+                
+            } catch (FieldException $e) {
+                return response($e->getMessage(),$e->getCode());
+                
+            }
+        }
     }
 
     /**
