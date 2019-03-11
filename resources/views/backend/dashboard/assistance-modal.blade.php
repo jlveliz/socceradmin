@@ -10,28 +10,27 @@
       <div class="modal-body">
         <div class="row">
           
-          <div class="col-12 d-none d-sm-block">
+          <div class="col-12 d-none">
             <span class="modal-message"></span>
             <strong class="modal-item-name"></strong>
           </div>
           
-          <div class="col-12 table-responsive">
-            
-            <div class="loader-bubble loader-bubble-primary m-5  d-flex align-content-end align-items-center" id="assistance-modal-loader"></div>
-
-            <table class="table">
-              <thead class="thead-dark">
-                <tr>
-                  <th>hola</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Hola</td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="col-12 text-center loader-modal-container">
+            <div class="loader-bubble loader-bubble-primary m-5" id="assistance-modal-loader"></div>
           </div>
+          
+          <div class="col-12">
+            <div class="container-result d-none">
+              <ul class="nav nav-tabs customtab mb-2">
+                
+              </ul>
+              <div class="tab-content" id="mytabassistance">
+                
+              </div>
+             
+            </div>
+          </div>
+
 
         </div>
       </div>

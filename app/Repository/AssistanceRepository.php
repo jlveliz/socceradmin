@@ -136,7 +136,7 @@ class AssistanceRepository implements AssistanceRepositoryInterface
 		$query =" SELECT DATE_FORMAT(en.created_at,'%Y-%m-%d') date_inscription,
 					CONCAT( pe.`name`, ' ', pe.last_name ) student_name,
 					concat( pe.age, ' Años' ) age,
-					concat( re.`name`, ' ', re.last_name ) representant,-- assistance.`name` assistance_name
+					concat( re.`name`, ' ', re.last_name ) representant,
 					gc.`day`,
 					en.is_pay_inscription,
 					en.is_pay_first_month,
@@ -147,8 +147,7 @@ class AssistanceRepository implements AssistanceRepositoryInterface
 		foreach ($datesAssistence as $key => $dateAssi) {
 			$date = $dateAssi->format('Y-m-d');
 			$query.="
-					( SELECT ifnull( assistance.state, 0 ) FROM assistance WHERE assistance.enrollment_group_id 		= eg.id AND date = '$date' ) AS '$key' ,
-					( SELECT assistance.id FROM assistance WHERE assistance.enrollment_group_id 		= eg.id AND date = '$date' ) AS id_$key
+					( SELECT ifnull( assistance.state, 0 ) FROM assistance WHERE assistance.enrollment_group_id= eg.id AND date = '$date' ) AS '$key' , ( SELECT assistance.id FROM assistance WHERE assistance.enrollment_group_id = eg.id AND date = '$date' ) AS id_$key
 					";
 
 			if (($key+1) < count($datesAssistence)) {
@@ -156,38 +155,11 @@ class AssistanceRepository implements AssistanceRepositoryInterface
           	}
 		}
 		
-		$query.=
-					"FROM
-					enrollment en
-					INNER JOIN student st ON en.student_id = st.id
-					INNER JOIN person pe ON st.person_id = pe.id -- REPRESENTANTE
-					INNER JOIN person re ON st.representant_id = re.id -- MATRICULA GRUPO
-					INNER JOIN enrollment_groups eg ON en.id = eg.enrollment_id --
-					INNER JOIN group_class gc ON eg.group_id = gc.id 
-				WHERE
-					en.state = 1 -- temporada activa
-					
-					AND en.season_id = 1 -- temporada
-					
-					AND en.class_type = 2 -- clase pagada
-					
-					AND gc.field_id = $fieldId -- la cancha
-
-					AND gc.day = '$day' -- la cancha
-
-					and st.deleted_at is null
-					
-					AND st.id > 0 
-					AND re.id > 0 
-					AND eg.group_id =$grId -- group_class que pertenece
-					and en.deleted_at is null
-					and st.deleted_at is null
-					order by student_name;
-				";
+		$query.="FROM enrollment en INNER JOIN student st ON en.student_id = st.id INNER JOIN person pe ON st.person_id = pe.id  INNER JOIN person re ON st.representant_id = re.id  INNER JOIN enrollment_groups eg ON en.id = eg.enrollment_id INNER JOIN group_class gc ON eg.group_id = gc.id  WHERE en.state = 1 AND en.season_id = 1 AND en.class_type = 2 AND gc.field_id = $fieldId AND gc.day = '$day' and st.deleted_at is null AND st.id > 0  AND re.id > 0 AND eg.group_id = $grId and en.deleted_at is null and st.deleted_at is null order by student_name;";
 
 		
 
-		$assistances = DB::select(DB::raw($query));
+		$assistances = DB::select($query);
 		return collect(['dates' =>$datesAssistence,'assistances' =>  $assistances]);
 	}
 

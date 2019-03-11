@@ -7,7 +7,8 @@
         <ul class="navigation-left">
             @php $idx = 0; @endphp
             @foreach ($menu as $key => $me)
-                @if (count($me->children) > 0)
+                 
+                @if (count($me->children()->orderBy('order','asc')->get()) > 0)
                     @php
                         $menuItems[$idx] = $me->children;
                         $idx++;
@@ -32,7 +33,7 @@
                 <li class="nav-item">                       
                     <a class="{{ Route::currentRouteName()=='dashboard_version_1' ? 'open' : '' }}" title="{{$menuItems[$i][$y]->description}}" alt="{{$menuItems[$i][$y]->name}}" href="@if($menuItems[$i][$y]->resource){{route($menuItems[$i][$y]->resource) }}@else#@endif">
                         <i class="nav-icon {{$menuItems[$i][$y]->fav_icon}}"></i>
-                        <span class="item-name">{{$menuItems[$i][$y]->name}}</span>
+                        <span class="item-name">{{$menuItems[$i][$y]->name}} </span>
                     </a>
                 </li>   
             @endfor

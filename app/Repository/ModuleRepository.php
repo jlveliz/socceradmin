@@ -164,8 +164,8 @@ class ModuleRepository implements ModuleRepositoryInterface
 			$query->select('permission.*')
 			->join('module','module.id','=','permission.module_id')
 			->join('permission as parent','parent.id','=','permission.parent_id')
-			->whereRaw("permission.type_id = (SELECT permission_type.id FROM permission_type WHERE permission_type.`code` = 'menu') order by permission.`order` asc")->get();
-		}])->join('module','module.id','=','permission.module_id')->whereRaw("permission.type_id = (SELECT permission_type.id FROM permission_type WHERE permission_type.`code` = 'menu') AND permission.parent_id IS NULL ORDER BY permission.`order` asc")->get();
+			->whereRaw("permission.type_id = (SELECT permission_type.id FROM permission_type WHERE permission_type.`code` = 'menu') order by module.order, permission.`order` asc")->get();
+		}])->join('module','module.id','=','permission.module_id')->whereRaw("permission.type_id = (SELECT permission_type.id FROM permission_type WHERE permission_type.`code` = 'menu') AND permission.parent_id IS NULL ORDER BY module.order, permission.`order` asc")->get();
 		
 		return $query;
 	}
