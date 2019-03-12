@@ -94,7 +94,7 @@
 										<div class="col-lg-6 col-12">
 											<div class="form-group">
 												<label for="medical_history" class="">Historial Médico </label>
-												<textarea name="medical_history" id="medical_history" class="form-control form-control-sm  {{ $errors->has('medical_history') ? ' is-invalid' : '' }}" rows="3">@if(isset($student)){{ $student->medical_history }}@else {{ old('medical_history') }}@endif</textarea>
+												<textarea name="medical_history" id="medical_history" class="form-control form-control-sm  {{ $errors->has('medical_history') ? ' is-invalid' : '' }}" rows="3">@if(isset($student)){{ $student->medical_history }}@else{{ old('medical_history') }}@endif</textarea>
 												@if ($errors->has('medical_history'))
 													<div class="invalid-feedback animated fadeInDown">{{ $errors->first('medical_history') }}</div>
 												@endif
@@ -104,7 +104,7 @@
 										<div class="col-lg-6 col-12">
 											<div class="form-group">
 												<label for="observation">Observación </label>
-												<textarea name="observation" id="observation" class="form-control {{ $errors->has('observation') ? ' is-invalid' : '' }}" rows="3">@if(isset($student)){{ $student->observation }}@else {{ old('observation') }}@endif</textarea>
+												<textarea name="observation" id="observation" class="form-control {{ $errors->has('observation') ? ' is-invalid' : '' }}" rows="3">@if(isset($student)){{ $student->observation }}@else{{ old('observation') }}@endif</textarea>
 												@if ($errors->has('observation'))
 													<div class="invalid-feedback animated fadeInDown">{{ $errors->first('observation') }}</div>
 												@endif
@@ -124,7 +124,7 @@
 										<div class="col-lg-4 col-6">
 											<div class="form-group">
 												<label for="representant_num_identification">Num Identificación <span class="text-danger">*</span></label>
-												<input type="text" max="9999999999" minlength="9999999999" name="representant[num_identification]" id="representant_num_identification" class="form-control form-control-sm {{ $errors->has('representant.num_identification') ? ' is-invalid' : '' }}"  value="@if(isset($student)){{ $student->representant->num_identification }}@else {{ old('representant_num_identification') }}@endif">
+												<input type="text" max="9999999999" minlength="9999999999" name="representant[num_identification]" id="representant_num_identification" class="form-control form-control-sm {{ $errors->has('representant.num_identification') ? ' is-invalid' : '' }}"  value="@if(isset($student)){{ $student->representant->num_identification }}@else{{ old('representant_num_identification') }}@endif">
 												@if ($errors->has('representant.num_identification'))
 													<div class="invalid-feedback animated fadeInDown">{{ $errors->first('representant.num_identification') }}</div>
 												@endif
@@ -133,7 +133,7 @@
 										<div class="col-lg-4 col-6">
 											<div class="form-group">
 												<label for="representant_name">Nombre <span class="text-danger">*</span></label>
-												<input type="text" name="representant[name]" id="representant_name" class="form-control form-control-sm {{ $errors->has('representant.name') ? ' is-invalid' : '' }}"  value="@if(isset($student)){{ $student->representant->name }}@else {{ old('representant.name') }}@endif">
+												<input type="text" name="representant[name]" id="representant_name" class="form-control form-control-sm {{ $errors->has('representant.name') ? ' is-invalid' : '' }}"  value="@if(isset($student)){{ $student->representant->name }}@else{{ old('representant.name') }}@endif">
 												@if ($errors->has('representant.name'))
 													<div class="invalid-feedback animated fadeInDown">{{ $errors->first('representant.name') }}</div>
 												@endif
@@ -143,7 +143,7 @@
 										<div class="col-lg-4 col-6">
 											<div class="form-group">
 												<label for="representant_last_name">Apellido <span class="text-danger">*</span></label>
-												<input type="text" name="representant[last_name]" id="representant_last_name" class="form-control form-control-sm {{ $errors->has('representant.last_name') ? ' is-invalid' : '' }}"  value="@if(isset($student)){{ $student->representant->last_name }}@else {{ old('representant.last_name') }}@endif">
+												<input type="text" name="representant[last_name]" id="representant_last_name" class="form-control form-control-sm {{ $errors->has('representant.last_name') ? ' is-invalid' : '' }}"  value="@if(isset($student)){{ $student->representant->last_name }}@else{{ old('representant.last_name') }}@endif">
 												@if ($errors->has('representant.last_name'))
 													<div class="invalid-feedback animated fadeInDown">{{ $errors->first('representant.last_name') }}</div>
 												@endif
@@ -153,7 +153,7 @@
 										<div class="col-lg-5 col-6">
 											<div class="form-group">
 												<label for="representant_address">Dirección <span class="text-danger">*</span></label>
-												<input type="text" name="representant[address]" id="representant_address" class="form-control form-control-sm {{ $errors->has('representant.address') ? ' is-invalid' : '' }}"  value="@if(isset($student)){{ $student->representant->address }}@else {{ old('representant.address') }}@endif">
+												<input type="text" name="representant[address]" id="representant_address" class="form-control form-control-sm {{ $errors->has('representant.address') ? ' is-invalid' : '' }}"  value="@if(isset($student)){{ $student->representant->address }}@else{{ old('representant.address') }}@endif">
 												@if ($errors->has('representant.address'))
 													<div class="invalid-feedback animated fadeInDown">{{ $errors->first('representant.address') }}</div>
 												@endif
@@ -173,7 +173,7 @@
 										<div class="col-lg-3 col-6">
 											<div class="form-group">
 												<label for="representant_phone">Teléfono</label>
-												<input type="text" name="representant[phone]" id="representant_phone" class="form-control form-control-sm {{ $errors->has('representant.phone') ? ' is-invalid' : '' }}"  value="@if(isset($student)){{ $student->representant->phone }}@else {{ old('representant.phone') }}@endif">
+												<input type="text" name="representant[phone]" id="representant_phone" class="form-control form-control-sm {{ $errors->has('representant.phone') ? ' is-invalid' : '' }}"  value="@if(isset($student)){{ $student->representant->phone }}@else{{ old('representant.phone') }}@endif">
 												@if ($errors->has('representant.phone'))
 													<div class="invalid-feedback animated fadeInDown">{{ $errors->first('representant.phone') }}</div>
 												@endif
@@ -183,7 +183,7 @@
 										<div class="col-lg-3 col-6">
 											<div class="form-group">
 												<label for="representant_mobile">Móvil</label>
-												<input type="text" name="representant[mobile]" id="representant_mobile" class="form-control form-control-sm {{ $errors->has('representant.mobile') ? ' is-invalid' : '' }}"  value="@if(isset($student)){{ $student->representant->mobile }}@else {{ old('representant.mobile') }}@endif">
+												<input type="text" name="representant[mobile]" id="representant_mobile" class="form-control form-control-sm {{ $errors->has('representant.mobile') ? ' is-invalid' : '' }}"  value="@if(isset($student)){{ $student->representant->mobile }}@else{{ old('representant.mobile') }}@endif">
 												@if ($errors->has('representant.mobile'))
 													<div class="invalid-feedback animated fadeInDown">{{ $errors->first('representant.mobile') }}</div>
 												@endif
@@ -218,7 +218,7 @@
 										<div class="col-lg-12 col-12">
 											<div class="form-group">
 												<label for="representant_activity">Actividad</label>
-												<textarea name="representant[activity]" id="representant_activity" class="form-control {{ $errors->has('representant.activity') ? ' is-invalid' : '' }}">@if(isset($student)){{ $student->representant->activity }}@else {{ old('representant.activity') }}@endif</textarea>
+												<textarea name="representant[activity]" id="representant_activity" class="form-control {{ $errors->has('representant.activity') ? ' is-invalid' : '' }}">@if(isset($student)){{ $student->representant->activity }}@else{{ old('representant.activity') }}@endif</textarea>
 												@if ($errors->has('representant.activity'))
 													<div class="invalid-feedback animated fadeInDown">{{ $errors->first('representant.activity') }}</div>
 												@endif

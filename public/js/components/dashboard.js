@@ -10,6 +10,7 @@ $(document).ready(function() {
 		$(".loader-modal-container").removeClass('d-none')
 		$(".container-result ul li").remove();
 		$(".modal-message h4").addClass('d-none');
+		$("#mytabassistance").html('');
 
 		if (idField && parseInt(idField) != NaN) {
 
@@ -58,9 +59,10 @@ $(document).ready(function() {
 		var counter = 1;
 		for(var avaylable in availableDays) {
 			var active = counter == 1 ?  'active' : false;
+			var selected = active ?  true : false;
 			html+="<li class='nav-item'>";
-				html+="<a class='nav-link "+active+"' id='"+avaylable+"-tab' aria-selected='"+active+"' data-toggle='tab' href='#"+avaylable+"' role='tab' aria-controls='"+avaylable+"'>"+days_of_week(avaylable)+"</a>";
-			html+="<li>" ;
+				html+="<a class='nav-link "+active+"' id='"+avaylable+"-tab' aria-selected='"+selected+"' data-toggle='tab' href='#"+avaylable+"' role='tab' aria-controls='"+avaylable+"'>"+days_of_week(avaylable)+"</a>";
+			html+="<li>";
 			counter++;
 		}
 
@@ -98,20 +100,30 @@ $(document).ready(function() {
 
 			for (var i = 0; i < days.length; i++) {
 				var active = null;
-				if (i == 0) active = "active";
+				if (i == 0) active = "show active";
 				html+="<div class='tab-pane fade "+active+"' id='"+days[i].day+"' role='tabpanel' aria-labelledby='"+days[i].day+"-tab'>";
 					html+="<ul class='nav nav-tabs customtab mb-2'>";
 						for (var x = 0; x < days[i].groups.length; x++) {
-							var activeLi = x == 1 ? "active" : null;
+							var activeLi = x == 0 ? "active" : null;
+							var selected = activeLi ? true : false
 							html+="<li class='nav-item'>";
-								html+="<a class='nav-link  "+activeLi+"'>"+days[i].groups[x].name+"</a>"
+								html+="<a class='nav-link  "+activeLi+"' id='"+days[i].groups[x].name+"-"+days[i].day+"-"+ x +"-tab' aria-selected='"+selected+"' data-toggle='tab' href='#"+days[i].groups[x].name+"-"+days[i].day+"-"+ x +"' role='tab' aria-controls='"+days[i].groups[x].name+"-"+days[i].day+"-"+ x +"'>"+get_group_names(days[i].groups[x].name)+'('+ days[i].groups[x].schedule.start +'-'+ days[i].groups[x].schedule.end +")</a>";
 							html+="</li>";
 						}
 					html+="</ul>";
+
+					//tabs content
+					html+= "<div class='tab-content'>";
+						for (var x = 0; x < days[i].groups.length; x++) {
+							var activeTab = x == 0 ? "show active" : "false";
+								html+= "<div class='tab-pane fade "+activeTab+"' id='"+days[i].groups[x].name+"-"+days[i].day+"-"+ x +"' role='tabpanel' aria-labelledby='"+days[i].groups[x].name+"-"+days[i].day+"-"+ x +"-tab'>";
+									html+= "<h3>Hola "+ days[i].groups[x].name+ x +"</h3>"
+								html+= "</div>";
+						}
+					html+= "</div>";
+
 				html+="</div>";
 			}
-
-			console.log(html)
 			deferred.resolve(html);
 		}
 

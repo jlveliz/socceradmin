@@ -24,7 +24,7 @@
                 
               </ul>
 
-              <div class="tab-content" id="mytabassistance">
+              <div class="tab-content p-0" id="mytabassistance">
                 
               </div>
              
