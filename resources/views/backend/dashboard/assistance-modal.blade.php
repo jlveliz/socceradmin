@@ -10,9 +10,8 @@
       <div class="modal-body">
         <div class="row">
           
-          <div class="col-12 d-none">
-            <span class="modal-message"></span>
-            <strong class="modal-item-name"></strong>
+          <div class="col-12 modal-message d-none">
+            <h4 class="text-center d-block"></h4>
           </div>
           
           <div class="col-12 text-center loader-modal-container">
@@ -21,9 +20,10 @@
           
           <div class="col-12">
             <div class="container-result d-none">
-              <ul class="nav nav-tabs customtab mb-2">
+              <ul class="nav nav-pills nav-fill mb-2">
                 
               </ul>
+
               <div class="tab-content" id="mytabassistance">
                 
               </div>
