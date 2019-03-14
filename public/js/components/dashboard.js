@@ -143,6 +143,8 @@ $(document).ready(function() {
 
 	var getTimeSeason = function() {
 		var deferred = jQuery.Deferred();
+		
+		return deferred.promise()
 	}
 	var generateAsistance = function(group) {
 		var params = {
