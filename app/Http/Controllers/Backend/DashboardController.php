@@ -37,4 +37,16 @@ class DashboardController extends Controller
         $fields = $this->field->enum();
         return view('backend.dashboard.index',compact('totalStudents','currentSeason','totalFields','fields'));
     }
+
+
+    public function loadAssistance(Request $request)
+    {
+        try {
+            
+            $asistances = $this->assistance->getAssistanceByGroup($request->all());
+            return response(compact($asistances),200);
+        } catch (AssistanceException $e) {
+            
+        }
+    }
 }

@@ -66,7 +66,10 @@
 	Auth::routes();
 
 	Route::get('/','Backend\DashboardController@showDash')->name('home');
-	Route::get('/dashboard','Backend\DashboardController@showDash')->name('dashboard');
+	Route::prefix('dashboard')->group(function(){
+		Route::get('/','Backend\DashboardController@showDash')->name('dashboard');
+		Route::get('get-schedules','Backend\DashboardController@loadAssistance');
+	});
 
 
 	//modules

@@ -117,7 +117,16 @@ $(document).ready(function() {
 						for (var x = 0; x < days[i].groups.length; x++) {
 							var activeTab = x == 0 ? "show active" : "false";
 								html+= "<div class='tab-pane fade "+activeTab+"' id='"+days[i].groups[x].name+"-"+days[i].day+"-"+ x +"' role='tabpanel' aria-labelledby='"+days[i].groups[x].name+"-"+days[i].day+"-"+ x +"-tab'>";
-									html+= "<h3>Hola "+ days[i].groups[x].name+ x +"</h3>"
+									html+= "<div class='row'>";
+										html+="<div class='col-lg-2 col-12 px-0'>";
+											html+="<div class='form-group'>";
+												html+="<label for='month'>Mes</label>";
+													html+="<select class='form-control'>";
+														html+= getTimeSeason();
+													html+="</select>";
+											html+= "</div>";
+										html+= "</div>";
+									html+= "</div>";
 								html+= "</div>";
 						}
 					html+= "</div>";
@@ -129,6 +138,33 @@ $(document).ready(function() {
 
 
 		return deferred.promise()
+		
+	}
+
+	var getTimeSeason = function() {
+		var deferred = jQuery.Deferred();
+	}
+	var generateAsistance = function(group) {
+		var params = {
+			field : group.field_id,
+			key_day: group.day,
+			group_id: group.id
+		}
+
+		$.ajax({
+			url: '/dashboard/get-schedules',
+			type: 'GET',
+			data: params,
+		})
+		.done(function(data) {
+			console.log(data);
+		})
+		.fail(function(err) {
+			console.log(err);
+		})
+		.always(function() {
+			console.log("complete");
+		});
 		
 	}
 
