@@ -30,7 +30,19 @@ $(document).ready(function() {
 						var tabs = html;	
 						$(".container-result ul").append(tabs);
 						generateGroupsByDay(result.groups).then(function(html) {
+							//loadtabs
 							$("#mytabassistance").append(html);
+							getTimeSeason().done(function(data) {
+								var currentMonth = (new Date()).getMonth();
+								currentMonth++;
+								for (var option in data) {
+									var selected = parseInt(option) != NaN &&  parseInt(option) == currentMonth ? "selected" : '';
+									var option = "<option value='"+option+"' "+selected+">"+ data[option] + "</option>";
+									$('.month').append(option);
+								}
+
+								$('.month').trigger('change');
+							});
 						})
 					})
 
@@ -47,10 +59,12 @@ $(document).ready(function() {
 			return false;
 		}
 
-
-		
-
 	});
+
+
+	$('.month').on('change',function(e){
+		console.log(e)
+	})
 
 
 	var generateTabsDay = function(availableDays) {
@@ -107,13 +121,13 @@ $(document).ready(function() {
 							var activeLi = x == 0 ? "active" : null;
 							var selected = activeLi ? true : false
 							html+="<li class='nav-item'>";
-								html+="<a class='nav-link  "+activeLi+"' id='"+days[i].groups[x].name+"-"+days[i].day+"-"+ x +"-tab' aria-selected='"+selected+"' data-toggle='tab' href='#"+days[i].groups[x].name+"-"+days[i].day+"-"+ x +"' role='tab' aria-controls='"+days[i].groups[x].name+"-"+days[i].day+"-"+ x +"'>"+get_group_names(days[i].groups[x].name)+'('+ days[i].groups[x].schedule.start +'-'+ days[i].groups[x].schedule.end +")</a>";
+								html+="<a class='nav-link p-2 "+activeLi+"' id='"+days[i].groups[x].name+"-"+days[i].day+"-"+ x +"-tab' aria-selected='"+selected+"' data-toggle='tab' href='#"+days[i].groups[x].name+"-"+days[i].day+"-"+ x +"' role='tab' aria-controls='"+days[i].groups[x].name+"-"+days[i].day+"-"+ x +"'>"+get_group_names(days[i].groups[x].name)+'('+ days[i].groups[x].schedule.start +'-'+ days[i].groups[x].schedule.end +")</a>";
 							html+="</li>";
 						}
 					html+="</ul>";
 
 					//tabs content
-					html+= "<div class='tab-content'>";
+					html+= "<div class='tab-content pt-0'>";
 						for (var x = 0; x < days[i].groups.length; x++) {
 							var activeTab = x == 0 ? "show active" : "false";
 								html+= "<div class='tab-pane fade "+activeTab+"' id='"+days[i].groups[x].name+"-"+days[i].day+"-"+ x +"' role='tabpanel' aria-labelledby='"+days[i].groups[x].name+"-"+days[i].day+"-"+ x +"-tab'>";
@@ -121,8 +135,7 @@ $(document).ready(function() {
 										html+="<div class='col-lg-2 col-12 px-0'>";
 											html+="<div class='form-group'>";
 												html+="<label for='month'>Mes</label>";
-													html+="<select class='form-control'>";
-														html+= getTimeSeason();
+													html+="<select class='month form-control'>";
 													html+="</select>";
 											html+= "</div>";
 										html+= "</div>";
@@ -143,10 +156,24 @@ $(document).ready(function() {
 
 	var getTimeSeason = function() {
 		var deferred = jQuery.Deferred();
+		$.ajax({
+			url: 'seasons/get-current-duration-season',
+			type: 'GET',
+		})
+		.done(function(data) {
+			
+			deferred.resolve(data);
+		})
+		.fail(function() {
+			alert("hubo un error al cargar los meses de temporada");
+		})
+		.always(function() {
+			console.log("complete");
+		});
 		
 		return deferred.promise()
 	}
-	var generateAsistance = function(group) {
+	var getTableInfoAssistance = function(group) {
 		var params = {
 			field : group.field_id,
 			key_day: group.day,

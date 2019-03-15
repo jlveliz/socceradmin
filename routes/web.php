@@ -107,6 +107,7 @@
 	Route::post('groupclass/remove-all','Backend\GroupClassController@removeAllGroupsBySchedule');
 	
 	//seasons
+	Route::get('seasons/get-current-duration-season','Backend\SeasonController@getDurationSeason');
 	Route::resource('seasons','Backend\SeasonController',['except'=>['show']]);
 
 	//Assitance

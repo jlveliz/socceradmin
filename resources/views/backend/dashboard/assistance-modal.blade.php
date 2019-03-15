@@ -20,7 +20,7 @@
           
           <div class="col-12">
             <div class="container-result d-none">
-              <ul class="nav nav-pills nav-fill mb-2">
+              <ul class="nav nav-pills nav-fill mb-1">
                 
               </ul>
 
