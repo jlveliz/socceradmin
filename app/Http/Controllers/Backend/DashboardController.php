@@ -7,6 +7,7 @@ use HappyFeet\Http\Controllers\Controller;
 use HappyFeet\RepositoryInterface\FieldRepositoryInterface;
 use HappyFeet\RepositoryInterface\StudentRepositoryInterface;
 use HappyFeet\RepositoryInterface\SeasonRepositoryInterface;
+use HappyFeet\RepositoryInterface\AssistanceRepositoryInterface;
 use HappyFeet\Exceptions\AssistanceException;
 
 
@@ -19,14 +20,16 @@ class DashboardController extends Controller
 	protected $field;
     protected $seasonRepo;
     protected $studentRepo;
+    protected $assistance;
 
-    public function __construct(FieldRepositoryInterface $field, SeasonRepositoryInterface $seasonRepo, StudentRepositoryInterface $studentRepo)
+    public function __construct(FieldRepositoryInterface $field, SeasonRepositoryInterface $seasonRepo, StudentRepositoryInterface $studentRepo, AssistanceRepositoryInterface $assistance)
     {
     	// $this->middleware('auth.backend')->except('logout');
     	$this->middleware('auth');
     	$this->field = $field;
         $this->seasonRepo = $seasonRepo;
         $this->studentRepo = $studentRepo;
+        $this->assistance = $assistance;
     }
 
     public function showDash(Request $request)
@@ -42,9 +45,8 @@ class DashboardController extends Controller
     public function loadAssistance(Request $request)
     {
         try {
-            
             $asistances = $this->assistance->getAssistanceByGroup($request->all());
-            return response(compact($asistances),200);
+            return response($asistances,200);
         } catch (AssistanceException $e) {
             
         }
