@@ -203,16 +203,16 @@ $(document).ready(function() {
                 html += "<table class='table'>";
                 html += "<thead class='thead-dark text-center'>";
                 html += "<tr>"
-                html += "<th>F. de Inscripción</th>"
-                html += "<th>Nombre</th>"
-                html += "<th>Edad</th>"
-                html += "<th>Representante</th>"
-                html += "<th>I</th>"
-                html += "<th>M</th>"
-                html += "<th>C</th>"
-                for (var i = 0; i < data['dates'].length; i++) {
-                    html += "<th>" + (new Date(data['dates'][i].date)).getDate() + "</th>"
-                }
+	                html += "<th>F. de Inscripción</th>"
+	                html += "<th>Nombre</th>"
+	                html += "<th>Edad</th>"
+	                html += "<th>Representante</th>"
+	                html += "<th>I</th>"
+	                html += "<th>M</th>"
+	                html += "<th>C</th>"
+	                for (var i = 0; i < data['dates'].length; i++) {
+	                    html += "<th>" + (new Date(data['dates'][i].date)).getDate() + "</th>"
+	                }
                 html += "</tr>"
                 html += "</thead>";
                 html += "<tbody>";
