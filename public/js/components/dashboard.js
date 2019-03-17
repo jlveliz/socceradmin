@@ -28,6 +28,7 @@ $(document).ready(function() {
                         generateTabsDay(result.available_days).then(function(html) {
                             var tabs = html;
                             $(".container-result ul").append(tabs);
+                            $(".container-result ul").addClass('d-none');
                             generateGroupsByDay(result.groups).then(function(html) {
                                 //loadtabs
                                 $("#mytabassistance").append(html);
@@ -39,9 +40,6 @@ $(document).ready(function() {
                                         var option = "<option value='" + option + "' " + selected + ">" + data[option] + "</option>";
                                         $('.month').append(option);
                                     }
-
-                                    $(".container-result").removeClass('d-none');
-                                    $(".loader-modal-container").addClass('d-none');
                                     $('.month').trigger('change');
                                 });
                             })
@@ -67,10 +65,21 @@ $(document).ready(function() {
         var currentTarget = $(e.currentTarget);
         var monthSelected = currentTarget.val();
         var group = currentTarget.parents('.tab-pane-group');
+        group.find('.show-table table').remove();
         var dataGroup = group.data('group')
         dataGroup['month'] = monthSelected;
+        if ($(".container-result ul").hasClass('d-none')) {
+            $(".loader-modal-container").removeClass('d-none')
+        } else {
+            group.find('.show-table').append("<div class='col-12 text-center loader-table'><div class='loader-bubble loader-bubble-primary m-5'></div></div>");
+        }
         getTableInfoAssistance(dataGroup).done(function(html) {
-            group.append(html);
+            $(".container-result").removeClass('d-none');
+            $(".container-result ul").removeClass('d-none');
+            $(".loader-modal-container").addClass('d-none');
+            group.find('.show-table').append(html);
+            // debugger
+            group.find('.loader-table').remove()
         });
     });
 
@@ -146,9 +155,9 @@ $(document).ready(function() {
                     html += "<select class='month form-control'>";
                     html += "</select>";
                     html += "</div>";
+                    html += "</div>";
+                    html += "</div>";
                     html += "<div class='show-table'></div>";
-                    html += "</div>";
-                    html += "</div>";
                     html += "</div>";
                 }
                 html += "</div>";
@@ -192,42 +201,42 @@ $(document).ready(function() {
             .done(function(data) {
                 var html = "<div class='row'><div class='col-12 px-0'><div class='table-responsive'>";
                 html += "<table class='table'>";
-	                html += "<thead class='thead-dark text-center'>";
-	                html += "<tr>"
-		                html += "<th>F. de Inscripción</th>"
-		                html += "<th>Nombre</th>"
-		                html += "<th>Edad</th>"
-		                html += "<th>Representante</th>"
-		                html += "<th>I</th>"
-		                html += "<th>M</th>"
-		                html += "<th>C</th>"
-		                for (var i = 0; i < data['dates'].length; i++) {
-		                    html += "<th>" + (new Date(data['dates'][i].date)).getDate() + "</th>"
-		                }
-                	html += "</tr>"
-                	html += "</thead>";
-                	html += "<tbody>"; 
-                		if (data['assistances'].length > 0) {
-                			for (var i = 0; i < data['assistances'].length; i++) {
-                				html+="<tr>";
-                					html+="<td>"+data['assistances'][i].date_inscription+"</td>";
-                					html+="<td>"+data['assistances'][i].student_name+"</td>";
-                					html+="<td>"+data['assistances'][i].age+"</td>";
-                					html+="<td>"+data['assistances'][i].representant+"</td>";
-                					html+="<td>"+data['assistances'][i].is_pay_inscription == '1'? + ' Si ' : ' No ' +"</td>";
-                					html+="<td>"+data['assistances'][i].is_pay_first_month == '1'? + ' Si ' : ' No ' +"</td>";
-                					html+="<td>"+data['assistances'][i].is_delivered_uniform == '1'? + ' Si ' : ' No ' +"</td>";
-                					for (var i = 0; i < data['assistances'].length; i++) {
-                						var  idAssistance = 'id_'+i;
-                						html+='<td class="text-center">'+data['assistances'][i][idAssistance]+'</td>';
-                					}
-                				html+="</tr>";
-                			}
+                html += "<thead class='thead-dark text-center'>";
+                html += "<tr>"
+                html += "<th>F. de Inscripción</th>"
+                html += "<th>Nombre</th>"
+                html += "<th>Edad</th>"
+                html += "<th>Representante</th>"
+                html += "<th>I</th>"
+                html += "<th>M</th>"
+                html += "<th>C</th>"
+                for (var i = 0; i < data['dates'].length; i++) {
+                    html += "<th>" + (new Date(data['dates'][i].date)).getDate() + "</th>"
+                }
+                html += "</tr>"
+                html += "</thead>";
+                html += "<tbody>";
+                if (data['assistances'].length > 0) {
+                    for (var i = 0; i < data['assistances'].length; i++) {
+                        html += "<tr>";
+                        html += "<td>" + data['assistances'][i].date_inscription + "</td>";
+                        html += "<td>" + data['assistances'][i].student_name + "</td>";
+                        html += "<td>" + data['assistances'][i].age + "</td>";
+                        html += "<td>" + data['assistances'][i].representant + "</td>";
+                        html += "<td>" + data['assistances'][i].is_pay_inscription == '1' ? +' Si ' : ' No ' + "</td>";
+                        html += "<td>" + data['assistances'][i].is_pay_first_month == '1' ? +' Si ' : ' No ' + "</td>";
+                        html += "<td>" + data['assistances'][i].is_delivered_uniform == '1' ? +' Si ' : ' No ' + "</td>";
+                        for (var i = 0; i < data['assistances'].length; i++) {
+                            var idAssistance = 'id_' + i;
+                            html += '<td class="text-center">' + data['assistances'][i][idAssistance] + '</td>';
+                        }
+                        html += "</tr>";
+                    }
 
-                		} else {
-	                		html+= "<tr><td colspan='"+( 7 + data['dates'].length)+"' clas='text-center'><p class='text-center align-middle'>No existen datos</p><td></tr>";
-                		}
-                	html += "</tbody>"; 
+                } else {
+                    html += "<tr><td colspan='" + (7 + data['dates'].length) + "' clas='text-center'><p class='text-center align-middle'>No existen datos</p></td></tr>";
+                }
+                html += "</tbody>";
                 html += "</table>";
                 html += "</div>";
                 html += "</div>";
@@ -243,7 +252,7 @@ $(document).ready(function() {
                 console.log("complete");
             });
 
-          return deferred.promise();
+        return deferred.promise();
 
     }
 
