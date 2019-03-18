@@ -94,12 +94,13 @@ class StudentController extends Controller
             $message['type'] = "error";
             $message['content'] = $e->getMessage();
             return back()->with($message);
-        } catch (Exception $e) {
-            DB::rollback();
-            $message['type'] = "error";
-            $message['content'] = $e->getMessage();
-            return back()->with($message);
-        }
+        } 
+        // catch (Exception $e) {
+        //     DB::rollback();
+        //     $message['type'] = "error";
+        //     $message['content'] = $e->getMessage();
+        //     return back()->with($message);
+        // }
     }
 
     /**
