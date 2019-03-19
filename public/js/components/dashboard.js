@@ -219,17 +219,27 @@ $(document).ready(function() {
                 if (data['assistances'].length > 0) {
                     for (var i = 0; i < data['assistances'].length; i++) {
                         html += "<tr>";
-                        debugger
+                        
                         html += "<td>" + data['assistances'][i].date_inscription + "</td>";
                         html += "<td>" + data['assistances'][i].student_name + "</td>";
                         html += "<td>" + data['assistances'][i].age + "</td>";
                         html += "<td>" + data['assistances'][i].representant + "</td>";
-                        html += "<td>" + data['assistances'][i].is_pay_inscription == '1' ? +' Si ' : + ' No ' + "</td>";
-                        html += "<td>" + data['assistances'][i].is_pay_first_month == '1' ? +' Si '  : +' No ' + "</td>";
-                        html += "<td>" + data['assistances'][i].is_delivered_uniform == '1' ? +' Si '  : + ' No ' + "</td>";
-	                        for (var i = 0; i < data['assistances'].length; i++) {
+                        var payInscr = parseInt(data['assistances'][i].is_pay_inscription) == 1 ? ' Si ' : ' No ';
+                        html += "<td>" + payInscr + "</td>";
+                        
+                        var isPayFirstMonth = parseInt(data['assistances'][i].is_pay_first_month) == 1 ? ' Si ' : 'No';
+
+                        html += "<td>" + isPayFirstMonth+ "</td>";
+
+                        var isDeliveredUniform = parseInt(data['assistances'][i].is_delivered_uniform) == 1 ? 'Si' : 'No';
+                        html += "<td>" + isDeliveredUniform + "</td>";
+                        debugger
+	                        for (var i = 0; i < data['dates'].length; i++) {
 	                            var idAssistance = 'id_' + i;
-	                            html += '<td class="text-center">' + data['assistances'][i][idAssistance] + '</td>';
+	                            // var existAssistance = '-';
+	                            // console.log(idAssistance);
+	                            existAssistance = data['assistances'][i][idAssistance]    ? 'Si' : 'No';
+	                            html += '<td class="text-center">' + existAssistance + '</td>';
 	                        }
                         html += "</tr>";
                     }
