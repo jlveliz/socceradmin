@@ -83,7 +83,6 @@ class StudentRepository implements StudentRepositoryInterface
 		//save user representant
 		$userRepresentant->fill($dataRepresentant);
 		$existPersonRepresentant ? $savedUserRepresentant =  $userRepresentant->update() : $savedUserRepresentant = $userRepresentant->save();
-		
 		if(!$savedUserRepresentant) {
 			throw new StudentException('Ha ocurrido un error al guardar el estudiante '.$data['name'],"500");
 		}
