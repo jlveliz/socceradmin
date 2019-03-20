@@ -78,9 +78,15 @@ $(document).ready(function() {
             $(".container-result ul").removeClass('d-none');
             $(".loader-modal-container").addClass('d-none');
             group.find('.show-table').append(html);
-            // debugger
+
             group.find('.loader-table').remove()
         });
+    });
+
+
+    $(".tab-content").on('click', '.reload-group-schedule', function(event) {
+        var currentTarget = $(event.currentTarget);
+        currentTarget.closest('.row').find('.month').trigger('change');
     });
 
 
@@ -149,11 +155,16 @@ $(document).ready(function() {
                     var activeTab = x == 0 ? "show active" : "false";
                     html += "<div class='tab-pane fade " + activeTab + " tab-pane-group' id='" + days[i].groups[x].name + "-" + days[i].day + "-" + x + "' role='tabpanel' aria-labelledby='" + days[i].groups[x].name + "-" + days[i].day + "-" + x + "-tab' data-group='" + JSON.stringify({ field: days[i].groups[x].field_id, group_id: days[i].groups[x].id, key_day: days[i].groups[x].day }) + "'>";
                     html += "<div class='row'>";
-                    html += "<div class='col-lg-2 col-12 px-0'>";
+                    html += "<div class='col-lg-2 col-6 px-0'>";
                     html += "<div class='form-group'>";
                     html += "<label for='month'>Mes</label>";
                     html += "<select class='month form-control'>";
                     html += "</select>";
+                    html += "</div>";
+                    html += "</div>";
+                    html += "<div class='col-lg-2 col-6 mt-1 pt-4'>";
+                    html += "<div class='form-group'>";
+                    html += "<button class='reload-group-schedule btn btn-secondary btn-sm'><i class='i-Refresh'></i></button>";
                     html += "</div>";
                     html += "</div>";
                     html += "</div>";
@@ -199,48 +210,51 @@ $(document).ready(function() {
                 data: group,
             })
             .done(function(data) {
+
                 var html = "<div class='row'><div class='col-12 px-0'><div class='table-responsive'>";
                 html += "<table class='table'>";
                 html += "<thead class='thead-dark text-center'>";
                 html += "<tr>"
-	                html += "<th>F. de Inscripción</th>"
-	                html += "<th>Nombre</th>"
-	                html += "<th>Edad</th>"
-	                html += "<th>Representante</th>"
-	                html += "<th>I</th>"
-	                html += "<th>M</th>"
-	                html += "<th>C</th>"
-	                for (var i = 0; i < data['dates'].length; i++) {
-	                    html += "<th>" + (new Date(data['dates'][i].date)).getDate() + "</th>"
-	                }
+                html += "<th>F. de Inscripción</th>"
+                html += "<th>Nombre</th>"
+                html += "<th>Edad</th>"
+                html += "<th>Representante</th>"
+                html += "<th>I</th>"
+                html += "<th>M</th>"
+                html += "<th>C</th>"
+                for (var i = 0; i < data['dates'].length; i++) {
+                    html += "<th>" + (new Date(data['dates'][i].date)).getDate() + "</th>"
+                }
                 html += "</tr>"
                 html += "</thead>";
                 html += "<tbody>";
                 if (data['assistances'].length > 0) {
                     for (var i = 0; i < data['assistances'].length; i++) {
                         html += "<tr>";
-                        
+
                         html += "<td>" + data['assistances'][i].date_inscription + "</td>";
                         html += "<td>" + data['assistances'][i].student_name + "</td>";
                         html += "<td>" + data['assistances'][i].age + "</td>";
                         html += "<td>" + data['assistances'][i].representant + "</td>";
+
+
                         var payInscr = parseInt(data['assistances'][i].is_pay_inscription) == 1 ? ' Si ' : ' No ';
                         html += "<td>" + payInscr + "</td>";
-                        
+
                         var isPayFirstMonth = parseInt(data['assistances'][i].is_pay_first_month) == 1 ? ' Si ' : 'No';
 
-                        html += "<td>" + isPayFirstMonth+ "</td>";
+                        html += "<td>" + isPayFirstMonth + "</td>";
 
                         var isDeliveredUniform = parseInt(data['assistances'][i].is_delivered_uniform) == 1 ? 'Si' : 'No';
                         html += "<td>" + isDeliveredUniform + "</td>";
-                        debugger
-	                        for (var i = 0; i < data['dates'].length; i++) {
-	                            var idAssistance = 'id_' + i;
-	                            // var existAssistance = '-';
-	                            // console.log(idAssistance);
-	                            existAssistance = data['assistances'][i][idAssistance]    ? 'Si' : 'No';
-	                            html += '<td class="text-center">' + existAssistance + '</td>';
-	                        }
+
+                        for (var x = 0; x < data['dates'].length; x++) {
+
+                            // var existAssistance = '-';
+                            // console.log(idAssistance);
+                            existAssistance = parseInt(data['assistances'][i][x]) == 1 ? 'Si' : 'No';
+                            html += '<td class="text-center">' + existAssistance + '</td>';
+                        }
                         html += "</tr>";
                     }
 

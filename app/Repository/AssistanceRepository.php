@@ -157,8 +157,6 @@ class AssistanceRepository implements AssistanceRepositoryInterface
 		
 		$query.="FROM enrollment en INNER JOIN student st ON en.student_id = st.id INNER JOIN person pe ON st.person_id = pe.id  INNER JOIN person re ON st.representant_id = re.id  INNER JOIN enrollment_groups eg ON en.id = eg.enrollment_id INNER JOIN group_class gc ON eg.group_id = gc.id  WHERE en.state = 1 AND en.season_id = 1 AND en.class_type = 2 AND gc.field_id = $fieldId AND gc.day = '$day' and st.deleted_at is null AND st.id > 0  AND re.id > 0 AND eg.group_id = $grId and en.deleted_at is null and st.deleted_at is null order by student_name;";
 
-		
-
 		$assistances = DB::select($query);
 		return collect(['dates' =>$datesAssistence,'assistances' =>  $assistances]);
 	}
