@@ -3,7 +3,7 @@ namespace HappyFeet\Repository;
 
 use HappyFeet\RepositoryInterface\CoachRepositoryInterface;
 use HappyFeet\Exceptions\CoachException;
-use HappyFeet\Models\User as Coach;
+use HappyFeet\Models\Coach;
 
 /**
 * 

@@ -50,17 +50,7 @@ class User extends Authenticatable
         return $this->belongsToMany('HappyFeet\Models\Role','user_role','user_id','role_id');
     }
 
-    // public function representant()
-    // {
-    //     return $this->hasOne('HappyFeet\Models\Representant','user_id');
-    // }
-
-    // public function permissions()
-    // {
-    //     return $this->hasMany('HappyFeet\Models\UserPermission','user_id');
-    // }
-
-
+ 
     public function authorizeRoles($roles)
     {
         if ($this->hasAnyRole($roles)) {
@@ -85,15 +75,6 @@ class User extends Authenticatable
         return false;
     }
 
-
-    // public function hasRole($role)
-    // {
-    //     $hasRole = false;
-    //     if ($this->roles()->where('code', $role)->first()) {
-    //         $hasRole = true;
-    //     }
-    //     return $hasRole;
-    // }
 
     public function hasRole($idRole)
     {

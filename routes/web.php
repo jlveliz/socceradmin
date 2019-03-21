@@ -113,7 +113,7 @@
 	//Assitance
 	Route::resource('assistances','Backend\AssistanceController',['except'=>['show','create','edit','update']]);
 
-	Route::resource('coachs','Backend\CoachController',['except' => ['show','create','edit','update']]);
+	Route::resource('coachs','Backend\CoachController',['only' => ['index']]);
 
 // });
 
