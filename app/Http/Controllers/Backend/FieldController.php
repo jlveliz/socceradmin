@@ -7,6 +7,7 @@ use HappyFeet\Http\Controllers\Controller;
 use HappyFeet\RepositoryInterface\FieldRepositoryInterface;
 use HappyFeet\RepositoryInterface\AgeRangeRepositoryInterface;
 use HappyFeet\RepositoryInterface\FieldTypeRepositoryInterface;
+use HappyFeet\RepositoryInterface\CoachRepositoryInterface;
 use HappyFeet\Http\Requests\FieldRequest;
 use HappyFeet\Exceptions\FieldException;
 use Exception;
@@ -18,16 +19,18 @@ class FieldController extends Controller
     protected $field;
     protected $ageRange;
     protected $ftype;
+    protected $coach;
 
     protected $routeRedirectIndex = 'fields.index';
 
 
-    function __construct(FieldRepositoryInterface $field, AgeRangeRepositoryInterface $ageRange, FieldTypeRepositoryInterface $ftype)
+    function __construct(FieldRepositoryInterface $field, AgeRangeRepositoryInterface $ageRange, FieldTypeRepositoryInterface $ftype, CoachRepositoryInterface $coach)
     {
         $this->middleware('auth');
         $this->field = $field;
         $this->ageRange = $ageRange;
         $this->ftype = $ftype;
+        $this->coach = $coach;
     }
     /**
      * Display a listing of the resource.
@@ -126,7 +129,8 @@ class FieldController extends Controller
         $aRanges = $this->ageRange->enum();
         $types = $this->ftype->enum();
         $daysOfWeek = days_of_week();
-        return view('backend.field.create-edit',compact('field','daysOfWeek','aRanges','types'));
+        $coachs = $this->coach->enum();
+        return view('backend.field.create-edit',compact('field','daysOfWeek','aRanges','types','coachs'));
     }
 
     /**

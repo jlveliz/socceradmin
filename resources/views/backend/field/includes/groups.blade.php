@@ -16,6 +16,7 @@
                     <thead>
                         <tr>
                             <th>Nombre</th>
+                            <th>Coach</th>
                             <th>Rango</th>
                             <th>Capacidad</th>
                             <th colspan="2">Hora Inicio / Hora Fin</th>
@@ -46,6 +47,16 @@
                                         </select>
                                         @if ($errors->has('groups.'.$kday.'.'.$kSchedule.'.'.$groupNum.'.name'))
                                             <div id="val-state-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('groups.'.$kday.'.'.$kSchedule.'.'.$groupNum.'.name') }}</div>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <select name="groups[{{$kday}}][{{$kSchedule}}][{{$groupNum}}][coach_id]" id="groups[{{$kday}}][{{$kSchedule}}][{{$groupNum}}][coach_id]" class="form-control form-control-sm group-coach-id @if ($errors->has('groups.'.$kday.'.'.$kSchedule.'.'.$groupNum.'.coach_id')) is-invalid @endif">
+                                            @foreach ($coachs as $coach)
+                                            <option value="{{$coach->id}}" @if($groupDb->id == $groupDb->field_id) selected @endif>{{$coach->person->name}}</option>
+                                            @endforeach
+                                        </select>
+                                        @if ($errors->has('groups.'.$kday.'.'.$kSchedule.'.'.$groupNum.'.coach_id'))
+                                        <div id="val-state-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('groups.'.$kday.'.'.$kSchedule.'.'.$groupNum.'.coach_id') }}</div>
                                         @endif
                                     </td>
                                     <td>
