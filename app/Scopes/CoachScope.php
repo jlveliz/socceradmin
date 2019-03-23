@@ -19,7 +19,7 @@ class CoachScope implements Scope
      */
     public function apply(Builder $builder, Model $model)
     {
-        $builder->whereRaw(" user.id in ( SELECT user_role.user_id from user_role WHERE user_role.role_id IN ( SELECT role.id FROM role WHERE role.`name` = 'profesores' )) ");
+        $builder->whereRaw(" user.id in ( SELECT user_role.user_id from user_role WHERE user_role.role_id IN ( SELECT role.id FROM role WHERE role.`code` = 'profesores' or role.`code` = 'coach' )) ");
     }
 
 }
