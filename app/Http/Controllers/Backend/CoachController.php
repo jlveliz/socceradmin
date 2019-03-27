@@ -121,4 +121,10 @@ class CoachController extends Controller
     {
         #
     }
+
+
+    public function getAssistances()
+    {
+        
+    }
 }

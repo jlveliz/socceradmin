@@ -4,7 +4,9 @@ namespace HappyFeet\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use HappyFeet\Http\Controllers\Controller;
-use HappyFeet\RepositoryInterface\AssistanceCoachCoachRepositoryInterface;
+use HappyFeet\RepositoryInterface\AssistanceCoachRepositoryInterface;
+use HappyFeet\RepositoryInterface\FieldRepositoryInterface;
+use HappyFeet\RepositoryInterface\CoachRepositoryInterface;
 use HappyFeet\Http\Requests\AssistanceCoachRequest;
 use HappyFeet\Exceptions\AssistanceCoachException;
 
@@ -13,25 +15,29 @@ class AssistanceCoachController extends Controller
 {
     
     protected $assistance;
+    protected $coach;
+    protected $field;
     
     protected $routeRedirectIndex = 'assistances.index';
 
 
-    function __construct(AssistanceCoachRepositoryInterface $assistance)
+    function __construct(AssistanceCoachRepositoryInterface $assistance, CoachRepositoryInterface $coach, FieldRepositoryInterface $field)
     {
         $this->middleware('auth');
         $this->assistance = $assistance;
+        $this->coach = $coach;
+        $this->field = $field;
     }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        return view('backend.assistance-coach.index');
-        
-
+        $coachs = $this->coach->enum();
+        $fields = $this->field->enum();
+        return view('backend.assistance-coach.index', compact('fields','coachs'));
     }
 
     /**

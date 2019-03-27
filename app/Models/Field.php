@@ -71,6 +71,20 @@ class Field extends Model
     }
 
 
+    public function getFormatDays()
+    {
+        $days =  array_keys($this->available_days);
+        $formated = "";
+        $numDays = count($days);
+        foreach ($days as $key => $day) {
+            $lastEl = ($key + 1) == $numDays ? true : false ;
+            $formated.= days_of_week()[$day];   
+            $formated.= !$lastEl ? ', ' : '';
+        }
+        return $formated;
+    }
+
+
     public function haveGroupsOnDay($kday) {
         $exist = false;
         foreach($this->groups as $grDb) {
@@ -92,4 +106,5 @@ class Field extends Model
     public function getGroupsOnSchedule($kday,$kSchedule) {
         return $this->groups()->where('day',$kday)->where('schedule_field_parent',$kSchedule)->get();
     }
+
 }

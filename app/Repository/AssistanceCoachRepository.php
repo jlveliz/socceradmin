@@ -1,7 +1,7 @@
 <?php
 namespace HappyFeet\Repository;
 
-use HappyFeet\RepositoryInterface\AssistanceCoachCoachRepositoryInterface;
+use HappyFeet\RepositoryInterface\AssistanceCoachRepositoryInterface;
 use HappyFeet\Exceptions\AssistanceCoachException;
 use HappyFeet\Models\AssistanceCoach;
 
