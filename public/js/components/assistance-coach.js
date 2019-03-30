@@ -1,27 +1,38 @@
 $(document).ready(function() {
+    var loadAssistances = (monthSelected, fieldId, numCoachs) => {
 
-    var loadAssistances = () => {
-        
-        $('.select-coach-month').each(function(index, el) {
-        	debugger
-        	$(el).trigger('change');
-        });
+        var deferred = jQuery.Deferred();
+
+        $.ajax({
+                url: '/coachs-assistances/schedule?month='+monthSelected,
+                type: 'GET',
+            })
+            .done(function(data) {
+                console.log(data);
+            })
+            .fail(function() {
+                console.log("error");
+            })
+            .always(function() {
+                console.log("complete");
+            });
+
+
+        return deferred.promise();
+
     }
 
-    loadAssistances();
 
 
 
 
-    $('.assistance-coach').on('change', '.select-coach-month', function(event) {
-        debugger;
-        var $select = $(event.currentTarget);
-        var monthSelected = $select.val();
-        var fieldTable = $select.closest('.assistance-coach').find('.table-coach-body').data('field');
-        var numCoachsTable = $select.closest('.assistance-coach').find('.table-coach-body').data('coachs');
 
-        console.log(monthSelected, fieldTable, numCoachsTable)
-
+    $('.assistance-coach').each(function(index, el) {
+        var $tableCoachBody = $(el).find('.table-coach-body');
+        var monthSelected = $(el).find('.select-coach-month').val();
+        var fieldId = $tableCoachBody.data('field');
+        var numCoachs = $tableCoachBody.data('coachs');
+        loadAssistances(monthSelected, fieldId, numCoachs);
     });
 
 

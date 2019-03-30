@@ -103,4 +103,13 @@ class AssistanceCoachRepository implements AssistanceCoachRepositoryInterface
 	{
 		return new AssistanceCoach();
 	}
+
+	public function loadDaysMonth($month)
+	{
+		$numMonth = \DateTime::createFromFormat('m',$month);
+		$numMonth2 = \DateTime::createFromFormat('m',$month);
+		$startDateMonth = $numMonth->modify('first day of this month');
+		$endDateMonth = $numMonth2->modify('last day of this month');
+		dd($startDateMonth, $endDateMonth);
+	}
 }

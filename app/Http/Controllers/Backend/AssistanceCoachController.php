@@ -167,27 +167,16 @@ class AssistanceCoachController extends Controller
     }
 
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function getSchedule($id , Request $request) {
-        
-        if ($request->ajax()) {
+    public function loadDaysMonth(Request $request)
+    {
+        try {
+           if ($request->ajax()) {
+                $monthSelected = $request->get('month');
+                $months = $this->assistance->loadDaysMonth($monthSelected);
+                return response($months);
+           } 
+        } catch (Exception $e) {
             
-            $schedule = $this->assistance->findSchedule($id);
-
-            if($schedule) {
-                return response($schedule,200);
-            } else {    
-                return response('no encontrado',404);
-            }
-
-
         }
-
-        return response('no permitido',401);
     }
 }

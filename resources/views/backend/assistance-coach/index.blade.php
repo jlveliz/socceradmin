@@ -25,7 +25,7 @@
                 @foreach ($fields as $field)
                     <div class="col-6 col-xs-12 assistance-coach">
                         <h3 class="text-center">{{ $field->name }}</h3>
-                        <div class="form-group col-12 col-lg-6">
+                        <div class="form-group col-12 col-lg-4">
                             <label for="">Mes</label>
                             <select name="select-coach-month" id="" class="select-coach-month form-control">
                                 @foreach (month_of_year() as $key => $month)
