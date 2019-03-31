@@ -42,7 +42,7 @@ class EnrollmentGroup extends Model
     {
         
         $clastype = $this->enrollment->class_type; // determina que tipo de clase es
-        $isFreeClass =  array_key_exists($clastype, get_type_class()) && get_type_class()[$clastype] == 'Demostrativa' ? true : false;
+        $isFreeClass =  array_key_exists($clastype, get_type_class()) && ( get_type_class()[$clastype] == 'Demostrativa' ||  get_type_class()[$clastype] == 'demostrativa') ? true : false;
 
         if($isFreeClass) return true;
 

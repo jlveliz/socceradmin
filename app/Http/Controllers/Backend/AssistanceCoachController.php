@@ -172,8 +172,9 @@ class AssistanceCoachController extends Controller
         try {
            if ($request->ajax()) {
                 $monthSelected = $request->get('month');
-                $months = $this->assistance->loadDaysMonth($monthSelected);
-                return response($months);
+                $fieldId = $request->get('field');
+                $days = $this->assistance->loadDaysMonth($monthSelected,$fieldId);
+                return response($days,200);
            } 
         } catch (Exception $e) {
             

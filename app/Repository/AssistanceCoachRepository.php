@@ -2,6 +2,7 @@
 namespace HappyFeet\Repository;
 
 use HappyFeet\RepositoryInterface\AssistanceCoachRepositoryInterface;
+use HappyFeet\Repository\FieldRepository;
 use HappyFeet\Exceptions\AssistanceCoachException;
 use HappyFeet\Models\AssistanceCoach;
 
@@ -104,12 +105,31 @@ class AssistanceCoachRepository implements AssistanceCoachRepositoryInterface
 		return new AssistanceCoach();
 	}
 
-	public function loadDaysMonth($month)
+	public function loadDaysMonth($month, $fieldId)
 	{
-		$numMonth = \DateTime::createFromFormat('m',$month);
-		$numMonth2 = \DateTime::createFromFormat('m',$month);
-		$startDateMonth = $numMonth->modify('first day of this month');
-		$endDateMonth = $numMonth2->modify('last day of this month');
-		dd($startDateMonth, $endDateMonth);
+		$firstDate = \DateTime::createFromFormat('m',$month);
+		$lastDate = \DateTime::createFromFormat('m',$month);
+		$startDate = $firstDate->modify('first day of this month');
+		$endDate = $lastDate->modify('last day of this month');
+
+		$fieldRepo = new FieldRepository();
+		$field = $fieldRepo->find($fieldId);
+		if ($field) {
+			$keyDaysField = array_keys($field->available_days);
+
+			$interval = \DateInterval::createFromDateString('1 day');
+
+			$period = new \DatePeriod($startDate, $interval, $endDate);
+			$days = [];
+			foreach ($period as $keyDay => $dayPeriod) {
+				$dayFormat = strtolower($dayPeriod->format('l'));
+				$foundDay = array_search($dayFormat, $keyDaysField);
+				if ($foundDay >= 0 && $foundDay !== false) {
+					$days[] = ['day' => days_of_week()[$dayFormat] , 'date' => $dayPeriod->format('d')];
+				}
+			}
+			return $days;
+		}
+		
 	}
 }

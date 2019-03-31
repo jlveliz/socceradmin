@@ -36,9 +36,10 @@
                         <h6 class="text-center"><b>{{ $field->getFormatDays() }}</b></h6>
                         <div class="table-responsive">
                             <table class="table">
-                                    <thead class="thead-dark text-center">
+                                    <thead class="thead-dark">
                                         <tr>
-                                            <th>Días</th>
+                                            <th>Día</th>
+                                            <th>Fecha</th>
                                             @php
                                                 $coachs = (new HappyFeet\Models\Coach())->getCoachsByField($field->id);
                                             @endphp
@@ -49,7 +50,7 @@
                                     </thead>
                                     <tbody class="table-coach-body" data-field="{{ $field->id }}" data-coachs="{{ count($coachs) }}">
                                         <tr>
-                                            <td colspan="{{ count($coachs) + 1 }}">
+                                            <td colspan="{{ count($coachs) + 2 }}">
                                                 <div class='col-12 text-center loader-modal-container'><div class='loader-bubble loader-bubble-primary'></div></div>
                                             </td>
                                         </tr>
