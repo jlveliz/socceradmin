@@ -42,13 +42,17 @@
                                             <th>Fecha</th>
                                             @php
                                                 $coachs = (new HappyFeet\Models\Coach())->getCoachsByField($field->id);
+                                                $idCoachs = [];
                                             @endphp
                                             @foreach ($coachs  as $coach)
-                                            <th>{{ $coach->person->name }}</th>
+                                            <th class="coach-name" data-coach="{{$coach->id}}">{{ $coach->person->name }}</th>
+                                                @php
+                                                    $idCoachs[] = $coach->id;
+                                                @endphp
                                             @endforeach
                                         </tr>
                                     </thead>
-                                    <tbody class="table-coach-body" data-field="{{ $field->id }}" data-coachs="{{ count($coachs) }}">
+                                    <tbody class="table-coach-body" data-field="{{ $field->id }}" data-coachs="{{ count($coachs) }}" data-idcoachs="{{json_encode($idCoachs)}}">
                                         <tr>
                                             <td colspan="{{ count($coachs) + 2 }}">
                                                 <div class='col-12 text-center loader-modal-container'><div class='loader-bubble loader-bubble-primary'></div></div>

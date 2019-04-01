@@ -20,7 +20,7 @@ $(document).ready(function() {
     }
 
 
-    var generateAssistanceCoachTable = (data, numcoachs) => {
+    var generateAssistanceCoachTable = (data, numcoachs, fieldId, idCoachs) => {
 
         var html = "";
         for (var i = 0; i < data.length; i++) {
@@ -48,13 +48,13 @@ $(document).ready(function() {
         var monthSelected = $(el).find('.select-coach-month').val();
         var fieldId = $tableCoachBody.data('field');
         var numCoachs = $tableCoachBody.data('coachs');
+        var idCoachs = $tableCoachBody.data('idcoachs');
         //loader
         loader.css('visibility', 'visible');
         loadAssistances(monthSelected, fieldId)
             .done((data) => {
                 loader.css('visibility', 'hidden');
-
-                var html = generateAssistanceCoachTable(data, numCoachs);
+                var html = generateAssistanceCoachTable(data, numCoachs, fieldId, idCoachs);
                 $tableCoachBody.find('tr').remove();
                 $tableCoachBody.append(html)
             })
@@ -67,21 +67,19 @@ $(document).ready(function() {
 
     $('.select-coach-month').on('change', function(event) {
         var el = event.currentTarget;
-        debugger
         var monthSelected = $(el).val();
         var $tableCoachBody = $(el).closest('.assistance-coach').find('.table-coach-body');
-        
+
         var fieldId = $tableCoachBody.data('field');
         var numCoachs = $tableCoachBody.data('coachs');
+        var idCoachs = $tableCoachBody.data('idcoachs');
         $tableCoachBody.find('tr').remove();
-        var loaderString = "<tr><td colspan='"+ (numCoachs + 2) +"'><div class='col-12 text-center loader-modal-container'><div class='loader-bubble loader-bubble-primary'></div></div></td></tr>";
+        var loaderString = "<tr><td colspan='" + (numCoachs + 2) + "'><div class='col-12 text-center loader-modal-container'><div class='loader-bubble loader-bubble-primary'></div></div></td></tr>";
         //loader
         $tableCoachBody.append(loaderString);
         loadAssistances(monthSelected, fieldId)
             .done((data) => {
-                // loader.css('visibility', 'hidden');
-
-                var html = generateAssistanceCoachTable(data, numCoachs);
+                var html = generateAssistanceCoachTable(data, numCoachs , fieldId, idCoachs);
                 $tableCoachBody.find('tr').remove();
                 $tableCoachBody.append(html)
             })
