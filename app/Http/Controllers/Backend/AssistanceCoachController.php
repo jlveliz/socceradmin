@@ -9,7 +9,7 @@ use HappyFeet\RepositoryInterface\FieldRepositoryInterface;
 use HappyFeet\RepositoryInterface\CoachRepositoryInterface;
 use HappyFeet\Http\Requests\AssistanceCoachRequest;
 use HappyFeet\Exceptions\AssistanceCoachException;
-
+use DB;
 
 class AssistanceCoachController extends Controller
 {
@@ -62,12 +62,11 @@ class AssistanceCoachController extends Controller
             'type' => 'primary',
             'content' =>'',
         ];
-        
         //begin transaction
         DB::beginTransaction();
         try {
             $message['content'] = "Se han guardado las asistencias Satisfactoriamente";
-            $assistance = $this->assistance->save($request->get('assistances'));
+            $assistance = $this->assistance->save($request->all());
             DB::commit();
             return back()->with($message);
         } catch (AssistanceCoachException $e) {
@@ -173,7 +172,8 @@ class AssistanceCoachController extends Controller
            if ($request->ajax()) {
                 $monthSelected = $request->get('month');
                 $fieldId = $request->get('field');
-                $days = $this->assistance->loadDaysMonth($monthSelected,$fieldId);
+                $coachsId = $request->get('coachs');
+                $days = $this->assistance->loadDaysMonth($monthSelected,$fieldId, $coachsId);
                 return response($days,200);
            } 
         } catch (Exception $e) {

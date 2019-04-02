@@ -67,6 +67,9 @@
         </div>
     </div>
 </div>
+
+@include('backend.assistance-coach.insert-edit-assistance')
+
 @endsection
 
 @section('js')

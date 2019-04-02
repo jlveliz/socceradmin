@@ -16,6 +16,7 @@ class AssistanceCoach extends Model
     	'date',
     	'profit',
         'state',
+        'field_id'
     ];
 
 

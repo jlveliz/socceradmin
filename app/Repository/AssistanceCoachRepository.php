@@ -105,12 +105,14 @@ class AssistanceCoachRepository implements AssistanceCoachRepositoryInterface
 		return new AssistanceCoach();
 	}
 
-	public function loadDaysMonth($month, $fieldId)
+	public function loadDaysMonth($month, $fieldId, $coachsId)
 	{
 		$firstDate = \DateTime::createFromFormat('m',$month);
 		$lastDate = \DateTime::createFromFormat('m',$month);
 		$startDate = $firstDate->modify('first day of this month');
 		$endDate = $lastDate->modify('last day of this month');
+		$coachsId = explode(',', $coachsId);
+		
 
 		$fieldRepo = new FieldRepository();
 		$field = $fieldRepo->find($fieldId);
@@ -121,11 +123,29 @@ class AssistanceCoachRepository implements AssistanceCoachRepositoryInterface
 
 			$period = new \DatePeriod($startDate, $interval, $endDate);
 			$days = [];
+			$index = 0;
 			foreach ($period as $keyDay => $dayPeriod) {
 				$dayFormat = strtolower($dayPeriod->format('l'));
 				$foundDay = array_search($dayFormat, $keyDaysField);
 				if ($foundDay >= 0 && $foundDay !== false) {
-					$days[] = ['day' => days_of_week()[$dayFormat] , 'date' => $dayPeriod->format('d')];
+					$days[$index] = [
+						'day' => days_of_week()[$dayFormat] , 
+						'date' => $dayPeriod->format('d'),
+						'fulldate' => $dayPeriod->format('Y-m-d')
+					];
+					$days[$index]['coachs'] = [];
+					for ($i=0; $i < count($coachsId) ; $i++) { 
+						$days[$index]['coachs'][$i]['coach_id'] = $coachsId[$i];
+						$days[$index]['coachs'][$i]['field_id'] = $field->id;
+
+						//insert more data
+						$existAssistance = AssistanceCoach::where('coach_id',$coachsId[$i])->where('date',$days[$index]['fulldate'])->where('field_id',$field->id)->first();
+						$days[$index]['coachs'][$i]['profit'] = $existAssistance ? $existAssistance->profit : null; 
+						$days[$index]['coachs'][$i]['state'] = $existAssistance ? $existAssistance->state : null;
+						$days[$index]['coachs'][$i]['id'] = $existAssistance ? $existAssistance->id : null;
+					}
+					$index++;
+
 				}
 			}
 			return $days;
