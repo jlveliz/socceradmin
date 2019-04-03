@@ -66,6 +66,15 @@ class AssistanceCoachRepository implements AssistanceCoachRepositoryInterface
 	public function save($data)
 	{
 		$assistance = new AssistanceCoach();
+		
+		if ($data['state'] == 2) {
+			$data['state'] = 1;
+		}
+
+		if ($data['profit'] == 'NULL' || $data['profit'] == NULL) {
+			$data['profit'] = 0;
+		}
+
 		$assistance->fill($data);
 		if ($assistance->save()) {
 			$key = $assistance->getKey();
@@ -78,6 +87,15 @@ class AssistanceCoachRepository implements AssistanceCoachRepositoryInterface
 	public function edit($id,$data)
 	{
 		$assistance = AssistanceCoach::find($id);
+		
+		if ($data['state'] == 2) {
+			$data['state'] = 1;
+		}
+
+		if ($data['profit'] == 'NULL' || $data['profit'] == NULL) {
+			$data['profit'] = 0;
+		}
+
 		if ($assistance) {
 			$assistance->fill($data);
 			if($assistance->update()){

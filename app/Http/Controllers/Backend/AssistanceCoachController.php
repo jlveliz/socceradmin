@@ -65,7 +65,7 @@ class AssistanceCoachController extends Controller
         //begin transaction
         DB::beginTransaction();
         try {
-            $message['content'] = "Se han guardado las asistencias Satisfactoriamente";
+            $message['content'] = "Se han guardado la asistencia Satisfactoriamente";
             $assistance = $this->assistance->save($request->all());
             DB::commit();
             return back()->with($message);
@@ -122,13 +122,8 @@ class AssistanceCoachController extends Controller
             'content' =>'',
         ];
         try {
-
-            if($request->has('remove-schedule')) {
-                dd($request->all());
-            }
-            
             $assistance = $this->assistance->edit($id,$request->all());
-            $message['content'] = "Se ha Actualizado la cancha satisfactoriamente";
+            $message['content'] = "Se ha Actualizado la asistencia satisfactoriamente";
             
           if ($request->get('redirect-index') == 1) { 
             return redirect()->route($this->routeRedirectIndex)->with($message);

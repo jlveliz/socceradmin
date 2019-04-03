@@ -132,20 +132,25 @@ $(document).ready(function() {
         modal.find('form').attr('action',routeAction);
         modal.find('form #field-id').val(idField);
         modal.find('form #coach-id').val(idCoach);
-        modal.find('form #proffit').val(profit);
+        modal.find('form #profit').val(profit);
+        modal.find('form #date').val(date);
+        
+        modal.find('form #state').val(!profit ? 2 : 1);
+        if (!profit) modal.find('form #profit').prop('readonly','readonly')
         
     });
 
 
     $('.select-assistance-coach').on('change', function(event) {
         var $el = $(event.currentTarget);
-        var $proffit = $('#proffit')
+        
+        var $proffit = $('form #profit')
         
         $proffit.val('')
-        if(parseInt($el.val())) {
-            $proffit.removeAttr('readonly')
-        } else {
+        if(parseInt($el.val()) == 2) {
             $proffit.prop('readonly','readonly')
+        } else {
+            $proffit.removeAttr('readonly')
         }
     });
 

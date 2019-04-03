@@ -17,14 +17,14 @@
 
             <div class="col-lg-6 col-12">
               <label for="" class="form-control-label">Asistió?</label>
-              <select name="state" id="" class="select-assistance-coach form-control">
+              <select name="state" id="state" class="select-assistance-coach form-control">
                   <option value="1">Si</option>
-                  <option value="0">No</option>
+                  <option value="2">No</option>
               </select>
             </div>
             <div class="col-lg-6 col-12">
               <label for="" class="form-control-label">Ganancia</label>
-              <input type="text" name="profit" class="form-control" id="proffit" autofocus="" required="">
+              <input type="text" name="profit" class="form-control" id="profit" autofocus="" required="">
             </div>
           </div>
       </div>

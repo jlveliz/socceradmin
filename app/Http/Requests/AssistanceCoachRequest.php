@@ -25,10 +25,10 @@ class AssistanceCoachRequest extends FormRequest
     public function rules()
     {
         
+        // dd($this->all());
         $rules = [
             'coach_id' => 'required|exists:user,id',
-            'date' => 'required',
-            'profit' => 'required'
+            'date' => 'required'
         ];
 
         

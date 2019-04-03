@@ -21,6 +21,11 @@
                 </div>
             @endif
 
+
+            @foreach ($errors->all() as $err)
+                {{ $err }}
+            @endforeach
+
             <div class="row mt-2">
                 @foreach ($fields as $field)
                     <div class="col-6 col-xs-12 assistance-coach">
