@@ -117,7 +117,7 @@ $(document).ready( () => {
             add index to group row
         */
         let groupId = lastChild.find('input.group-id').attr('name');
-        let groupName = lastChild.find('select.group-name').attr('name');
+        let coachId = lastChild.find('select.group-coach-id').attr('name');
         let fieldName = lastChild.find('input.field-name').attr('name');
         let fielScheduleKey = lastChild.find('input.schedule-key-name').attr('name');
         let dayName = lastChild.find('input.day-name').attr('name');
@@ -134,14 +134,14 @@ $(document).ready( () => {
         let letNumRow = idRow[idRow.length -1];
         let newIdRow = idRow.replace(/.$/,parseInt( letNumRow  ) + 1 );
         
-        //let match = groupName.match(/\[[0-9]+\]/);
+        //let match = coachId.match(/\[[0-9]+\]/);
         
         // remove object
         if(groupId) {
             lastChild.find('input.group-id').remove();
         }
         fieldName = fieldName.replace(/\[[0-9]+\]/,"["+ (parseInt(letNumRow) + 1) +"]");
-        groupName = groupName.replace(/\[[0-9]+\]/,"["+ (parseInt(letNumRow) + 1) +"]");
+        coachId = coachId.replace(/\[[0-9]+\]/,"["+ (parseInt(letNumRow) + 1) +"]");
         fielScheduleKey = fielScheduleKey.replace(/\[[0-9]+\]/,"["+ (parseInt(letNumRow) + 1) +"]");
         dayName = dayName.replace(/\[[0-9]+\]/,"["+ (parseInt(letNumRow) + 1) +"]");
         rangeAge = rangeAge.replace(/\[[0-9]+\]/,"["+ (parseInt(letNumRow) + 1) +"]");
@@ -150,7 +150,7 @@ $(document).ready( () => {
         endHour = endHour.replace(/\[[0-9]+\]/,"["+ (parseInt(letNumRow) + 1) +"]");
         state = state.replace(/\[[0-9]+\]/,"["+ (parseInt(letNumRow) + 1) +"]");
         
-        lastChild.find('select.group-name').attr('name',groupName).attr('id',groupName);
+        lastChild.find('select.group-coach-id').attr('name',coachId).attr('id',coachId);
         lastChild.find('input.field-name').attr('name',fieldName).attr('id',fieldName);
         lastChild.find('input.schedule-key-name').attr('name',fielScheduleKey).attr('id',fielScheduleKey);
         lastChild.find('input.day-name').attr('name',dayName).attr('id',dayName);
