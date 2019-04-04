@@ -23,7 +23,6 @@ class GroupClass extends Model
     const INACTIVE = 0;
 
     protected $fillable = [
-        'name',
         'day',
         'schedule_field_parent',
     	'field_id',

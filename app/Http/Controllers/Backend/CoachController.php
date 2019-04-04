@@ -64,7 +64,7 @@ class CoachController extends Controller
     public function show($id)
     {
          $message = [
-            'type' => 'primary',
+            'type' => 'success',
             'content' =>'',
         ];
 

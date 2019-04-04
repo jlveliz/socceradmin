@@ -65,7 +65,7 @@ class GroupClassController extends Controller
     public function store(GroupClassRequest $request)
     {
         $message = [
-            'type' => 'primary',
+            'type' => 'success',
             'content' =>'',
         ];
 
@@ -118,7 +118,7 @@ class GroupClassController extends Controller
     public function update(GroupClassRequest $request, $id)
     {
         $message = [
-            'type' => 'primary',
+            'type' => 'success',
             'content' =>'',
         ];
         try {
@@ -146,7 +146,7 @@ class GroupClassController extends Controller
     public function destroy($id, GroupClassRequest $request)
     {
         $message = [
-            'type' => 'primary',
+            'type' => 'success',
             'content' =>'',
         ];
         try {

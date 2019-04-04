@@ -54,7 +54,7 @@ class AgeRangeController extends Controller
     public function store(AgeRangeRequest $request)
     {
         $message = [
-            'type' => 'primary',
+            'type' => 'success',
             'content' =>'',
         ];
 
@@ -107,7 +107,7 @@ class AgeRangeController extends Controller
     public function update(Request $request, $id)
     {
         $message = [
-            'type' => 'primary',
+            'type' => 'success',
             'content' =>'',
         ];
         try {
@@ -135,7 +135,7 @@ class AgeRangeController extends Controller
     public function destroy($id)
     {
         $message = [
-            'type' => 'primary',
+            'type' => 'success',
             'content' =>'',
         ];
         try {

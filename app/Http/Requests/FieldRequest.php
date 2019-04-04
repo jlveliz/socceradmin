@@ -38,8 +38,8 @@ class FieldRequest extends FormRequest
             'address' => 'required',
             'type_field_id' => 'required|exists:field_type,id',
             'available_days' => 'required',
-            'inscription_price' => 'required',
-            'month_price' => 'required'
+            // 'inscription_price' => 'required',
+            // 'month_price' => 'required'
         ];
 
         
@@ -90,8 +90,8 @@ class FieldRequest extends FormRequest
             'type_field_id.exists' => 'Por favor ingrese un tipo válido',
             'available_days.required' => 'Por favor, Ingrese algún horario',
             'groups.required' => 'Por favor, ingrese al menos un grupo',
-            'inscription_price.required' => 'Por favor, ingrese  un precio',
-            'month_price.required' => 'Por favor, ingrese un precio',
+            // 'inscription_price.required' => 'Por favor, ingrese  un precio',
+            // 'month_price.required' => 'Por favor, ingrese un precio',
         ];
 
         //schedule field

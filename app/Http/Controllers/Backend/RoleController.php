@@ -69,7 +69,7 @@ class RoleController extends Controller
     public function store(RoleRequest $request)
     {
         $message = [
-            'type' => 'primary',
+            'type' => 'success',
             'content' =>'',
         ];
          DB::beginTransaction();
@@ -138,7 +138,7 @@ class RoleController extends Controller
     public function update(RoleRequest $request, $id)
     {
         $message = [
-            'type' => 'primary',
+            'type' => 'success',
             'content' =>'',
         ];
         try {
@@ -166,7 +166,7 @@ class RoleController extends Controller
     public function destroy($id, RoleRequest $request)
     {
         $message = [
-            'type' => 'primary',
+            'type' => 'success',
             'content' =>'',
         ];
         try {

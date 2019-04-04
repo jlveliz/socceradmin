@@ -88,10 +88,10 @@ class FieldRepository implements FieldRepositoryInterface
 				if(array_key_exists('validate-form',$data) && $data['validate-form'] == 'true') {
 					if(array_key_exists('groups',$data)) {
 						foreach($data['groups'] as $kday => $schedules) {
+
 							if(array_key_exists($kday,days_of_week())) {
 								foreach ($schedules as $schedule) {
 									foreach($schedule as $groupData) {
-										
 										$existGr = false;
 										
 										if(isset($groupData['id']) && $groupData['id'] != null) {

@@ -64,7 +64,7 @@ class FieldController extends Controller
     public function store(FieldRequest $request)
     {
         $message = [
-            'type' => 'primary',
+            'type' => 'success',
             'content' =>'',
         ];
 
@@ -143,7 +143,7 @@ class FieldController extends Controller
     public function update(FieldRequest $request, $id)
     {
         $message = [
-            'type' => 'primary',
+            'type' => 'success',
             'content' =>'',
         ];
         DB::beginTransaction();
@@ -184,7 +184,7 @@ class FieldController extends Controller
     public function destroy($id)
     {
         $message = [
-            'type' => 'primary',
+            'type' => 'success',
             'content' =>'',
         ];
         DB::beginTransaction();

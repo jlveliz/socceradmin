@@ -56,7 +56,7 @@ class ModuleController extends Controller
     public function store(ModuleRequest $request)
     {
         $message = [
-            'type' => 'primary',
+            'type' => 'success',
             'content' =>'',
         ];
 
@@ -119,7 +119,7 @@ class ModuleController extends Controller
     public function update(Request $request, $id)
     {
         $message = [
-            'type' => 'primary',
+            'type' => 'success',
             'content' =>'',
         ];
           //begin transaction
@@ -156,7 +156,7 @@ class ModuleController extends Controller
     public function destroy($id)
     {
         $message = [
-            'type' => 'primary',
+            'type' => 'success',
             'content' =>'',
         ];
            //begin transaction

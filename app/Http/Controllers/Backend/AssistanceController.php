@@ -95,7 +95,7 @@ class AssistanceController extends Controller
     public function store(AssistanceRequest $request)
     {
         $message = [
-            'type' => 'primary',
+            'type' => 'success',
             'content' =>'',
         ];
         
@@ -155,7 +155,7 @@ class AssistanceController extends Controller
     public function update(AssistanceRequest $request, $id)
     {
         $message = [
-            'type' => 'primary',
+            'type' => 'success',
             'content' =>'',
         ];
         try {
@@ -188,7 +188,7 @@ class AssistanceController extends Controller
     public function destroy($id)
     {
         $message = [
-            'type' => 'primary',
+            'type' => 'success',
             'content' =>'',
         ];
         try {

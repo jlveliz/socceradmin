@@ -74,7 +74,7 @@ class PermissionController extends Controller
     public function store(PermissionRequest $request)
     {
         $message = [
-            'type' => 'primary',
+            'type' => 'success',
             'content' =>'',
         ];
 
@@ -147,7 +147,7 @@ class PermissionController extends Controller
     public function update(PermissionRequest $request, $id)
     {
         $message = [
-            'type' => 'primary',
+            'type' => 'success',
             'content' =>'',
         ];
         DB::beginTransaction();
@@ -183,7 +183,7 @@ class PermissionController extends Controller
     public function destroy(PermissionRequest $request, $id)
     {
         $message = [
-            'type' => 'primary',
+            'type' => 'success',
             'content' =>'',
         ];
         DB::beginTransaction();

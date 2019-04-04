@@ -63,7 +63,7 @@ class StudentController extends Controller
     public function store(StudentRequest $request)
     {
         $message = [
-            'type' => 'primary',
+            'type' => 'success',
             'content' =>'',
         ];
 
@@ -139,7 +139,7 @@ class StudentController extends Controller
     public function update(StudentRequest $request, $id)
     {
         $message = [
-            'type' => 'primary',
+            'type' => 'success',
             'content' =>'',
         ];
 
@@ -187,7 +187,7 @@ class StudentController extends Controller
     public function destroy($id)
     {
         $message = [
-            'type' => 'primary',
+            'type' => 'success',
             'content' =>'',
         ];
         

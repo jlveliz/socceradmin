@@ -54,7 +54,7 @@ class SeasonController extends Controller
     public function store(SeasonRequest $request)
     {
         $message = [
-            'type' => 'primary',
+            'type' => 'success',
             'content' =>'',
         ];
           //begin transaction
@@ -116,7 +116,7 @@ class SeasonController extends Controller
     public function update(SeasonRequest $request, $id)
     {
         $message = [
-            'type' => 'primary',
+            'type' => 'success',
             'content' =>'',
         ];
           //begin transaction
@@ -155,7 +155,7 @@ class SeasonController extends Controller
     public function destroy($id, SeasonRequest $request)
     {
         $message = [
-            'type' => 'primary',
+            'type' => 'success',
             'content' =>'',
         ];
           //begin transaction

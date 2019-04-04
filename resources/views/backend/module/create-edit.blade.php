@@ -13,7 +13,7 @@
         <div class="card p-30">
     		<div class="card-body col-12">
     			@if (session()->has('type') && session()->has('content'))
-            		<div class="alert alert-{{ session()->get('type') }} sufee-alert alert with-close alert-dismissible fade show">
+            		<div class="alert alert-card alert-{{ session()->get('type') }} sufee-alert alert with-close alert-dismissible fade show">
             			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
             			{{ session()->get('content') }}
             		</div>

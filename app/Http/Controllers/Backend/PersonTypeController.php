@@ -48,7 +48,7 @@ class PersonTypeController extends Controller
     public function store(PersonTypeRequest $request)
     {
         $message = [
-            'type' => 'primary',
+            'type' => 'success',
             'content' =>'',
         ];
 
@@ -100,7 +100,7 @@ class PersonTypeController extends Controller
     public function update(PersonTypeRequest $request, $id)
     {
        $message = [
-            'type' => 'primary',
+            'type' => 'success',
             'content' =>'',
         ];
         
@@ -129,7 +129,7 @@ class PersonTypeController extends Controller
     public function destroy(PersonTypeRequest $request,$id)
     {
         $message = [
-            'type' => 'primary',
+            'type' => 'success',
             'content' =>'',
         ];
         

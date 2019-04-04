@@ -60,7 +60,7 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         $message = [
-            'type' => 'primary',
+            'type' => 'success',
             'content' =>'',
         ];
         DB::beginTransaction();
@@ -120,7 +120,7 @@ class UserController extends Controller
     public function update(UserRequest $request, $id)
     {
         $message = [
-            'type' => 'primary',
+            'type' => 'success',
             'content' =>'',
         ];
          DB::beginTransaction();
@@ -156,7 +156,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         $message = [
-            'type' => 'primary',
+            'type' => 'success',
             'content' =>'',
         ];
          DB::beginTransaction();

@@ -59,7 +59,7 @@ class AssistanceCoachController extends Controller
     public function store(AssistanceCoachRequest $request)
     {
         $message = [
-            'type' => 'primary',
+            'type' => 'success',
             'content' =>'',
         ];
         //begin transaction
@@ -118,7 +118,7 @@ class AssistanceCoachController extends Controller
     public function update(AssistanceCoachRequest $request, $id)
     {
         $message = [
-            'type' => 'primary',
+            'type' => 'success',
             'content' =>'',
         ];
         try {
@@ -146,7 +146,7 @@ class AssistanceCoachController extends Controller
     public function destroy($id)
     {
         $message = [
-            'type' => 'primary',
+            'type' => 'success',
             'content' =>'',
         ];
         try {

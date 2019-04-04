@@ -26,7 +26,7 @@
         <div class="card">
         	<div class="card-body col-12">
 	            	@if (session()->has('type') && session()->has('content'))
-	            		<div class="alert alert-{{ session()->get('type') }} sufee-alert alert with-close alert-dismissible fade show">
+	            		<div class="alert alert-card alert-{{ session()->get('type') }} sufee-alert alert with-close alert-dismissible fade show">
 	            			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
 	            			{{ session()->get('content') }}
 	            		</div>
@@ -37,7 +37,7 @@
 					</div>
 					{{-- validation errors --}}
 					@if($errors->any())
-						<div class="alert alert-danger sufee-alert alert with-close alert-dismissible fade show">
+						<div class="alert alert-card alert-danger sufee-alert alert with-close alert-dismissible fade show">
 	            			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
 	            			@foreach ($errors->all() as $error)
 								{{$error}} <br>
@@ -105,7 +105,7 @@
 											</div>
 										</div>
 
-										<div class="col-lg-2 col-4">
+										{{-- <div class="col-lg-2 col-4">
 											<div class="form-group">
 												<label for="inscription_price">P. de Inscripción <span class="text-danger">*</span></label>
 												<input type="number" name="inscription_price" id="inscription_price" class="form-control {{ $errors->has('inscription_price') ? ' is-invalid' : '' }}" value="@if( isset($field) ){{$field->inscription_price}}@else{{ old('inscription_price') }}@endif">
@@ -122,7 +122,7 @@
 					                				<div  class="invalid-feedback animated fadeInDown">{{ $errors->first('month_price') }}</div>
 					                			@endif
 					                		</div>
-				                		</div>
+				                		</div> --}}
 									</div>
 
 									<div class="row">
