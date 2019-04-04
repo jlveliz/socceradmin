@@ -42,6 +42,7 @@ class Enrollment extends Model
     public function fieldOfGroup() {
         $grFounds = [];
         $sameField = false;
+
         if(count($this->groups) > 0) {
             foreach($this->groups as $key =>  $gr) {
                 if($grf = GroupClass::where('state',GroupClass::ACTIVE)->where('id',$gr->group_id)->first()) {
@@ -84,7 +85,7 @@ class Enrollment extends Model
         $found = false;
         
         foreach($this->groups as $gr) {
-            if($gr->group_id == $groupId) $found = true;
+            if($gr->group_id == $groupId && $gr->state == 1) $found = true;
         }
 
         return $found;

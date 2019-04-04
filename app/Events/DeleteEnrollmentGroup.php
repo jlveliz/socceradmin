@@ -19,11 +19,12 @@ class DeleteEnrollmentGroup
      *
      * @return void
      */
-    public function __construct(array $newGroups, array $oldGroups, $idEnrollment)
+    public function __construct(array $newGroups, array $oldGroups, $idEnrollment, $studentSate = 1)
     {
         $this->newGroups = $newGroups;
         $this->oldGroups = $oldGroups;
         $this->idEnrollment = $idEnrollment;
+        $this->studentSate = $studentSate;
     }
 
     /**

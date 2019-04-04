@@ -20,7 +20,8 @@ class EnrollmentGroup extends Model
 
     protected $fillable = [
         'enrollment_id',
-        'group_id'
+        'group_id',
+        'state'
     ];
 
 

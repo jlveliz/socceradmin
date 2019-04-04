@@ -253,7 +253,7 @@
 				<div class="card p-2">
 					<div class="card-body col-12">
 						<h4 class="text-center"> <strong>Matricula</strong></h4>
-						@if (isset($student) && $student->currentEnrollment())
+						
 							<div class="col-12 form-group">
 								<label for="season-enrollment">Temporada  <span class="text-danger">*</span></label>
 								<select name="enrollment[season_id]" id="season-enrollment" class="form-control form-control-sm {{ $errors->has('enrollment.season_id') ? ' is-invalid' : '' }}">
@@ -272,7 +272,7 @@
 								<select name="enrollment[field_id]" id="select-field" class="form-control form-control-sm {{ $errors->has('enrollment.field_id') ? ' is-invalid' : '' }}">
 									<option value="">Seleccione</option>
 									@foreach ($fields as $field)
-									<option value="{{$field->id}}" @if( (isset($student) &&  $student->currentEnrollment() && $student->currentEnrollment()->fieldOfGroup()->id == $field->id)  || (old('enrollment.field_id') ==  $field->id)) selected @endif>{{$field->name}}</option>
+									<option value="{{$field->id}}" @if( (isset($student) &&   $student->currentEnrollment()->fieldOfGroup()->id == $field->id)  || (old('enrollment.field_id') ==  $field->id)) selected @endif>{{$field->name}}</option>
 									@endforeach
 								</select>
 								@if ($errors->has('enrollment.field_id'))
@@ -285,7 +285,7 @@
 								<select name="enrollment[class_type]" id="class-type" class="form-control form-control-sm {{ $errors->has('enrollment.class_type') ? ' is-invalid' : '' }}">
 									<option value="">Seleccione</option>
 									@foreach (get_type_class() as $key => $group)
-										<option value="{{$key}}" @if ((isset($student) || ( $student->currentEnrollment()  && $key == $student->currentEnrollment()->class_type) ) || (old('enrollment.class_type') == $key)) selected @endif >{{$group}}</option>
+										<option value="{{$key}}" @if ( ( isset($student) && $key == $student->currentEnrollment()->class_type) ||  (old('enrollment.class_type') == $key)) selected @endif >{{$group}}</option>
 									@endforeach
 								</select>
 								@if ($errors->has('enrollment.class_type'))
@@ -296,7 +296,7 @@
 							<div class="col-12 form-group">
 								<label for="grupo-class">Grupos  <span class="text-danger">*</span></label>
 								@if(isset($student)) 
-									<select @if ( $student->currentEnrollment() &&  $student->currentEnrollment()->class_type > 0) multiple @endif name="enrollment[groups][]" id="grupo-class" class="form-control form-control-sm grupo-class-edit {{ $errors->has('enrollment.groups') ? ' is-invalid' : '' }}">
+									<select @if ( $student->currentEnrollment()->class_type > 0) multiple @endif name="enrollment[groups][]" id="grupo-class" class="form-control form-control-sm grupo-class-edit {{ $errors->has('enrollment.groups') ? ' is-invalid' : '' }}">
 										@foreach ($student->currentEnrollment()->fieldOfGroup()->groups as $group)
 										<option value="{{$group->id}}" @if($student->currentEnrollment()->existGroupOnEnrollment($group->id)) selected @endif>{{$group->range->name}} - {{$group->disponibility}} Cupos Disponibles - {{days_of_week()[$group->day]}} - ({{$group->schedule['start']}} -  {{$group->schedule['end']}})</option>
 										@endforeach 
@@ -313,7 +313,7 @@
 							</div> 
 							
 							<div class="col-12 form-check form-group">
-									<input class="form-check-input {{ $errors->has('enrollment.is_pay_inscription') ? ' is-invalid' : '' }}" name="enrollment[is_pay_inscription]" type="checkbox" value="1" id="is_pay_inscription" @if((isset($student) || ( $student->currentEnrollment()  && $student->currentEnrollment()->is_pay_inscription == 1 )) || old('enrollment.is_pay_inscription')) checked="" @endif>
+									<input class="form-check-input {{ $errors->has('enrollment.is_pay_inscription') ? ' is-invalid' : '' }}" name="enrollment[is_pay_inscription]" type="checkbox" value="1" id="is_pay_inscription" @if( ( isset($student) && $student->currentEnrollment()->is_pay_inscription == 1 ) ||  old('enrollment.is_pay_inscription')) checked="" @endif>
 									<label class="form-check-label" for="is_pay_inscription">Pagó Inscripción?</label>
 
 									@if ($errors->has('enrollment.is_pay_inscription'))
@@ -322,7 +322,7 @@
 							</div>
 							
 							<div class="col-12 form-check form-group">
-									<input class="form-check-input {{ $errors->has('enrollment.is_pay_first_month') ? ' is-invalid' : '' }}" name="enrollment[is_pay_first_month]" type="checkbox" value="1" id="is_pay_first_month" @if((isset($student) || ( $student->currentEnrollment() && $student->currentEnrollment()->is_pay_first_month == 1)) || old('enrollment.is_pay_first_month')) checked="" @endif>
+									<input class="form-check-input {{ $errors->has('enrollment.is_pay_first_month') ? ' is-invalid' : '' }}" name="enrollment[is_pay_first_month]" type="checkbox" value="1" id="is_pay_first_month" @if( ( isset($student) && $student->currentEnrollment()->is_pay_first_month == 1) || old('enrollment.is_pay_first_month')) checked="" @endif>
 									<label class="form-check-label" for="is_pay_first_month">Pagó Primer Mes?</label>
 
 									@if ($errors->has('enrollment.is_pay_first_month'))
@@ -331,15 +331,14 @@
 							</div>
 
 							<div class="col-12 form-check form-group">
-									<input class="form-check-input {{ $errors->has('enrollment.is_delivered_uniform') ? ' is-invalid' : '' }}" name="enrollment[is_delivered_uniform]" type="checkbox" value="1" id="is_delivered_uniform" @if((isset($student) || ( $student->currentEnrollment() && $student->currentEnrollment()->is_delivered_uniform == 1 )) || old('enrollment.is_delivered_uniform')) checked="" @endif>
+									<input class="form-check-input {{ $errors->has('enrollment.is_delivered_uniform') ? ' is-invalid' : '' }}" name="enrollment[is_delivered_uniform]" type="checkbox" value="1" id="is_delivered_uniform" @if( (isset($student) && $student->currentEnrollment()->is_delivered_uniform == 1 ) || old('enrollment.is_delivered_uniform')) checked="" @endif>
 									<label class="form-check-label" for="is_delivered_uniform">Se entregó el Uniforme?</label>
 
 									@if ($errors->has('enrollment.is_delivered_uniform'))
 									<div class="invalid-feedback animated fadeInDown">{{ $errors->first('enrollment.is_delivered_uniform') }}</div>
 								@endif
 							</div>
-							{{-- expr --}}
-						@endif
+							
 						
 					</div>
 				</div>

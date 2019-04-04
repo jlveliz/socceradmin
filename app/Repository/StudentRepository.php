@@ -220,14 +220,15 @@ class StudentRepository implements StudentRepositoryInterface
 					$updateGroupClass = true;
 
 				} elseif ($data['state'] == 0) {
-					$enrollment = $student->currentEnrollment()->delete();
+					$enrollment = $student->currentEnrollment();
 					$newGroups = [];
 					$oldGroups = [];
 					foreach($enrollment->groups as $oldGrObj) {
 						$oldGroups[] = $oldGrObj->group_id;
 					}
 					
-					event(new DeleteEnrollmentGroup($newGroups, $oldGroups, $enrollment->id));
+					
+					event(new DeleteEnrollmentGroup($newGroups, $oldGroups, $enrollment->id, $data['state']));
 					$updateGroupClass = true;
 				}
 				$enrollment->fill($dataEnrollment);
