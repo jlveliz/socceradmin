@@ -30,15 +30,16 @@ class StudentRequest extends FormRequest
             'date_birth' => 'required|date',
             'age' => 'required',
             'genre' => 'required',
+            'state' => 'required',
             'representant.num_identification' => 'required',
             'representant.name' => 'required',
             'representant.last_name' => 'required',
             'representant.address' => 'required',
             'representant.email' => 'required|email',
-            'enrollment.season_id' => 'required',
-            'enrollment.field_id' => 'required',
-            'enrollment.class_type' => 'required',
-            'enrollment.groups' => 'required',
+            // 'enrollment.season_id' => 'required',
+            // 'enrollment.field_id' => 'required',
+            // 'enrollment.class_type' => 'required',
+            // 'enrollment.groups' => 'required',
         ];
         
         // if ($this->method() == 'PUT') {
@@ -56,6 +57,7 @@ class StudentRequest extends FormRequest
             'date_birth.required' => 'Por favor, ingrese una fecha de nacimiento del jugador',
             'date_birth.date' => 'Por favor, ingrese una fecha de nacimiento válida',
             'age.required' => 'Por favor, ingrese una edad del jugador',
+            'state.required' => 'Por favor, escoja un estado',
             'genre.required' => 'Por favor, ingrese un género del jugador',
             'representant.num_identification.required' => 'Por favor, ingrese una C.I de Representante',
             'representant.num_identification.unique' => 'Ya existe una identificación existente',

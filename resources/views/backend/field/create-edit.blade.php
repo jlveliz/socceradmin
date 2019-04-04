@@ -32,7 +32,7 @@
 	            		</div>
 					@endif
 					{{-- message ajax --}}
-					<div class="alert sufee-alert with-close alert-dismissible fade show d-none" id="message-alert-field">
+					<div class="alert alert-card sufee-alert with-close alert-dismissible fade show d-none" id="message-alert-field">
 						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
 					</div>
 					{{-- validation errors --}}

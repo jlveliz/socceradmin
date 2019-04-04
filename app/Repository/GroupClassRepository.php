@@ -93,6 +93,7 @@ class GroupClassRepository implements GroupClassRepositoryInterface
 	public function remove($id)
 	{
 		if ($field = $this->find($id)) {
+			
 			$field->delete();
 			return true;
 		}

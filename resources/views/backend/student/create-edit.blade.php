@@ -17,6 +17,10 @@
 					</div>
 				</div>
 			@endif
+
+			@foreach ($errors->all() as $err)
+				{{ $err }}
+			@endforeach
 		    <div class="col-lg-7 col-12">
 		        <div class="card p-2">
 					<div class="card-body col-12">
@@ -70,7 +74,7 @@
 										<div class="col-lg-2 col-4">
 											<div class="form-group">
 												<label for="age">Edad <span class="text-danger">*</span></label>
-												<input type="number" name="age" id="age" class="form-control form-control-sm {{ $errors->has('age') ? ' is-invalid' : '' }}"  value="@if(isset($student)){{ $student->person->age }}@else{{ old('age') }}@endif" pattern="\d+" min="0" max="{{ config('happyfeet.max-age') }}">
+												<input type="number" name="age" id="age" class="form-control form-control-sm {{ $errors->has('age') ? ' is-invalid' : '' }}"  value="@if(isset($student)){{ $student->person->age }}@else{{ old('age') }}@endif" pattern="\d+" min="0" max="{{ config('happyfeet.max-age') }}" readonly="">
 												@if ($errors->has('age'))
 													<div class="invalid-feedback animated fadeInDown">{{ $errors->first('age') }}</div>
 												@endif
@@ -85,6 +89,19 @@
 												</select>
 												@if ($errors->has('genre'))
 												<div class="invalid-feedback animated fadeInDown">{{ $errors->first('genre') }}</div>
+												@endif
+											</div>
+										</div>
+
+										<div class="col-lg-3 col-4">
+											<div class="form-group">
+												<label for="state">Estado </label>
+												<select type="text" name="state" id="state" class="form-control form-control-sm {{ $errors->has('state') ? ' is-invalid' : '' }}">
+													<option value="1" @if( (isset($student) && $student->state == '1') || old('state') == '1' ) selected @endif>Activo</option>
+													<option value="0" @if( (isset($student) && $student->state == '0') || old('state') == '0' ) selected @endif>Inactivo</option>
+												</select>
+												@if ($errors->has('state'))
+												<div class="invalid-feedback animated fadeInDown">{{ $errors->first('state') }}</div>
 												@endif
 											</div>
 										</div>
@@ -203,7 +220,7 @@
 											</div>
 										</div>
 
-										<div class="col-lg-4 col-6">
+										{{-- <div class="col-lg-4 col-6">
 											<div class="form-group">
 												<label for="representant_date_birth">F. de Nacimiento</label>
 												<input type="date" name="representant[date_birth]" id="representant_date_birth" class="form-control form-control-sm {{ $errors->has('representant.date_birth') ? ' is-invalid' : '' }}"  value="@if(isset($student)){{ $student->representant->date_birth }}@else{{ old('representant.date_birth') }}@endif">
@@ -211,13 +228,13 @@
 													<div class="invalid-feedback animated fadeInDown">{{ $errors->first('representant.date_birth') }}</div>
 												@endif
 											</div>
-										</div>
+										</div> --}}
 										
 										
 
 										<div class="col-lg-12 col-12">
 											<div class="form-group">
-												<label for="representant_activity">Actividad</label>
+												<label for="representant_activity">Observación</label>
 												<textarea name="representant[activity]" id="representant_activity" class="form-control {{ $errors->has('representant.activity') ? ' is-invalid' : '' }}">@if(isset($student)){{ $student->representant->activity }}@else{{ old('representant.activity') }}@endif</textarea>
 												@if ($errors->has('representant.activity'))
 													<div class="invalid-feedback animated fadeInDown">{{ $errors->first('representant.activity') }}</div>
@@ -236,90 +253,93 @@
 				<div class="card p-2">
 					<div class="card-body col-12">
 						<h4 class="text-center"> <strong>Matricula</strong></h4>
-						<div class="col-12 form-group">
-							<label for="season-enrollment">Temporada  <span class="text-danger">*</span></label>
-							<select name="enrollment[season_id]" id="season-enrollment" class="form-control form-control-sm {{ $errors->has('enrollment.season_id') ? ' is-invalid' : '' }}">
-								<option value="">Seleccione</option>
-								@foreach ($seasons as $season)
-								<option value="{{$season->id}}" @if((isset($student) && $student->currentEnrollment()->season_id == $season->id) || old('enrollment.season_id') ==  $season->id) selected @endif>{{$season->name}}</option>
-								@endforeach
-							</select>
-							@if ($errors->has('enrollment.season_id'))
-								<div class="invalid-feedback animated fadeInDown">{{ $errors->first('enrollment.season_id') }}</div>
-							@endif
-						</div>
-						 <div class="col-12 form-group">
-							<label for="select-field">Cancha  <span class="text-danger">*</span></label>
+						@if (isset($student) && $student->currentEnrollment())
+							<div class="col-12 form-group">
+								<label for="season-enrollment">Temporada  <span class="text-danger">*</span></label>
+								<select name="enrollment[season_id]" id="season-enrollment" class="form-control form-control-sm {{ $errors->has('enrollment.season_id') ? ' is-invalid' : '' }}">
+									<option value="">Seleccione</option>
+									@foreach ($seasons as $season)
+									<option value="{{$season->id}}" @if( (isset($student) &&  $student->currentEnrollment()  &&   $student->currentEnrollment()->season_id == $season->id) || old('enrollment.season_id') ==  $season->id) )) selected @endif>{{$season->name}}</option>
+									@endforeach
+								</select>
+								@if ($errors->has('enrollment.season_id'))
+									<div class="invalid-feedback animated fadeInDown">{{ $errors->first('enrollment.season_id') }}</div>
+								@endif
+							</div>
+							 <div class="col-12 form-group">
+								<label for="select-field">Cancha  <span class="text-danger">*</span></label>
+								
+								<select name="enrollment[field_id]" id="select-field" class="form-control form-control-sm {{ $errors->has('enrollment.field_id') ? ' is-invalid' : '' }}">
+									<option value="">Seleccione</option>
+									@foreach ($fields as $field)
+									<option value="{{$field->id}}" @if( (isset($student) &&  $student->currentEnrollment() && $student->currentEnrollment()->fieldOfGroup()->id == $field->id)  || (old('enrollment.field_id') ==  $field->id)) selected @endif>{{$field->name}}</option>
+									@endforeach
+								</select>
+								@if ($errors->has('enrollment.field_id'))
+									<div class="invalid-feedback animated fadeInDown">{{ $errors->first('enrollment.field_id') }}</div>
+								@endif
+							</div>
 							
-							<select name="enrollment[field_id]" id="select-field" class="form-control form-control-sm {{ $errors->has('enrollment.field_id') ? ' is-invalid' : '' }}">
-								<option value="">Seleccione</option>
-								@foreach ($fields as $field)
-								<option value="{{$field->id}}" @if((isset($student) && $student->currentEnrollment()->fieldOfGroup()->id == $field->id) || old('enrollment.field_id') ==  $field->id) selected @endif>{{$field->name}}</option>
-								@endforeach
-							</select>
-							@if ($errors->has('enrollment.field_id'))
-								<div class="invalid-feedback animated fadeInDown">{{ $errors->first('enrollment.field_id') }}</div>
-							@endif
-						</div>
-						
-						<div class="col-12 form-group">
-							<label for="class-type">Clase  <span class="text-danger">*</span></label>
-							<select name="enrollment[class_type]" id="class-type" class="form-control form-control-sm {{ $errors->has('enrollment.class_type') ? ' is-invalid' : '' }}">
-								<option value="">Seleccione</option>
-								@foreach (get_type_class() as $key => $group)
-									<option value="{{$key}}" @if ((isset($student) && $key == $student->currentEnrollment()->class_type) || (old('enrollment.class_type') == $key)) selected @endif >{{$group}}</option>
-								@endforeach
-							</select>
-							@if ($errors->has('enrollment.class_type'))
-								<div class="invalid-feedback animated fadeInDown">{{ $errors->first('enrollment.class_type') }}</div>
-							@endif
-						</div>
-
-						<div class="col-12 form-group">
-							<label for="grupo-class">Grupos  <span class="text-danger">*</span></label>
-							@if(isset($student)) 
-								<select @if ( $student->currentEnrollment()->class_type > 0) multiple @endif name="enrollment[groups][]" id="grupo-class" class="form-control form-control-sm grupo-class-edit {{ $errors->has('enrollment.groups') ? ' is-invalid' : '' }}">
-									@foreach ($student->currentEnrollment()->fieldOfGroup()->groups as $group)
-									<option value="{{$group->id}}" @if($student->currentEnrollment()->existGroupOnEnrollment($group->id)) selected @endif>{{get_group_names()[$group->name]}} - {{$group->disponibility}} Cupos Disponibles - {{days_of_week()[$group->day]}} - ({{$group->schedule['start']}} -  {{$group->schedule['end']}})</option>
-									@endforeach 
+							<div class="col-12 form-group">
+								<label for="class-type">Clase  <span class="text-danger">*</span></label>
+								<select name="enrollment[class_type]" id="class-type" class="form-control form-control-sm {{ $errors->has('enrollment.class_type') ? ' is-invalid' : '' }}">
+									<option value="">Seleccione</option>
+									@foreach (get_type_class() as $key => $group)
+										<option value="{{$key}}" @if ((isset($student) || ( $student->currentEnrollment()  && $key == $student->currentEnrollment()->class_type) ) || (old('enrollment.class_type') == $key)) selected @endif >{{$group}}</option>
+									@endforeach
 								</select>
-								<input type="hidden" name="is_changing_group" id="is-changing-group" value="0">
-							@else 
-								<select name="enrollment[groups][]" id="grupo-class" class="form-control form-control-sm grupo-class-create" @if( !old('enrollment.class_type') ||  !old('enrollment.field_id'))disabled @endif @if(old('enrollment.class_type') == 2 ) multiple @endif>
-								</select>
-							@endif
+								@if ($errors->has('enrollment.class_type'))
+									<div class="invalid-feedback animated fadeInDown">{{ $errors->first('enrollment.class_type') }}</div>
+								@endif
+							</div>
 
-							@if ($errors->has('enrollment.groups'))
-								<div class="invalid-feedback animated fadeInDown">{{ $errors->first('enrollment.groups') }}</div>
-							@endif
-						</div> 
-						
-						<div class="col-12 form-check form-group">
-								<input class="form-check-input {{ $errors->has('enrollment.is_pay_inscription') ? ' is-invalid' : '' }}" name="enrollment[is_pay_inscription]" type="checkbox" value="1" id="is_pay_inscription" @if((isset($student) && $student->currentEnrollment()->is_pay_inscription == 1) || old('enrollment.is_pay_inscription')) checked="" @endif>
-								<label class="form-check-label" for="is_pay_inscription">Pagó Inscripción?</label>
+							<div class="col-12 form-group">
+								<label for="grupo-class">Grupos  <span class="text-danger">*</span></label>
+								@if(isset($student)) 
+									<select @if ( $student->currentEnrollment() &&  $student->currentEnrollment()->class_type > 0) multiple @endif name="enrollment[groups][]" id="grupo-class" class="form-control form-control-sm grupo-class-edit {{ $errors->has('enrollment.groups') ? ' is-invalid' : '' }}">
+										@foreach ($student->currentEnrollment()->fieldOfGroup()->groups as $group)
+										<option value="{{$group->id}}" @if($student->currentEnrollment()->existGroupOnEnrollment($group->id)) selected @endif>{{$group->range->name}} - {{$group->disponibility}} Cupos Disponibles - {{days_of_week()[$group->day]}} - ({{$group->schedule['start']}} -  {{$group->schedule['end']}})</option>
+										@endforeach 
+									</select>
+									<input type="hidden" name="is_changing_group" id="is-changing-group" value="0">
+								@else 
+									<select name="enrollment[groups][]" id="grupo-class" class="form-control form-control-sm grupo-class-create" @if( !old('enrollment.class_type') ||  !old('enrollment.field_id'))disabled @endif @if(old('enrollment.class_type') == 2 ) multiple @endif>
+									</select>
+								@endif
 
-								@if ($errors->has('enrollment.is_pay_inscription'))
-								<div class="invalid-feedback animated fadeInDown">{{ $errors->first('enrollment.is_pay_inscription') }}</div>
-							@endif
-						</div>
-						
-						<div class="col-12 form-check form-group">
-								<input class="form-check-input {{ $errors->has('enrollment.is_pay_first_month') ? ' is-invalid' : '' }}" name="enrollment[is_pay_first_month]" type="checkbox" value="1" id="is_pay_first_month" @if((isset($student) && $student->currentEnrollment()->is_pay_first_month == 1) || old('enrollment.is_pay_first_month')) checked="" @endif>
-								<label class="form-check-label" for="is_pay_first_month">Pagó Primer Mes?</label>
+								@if ($errors->has('enrollment.groups'))
+									<div class="invalid-feedback animated fadeInDown">{{ $errors->first('enrollment.groups') }}</div>
+								@endif
+							</div> 
+							
+							<div class="col-12 form-check form-group">
+									<input class="form-check-input {{ $errors->has('enrollment.is_pay_inscription') ? ' is-invalid' : '' }}" name="enrollment[is_pay_inscription]" type="checkbox" value="1" id="is_pay_inscription" @if((isset($student) || ( $student->currentEnrollment()  && $student->currentEnrollment()->is_pay_inscription == 1 )) || old('enrollment.is_pay_inscription')) checked="" @endif>
+									<label class="form-check-label" for="is_pay_inscription">Pagó Inscripción?</label>
 
-								@if ($errors->has('enrollment.is_pay_first_month'))
-								<div class="invalid-feedback animated fadeInDown">{{ $errors->first('enrollment.is_pay_first_month') }}</div>
-							@endif
-						</div>
+									@if ($errors->has('enrollment.is_pay_inscription'))
+									<div class="invalid-feedback animated fadeInDown">{{ $errors->first('enrollment.is_pay_inscription') }}</div>
+								@endif
+							</div>
+							
+							<div class="col-12 form-check form-group">
+									<input class="form-check-input {{ $errors->has('enrollment.is_pay_first_month') ? ' is-invalid' : '' }}" name="enrollment[is_pay_first_month]" type="checkbox" value="1" id="is_pay_first_month" @if((isset($student) || ( $student->currentEnrollment() && $student->currentEnrollment()->is_pay_first_month == 1)) || old('enrollment.is_pay_first_month')) checked="" @endif>
+									<label class="form-check-label" for="is_pay_first_month">Pagó Primer Mes?</label>
 
-						<div class="col-12 form-check form-group">
-								<input class="form-check-input {{ $errors->has('enrollment.is_delivered_uniform') ? ' is-invalid' : '' }}" name="enrollment[is_delivered_uniform]" type="checkbox" value="1" id="is_delivered_uniform" @if((isset($student) && $student->currentEnrollment()->is_delivered_uniform == 1) || old('enrollment.is_delivered_uniform')) checked="" @endif>
-								<label class="form-check-label" for="is_delivered_uniform">Se entregó el Uniforme?</label>
+									@if ($errors->has('enrollment.is_pay_first_month'))
+									<div class="invalid-feedback animated fadeInDown">{{ $errors->first('enrollment.is_pay_first_month') }}</div>
+								@endif
+							</div>
 
-								@if ($errors->has('enrollment.is_delivered_uniform'))
-								<div class="invalid-feedback animated fadeInDown">{{ $errors->first('enrollment.is_delivered_uniform') }}</div>
-							@endif
-						</div>
+							<div class="col-12 form-check form-group">
+									<input class="form-check-input {{ $errors->has('enrollment.is_delivered_uniform') ? ' is-invalid' : '' }}" name="enrollment[is_delivered_uniform]" type="checkbox" value="1" id="is_delivered_uniform" @if((isset($student) || ( $student->currentEnrollment() && $student->currentEnrollment()->is_delivered_uniform == 1 )) || old('enrollment.is_delivered_uniform')) checked="" @endif>
+									<label class="form-check-label" for="is_delivered_uniform">Se entregó el Uniforme?</label>
+
+									@if ($errors->has('enrollment.is_delivered_uniform'))
+									<div class="invalid-feedback animated fadeInDown">{{ $errors->first('enrollment.is_delivered_uniform') }}</div>
+								@endif
+							</div>
+							{{-- expr --}}
+						@endif
 						
 					</div>
 				</div>
@@ -339,5 +359,6 @@
 @endsection
 
 @section('js')
+<script type="text/javascript" src="{{asset('js/moment/moment.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/components/student.js')}}"></script>
 @endsection()

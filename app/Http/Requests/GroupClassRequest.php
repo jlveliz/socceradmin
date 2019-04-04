@@ -26,7 +26,7 @@ class GroupClassRequest extends FormRequest
         $rules = [];
         
         if ($this->method() == 'DELETE') {
-            dd($this->all());
+            
             $rules['id'] = 'is_used:enrollment_groups,group_id';
         }
         

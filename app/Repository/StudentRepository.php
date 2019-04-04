@@ -117,13 +117,14 @@ class StudentRepository implements StudentRepositoryInterface
 
 				if($saveEnrollment =  $enrollment->save() ) {
 					//save groups
-					foreach ($dataEnrollment['groups'] as $key => $gr) {
-						$enrGroup = new EnrollmentGroup(['group_id' => $gr]);
-						$enrollment->groups()->save($enrGroup);
+					if ($student->state == Student::ACTIVE) {
+						foreach ($dataEnrollment['groups'] as $key => $gr) {
+							$enrGroup = new EnrollmentGroup(['group_id' => $gr]);
+							$enrollment->groups()->save($enrGroup);
+						}
+					
+						$enrollment->insertCapacitiesGroups($dataEnrollment['groups']);
 					}
-					//update capacity
-					// dd($dataEnrollment['groups']);
-					$enrollment->insertCapacitiesGroups($dataEnrollment['groups']);
 
 					return  $this->find($student->getKey());
 				}
@@ -210,6 +211,17 @@ class StudentRepository implements StudentRepositoryInterface
 				$updateGroupClass = false;
 				if(array_key_exists('is_changing_group',$data) && $data['is_changing_group'] == '1') {
 					$newGroups = $data['enrollment']['groups'];
+					$oldGroups = [];
+					foreach($enrollment->groups as $oldGrObj) {
+						$oldGroups[] = $oldGrObj->group_id;
+					}
+					
+					event(new DeleteEnrollmentGroup($newGroups, $oldGroups, $enrollment->id));
+					$updateGroupClass = true;
+
+				} elseif ($data['state'] == 0) {
+					$enrollment = $student->currentEnrollment()->delete();
+					$newGroups = [];
 					$oldGroups = [];
 					foreach($enrollment->groups as $oldGrObj) {
 						$oldGroups[] = $oldGrObj->group_id;

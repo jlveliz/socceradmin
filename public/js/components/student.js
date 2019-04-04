@@ -137,6 +137,16 @@ $(document).ready(function() {
     $('.grupo-class-edit').on('change', (e) => {
         $target = $(e.currentTarget);
         $("#is-changing-group").val(1);
-    })
+    });
+
+
+    $('#date_birth').on('change', function(event) {
+
+        var currentElDate = moment($(event.currentTarget).val());
+        var currentDate = moment(getFullCurrentDate());
+        var difYear = currentDate.diff(currentElDate,'year')
+        $('#age').val(difYear);
+        
+    });
 
 })

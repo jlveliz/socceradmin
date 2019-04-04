@@ -39,6 +39,7 @@
                     <th>Representante</th>
     				<th>Género</th>
     				<th>Edad</th>
+                    <th>Estado</th>
     				<th>Acción</th>
     			</tr>
     		</thead>
@@ -54,6 +55,7 @@
                             {{ $student->person->genre =='m' ? 'Masculino' : 'Femenino' }}
                         </td>
                         <td>{{ $student->person->age }} Año(s)</td>
+                        <td><div class="{{ $student->state == 1 ? 'text-success' : 'text-warning' }} ">{{ $student->state == 1 ? 'Activo' : 'Inactivo' }} </div></td>
         				<td>
         					<a class="btn btn-warning btn-flat " href="{{ route('students.edit',['id' => $student->id]) }}"><i class="i-Pen-2"></i> Editar</a>
         					<button class="btn btn-danger btn-flat  delete-btn" data-toggle="modal" data-target="#delete-modal"  data-object="{{$student}}" data-fieldname="{{$student->person->name}} {{$student->person->last_name}}" data-message="Está seguro de eliminar el Estudiante" data-route="{{ route('students.destroy',$student->id) }}"><i class="i-File-Trash"></i> Eliminar</button>

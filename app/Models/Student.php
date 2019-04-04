@@ -29,7 +29,8 @@ class Student extends Model
     	'person_id',
     	'representant_id',
     	'medical_history',
-    	'observation'
+    	'observation',
+        'state'
     ];
 
 
@@ -50,6 +51,8 @@ class Student extends Model
     public function currentEnrollment() {
        return $this->enrollments()->where('state',self::ACTIVE)->first();
     }
+
+    
 
     
 
