@@ -28,6 +28,9 @@
             <div class="card-title col-6 mt-4 ml-4">
                 <h3>Listado</h3>
             </div>
+            <div class="col-5 mt-4 ml-4 text-right">
+                <a href="{{ route('coachs.create') }}" class="btn btn-primary "><i class="i-Add"></i> Crear</a>             
+            </div>
         </div>
 
         <div class="card-body"> 
@@ -56,6 +59,7 @@
                         <th>Usuario</th>
                         <th>Nombre</th>
         				<th>Último Acceso</th>
+                        <th>Acción</th>
         			</tr>
         		</thead>
         		<tbody>
@@ -69,6 +73,10 @@
                             @else
                                 -
                             @endif
+                        </td>
+                        <td>
+                            <a class="btn btn-warning btn-flat " href="{{ route('users.edit',['id' => $coach->id]) }}"><i class="i-Pen-2"></i> Editar</a>
+                            <button class="btn btn-danger btn-flat  delete-btn" data-toggle="modal" data-target="#delete-modal"  data-object="{{$coach}}" data-fieldname="{{$coach->person->name}} {{$coach->person->last_name}}" data-message="Está seguro de eliminar el Coach" data-route="{{ route('users.destroy',$coach->id) }}"><i class="i-File-Trash"></i> Eliminar</button>
                         </td>
         			</tr>
         			@endforeach

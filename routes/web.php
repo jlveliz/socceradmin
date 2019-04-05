@@ -114,7 +114,7 @@
 	Route::resource('assistances','Backend\AssistanceController',['except'=>['show','create','edit','update']]);
 
 	//Coachs
-	Route::resource('coachs','Backend\CoachController',['only' => ['index']]);
+	Route::resource('coachs','Backend\CoachController',['except' => ['show']]);
 	Route::get('coachs-assistances/schedule','Backend\AssistanceCoachController@loadDaysMonth');
 	Route::resource('coachs-assistances','Backend\AssistanceCoachController',['only'=>['index','store','update']]);
 

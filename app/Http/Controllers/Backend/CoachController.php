@@ -6,6 +6,7 @@ use HappyFeet\Http\Controllers\Controller;
 use HappyFeet\RepositoryInterface\CoachRepositoryInterface;
 use HappyFeet\Http\Requests\CoachRequest;
 use HappyFeet\Exception\CoachException;
+use DB;
 
 class CoachController extends Controller
 {
@@ -41,7 +42,7 @@ class CoachController extends Controller
      */
     public function create()
     {
-        #
+        return view('backend.coach.create-edit');
     }
 
     /**
@@ -52,7 +53,32 @@ class CoachController extends Controller
      */
     public function store(CoachRequest $request)
     {
-       #
+       $message = [
+            'type' => 'success',
+            'content' =>'',
+        ];
+        
+        DB::beginTransaction();
+        try {
+            $message['content'] = "Se ha creado el coach satisfactoriamente";
+            $coach = $this->coachRepo->save($request->all());
+            DB::commit();
+            if ($request->get('redirect-index') == 1) {
+                return redirect()->route($this->routeRedirectIndex)->with($message);
+            } else {
+                return redirect()->route('coachs.edit',['id'=>$coach->id])->with($message);
+            }
+        } catch (CoachException $e) {
+            DB::rollback();
+            $message['type'] = "error";
+            $message['content'] = $e->getMessage();
+            return back()->with($message);
+        } catch (Exception $e) {
+            DB::rollback();
+            $message['type'] = "error";
+            $message['content'] = $e->getMessage();
+            return back()->with($message);
+        }
     }
 
     /**
@@ -63,29 +89,7 @@ class CoachController extends Controller
      */
     public function show($id)
     {
-         $message = [
-            'type' => 'success',
-            'content' =>'',
-        ];
-
-        try {
-            
-            $coach = $this->coachRepo->find($id);
-            return view('backend.coach.show',compact('coach'));
-            
-        } catch (CoachException $e) {
-            
-            $message['type'] = "error";
-            $message['content'] = $e->getMessage();
-            return back()->with($message);
-
-        } catch (Exception $e) {
-            
-            $message['type'] = "error";
-            $message['content'] = $e->getMessage();
-            return back()->with($message);
-            
-        }
+        
     }
 
     /**
@@ -96,7 +100,8 @@ class CoachController extends Controller
      */
     public function edit($id)
     {
-        #
+        $coach = $this->coachRepo->find($id);
+        return view('backend.coach.create-edit',compact('coach'));
     }
 
     /**
@@ -108,7 +113,33 @@ class CoachController extends Controller
      */
     public function update(CoachRequest $request, $id)
     {
-        #
+        $message = [
+            'type' => 'success',
+            'content' =>'',
+        ];
+        DB::beginTransaction();
+        
+        try {
+            $coach = $this->coachRepo->edit($id,$request->all());
+            DB::commit();
+            $message['content'] = "Se ha Actualizado el coach satisfactoriamente";
+          
+              if ($request->get('redirect-index') == 1) { 
+                return redirect()->route($this->routeRedirectIndex)->with($message);
+              } else {
+                return back()->with($message);
+              }
+          
+        } catch (CoachException $e) {
+            DB::rollback();
+            $message['type'] = 'error';
+            $message['content'] = $e->getMessage();
+        }catch (Exception $e) {
+            DB::rollback();
+            $message['type'] = "error";
+            $message['content'] = $e->getMessage();
+            return back()->with($message);
+        }
     }
 
     /**
@@ -119,12 +150,27 @@ class CoachController extends Controller
      */
     public function destroy($id)
     {
-        #
-    }
+        $message = [
+            'type' => 'success',
+            'content' =>'',
+        ];
+         DB::beginTransaction();
 
-
-    public function getAssistances()
-    {
-        
+        try {
+            $deleted = $this->coachRepo->remove($id);
+            DB::commit();
+            $message['content'] = "Se ha eliminado el coach satisfactoriamente";
+            return back()->with($message);
+        } catch (CoachException $e) {
+            DB::rollback();
+            $message['type'] = "error";
+            $message['content'] = $e->getMessage();
+            return back()->with($message);
+        }catch (Exception $e) {
+            DB::rollback();
+            $message['type'] = "error";
+            $message['content'] = $e->getMessage();
+            return back()->with($message);
+        }
     }
 }
