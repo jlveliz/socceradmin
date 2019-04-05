@@ -149,7 +149,7 @@
                                                     <td class="text-center">
                                                         <div class="form-check form-check-inline">
                                                             <input type="hidden" value="{{$assistance->$idAssistance}}" name="assistances[{{$i}}][assistance_id]"/>
-                                                            <input class="form-check-input"  name="assistances[{{$i}}][value]"  type="checkbox" id="{{$assistance->student_name}}_{{$i}}"  @if($assistance->$i == 1) checked @endif @if($assistances['dates'][$i]->format('Y-m-d') < date('Y-m-d'))) disabled @endif/>
+                                                            <input class="form-check-input"  name="assistances[{{$i}}][value]"  type="checkbox" id="{{$assistance->student_name}}_{{$i}}"  @if($assistance->$i == 1) checked @endif {{-- @if($assistances['dates'][$i]->format('Y-m-d') < date('Y-m-d'))) disabled @endif --}}/>
                                                         </div>
                                                     </td>
                                                 @endfor
