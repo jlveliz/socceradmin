@@ -119,7 +119,7 @@ class StudentRepository implements StudentRepositoryInterface
 					//save groups
 					if ($student->state == Student::ACTIVE) {
 						foreach ($dataEnrollment['groups'] as $key => $gr) {
-							$enrGroup = new EnrollmentGroup(['group_id' => $gr]);
+							$enrGroup = new EnrollmentGroup(['group_id' => $gr,'state' => Enrollment::ACTIVE]);
 							$enrollment->groups()->save($enrGroup);
 						}
 					
@@ -190,7 +190,7 @@ class StudentRepository implements StudentRepositoryInterface
 		if(!$student) {
 			throw new StudentException('Ha ocurrido un error al actualizar el estudiante '.$data['name'],"500");
 		}
-
+		
 		$data['person_type_id'] = $this->getPersonType();
 		$student->person->fill($data);
 		if($savePerson = $student->person->update()) {
@@ -209,7 +209,8 @@ class StudentRepository implements StudentRepositoryInterface
 				
 				//if change a group
 				$updateGroupClass = false;
-				if(array_key_exists('is_changing_group',$data) && $data['is_changing_group'] == '1') {
+
+				if(array_key_exists('is_changing_group',$data) && $data['is_changing_group'] == '1' && $data['state'] == 1) {
 					$newGroups = $data['enrollment']['groups'];
 					$oldGroups = [];
 					foreach($enrollment->groups as $oldGrObj) {
@@ -220,6 +221,7 @@ class StudentRepository implements StudentRepositoryInterface
 					$updateGroupClass = true;
 
 				} elseif ($data['state'] == 0) {
+					
 					$enrollment = $student->currentEnrollment();
 					$newGroups = [];
 					$oldGroups = [];

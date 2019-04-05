@@ -101,7 +101,7 @@
 
 										<div class="col-lg-3 col-4">
 											<div class="form-group">
-												<label for="state">Estado </label>
+												<label for="state">Estado <span class="text-danger">*</span></label>
 												<select type="text" name="state" id="state" class="form-control form-control-sm {{ $errors->has('state') ? ' is-invalid' : '' }}">
 													<option value="1" @if( (isset($student) && $student->state == '1') || old('state') == '1' ) selected @endif>Activo</option>
 													<option value="0" @if( (isset($student) && $student->state == '0') || old('state') == '0' ) selected @endif>Inactivo</option>
@@ -138,7 +138,7 @@
 								<div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 
 									<div class="row justify-content-center my-2">
-										<button type="button" data-toggle="modal" data-target="#search-modal" data-route="{{route('users.representants')}}" @if(isset($student)) data-edit="true" @endif data-size="modal-lg" data-title="Buscar Representante" class="btn  btn-info"><i class="i-Data-Search"></i> Buscar Representante</button>
+										<button type="button" data-toggle="modal" data-target="#search-modal" data-route="{{route('users.representants')}}" @if(isset($student)) data-edit="true" @endif data-title="Buscar Representante" class="btn  btn-info"><i class="i-Data-Search"></i> Buscar Representante</button>
 									</div>
 									
 									<div class="row p-2">
@@ -254,7 +254,7 @@
 					</div>            	
 				</div>
 			</div>
-				{{-- matricula --}}
+			{{-- matricula --}}
 			<div class="col-lg-5 col-12 mt-lg-0 mt-3">
 				<div class="card p-2">
 					<div class="card-body col-12">
@@ -278,7 +278,7 @@
 								<select name="enrollment[field_id]" id="select-field" class="form-control form-control-sm {{ $errors->has('enrollment.field_id') ? ' is-invalid' : '' }}">
 									<option value="">Seleccione</option>
 									@foreach ($fields as $field)
-									<option value="{{$field->id}}" @if( (isset($student) &&   $student->currentEnrollment()->fieldOfGroup()->id == $field->id)  || (old('enrollment.field_id') ==  $field->id)) selected @endif>{{$field->name}}</option>
+									<option value="{{$field->id}}" @if( (isset($student) &&   $student->currentEnrollment()->field_id == $field->id)  || (old('enrollment.field_id') ==  $field->id)) selected @endif>{{$field->name}}</option>
 									@endforeach
 								</select>
 								@if ($errors->has('enrollment.field_id'))
@@ -287,7 +287,7 @@
 							</div>
 							
 							<div class="col-12 form-group">
-								{{-- <label for="class-type">Clase  <span class="text-danger">*</span></label>
+								<label for="class-type">Clase  <span class="text-danger">*</span></label>
 								<select name="enrollment[class_type]" id="class-type" class="form-control form-control-sm {{ $errors->has('enrollment.class_type') ? ' is-invalid' : '' }}">
 									<option value="">Seleccione</option>
 									@foreach (get_type_class() as $key => $group)
@@ -296,14 +296,14 @@
 								</select>
 								@if ($errors->has('enrollment.class_type'))
 									<div class="invalid-feedback animated fadeInDown">{{ $errors->first('enrollment.class_type') }}</div>
-								@endif --}}
+								@endif
 							</div>
 
 							<div class="col-12 form-group">
 								<label for="grupo-class">Grupos  <span class="text-danger">*</span></label>
-								{{-- @if(isset($student)) 
+								@if(isset($student)) 
 									<select @if ( $student->currentEnrollment()->class_type > 0) multiple @endif name="enrollment[groups][]" id="grupo-class" class="form-control form-control-sm grupo-class-edit {{ $errors->has('enrollment.groups') ? ' is-invalid' : '' }}">
-										@foreach ($student->currentEnrollment()->fieldOfGroup()->groups as $group)
+										@foreach ($student->currentEnrollment()->field->groups as $group)
 										<option value="{{$group->id}}" @if($student->currentEnrollment()->existGroupOnEnrollment($group->id)) selected @endif>{{$group->range->name}} - {{$group->disponibility}} Cupos Disponibles - {{days_of_week()[$group->day]}} - ({{$group->schedule['start']}} -  {{$group->schedule['end']}})</option>
 										@endforeach 
 									</select>
@@ -311,7 +311,7 @@
 								@else 
 									<select name="enrollment[groups][]" id="grupo-class" class="form-control form-control-sm grupo-class-create" @if( !old('enrollment.class_type') ||  !old('enrollment.field_id'))disabled @endif @if(old('enrollment.class_type') == 2 ) multiple @endif>
 									</select>
-								@endif --}}
+								@endif
 
 								@if ($errors->has('enrollment.groups'))
 									<div class="invalid-feedback animated fadeInDown">{{ $errors->first('enrollment.groups') }}</div>

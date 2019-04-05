@@ -23,9 +23,10 @@ class StudentRequest extends FormRequest
      */
     public function rules()
     {
+        
         $emtpyGroups = false;
         if ($this->has('enrollment.groups')) {
-            if (!$this->get('enrollment.groups') && $this->get('state') == 1) {
+            if (!$this->get('enrollment.groups')) {
                 $emtpyGroups = true;
             }
         }
@@ -49,7 +50,6 @@ class StudentRequest extends FormRequest
             'enrollment.groups' => 'required_if:state,==,1',
         ];
 
-
         if ($emtpyGroups) {
             $rules['enrollment.groups'] = 'required';
         }
@@ -57,7 +57,7 @@ class StudentRequest extends FormRequest
         // if ($this->method() == 'PUT') {
         //     $rules['representant_num_identification'] = 'required|unique:person,num_identification'.$this->get('representant_person_id');
         // }
-
+        
         return $rules;
     }
 

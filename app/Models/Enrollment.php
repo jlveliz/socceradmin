@@ -40,6 +40,11 @@ class Enrollment extends Model
         return $this->hasMany('HappyFeet\Models\EnrollmentGroup','enrollment_id');
     }
 
+    public function field()
+    {
+        return $this->belongsTo('HappyFeet\Models\Field','field_id');
+    }
+
     public function fieldOfGroup() {
         $grFounds = [];
         $sameField = false;
@@ -86,7 +91,7 @@ class Enrollment extends Model
         $found = false;
         
         foreach($this->groups as $gr) {
-            if($gr->group_id == $groupId && $gr->state == 1) $found = true;
+            if($gr->group_id == $groupId) $found = true;
         }
 
         return $found;

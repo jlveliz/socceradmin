@@ -68,8 +68,9 @@ class DeleteAssistances
                     $enrGr = EnrollmentGroup::where('enrollment_id',$idEnrollment)->where('group_id',$grDel)->first();
                     if ($enrGr) {
                         $enrGr->assistances()->delete();
-                        $enrGr->state = 0 ;
-                        $enrGr->update();
+                        // $enrGr->state = 0 ;
+                        // $enrGr->update();
+                        $enrGr->delete();
                     }else {
                     throw new EnrollmentGroupException("No se pudo eliminar las asistencias", 500);
                     }

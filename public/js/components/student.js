@@ -40,7 +40,8 @@ $(document).ready(function() {
 
     formatDomSelect = (data) => {
         var dfd = jQuery.Deferred();
-        let htmlReturn = "<option value=''>Seleccione</option>";
+        // let htmlReturn = "<option value=''>Seleccione</option>";
+        let htmlReturn = "";
         data.forEach(element => {
             htmlReturn += "<option value='" + element.id + "'>";
             htmlReturn += element.name + ' - ' + element.disponibility + ' Cupos Disponibles<span class="text-secondary"><i> - ' + element.day + ' - (' + element.schedule.start + ' - ' + element.schedule.end + ') </i></span> '

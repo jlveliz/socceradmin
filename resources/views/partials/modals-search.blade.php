@@ -10,8 +10,8 @@
         <div class="modal-body">
           <div class="row">
             <div class="col-12">
-              <form action="" method="POST" class="form-inline justify-content-center">
-                  <div class="form-group col-5 mx-sm-3 mb-2">
+              <form action="" method="POST" class="form-inline">
+                  <div class="form-group col-8 mx-sm-3 mb-2">
                       <input type="text" class="form-control col-12" id="search-input" placeholder="Cédula, nombres o apellidos" autofocus="autofocus">
                   </div>
                   <button type="submit" class="btn btn-primary mb-2 btn-search"><i class="i-Data-Search"></i></button>
