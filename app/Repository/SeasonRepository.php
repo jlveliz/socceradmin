@@ -153,6 +153,12 @@ class SeasonRepository implements SeasonRepositoryInterface
 			return [$season->start];
 		}
 
-		return [$season->start,$season->end];
+
+		$months = [];
+		for ($i= $season->start; $i <= count(month_of_year()) ; $i++) { 
+			$months[$i] = month_of_year()[$i];
+		}
+		
+		return $months;
 	}
 }

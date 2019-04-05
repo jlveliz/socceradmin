@@ -89,7 +89,7 @@
                                                 <option value="">Seleccione</option>
                                                 @if (isset($months))
                                                     @foreach ($months as $keyMonth => $month)
-                                                        <option value="{{ $month }}" @if(request()->get('month') == $month) selected @endif>{{month_of_year()[$month]}}</option>
+                                                        <option value="{{ $keyMonth }}" @if(request()->get('month') == $keyMonth) selected @endif>{{$month}}</option>
                                                     @endforeach
                                                 @endif
                                             </select>
@@ -152,7 +152,7 @@
                                                             <input class="form-check-input"  name="assistances[{{$i}}][value]"  type="checkbox" id="{{$assistance->student_name}}_{{$i}}"  @if($assistance->$i == 1) checked @endif @if($assistances['dates'][$i]->format('Y-m-d') < date('Y-m-d'))) disabled @endif/>
                                                         </div>
                                                     </td>
-                                                @endfor;
+                                                @endfor
                                             </tr>
                                         @endforeach
                                     @else
