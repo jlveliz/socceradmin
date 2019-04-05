@@ -18,12 +18,18 @@
 				</div>
 			@endif
 
-			@foreach ($errors->all() as $err)
-				{{ $err }}
-			@endforeach
 		    <div class="col-lg-7 col-12">
 		        <div class="card p-2">
 					<div class="card-body col-12">
+						{{-- validation errors --}}
+						@if($errors->any())
+							<div class="alert alert-card alert-danger sufee-alert alert with-close alert-dismissible fade show">
+		            			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+		            			@foreach ($errors->all() as $error)
+									{{$error}} <br>
+								@endforeach
+							</div>
+						@endif
 						<div class="form-validation">
 							{{ csrf_field() }}
 							@if (isset($student))
@@ -34,15 +40,15 @@
 							
 							<ul class="nav nav-tabs customtab" id="myTab" role="tablist">
 								<li class="nav-item">
-									<a class="nav-link @if(!$errors->has('representant.num_identification') || !$errors->has('representant.name') || !$errors->has('representant.last_name') || !$errors->has('representant.address') || !$errors->has('representant.email')) active @endif" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="@if(!$errors->has('representant.num_identification') || !$errors->has('representant.name') || !$errors->has('representant.last_name') || !$errors->has('representant.address') || !$errors->has('representant.email')) active @endif">Estudiante</a>
+									<a class="nav-link  active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="@if(!$errors->has('representant.num_identification') || !$errors->has('representant.name') || !$errors->has('representant.last_name') || !$errors->has('representant.address') || !$errors->has('representant.email')) active @endif">Estudiante</a>
 								</li>
 
 								<li class="nav-item">
-									<a class="nav-link @if($errors->has('representant.num_identification') || $errors->has('representant.name') || $errors->has('representant.last_name') || $errors->has('representant.address') || $errors->has('representant.email')) active @endif" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="@if($errors->has('representant')) true @else false @endif">Representante</a>
+									<a class="nav-link " id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="@if($errors->has('representant')) true @else false @endif">Representante</a>
 								</li>
 							</ul>
 							<div class="tab-content" id="myTabContent">
-								<div class="tab-pane fade show @if(!$errors->has('representant.num_identification') || !$errors->has('representant.name') || !$errors->has('representant.last_name') || !$errors->has('representant.address') || !$errors->has('representant.email')) active @endif" id="home" role="tabpanel" aria-labelledby="home-tab">
+								<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 									<div class="row p-2">
 										<div class="col-lg-4 col-6">
 											<div class="form-group">
@@ -129,7 +135,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="tab-pane @if($errors->has('representant.num_identification') || $errors->has('representant.name') || $errors->has('representant.last_name') || $errors->has('representant.address') || $errors->has('representant.email')) active @endif" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+								<div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 
 									<div class="row justify-content-center my-2">
 										<button type="button" data-toggle="modal" data-target="#search-modal" data-route="{{route('users.representants')}}" @if(isset($student)) data-edit="true" @endif data-size="modal-lg" data-title="Buscar Representante" class="btn  btn-info"><i class="i-Data-Search"></i> Buscar Representante</button>
@@ -141,7 +147,7 @@
 										<div class="col-lg-4 col-6">
 											<div class="form-group">
 												<label for="representant_num_identification">Num Identificación <span class="text-danger">*</span></label>
-												<input type="text" max="9999999999" minlength="9999999999" name="representant[num_identification]" id="representant_num_identification" class="form-control form-control-sm {{ $errors->has('representant.num_identification') ? ' is-invalid' : '' }}"  value="@if(isset($student)){{ $student->representant->num_identification }}@else{{ old('representant_num_identification') }}@endif">
+												<input type="text" max="9999999999" minlength="9999999999" name="representant[num_identification]" id="representant_num_identification" class="form-control form-control-sm {{ $errors->has('representant.num_identification') ? ' is-invalid' : '' }}"  value="@if(isset($student)){{ $student->representant->num_identification }}@else{{ old('representant.num_identification') }}@endif">
 												@if ($errors->has('representant.num_identification'))
 													<div class="invalid-feedback animated fadeInDown">{{ $errors->first('representant.num_identification') }}</div>
 												@endif
@@ -227,7 +233,7 @@
 												@if ($errors->has('representant.date_birth'))
 													<div class="invalid-feedback animated fadeInDown">{{ $errors->first('representant.date_birth') }}</div>
 												@endif
-											</div>
+											</div> 
 										</div> --}}
 										
 										
@@ -281,7 +287,7 @@
 							</div>
 							
 							<div class="col-12 form-group">
-								<label for="class-type">Clase  <span class="text-danger">*</span></label>
+								{{-- <label for="class-type">Clase  <span class="text-danger">*</span></label>
 								<select name="enrollment[class_type]" id="class-type" class="form-control form-control-sm {{ $errors->has('enrollment.class_type') ? ' is-invalid' : '' }}">
 									<option value="">Seleccione</option>
 									@foreach (get_type_class() as $key => $group)
@@ -290,12 +296,12 @@
 								</select>
 								@if ($errors->has('enrollment.class_type'))
 									<div class="invalid-feedback animated fadeInDown">{{ $errors->first('enrollment.class_type') }}</div>
-								@endif
+								@endif --}}
 							</div>
 
 							<div class="col-12 form-group">
 								<label for="grupo-class">Grupos  <span class="text-danger">*</span></label>
-								@if(isset($student)) 
+								{{-- @if(isset($student)) 
 									<select @if ( $student->currentEnrollment()->class_type > 0) multiple @endif name="enrollment[groups][]" id="grupo-class" class="form-control form-control-sm grupo-class-edit {{ $errors->has('enrollment.groups') ? ' is-invalid' : '' }}">
 										@foreach ($student->currentEnrollment()->fieldOfGroup()->groups as $group)
 										<option value="{{$group->id}}" @if($student->currentEnrollment()->existGroupOnEnrollment($group->id)) selected @endif>{{$group->range->name}} - {{$group->disponibility}} Cupos Disponibles - {{days_of_week()[$group->day]}} - ({{$group->schedule['start']}} -  {{$group->schedule['end']}})</option>
@@ -305,7 +311,7 @@
 								@else 
 									<select name="enrollment[groups][]" id="grupo-class" class="form-control form-control-sm grupo-class-create" @if( !old('enrollment.class_type') ||  !old('enrollment.field_id'))disabled @endif @if(old('enrollment.class_type') == 2 ) multiple @endif>
 									</select>
-								@endif
+								@endif --}}
 
 								@if ($errors->has('enrollment.groups'))
 									<div class="invalid-feedback animated fadeInDown">{{ $errors->first('enrollment.groups') }}</div>

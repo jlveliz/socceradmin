@@ -23,7 +23,14 @@ class StudentRequest extends FormRequest
      */
     public function rules()
     {
-       
+        $emtpyGroups = false;
+        if ($this->has('enrollment.groups')) {
+            if (!$this->get('enrollment.groups') && $this->get('state') == 1) {
+                $emtpyGroups = true;
+            }
+        }
+
+        
         $rules = [
             'name' => 'required',
             'last_name' => 'required',
@@ -36,11 +43,16 @@ class StudentRequest extends FormRequest
             'representant.last_name' => 'required',
             'representant.address' => 'required',
             'representant.email' => 'required|email',
-            // 'enrollment.season_id' => 'required',
-            // 'enrollment.field_id' => 'required',
-            // 'enrollment.class_type' => 'required',
-            // 'enrollment.groups' => 'required',
+            'enrollment.season_id' => 'required',
+            'enrollment.field_id' => 'required',
+            'enrollment.class_type' => 'required',
+            'enrollment.groups' => 'required_if:state,==,1',
         ];
+
+
+        if ($emtpyGroups) {
+            $rules['enrollment.groups'] = 'required';
+        }
         
         // if ($this->method() == 'PUT') {
         //     $rules['representant_num_identification'] = 'required|unique:person,num_identification'.$this->get('representant_person_id');
@@ -69,6 +81,7 @@ class StudentRequest extends FormRequest
             'enrollment.season_id.required' => 'Por favor, ingrese una temporada',
             'enrollment.field_id.required' => 'Por favor, ingrese una cancha',
             'enrollment.class_type.required' => 'Por favor Ingrese un tipo de clase',
+            'enrollment.groups.required_if' => 'Por favor ingrese al menos un grupo',
             'enrollment.groups.required' => 'Por favor ingrese al menos un grupo',
         ];
     }

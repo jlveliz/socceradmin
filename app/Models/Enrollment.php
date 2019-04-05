@@ -28,6 +28,7 @@ class Enrollment extends Model
         'season_id',
     	'state',
         'class_type',
+        'field_id',
         'is_pay_inscription',
         'is_delivered_uniform',
         'is_pay_first_month'
