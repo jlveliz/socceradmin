@@ -39,16 +39,26 @@ $(document).ready(function() {
     var generateAssistanceCoachTable = (data, idCoachs) => {
 
         var html = "";
+        var totals = {};
         for (var i = 0; i < data.length; i++) {
             html += "<tr>";
             html += "<td>" + data[i].day + "</td>";
             html += "<td>" + data[i].date + "</td>";
             for (var x = 0; x < data[i].coachs.length; x++) {
                 html += "<td>" + generateHtmlFormAssistance(data[i].coachs[x], data[i].fulldate) + "</td>";
+                
+                if (!totals.hasOwnProperty('coach_'+x)) {
+                    totals['coach_'+x] = 0;    
+                }
+                totals['coach_'+x]+= data[i].coachs[x].profit ? data[i].coachs[x].profit :  0 ; 
             }
             html += "</tr>";
         }
-
+        html+="<tr class='table-light'><td colspan='2' class='text-center'><b>Total </b></td>";
+        for(var coachTotal in totals) {
+            html+="<td> $ " + parseFloat(Math.round(totals[coachTotal] * 100) / 100).toFixed(2) + "</td>";
+        }
+        html+="</tr>";
         return html;
 
     }
