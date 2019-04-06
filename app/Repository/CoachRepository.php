@@ -7,6 +7,7 @@ use HappyFeet\Models\Coach;
 use HappyFeet\Models\Person;
 use HappyFeet\Models\Role;
 use HappyFeet\Models\PersonType;
+use DB;
 
 /**
 * 
@@ -59,7 +60,6 @@ class CoachRepository implements CoachRepositoryInterface
 			$coach->fill($data);
 			if ($saved = $coach->save()) {
 				$data['roles'] = $this->getDefaultRole();
-				
 				$coach->roles()->sync($data['roles']);
 				
 				$key = $coach->getKey();
@@ -112,8 +112,12 @@ class CoachRepository implements CoachRepositoryInterface
 
 	public function getDefaultRole()
 	{
-		return Role::select('id')->where('code',Coach::ROLE)->orWhere('code',Coach::ALTROLE)->get()->toArray();
-
+		$roles = Role::without('permissions')->select('role.id')->where('code',Coach::ROLE)->orWhere('code',Coach::ALTROLE)->get()->toArray();
+		$newRoles = [];
+		foreach ($roles as $keyRole => $valueRole) {
+			$newRoles[] = $valueRole['id'];
+		}
+		return $newRoles;
 	}
 
 	public function getPersonType($code = null) {
