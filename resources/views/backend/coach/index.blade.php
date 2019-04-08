@@ -65,7 +65,7 @@
         		<tbody>
     				@foreach ($coachs as $coach)
         			<tr>
-                        <td><a href="#" class="text-primary">{{ $coach->username }}</a></td>
+                        <td><a href="{{ route('coachs.edit',$coach->id) }}" class="text-primary">{{ $coach->username }}</a></td>
                         <td>{{$coach->person->name .' '. $coach->person->last_name}}</td>
         				<td>
                             @if ($coach->last_access)
@@ -75,8 +75,8 @@
                             @endif
                         </td>
                         <td>
-                            <a class="btn btn-warning btn-flat " href="{{ route('users.edit',['id' => $coach->id]) }}"><i class="i-Pen-2"></i> Editar</a>
-                            <button class="btn btn-danger btn-flat  delete-btn" data-toggle="modal" data-target="#delete-modal"  data-object="{{$coach}}" data-fieldname="{{$coach->person->name}} {{$coach->person->last_name}}" data-message="Está seguro de eliminar el Coach" data-route="{{ route('users.destroy',$coach->id) }}"><i class="i-File-Trash"></i> Eliminar</button>
+                            <a class="btn btn-warning btn-flat " href="{{ route('coachs.edit',['id' => $coach->id]) }}"><i class="i-Pen-2"></i> Editar</a>
+                            <button class="btn btn-danger btn-flat  delete-btn" data-toggle="modal" data-target="#delete-modal"  data-object="{{$coach}}" data-fieldname="{{$coach->person->name}} {{$coach->person->last_name}}" data-message="Está seguro de eliminar el Coach" data-route="{{ route('coachs.destroy',$coach->id) }}"><i class="i-File-Trash"></i> Eliminar</button>
                         </td>
         			</tr>
         			@endforeach

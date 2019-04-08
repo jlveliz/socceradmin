@@ -4,7 +4,7 @@ namespace HappyFeet\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserRequest extends FormRequest
+class CoachRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,12 +27,11 @@ class UserRequest extends FormRequest
         $rules = [
             'username' => 'required|unique:user,username',
             'email' => 'required|email|unique:user,email',
-            'state' => 'required',
             'name' => 'required',
             'last_name' => 'required',
             'password' => 'required',
             'rep_password' => 'required|same:password',
-            'roles' => 'required_without:super_admin'
+            'state' => 'required'
 
         ];
         
@@ -59,7 +58,6 @@ class UserRequest extends FormRequest
             'password.required' => 'Ingrese una contraseña',
             'rep_password.required' => 'Por favor, ingrese la contraseña',
             'rep_password.same' => 'Las contraseñas no coinciden',
-            'roles.required_without' => 'Por favor, ingrese al menos un rol',
             'state.required' => 'El estado es requerido'
         ];
     }

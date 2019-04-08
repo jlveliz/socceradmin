@@ -128,6 +128,18 @@
 		                		</div>
 	                		</div>
 	                		<div class="col-lg-2 col-6">
+		                		<div class="form-group  {{ $errors->has('state') ? ' is-invalid' : '' }}">
+		                			<label for="state">Estado </label>
+		                			<select name="state" id="state" class="form-control">
+		                				<option value="1" @if( (isset($user) && $user->state == 1 ) ||  old('state') == '1' )  selected  @endif>Activo</option>
+		                				<option value="0"  @if( (isset($user) && $user->state == 0 ) ||  old('state') == '0' )  selected  @endif>Inactivo</option>
+		                			</select>
+		                			@if ($errors->has('state'))
+		                				<div class="invalid-feedback animated fadeInDown">{{ $errors->first('state') }}</div>
+		                			@endif
+		                		</div>
+	                		</div>
+	                		<div class="col-lg-2 col-6">
 		                		<div class="form-group">
 		                			<label for="phone">Teléfono </label>
 		                			<input type="text" name="phone" id="phone" class="form-control {{ $errors->has('phone') ? ' is-invalid' : '' }}"  value="@if(isset($user)){{ $user->person->phone }}@else{{ old('phone') }}@endif">
