@@ -365,5 +365,6 @@
 
 @section('js')
 <script type="text/javascript" src="{{asset('js/moment/moment.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/tagging/tagging.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/components/student.js')}}"></script>
 @endsection()

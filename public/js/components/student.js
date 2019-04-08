@@ -91,7 +91,6 @@ $(document).ready(function() {
 
         loadGroups(fieldId).then(
             (data) => {
-                    debugger
                 formatDomSelect(data).then((formatted) => {
                     $groupSelect.append(formatted)
                     //if class is selected
@@ -150,5 +149,9 @@ $(document).ready(function() {
         $('#age').val(difYear);
         
     });
+
+
+    //TAGGING
+    
 
 })
