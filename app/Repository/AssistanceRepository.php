@@ -135,6 +135,7 @@ class AssistanceRepository implements AssistanceRepositoryInterface
 		
 		$query =" SELECT DATE_FORMAT(en.created_at,'%Y-%m-%d') date_inscription,
 					CONCAT( pe.`name`, ' ', pe.last_name ) student_name,
+					pe.`id` student_id,
 					concat( pe.age, ' Años' ) age,
 					concat( re.`name`, ' ', re.last_name ) representant,
 					gc.`day`,
@@ -151,7 +152,7 @@ class AssistanceRepository implements AssistanceRepositoryInterface
 					";
 
 			if (($key+1) < count($datesAssistence)) {
-             	 $query.=" , ";
+             	$query.=" , ";
           	}
 		}
 		

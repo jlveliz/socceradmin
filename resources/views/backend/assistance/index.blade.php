@@ -144,12 +144,15 @@
                                                 <td>{{ $assistance->is_pay_inscription == '1' ? 'Si' : 'No' }}</td>
                                                 <td>{{ $assistance->is_pay_first_month == '1' ? 'Si' : 'No' }}</td>
                                                 <td>{{ $assistance->is_delivered_uniform == '1' ? 'Si' : 'No' }}</td>
+                                                @php
+                                                    dd($assistances['dates']);
+                                                @endphp
                                                 @for ($i = 0; $i < count($assistances['dates']); $i++)
-                                                    @php $idAssistance = 'id_'.$i; @endphp
+                                                    @php $idAssistance = $i; @endphp
                                                     <td class="text-center">
                                                         <div class="form-check form-check-inline">
-                                                            <input type="hidden" value="{{$assistance->$idAssistance}}" name="assistances[{{$i}}][assistance_id]"/>
-                                                            <input class="form-check-input"  name="assistances[{{$i}}][value]"  type="checkbox" id="{{$assistance->student_name}}_{{$i}}"  @if($assistance->$i == 1) checked @endif {{-- @if($assistances['dates'][$i]->format('Y-m-d') < date('Y-m-d'))) disabled @endif --}}/>
+                                                            <input type="hidden" value="{{$assistance->$idAssistance}}" name="assistances[{{$key}}][{{$i}}][assistance_id]"/>
+                                                            <input class="form-check-input"  name="assistances[{{$key}}][{{$i}}][value]"  type="checkbox" id="{{$assistance->student_name}}_{{$i}}"  @if($assistance->$i == 1) checked @endif {{-- @if($assistances['dates'][$i]->format('Y-m-d') < date('Y-m-d'))) disabled @endif --}}/>
                                                         </div>
                                                     </td>
                                                 @endfor

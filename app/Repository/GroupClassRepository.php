@@ -133,7 +133,7 @@ class GroupClassRepository implements GroupClassRepositoryInterface
 	public function enumByField($fieldId) {
 		
 		// $groups = $this->enum($fieldId);
-		$groups = GroupClass::with('coach')->where('state',GroupClass::ACTIVE)->where('disponibility','>',\DB::raw(0))->where('field_id',$fieldId)->get();
+		$groups = GroupClass::with('coach','range')->where('state',GroupClass::ACTIVE)->where('disponibility','>',\DB::raw(0))->where('field_id',$fieldId)->get();
 		foreach($groups as $group) {
 			$group->day = days_of_week()[$group->day];
 			$group->name = get_group_names()[$group->name];

@@ -34,7 +34,7 @@ class AssistanceRequest extends FormRequest
             return $rules;
         }
 
-
+        dd($this->get('assistances'));
         foreach ($this->get('assistances') as $key => $assistance) {
             $rules['assistances.'.$key.'.id'] = 'exists:assistance';
         }

@@ -44,7 +44,7 @@ $(document).ready(function() {
         let htmlReturn = "";
         data.forEach(element => {
             htmlReturn += "<option value='" + element.id + "'>";
-            htmlReturn +=  element.coach.username +' - '+element.name + ' - ' + element.disponibility + ' Cupos Disponibles<span class="text-secondary"><i> - ' + element.day + ' - (' + element.schedule.start + ' - ' + element.schedule.end + ') </i></span> '
+            htmlReturn +=  element.range.name + ' - ' +element.coach.username + ' - ' + element.disponibility + ' Cupos Disponibles<span class="text-secondary"><i> - ' + element.day + ' - (' + element.schedule.start + ' - ' + element.schedule.end + ') </i></span> '
             htmlReturn += "</option>";
         });
 
