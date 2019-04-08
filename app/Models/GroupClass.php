@@ -40,6 +40,11 @@ class GroupClass extends Model
         return $this->belongsToMany('HappyFeet\Models\Student','group_class_student','group_id','student_id');
     }
 
+    public function coach()
+    {
+        return $this->belongsTo('HappyFeet\Models\User','coach_id');
+    }
+
     public function range()
     {
     	return $this->belongsTo('HappyFeet\Models\AgeRange','range_age_id');
