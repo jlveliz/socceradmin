@@ -151,7 +151,9 @@ $(document).ready(function() {
     });
 
 
-    //TAGGING
+    //MULTISELECT
+    $(".grupo-class-create").bsMultiSelect();
+    $(".grupo-class-edit").bsMultiSelect();
     
 
 })
