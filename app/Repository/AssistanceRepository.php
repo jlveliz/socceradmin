@@ -158,6 +158,7 @@ class AssistanceRepository implements AssistanceRepositoryInterface
 		
 		$query.="FROM enrollment en INNER JOIN student st ON en.student_id = st.id INNER JOIN person pe ON st.person_id = pe.id  INNER JOIN person re ON st.representant_id = re.id  INNER JOIN enrollment_groups eg ON en.id = eg.enrollment_id INNER JOIN group_class gc ON eg.group_id = gc.id  WHERE en.state = 1 AND en.season_id = 1 AND en.class_type = 2 AND gc.field_id = $fieldId AND gc.day = '$day' and st.deleted_at is null AND st.id > 0  AND re.id > 0 AND eg.group_id = $grId and en.deleted_at is null and st.deleted_at is null order by student_name;";
 
+		
 		$assistances = DB::select($query);
 		return collect(['dates' =>$datesAssistence,'assistances' =>  $assistances]);
 	}
@@ -165,19 +166,22 @@ class AssistanceRepository implements AssistanceRepositoryInterface
 	public function saveMany($assistances)
 	{
 		$allSuccess = false;
-		
-		foreach($assistances as $key => $assis) {
+		foreach($assistances as $key => $assisFile) {
 			$dataUpdate = [];
-			if (array_key_exists('value',$assis)  && $assis['value'] == 'on') {	
-				$dataUpdate['state'] = 1;
-			} else {
-				$dataUpdate['state'] = 0; 
+			foreach ($assisFile as $key => $Assistance) {
+				
+				if (array_key_exists('value',$Assistance)  && $Assistance['value'] == 'on') {	
+					$dataUpdate['state'] = 1;
+				} else {
+					$dataUpdate['state'] = 0; 
+				}
+				
+				if($update = $this->edit($Assistance['assistance_id'],$dataUpdate)) {
+
+					$allSuccess =  true;
+				}
 			}
 			
-			if($update = $this->edit($assis['assistance_id'],$dataUpdate)) {
-
-				$allSuccess =  true;
-			}
 		}
 		if(!$allSuccess) {
 			throw new AssistanceException('Ha ocurrido un error al actualizar la asistencia ',500);
