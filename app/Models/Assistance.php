@@ -16,6 +16,7 @@ class Assistance extends Model
     	'enrollment_group_id',
     	'date',
     	'state',
+        'observation'
     ];
 
 

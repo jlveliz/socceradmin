@@ -148,7 +148,8 @@ class AssistanceRepository implements AssistanceRepositoryInterface
 		foreach ($datesAssistence as $key => $dateAssi) {
 			$date = $dateAssi->format('Y-m-d');
 			$query.="
-					( SELECT ifnull( assistance.state, 0 ) FROM assistance WHERE assistance.enrollment_group_id= eg.id AND date = '$date' ) AS '$key' , ( SELECT assistance.id FROM assistance WHERE assistance.enrollment_group_id = eg.id AND date = '$date' ) AS id_$key
+					( SELECT ifnull( assistance.state, 0 ) FROM assistance WHERE assistance.enrollment_group_id= eg.id AND date = '$date' ) AS '$key' , ( SELECT assistance.id FROM assistance WHERE assistance.enrollment_group_id = eg.id AND date = '$date' ) AS id_$key ,
+						( SELECT assistance.observation FROM assistance WHERE assistance.enrollment_group_id = eg.id AND date = '$date' ) AS comment_$key
 					";
 
 			if (($key+1) < count($datesAssistence)) {
@@ -174,7 +175,10 @@ class AssistanceRepository implements AssistanceRepositoryInterface
 					$dataUpdate['state'] = 1;
 				} else {
 					$dataUpdate['state'] = 0; 
+					
 				}
+				
+				$dataUpdate['observation'] = $Assistance['comment'];
 				
 				if($update = $this->edit($Assistance['assistance_id'],$dataUpdate)) {
 

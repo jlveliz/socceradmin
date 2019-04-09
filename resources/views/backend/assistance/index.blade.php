@@ -144,15 +144,15 @@
                                                 <td>{{ $assistance->is_pay_inscription == '1' ? 'Si' : 'No' }}</td>
                                                 <td>{{ $assistance->is_pay_first_month == '1' ? 'Si' : 'No' }}</td>
                                                 <td>{{ $assistance->is_delivered_uniform == '1' ? 'Si' : 'No' }}</td>
-                                                @php
-                                                    // dd($assistances['dates']);
-                                                @endphp
                                                 @for ($i = 0; $i < count($assistances['dates']); $i++)
                                                     @php $idAssistance = 'id_'.$i; @endphp
+                                                    @php $commentAssistance = 'comment_'.$i; @endphp
                                                     <td class="text-center">
                                                         <div class="form-check form-check-inline">
-                                                            <input type="hidden" value="{{$assistance->$idAssistance}}" name="assistances[{{$key}}][{{$i}}][assistance_id]"/>
-                                                            <input class="form-check-input"  name="assistances[{{$key}}][{{$i}}][value]"  type="checkbox" id="{{str_slug($assistance->student_name)}}-{{$i}}"  @if($assistance->$i == 1) checked @endif {{-- @if($assistances['dates'][$i]->format('Y-m-d') < date('Y-m-d'))) disabled @endif --}}/>
+                                                            <input type="hidden" value="{{$assistance->$commentAssistance}}" class="comment-hidden" name="assistances[{{$key}}][{{$i}}][comment]"/>
+                                                            <input type="hidden" value="{{$assistance->$idAssistance}}" name="assistances[{{$key}}][{{$i}}][assistance_id]" id="check-assistance-{{$key}}-{{$i}}" />
+                                                            <input class="form-check-input check-assistance" name="assistances[{{$key}}][{{$i}}][value]" type="checkbox" id="{{str_slug($assistance->student_name)}}-{{$i}}"  @if($assistance->$i == 1) checked @endif  @if($assistance->$commentAssistance) title="{{$assistance->$commentAssistance}}" data-toggle="tooltip" @endif/>
+                                                            <a href="#" @if($assistance->$commentAssistance) title="{{$assistance->$commentAssistance}}" data-toggle="tooltip" @endif  data-toggle='modal' data-target='#insertCommentModal' class="show-message @if($assistance->$commentAssistance) visible @else invisible @endif"><i class="i-Speach-Bubble-2"></i></a>
                                                         </div>
                                                     </td>
                                                 @endfor
@@ -184,6 +184,8 @@
     </div>
 
 </div>
+
+@include('backend.assistance.includes.insert-comment')
 @endsection
 
 @section('js')
