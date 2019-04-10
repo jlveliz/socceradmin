@@ -152,7 +152,7 @@ $(document).ready(function() {
 
 
     //MULTISELECT
-    $(".grupo-class-create").bsMultiSelect();
+    // $(".grupo-class-create").bsMultiSelect();
     $(".grupo-class-edit").bsMultiSelect();
     
 

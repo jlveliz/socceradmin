@@ -192,11 +192,11 @@ class SeasonController extends Controller
         }  catch (SeasonException $e) {
             $message['type'] = "error";
             $message['content'] = $e->getMessage();
-            return response(compact($message),$e->getCode());
+            return response(compact('message'),500);
         }catch (Exception $e) {
             $message['type'] = "error";
             $message['content'] = $e->getMessage();
-           return response(compact($message),$e->getCode());
+           return response(compact('message'),500);
         }
     }
 }

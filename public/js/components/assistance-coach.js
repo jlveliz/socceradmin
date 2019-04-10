@@ -46,11 +46,10 @@ $(document).ready(function() {
             html += "<td>" + data[i].date + "</td>";
             for (var x = 0; x < data[i].coachs.length; x++) {
                 html += "<td>" + generateHtmlFormAssistance(data[i].coachs[x], data[i].fulldate) + "</td>";
-                
                 if (!totals.hasOwnProperty('coach_'+x)) {
                     totals['coach_'+x] = 0;    
                 }
-                totals['coach_'+x]+= data[i].coachs[x].profit ? data[i].coachs[x].profit :  0 ; 
+                totals['coach_'+x]+= data[i].coachs[x].profit ? parseInt(data[i].coachs[x].profit) :  0 ; 
             }
             html += "</tr>";
         }

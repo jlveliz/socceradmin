@@ -193,7 +193,8 @@ $(document).ready(function() {
 
                 deferred.resolve(data);
             })
-            .fail(function() {
+            .fail(function(err) {
+                console.log(err)
                 alert("hubo un error al cargar los meses de temporada");
             })
             .always(function() {
