@@ -52,7 +52,7 @@ class AssistanceController extends Controller
             } else {
                 $days = [];
             }
-
+            dd($request->all());
             if ($request->has('key_day')) {
                 $groups = $this->grClass->findByFieldAndDay($request->get('field'),$request->get('key_day'));
             } else {

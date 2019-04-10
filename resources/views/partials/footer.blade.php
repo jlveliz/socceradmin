@@ -6,7 +6,7 @@
         <div class="d-flex align-items-center">
             <img class="logo" src="{{asset('assets/images/logo-ball.png')}}" alt="">
             <div>
-                <p class="m-0">&copy; {{ date('Y') }} <a href="https://thejlmedia.com" target="_blank">thejlmedia.com</a></p>
+                <p class="m-0">&copy; {{ date('Y') }} <a href="{{config('app.credit_url')}}" target="_blank">{{config('app.credit')}}</a></p>
                 <p class="m-0">Todos los derechos reservados</p>
             </div>
         </div>
