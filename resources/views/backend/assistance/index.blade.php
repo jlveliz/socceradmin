@@ -72,7 +72,7 @@
                                                 <option value="">Seleccione</option>
                                                 @if (isset($groups))
                                                     @foreach ($groups as $grIdx => $group)
-                                                        <option value="{{ $group->id }}" @if(request()->get('group_id') == $group->id) selected @endif>{{$group->schedule['start'] .' '. $group->schedule['end']}} - {{get_group_names()[$group->name]}} -  {{$group->range ? $group->range->name : '-'}}</option>
+                                                        <option value="{{ $group->id }}" @if(request()->get('group_id') == $group->id) selected @endif>{{$group->schedule['start'] .' '. $group->schedule['end']}}  {{$group->range ? $group->range->name : '-'}}</option>
                                                     @endforeach
                                                 @endif
                                             </select>
