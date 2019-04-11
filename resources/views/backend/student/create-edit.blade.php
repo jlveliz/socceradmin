@@ -362,12 +362,11 @@
 @endsection
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/multiselect/BsMultiSelect.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/select2/select2-bootstrap4.min.css') }}">
 @endsection
 
 @section('js')
 <script type="text/javascript" src="{{asset('js/moment/moment.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/tagging/tagging.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/multiselect/BsMultiSelect.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/components/student.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/select2/select2.full.min.js')}}"></script>
 @endsection()
