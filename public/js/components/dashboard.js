@@ -144,7 +144,8 @@ $(document).ready(function() {
                     var activeLi = x == 0 ? "active" : null;
                     var selected = activeLi ? true : false
                     html += "<li class='nav-item'>";
-                    html += "<a class='nav-link p-2 " + activeLi + "' id='" + days[i].groups[x].name + "-" + days[i].day + "-" + x + "-tab' aria-selected='" + selected + "' data-toggle='tab' href='#" + days[i].groups[x].name + "-" + days[i].day + "-" + x + "' role='tab' aria-controls='" + days[i].groups[x].name + "-" + days[i].day + "-" + x + "'>" + get_group_names(days[i].groups[x].name) + '(' + days[i].groups[x].schedule.start + '-' + days[i].groups[x].schedule.end + ")</a>";
+                    debugger;
+                    html += "<a class='nav-link p-2 " + activeLi + "' id='" + days[i].groups[x].range.name + "-" + days[i].day + "-" + x + "-tab' aria-selected='" + selected + "' data-toggle='tab' href='#" + days[i].groups[x].range.name + "-" + days[i].day + "-" + x + "' role='tab' aria-controls='" + days[i].groups[x].name + "-" + days[i].day + "-" + x + "'>" + days[i].groups[x].range.name + '(' + days[i].groups[x].schedule.start + '-' + days[i].groups[x].schedule.end + ")</a>";
                     html += "</li>";
                 }
                 html += "</ul>";
@@ -153,7 +154,7 @@ $(document).ready(function() {
                 html += "<div class='tab-content pt-0'>";
                 for (var x = 0; x < days[i].groups.length; x++) {
                     var activeTab = x == 0 ? "show active" : "false";
-                    html += "<div class='tab-pane fade " + activeTab + " tab-pane-group' id='" + days[i].groups[x].name + "-" + days[i].day + "-" + x + "' role='tabpanel' aria-labelledby='" + days[i].groups[x].name + "-" + days[i].day + "-" + x + "-tab' data-group='" + JSON.stringify({ field: days[i].groups[x].field_id, group_id: days[i].groups[x].id, key_day: days[i].groups[x].day }) + "'>";
+                    html += "<div class='tab-pane fade " + activeTab + " tab-pane-group' id='" + days[i].groups[x].range.name + "-" + days[i].day + "-" + x + "' role='tabpanel' aria-labelledby='" + days[i].groups[x].range.name + "-" + days[i].day + "-" + x + "-tab' data-group='" + JSON.stringify({ field: days[i].groups[x].field_id, group_id: days[i].groups[x].id, key_day: days[i].groups[x].day }) + "'>";
                     html += "<div class='row'>";
                     html += "<div class='col-lg-2 col-6 px-0'>";
                     html += "<div class='form-group'>";

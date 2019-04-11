@@ -18,6 +18,8 @@ class GroupClass extends Model
 
     protected $dates = ['deleted_at'];
 
+    protected $with = ['range'];
+
     const ACTIVE = 1;
 
     const INACTIVE = 0;

@@ -148,12 +148,13 @@ class SeasonRepository implements SeasonRepositoryInterface
 
 			$season = Season::selectRaw(" month(start_date) start, month(end_date) end")->where('state',$active)->first();
 		}
-		
+
 		if ($season->start == $season->end) {
 			return [$season->start];
 		}
 
 
+	
 		$months = [];
 		for ($i= $season->start; $i <= count(month_of_year()) ; $i++) { 
 			$months[$i] = month_of_year()[$i];

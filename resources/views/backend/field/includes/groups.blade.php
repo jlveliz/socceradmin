@@ -223,13 +223,13 @@
                                     <input type="hidden" name="groups[{{$kday}}][{{$kSchedule}}][0][field_id]" value="{{$field->id}}" class="field-name">
                                     <input type="hidden" name="groups[{{$kday}}][{{$kSchedule}}][0][day]" value="{{$kday}}" class="day-name">
                                     <input type="hidden" name="groups[{{$kday}}][{{$kSchedule}}][0][schedule_field_parent]" value="{{$kSchedule}}" class="schedule-key-name">
-                                {{-- <td>
-                                    <select name="groups[{{$kday}}][{{$kSchedule}}][0][name]" id="groups[{{$kday}}][{{$kSchedule}}][0][name]" class="form-control form-control-sm group-name">
-                                        @foreach (get_group_names() as $grkey => $gr)
-                                        <option value="{{$grkey}}">{{$gr}}</option>
+                                <td>
+                                    <select name="groups[{{$kday}}][{{$kSchedule}}][0][coach_id]" id="groups[{{$kday}}][0][{{$groupNum}}][coach_id]" class="form-control form-control-sm group-coach-id @if ($errors->has('groups.'.$kday.'.'.$kSchedule.'.'.$groupNum.'.coach_id')) is-invalid @endif">
+                                        @foreach ($coachs as $coach)
+                                            <option value="{{$coach->id}}">{{$coach->person->name}}</option>
                                         @endforeach
                                     </select>
-                                </td> --}}
+                                </td>
                                 <td>
                                     <select name="groups[{{$kday}}][{{$kSchedule}}][0][range_age_id]" id="groups[{{$kday}}][{{$kSchedule}}][0][range_age_id]" class="form-control form-control-sm range-name">
                                         @foreach ($aRanges as  $range)

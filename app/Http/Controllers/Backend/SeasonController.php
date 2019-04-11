@@ -183,12 +183,7 @@ class SeasonController extends Controller
     {
         try {
             $duration = $this->season->getMonthForSeason();
-            $formated = [];
-            foreach ($duration as $key => $dura) {
-                $formated[$dura] = month_of_year()[$dura];
-            }
-            
-            return response($formated,200);
+            return response($duration,200);
         }  catch (SeasonException $e) {
             $message['type'] = "error";
             $message['content'] = $e->getMessage();
