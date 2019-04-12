@@ -144,8 +144,7 @@ $(document).ready(function() {
                     var activeLi = x == 0 ? "active" : null;
                     var selected = activeLi ? true : false
                     html += "<li class='nav-item'>";
-                    debugger;
-                    html += "<a class='nav-link p-2 " + activeLi + "' id='" + days[i].groups[x].range.name + "-" + days[i].day + "-" + x + "-tab' aria-selected='" + selected + "' data-toggle='tab' href='#" + days[i].groups[x].range.name + "-" + days[i].day + "-" + x + "' role='tab' aria-controls='" + days[i].groups[x].name + "-" + days[i].day + "-" + x + "'>" + days[i].groups[x].range.name + '(' + days[i].groups[x].schedule.start + '-' + days[i].groups[x].schedule.end + ")</a>";
+                    html += "<a class='nav-link p-2 " + activeLi + "' id='" + days[i].groups[x].range.name + "-" + days[i].day + "-" + x + "-tab' aria-selected='" + selected + "' data-toggle='tab' href='#" + days[i].groups[x].range.name + "-" + days[i].day + "-" + x + "' role='tab' aria-controls='" + days[i].groups[x].name + "-" + days[i].day + "-" + x + "'>" + days[i].groups[x].coach.username+ ' - ' + days[i].groups[x].range.name + '(' + days[i].groups[x].schedule.start + '-' + days[i].groups[x].schedule.end + ")</a>";
                     html += "</li>";
                 }
                 html += "</ul>";

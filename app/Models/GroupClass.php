@@ -18,7 +18,7 @@ class GroupClass extends Model
 
     protected $dates = ['deleted_at'];
 
-    protected $with = ['range'];
+    protected $with = ['range','coach'];
 
     const ACTIVE = 1;
 

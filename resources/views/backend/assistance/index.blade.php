@@ -72,7 +72,7 @@
                                                 <option value="">Seleccione</option>
                                                 @if (isset($groups))
                                                     @foreach ($groups as $grIdx => $group)
-                                                        <option value="{{ $group->id }}" @if(request()->get('group_id') == $group->id) selected @endif>{{$group->schedule['start'] .' '. $group->schedule['end']}}  {{$group->range ? $group->range->name : '-'}}</option>
+                                                        <option value="{{ $group->id }}" @if(request()->get('group_id') == $group->id) selected @endif> {{$group->coach->username}} - {{$group->range ? $group->range->name : '-'}} - {{$group->schedule['start'] .' '. $group->schedule['end']}}  </option>
                                                     @endforeach
                                                 @endif
                                             </select>
@@ -152,7 +152,7 @@
                                                             <input type="hidden" value="{{$assistance->$commentAssistance}}" class="comment-hidden" name="assistances[{{$key}}][{{$i}}][comment]"/>
                                                             <input type="hidden" value="{{$assistance->$idAssistance}}" name="assistances[{{$key}}][{{$i}}][assistance_id]" id="check-assistance-{{$key}}-{{$i}}" />
                                                             <input class="form-check-input check-assistance" name="assistances[{{$key}}][{{$i}}][value]" type="checkbox" id="{{str_slug($assistance->student_name)}}-{{$i}}"  @if($assistance->$i == 1) checked @endif  @if($assistance->$commentAssistance) title="{{$assistance->$commentAssistance}}" data-toggle="tooltip" @endif/>
-                                                            <a href="#" @if($assistance->$commentAssistance) title="{{$assistance->$commentAssistance}}" data-toggle="tooltip" @endif  data-toggle='modal' data-target='#insertCommentModal' class="show-message @if($assistance->$commentAssistance) visible @else invisible @endif"><i class="i-Speach-Bubble-2"></i></a>
+                                                            <a data-toggle='modal' data-target='#insertCommentModal' class="show-message @if($assistance->$commentAssistance) visible @else invisible @endif"><i class="i-Speach-Bubble-2"></i></a>
                                                         </div>
                                                     </td>
                                                 @endfor

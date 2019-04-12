@@ -20,7 +20,6 @@ jQuery(document).ready(function($) {
 
 
 	$('.check-assistance').on('click', function(event) {
-		debugger;
 		$check = $(event.currentTarget);
 		if (!$check.is(':checked')) {
 			var message = confirm('Está sguro?');
@@ -36,15 +35,17 @@ jQuery(document).ready(function($) {
 		}
 	});
 
-	$("#insertCommentModal").on('show.bs.modal',function(event){
+	$("#insertCommentModal").on('show.bs.modal',function(event){		
 		var $modal = $(event.currentTarget);
 		var showMessageIcon = $(event.relatedTarget);
+		var $check = showMessageIcon.closest('.form-check-inline').find('input[type="checkbox"]');
 		var comment = showMessageIcon.closest('.form-check-inline').find('.comment-hidden').val()
 		if (comment) {
 			$modal.find('input[type=text]').val(comment).attr('autofocus');
 		} else {
 			$modal.find('input[type=text]').val('').attr('autofocus');
 		}
+		$("#insertCommentModal").trigger('pass-check',$check.attr('id'));
 	});
 
 	$("#insertCommentModal").on('pass-check',function(event, param){
@@ -57,7 +58,7 @@ jQuery(document).ready(function($) {
 		var $modal = $(event.currentTarget);
 		var idTargetChecked = $modal.find('#button-target').val();
 		var comment = $modal.find('#comment').val();
-		if (comment) {
+		if (comment && idTargetChecked) {
 			$('#'+idTargetChecked).closest('.form-check-inline').find('.comment-hidden').val(comment);
 			$('#'+idTargetChecked).closest('.form-check-inline').find('.show-message').removeClass('invisible').addClass('visible')
 		}
