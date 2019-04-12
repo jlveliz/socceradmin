@@ -22,9 +22,16 @@ class CoachRepository implements CoachRepositoryInterface
 
 	public function enum($params = null)
 	{
-		$coachs = Coach::all();
+		
+		if ($params) {
+			if (array_key_exists('state', $params)) {
+				$coachs = Coach::where('state',$params['state'])->get();
+			}
+		} else {
+			$coachs = Coach::all();
+		}
 
-		if (!$coachs) {
+		if (!$coachs || !isset($coachs)) {
 			throw new CoachException('No se han encontrado el listado de  coachs',"404");
 		}
 		return $coachs;

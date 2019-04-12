@@ -129,7 +129,7 @@ class FieldController extends Controller
         $aRanges = $this->ageRange->enum();
         $types = $this->ftype->enum();
         $daysOfWeek = days_of_week();
-        $coachs = $this->coach->enum();
+        $coachs = $this->coach->enum(['state' => 1]);
         return view('backend.field.create-edit',compact('field','daysOfWeek','aRanges','types','coachs'));
     }
 
