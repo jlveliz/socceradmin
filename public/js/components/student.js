@@ -44,7 +44,7 @@ $(document).ready(function() {
         let htmlReturn = "";
         data.forEach(element => {
             htmlReturn += "<option value='" + element.id + "'>";
-            htmlReturn += element.name + ' - ' + element.disponibility + ' Cupos Disponibles<span class="text-secondary"><i> - ' + element.day + ' - (' + element.schedule.start + ' - ' + element.schedule.end + ') </i></span> '
+            htmlReturn += element.range.name + ' - ' + element.coach.username + ' - ' + element.disponibility + ' Cupos Disponibles<span class="text-secondary"><i> - ' + element.day + ' - (' + element.schedule.start + ' - ' + element.schedule.end + ') </i></span> '
             htmlReturn += "</option>";
         });
 
@@ -145,9 +145,28 @@ $(document).ready(function() {
 
         var currentElDate = moment($(event.currentTarget).val());
         var currentDate = moment(getFullCurrentDate());
-        var difYear = currentDate.diff(currentElDate,'year')
+        var difYear = currentDate.diff(currentElDate, 'year')
         $('#age').val(difYear);
-        
+
     });
+
+
+    //MULTISELECT
+    if ($(".grupo-class-edit").length > 0) {
+        $(".grupo-class-edit").select2({
+            placeholder: "Seleccione un grupo",
+            allowClear: true,
+            theme: "bootstrap"
+        });
+    }
+
+    if ($(".grupo-class-create").length > 0) {
+        $(".grupo-class-create").select2({
+            placeholder: "Seleccione un grupo",
+            allowClear: true,
+            theme: "bootstrap"
+        });
+    }
+
 
 })

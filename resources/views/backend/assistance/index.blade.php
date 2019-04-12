@@ -72,7 +72,7 @@
                                                 <option value="">Seleccione</option>
                                                 @if (isset($groups))
                                                     @foreach ($groups as $grIdx => $group)
-                                                        <option value="{{ $group->id }}" @if(request()->get('group_id') == $group->id) selected @endif>{{$group->schedule['start'] .' '. $group->schedule['end']}} - {{get_group_names()[$group->name]}} -  {{$group->range ? $group->range->name : '-'}}</option>
+                                                        <option value="{{ $group->id }}" @if(request()->get('group_id') == $group->id) selected @endif>{{$group->schedule['start'] .' '. $group->schedule['end']}}  {{$group->range ? $group->range->name : '-'}}</option>
                                                     @endforeach
                                                 @endif
                                             </select>
@@ -146,10 +146,13 @@
                                                 <td>{{ $assistance->is_delivered_uniform == '1' ? 'Si' : 'No' }}</td>
                                                 @for ($i = 0; $i < count($assistances['dates']); $i++)
                                                     @php $idAssistance = 'id_'.$i; @endphp
+                                                    @php $commentAssistance = 'comment_'.$i; @endphp
                                                     <td class="text-center">
                                                         <div class="form-check form-check-inline">
-                                                            <input type="hidden" value="{{$assistance->$idAssistance}}" name="assistances[{{$i}}][assistance_id]"/>
-                                                            <input class="form-check-input"  name="assistances[{{$i}}][value]"  type="checkbox" id="{{$assistance->student_name}}_{{$i}}"  @if($assistance->$i == 1) checked @endif {{-- @if($assistances['dates'][$i]->format('Y-m-d') < date('Y-m-d'))) disabled @endif --}}/>
+                                                            <input type="hidden" value="{{$assistance->$commentAssistance}}" class="comment-hidden" name="assistances[{{$key}}][{{$i}}][comment]"/>
+                                                            <input type="hidden" value="{{$assistance->$idAssistance}}" name="assistances[{{$key}}][{{$i}}][assistance_id]" id="check-assistance-{{$key}}-{{$i}}" />
+                                                            <input class="form-check-input check-assistance" name="assistances[{{$key}}][{{$i}}][value]" type="checkbox" id="{{str_slug($assistance->student_name)}}-{{$i}}"  @if($assistance->$i == 1) checked @endif  @if($assistance->$commentAssistance) title="{{$assistance->$commentAssistance}}" data-toggle="tooltip" @endif/>
+                                                            <a href="#" @if($assistance->$commentAssistance) title="{{$assistance->$commentAssistance}}" data-toggle="tooltip" @endif  data-toggle='modal' data-target='#insertCommentModal' class="show-message @if($assistance->$commentAssistance) visible @else invisible @endif"><i class="i-Speach-Bubble-2"></i></a>
                                                         </div>
                                                     </td>
                                                 @endfor
@@ -181,6 +184,8 @@
     </div>
 
 </div>
+
+@include('backend.assistance.includes.insert-comment')
 @endsection
 
 @section('js')

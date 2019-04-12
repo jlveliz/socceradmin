@@ -170,6 +170,8 @@
 
 
   {{-- common js --}}
+  <script src="{{ asset('js/bootstrap/js/popper.min.js') }}" type="text/javascript"></script>
+
   <script src="{{asset('assets/js/common-bundle-script.js')}}" type="text/javascript"></script>
     {{-- page specific javascript --}}
     

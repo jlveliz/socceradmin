@@ -89,7 +89,7 @@
 										<div class="col-lg-3 col-4">
 											<div class="form-group">
 												<label for="genre">Género </label>
-												<select type="text" name="genre" id="genre" class="form-control form-control-sm {{ $errors->has('genre') ? ' is-invalid' : '' }}">
+												<select type="text" name="genre" id="genre" class="form-control form-control-sm {{ $errors->has('genre') ? ' is-invalid' : '' }}" data-placeholder="Seleccione Grupos">
 													<option value="m" @if( (isset($student) && $student->person->genre == 'm') || old('genre') == 'm' ) selected @endif>Masculino</option>
 													<option value="f" @if( (isset($student) && $student->person->genre == 'f') || old('genre') == 'f' ) selected @endif>Femenino</option>
 												</select>
@@ -102,7 +102,7 @@
 										<div class="col-lg-3 col-4">
 											<div class="form-group">
 												<label for="state">Estado <span class="text-danger">*</span></label>
-												<select type="text" name="state" id="state" class="form-control form-control-sm {{ $errors->has('state') ? ' is-invalid' : '' }}">
+												<select type="text" name="state" id="state" class="form-control form-control-sm {{ $errors->has('state') ? ' is-invalid' : '' }}" data-placeholder="Seleccione Grupos">
 													<option value="1" @if( (isset($student) && $student->state == '1') || old('state') == '1' ) selected @endif>Activo</option>
 													<option value="0" @if( (isset($student) && $student->state == '0') || old('state') == '0' ) selected @endif>Inactivo</option>
 												</select>
@@ -304,7 +304,7 @@
 								@if(isset($student)) 
 									<select @if ( $student->currentEnrollment()->class_type > 0) multiple @endif name="enrollment[groups][]" id="grupo-class" class="form-control form-control-sm grupo-class-edit {{ $errors->has('enrollment.groups') ? ' is-invalid' : '' }}">
 										@foreach ($student->currentEnrollment()->field->groups as $group)
-										<option value="{{$group->id}}" @if($student->currentEnrollment()->existGroupOnEnrollment($group->id)) selected @endif>{{$group->range->name}} - {{$group->disponibility}} Cupos Disponibles - {{days_of_week()[$group->day]}} - ({{$group->schedule['start']}} -  {{$group->schedule['end']}})</option>
+										<option value="{{$group->id}}" @if($student->currentEnrollment()->existGroupOnEnrollment($group->id)) selected @endif>{{$group->range->name}}- {{$group->coach->username}} - {{$group->disponibility}} Cupos Disponibles - {{days_of_week()[$group->day]}} - ({{$group->schedule['start']}} -  {{$group->schedule['end']}})</option>
 										@endforeach 
 									</select>
 									<input type="hidden" name="is_changing_group" id="is-changing-group" value="0">
@@ -344,8 +344,6 @@
 									<div class="invalid-feedback animated fadeInDown">{{ $errors->first('enrollment.is_delivered_uniform') }}</div>
 								@endif
 							</div>
-							
-						
 					</div>
 				</div>
 			</div>
@@ -363,7 +361,14 @@
 	</div>
 @endsection
 
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/select2/select2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/select2/select2-bootstrap4.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/select2/select2-bootstrap.min.css') }}">
+@endsection
+
 @section('js')
+<script type="text/javascript" src="{{asset('js/select2/select2.full.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/moment/moment.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/components/student.js')}}"></script>
 @endsection()

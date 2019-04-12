@@ -18,6 +18,8 @@ class GroupClass extends Model
 
     protected $dates = ['deleted_at'];
 
+    protected $with = ['range'];
+
     const ACTIVE = 1;
 
     const INACTIVE = 0;
@@ -38,6 +40,11 @@ class GroupClass extends Model
     public function students()
     {
         return $this->belongsToMany('HappyFeet\Models\Student','group_class_student','group_id','student_id');
+    }
+
+    public function coach()
+    {
+        return $this->belongsTo('HappyFeet\Models\User','coach_id');
     }
 
     public function range()

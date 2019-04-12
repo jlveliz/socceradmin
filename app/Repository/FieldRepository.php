@@ -99,9 +99,11 @@ class FieldRepository implements FieldRepositoryInterface
 											$grModel = GroupClass::find($groupData['id']);
 										} else {
 											//add disponibility 
-											$groupData['disponibility'] = $groupData['maximum_capacity'];
 											$grModel = new GroupClass();
 										}
+										
+										
+										$groupData['disponibility'] = $groupData['maximum_capacity'];
 										
 										
 										$grModel->fill($groupData);

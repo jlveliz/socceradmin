@@ -34,9 +34,10 @@ class AssistanceRequest extends FormRequest
             return $rules;
         }
 
-
-        foreach ($this->get('assistances') as $key => $assistance) {
-            $rules['assistances.'.$key.'.id'] = 'exists:assistance';
+        foreach ($this->get('assistances') as $key => $assistanceUser) {
+            foreach ($assistanceUser as $keyAssas => $assistance) {
+                $rules['assistances.'.$keyAssas.'.assistance_id'] = 'exists:assistance';
+            }
         }
 
         return $rules;
@@ -56,10 +57,12 @@ class AssistanceRequest extends FormRequest
             return $messages;
         }
 
-        foreach ($this->get('assistances') as $key => $assistance) {
-            $messages['assistances.'.$key.'.id.exists'] = 'Fecha de Asistencia mal ingresada';
+        foreach ($this->get('assistances') as $key => $assistanceUser) {
+            foreach ($assistanceUser as $keyAssas => $assistance) {
+                $messages['assistances.'.$keyAssas.'.assistance_id.exists'] = 'La Asistencia no existe';
+            }
         }
-
+       
         return $messages;
     }
 }
