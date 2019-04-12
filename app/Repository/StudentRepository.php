@@ -119,7 +119,7 @@ class StudentRepository implements StudentRepositoryInterface
 					//save groups
 					if ($student->state == Student::ACTIVE) {
 						foreach ($dataEnrollment['groups'] as $key => $gr) {
-							$enrGroup = new EnrollmentGroup(['group_id' => $gr,'state' => Enrollment::ACTIVE]);
+							$enrGroup = new EnrollmentGroup(['group_id' => $gr]);
 							$enrollment->groups()->save($enrGroup);
 						}
 					
@@ -230,7 +230,7 @@ class StudentRepository implements StudentRepositoryInterface
 					}
 					
 					
-					event(new DeleteEnrollmentGroup($newGroups, $oldGroups, $enrollment->id, $data['state']));
+					event(new DeleteEnrollmentGroup($newGroups, $oldGroups, $enrollment->id));
 					$updateGroupClass = true;
 				}
 				$enrollment->fill($dataEnrollment);

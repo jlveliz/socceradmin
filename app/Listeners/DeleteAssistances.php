@@ -79,7 +79,7 @@ class DeleteAssistances
 
             if (count($grToInsert) > 0) {
                 foreach ($grToInsert as $key => $grinsert) {
-                    $enrGroup = new EnrollmentGroup(['group_id' => $grinsert,'enrollment_id'=> $idEnrollment,'state' => 1]);
+                    $enrGroup = new EnrollmentGroup(['group_id' => $grinsert,'enrollment_id'=> $idEnrollment]);
                     if(!$enrGroup->save()){
                         throw new EnrollmentGroupException("No se pudo crear el grupo de la matricula", 500);
                     }
@@ -91,7 +91,7 @@ class DeleteAssistances
                 foreach ($grToUpdate as $key => $grUpdate) {
 
                     $enrGr = EnrollmentGroup::where('enrollment_id',$idEnrollment)->where('group_id',$grUpdate)->first();
-                   $enrGr->state = $stateStudent == 0 ? 0 : 1;
+                    // $enrGr->state = $stateStudent == 0 ? 0 : 1;
                     if(!$enrGr->update()) {
                         throw new EnrollmentGroupException("No se pudo actualizar el grupo de la matricula", 500);
                     }
