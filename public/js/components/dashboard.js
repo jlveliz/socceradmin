@@ -136,39 +136,41 @@ $(document).ready(function() {
         if (days.length) {
 
             for (var i = 0; i < days.length; i++) {
-                var active = null;
+                var active = '';
                 if (i == 0) active = "show active";
                 html += "<div class='tab-pane fade " + active + "' id='" + days[i].day + "' role='tabpanel' aria-labelledby='" + days[i].day + "-tab'>";
                 html += "<ul class='nav nav-tabs customtab mb-2'>";
                 for (var x = 0; x < days[i].groups.length; x++) {
-                    var activeLi = x == 0 ? "active" : null;
+                    var activeLi = x == 0 ? "active" : '';
                     var selected = activeLi ? true : false
                     html += "<li class='nav-item'>";
-                    html += "<a class='nav-link p-2 " + activeLi + "' id='" + i + '-' + x + "-" + days[i].day + "-" + x + "-tab' aria-selected='" + selected + "' data-toggle='tab' href='#" + i + '-' + x + "-" + days[i].day + "-" + x + "' role='tab' aria-controls='" + i + '-' + x + "-" + days[i].day + "-" + x + "'>" + days[i].groups[x].coach.username+ ' - ' + days[i].groups[x].range.name + '(' + days[i].groups[x].schedule.start + '-' + days[i].groups[x].schedule.end + ")</a>";
+                    html += "<a class='nav-link p-2 " + activeLi + "' id='" + i + '-' + x + "-" + days[i].day + "-" + x + "-tab' aria-selected='" + selected + "' data-toggle='tab' href='#" + i + '-' + x + "-" + days[i].day + "-" + x + "' role='tab' aria-controls='" + i + '-' + x + "-" + days[i].day + "-" + x + "'>" + days[i].groups[x].coach.username + ' - ' + days[i].groups[x].range.name + '(' + days[i].groups[x].schedule.start + '-' + days[i].groups[x].schedule.end + ")</a>";
                     html += "</li>";
                 }
                 html += "</ul>";
 
                 //tabs content
                 html += "<div class='tab-content pt-0'>";
+
                 for (var x = 0; x < days[i].groups.length; x++) {
-                    if(x == 0)  var activeTab = "show active";
+                    var activeTab = '';
+                    if (x == 0) activeTab = "active show";
                     html += "<div class='tab-pane fade " + activeTab + " tab-pane-group' id='" + i + '-' + x + "-" + days[i].day + "-" + x + "' role='tabpanel' aria-labelledby='" + i + '-' + x + "-" + days[i].day + "-" + x + "-tab' data-group='" + JSON.stringify({ field: days[i].groups[x].field_id, group_id: days[i].groups[x].id, key_day: days[i].groups[x].day }) + "'>";
-                    html += "<div class='row'>";
-                    html += "<div class='col-lg-2 col-6 px-0'>";
-                    html += "<div class='form-group'>";
-                    html += "<label for='month'>Mes</label>";
-                    html += "<select class='month form-control'>";
-                    html += "</select>";
-                    html += "</div>";
-                    html += "</div>";
-                    html += "<div class='col-lg-2 col-6 mt-1 pt-4'>";
-                    html += "<div class='form-group'>";
-                    html += "<button class='reload-group-schedule btn btn-secondary btn-sm'><i class='i-Refresh'></i></button>";
-                    html += "</div>";
-                    html += "</div>";
-                    html += "</div>";
-                    html += "<div class='show-table'></div>";
+                        html += "<div class='row'>";
+                            html += "<div class='col-lg-2 col-6 px-0'>";
+                                html += "<div class='form-group'>";
+                                    html += "<label for='month'>Mes</label>";
+                                    html += "<select class='month form-control'>";
+                                    html += "</select>";
+                                html += "</div>";
+                            html += "</div>";
+                            html += "<div class='col-lg-2 col-6 mt-1 pt-4'>";
+                                html += "<div class='form-group'>";
+                                    html += "<button class='reload-group-schedule btn btn-secondary btn-sm'><i class='i-Refresh'></i></button>";
+                                html += "</div>";
+                            html += "</div>";
+                        html += "</div>";
+                        html += "<div class='show-table'></div>";
                     html += "</div>";
                 }
                 html += "</div>";
@@ -284,6 +286,13 @@ $(document).ready(function() {
 
 
 
+
+    $("#mytabassistance").on('click','ul.nav-tabs a',function(e) {
+        e.preventDefault();
+        var idElementShow = $(this).attr('href');
+        $(idElementShow).closest('.tab-content').find('.tab-pane').removeClass('fade active show');
+        $(idElementShow).addClass('fade active show')
+    })
 
 
 });
