@@ -63,6 +63,17 @@
 
 	//LAYOUTS
 
+	//Frontend
+	Route::prefix('frontend')->group(function(){
+		Route::get('register','Frontend\RegisterController@showRegisterForm')->name('register-user');
+	});
+
+
+
+	
+
+
+	//Backend
 	Auth::routes();
 
 	Route::get('/','Backend\DashboardController@showDash')->name('home');

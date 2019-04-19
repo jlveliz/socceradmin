@@ -1,6 +1,6 @@
 <?php
 
-namespace HappyFeet\Http\Controllers\Frontend\Auth;
+namespace HappyFeet\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
 use HappyFeet\Http\Controllers\Controller;
@@ -24,7 +24,7 @@ class RegisterController extends Controller
 
     public function showRegisterForm()
     {
-    	return view('frontend.auth.insert-identification');
+    	return view('frontend.auth.register');
     }
 
     public function verifyForm(Request $request)
