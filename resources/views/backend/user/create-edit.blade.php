@@ -7,7 +7,7 @@
 
 @section('content')
 
-<ul class="nav nav-tabs customtab mb-2">
+<ul class="nav nav-tabs customtab">
     <li class="nav-item">
         <a class="nav-link active" id="field-tab" data-toggle="tab" href="#users" role="tab" aria-controls="user" aria-selected="true">Usuarios</a>
     </li>

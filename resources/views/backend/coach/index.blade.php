@@ -15,7 +15,7 @@
 
 @section('content')
 
-<ul class="nav nav-tabs customtab mb-2">
+<ul class="nav nav-tabs customtab">
     <li class="nav-item">
         <a class="nav-link active" id="field-tab" data-toggle="tab" href="#coachs" role="tab" aria-controls="coach" aria-selected="true">Coachs</a>
     </li>

@@ -11,7 +11,7 @@
 <div class="row">
     <div class="col-12">
 		
-		<ul class="nav nav-tabs customtab mb-2">
+		<ul class="nav nav-tabs customtab">
             <li class="nav-item">
                 <a class="nav-link" id="field-tab" href="{{route('fields.index')}}">Canchas</a>
             </li>

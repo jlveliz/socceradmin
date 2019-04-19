@@ -14,13 +14,17 @@
 @endsection
 
 @section('content')
-<ul class="nav nav-tabs customtab mb-2">
+<ul class="nav nav-tabs customtab">
     <li class="nav-item">
         <a class="nav-link" id="field-tab" href="{{route('fields.index')}}">Canchas</a>
     </li>
     
     <li class="nav-item">
         <a class="nav-link active"  id="range-age-tab"  data-toggle="tab" href="#ageranges" role="tab" aria-controls="ageranges" aria-selected="true"> Tipos de Cancha</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" id="range-age-tab"  href="{{route('ageranges.index')}}">Rango de Edades</a>
     </li>
 
 </ul>

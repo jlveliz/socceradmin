@@ -14,7 +14,7 @@
 @endsection
 
 @section('content')
-<ul class="nav nav-tabs customtab mb-2">
+<ul class="nav nav-tabs customtab">
     <li class="nav-item">
         <a class="nav-link" id="users-tab"  href="{{route('users.index')}}">Usuarios</a>
     </li>
