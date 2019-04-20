@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{ asset('css/base-front.css') }}">
     <link rel="stylesheet" href="{{ asset('css/font-awesome/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/frontend.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/frontend-animation.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/post-9.css') }}">
     <script type="text/javascript">
             window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/sur.happyfeetsoccer.com.ec\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.10"}};
@@ -60,15 +61,15 @@ button[type='submit'] {
     background-color: #1578bc!important;
     color: #ffffff!important;
     font-family: "Roboto Condensed", Sans-serif!important;
-    font-size: 20px!important;
-    font-weight: 400!important;
+    font-size: 16px!important;
+    font-weight: bold!important;
     text-transform: uppercase!important;
     line-height: 26px!important;
     border-radius: 50px 50px 50px 50px!important;
 }
 
 button[type='submit']:hover {
-    background-color: #199447;
+    background-color: #199447!important;
 }
 </style>
 </head>
