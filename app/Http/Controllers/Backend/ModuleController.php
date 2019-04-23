@@ -73,12 +73,12 @@ class ModuleController extends Controller
                 return redirect()->route('modules.edit',['id'=>$module->id])->with($message);
             }
         } catch (ModuleException $e) {
-             DB::rollback();
+            DB::rollback();
             $message['type'] = "error";
             $message['content'] = $e->getMessage();
             return back()->with($message);
         }catch (Exception $e) {
-             DB::rollback();
+            DB::rollback();
             $message['type'] = "error";
             $message['content'] = $e->getMessage();
             return back()->with($message);

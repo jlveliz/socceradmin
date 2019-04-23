@@ -104,56 +104,77 @@ class AgeRangeRepository implements AgeRangeRepositoryInterface
 	}
 
 
-	public function loadMenu($userId)
-	{
-		$query  = AgeRange::select('AgeRange.*')->with(['permissions'=>function($query) use($userId){
-						$query->selectRaw('distinct permission.*')
-						->leftJoin('permission_role as rPer','rPer.permission_id','=','permission.id')
-						->leftJoin('user_role as rolU','rolU.role_id','=','rPer.role_id')
-						->leftJoin('user as usr','usr.id','=','rolU.user_id')
-						->whereRaw('usr.id = "'.$userId.'" and permission.type_id = (select id from permission_type where permission_type.code = "menu" and permission.parent_id is null)')
-						->orderBy('permission.order')
-						->with(['children'=>function($query) use($userId){
-							$query->select('permission.*')
-							->leftJoin('permission_role as rPer','rPer.permission_id','=','permission.id')
-							->leftJoin('user_role as rolU','rolU.role_id','=','rPer.role_id')
-							->leftJoin('user as usr','usr.id','=','rolU.user_id')
-							->whereRaw('usr.id = "'.$userId.'" and permission.type_id = (select id from permission_type where permission_type.code = "menu")')
-							->orderBy('permission.order')
-							->get();
-						}])
-						->get();
-					}])
-					->leftJoin('permission as parent','parent.AgeRange_id','=','AgeRange.id')
-					->leftJoin('permission as child','child.parent_id','=','parent.id')
-					->whereRaw("AgeRange.state=1 and AgeRange.id in (SELECT per.AgeRange_id FROM permission per left JOIN permission_role rPer ON rPer.permission_id = per.id left join user_role rolU on rolU.role_id = rPer.role_id left join user on `user`.id = rolU.user_id where user.id = ".$userId.") and parent.type_id = (select id from permission_type where code = 'menu')")
-					->groupBy('AgeRange.name')
-					->orderBy('AgeRange.order')
-					->orderBy('parent.order')
-					->get();
-		return $query;
-	}
+	// public function loadMenu($userId)
+	// {
+	// 	$query  = AgeRange::select('AgeRange.*')->with(['permissions'=>function($query) use($userId){
+	// 					$query->selectRaw('distinct permission.*')
+	// 					->leftJoin('permission_role as rPer','rPer.permission_id','=','permission.id')
+	// 					->leftJoin('user_role as rolU','rolU.role_id','=','rPer.role_id')
+	// 					->leftJoin('user as usr','usr.id','=','rolU.user_id')
+	// 					->whereRaw('usr.id = "'.$userId.'" and permission.type_id = (select id from permission_type where permission_type.code = "menu" and permission.parent_id is null)')
+	// 					->orderBy('permission.order')
+	// 					->with(['children'=>function($query) use($userId){
+	// 						$query->select('permission.*')
+	// 						->leftJoin('permission_role as rPer','rPer.permission_id','=','permission.id')
+	// 						->leftJoin('user_role as rolU','rolU.role_id','=','rPer.role_id')
+	// 						->leftJoin('user as usr','usr.id','=','rolU.user_id')
+	// 						->whereRaw('usr.id = "'.$userId.'" and permission.type_id = (select id from permission_type where permission_type.code = "menu")')
+	// 						->orderBy('permission.order')
+	// 						->get();
+	// 					}])
+	// 					->get();
+	// 				}])
+	// 				->leftJoin('permission as parent','parent.AgeRange_id','=','AgeRange.id')
+	// 				->leftJoin('permission as child','child.parent_id','=','parent.id')
+	// 				->whereRaw("AgeRange.state=1 and AgeRange.id in (SELECT per.AgeRange_id FROM permission per left JOIN permission_role rPer ON rPer.permission_id = per.id left join user_role rolU on rolU.role_id = rPer.role_id left join user on `user`.id = rolU.user_id where user.id = ".$userId.") and parent.type_id = (select id from permission_type where code = 'menu')")
+	// 				->groupBy('AgeRange.name')
+	// 				->orderBy('AgeRange.order')
+	// 				->orderBy('parent.order')
+	// 				->get();
+	// 	return $query;
+	// }
 
 
-	public function loadAdminMenu()
+	// public function loadAdminMenu()
+	// {
+	// 	$query = AgeRange::select('AgeRange.*')->with(['permissions'=>function($query){
+	// 		$query->selectRaw('distinct permission.* ')
+	// 		->whereRaw('permission.type_id = (select id from permission_type where permission_type.code = "menu")')
+	// 		->whereNull('permission.parent_id')
+	// 		->with(['children'=>function($query){
+	// 			$query->select('permission.*')
+	// 			->whereRaw('permission.type_id = (select id from permission_type where permission_type.code = "menu")')
+	// 			->orderBy('permission.order')
+	// 			->get();
+	// 		}])->orderBy('permission.order')->get();
+	// 	}])
+	// 	->whereRaw('AgeRange.state=1 ')
+	// 	->leftJoin('permission as parent','parent.AgeRange_id','=','AgeRange.id')
+	// 	->groupBy('AgeRange.name')
+	// 	->orderBy('AgeRange.order')
+	// 	->orderBy('parent.order')
+	// 	->get();
+	// 	return $query;
+	// }
+
+	public function getRangeSecuence()
 	{
-		$query = AgeRange::select('AgeRange.*')->with(['permissions'=>function($query){
-			$query->selectRaw('distinct permission.* ')
-			->whereRaw('permission.type_id = (select id from permission_type where permission_type.code = "menu")')
-			->whereNull('permission.parent_id')
-			->with(['children'=>function($query){
-				$query->select('permission.*')
-				->whereRaw('permission.type_id = (select id from permission_type where permission_type.code = "menu")')
-				->orderBy('permission.order')
-				->get();
-			}])->orderBy('permission.order')->get();
-		}])
-		->whereRaw('AgeRange.state=1 ')
-		->leftJoin('permission as parent','parent.AgeRange_id','=','AgeRange.id')
-		->groupBy('AgeRange.name')
-		->orderBy('AgeRange.order')
-		->orderBy('parent.order')
-		->get();
-		return $query;
+		$rangeAges = AgeRange::selectRaw(" min(min_age) min_age, max(max_age) max_age  ")->first();
+
+		$ages  = [];
+		
+		for ($i= $rangeAges->min_age; $i <= $rangeAges->max_age; $i++) { 
+			$ages[$i] = $i;	
+		}
+
+		if (count($ages) == 0) {
+			throw new AgeRangeException('No se ha podido cargar el rango de edades',500);
+		}
+
+		if (!$rangeAges) {
+			throw new AgeRangeException('No existen rangos de edades disponibles',500);
+		}
+		return $ages;
+		
 	}
 }

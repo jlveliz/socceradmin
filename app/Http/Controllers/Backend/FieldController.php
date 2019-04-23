@@ -26,7 +26,7 @@ class FieldController extends Controller
 
     function __construct(FieldRepositoryInterface $field, AgeRangeRepositoryInterface $ageRange, FieldTypeRepositoryInterface $ftype, CoachRepositoryInterface $coach)
     {
-        $this->middleware('auth');
+        $this->middleware('auth',['except' => 'getSchedule']);
         $this->field = $field;
         $this->ageRange = $ageRange;
         $this->ftype = $ftype;
