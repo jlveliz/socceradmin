@@ -125,7 +125,6 @@ class FieldController extends Controller
     {
         
         $field = $this->field->find($id);
-        // dd($field->groups[0]->schedule);
         $aRanges = $this->ageRange->enum();
         $types = $this->ftype->enum();
         $daysOfWeek = days_of_week();

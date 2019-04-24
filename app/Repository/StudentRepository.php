@@ -57,7 +57,7 @@ class StudentRepository implements StudentRepositoryInterface
 		$dataRepresentant = $data['representant'];
 		
 		$existPersonRepresentant = false;
-		if (($dataRepresentant['user_id'] != null) && ($dataRepresentant['person_id'] != null ) ) {
+		if ( (isset($dataRepresentant['user_id'])) && ($dataRepresentant['user_id'] != null) && ($dataRepresentant['person_id'] != null ) ) {
 			$personRepresentant = Person::find($dataRepresentant['person_id']);
 			$existPersonRepresentant = true;
 		} else {

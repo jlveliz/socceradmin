@@ -187,4 +187,37 @@ class GroupClassController extends Controller
             return back()->with($message);
         }
     }
+
+
+
+    /**
+     * 
+     */
+
+    public function getAvailableDayField($fieldId, Request $request)
+    {
+        try {
+            if ($request->ajax()) {
+                $days = $this->groupClass->getAvailableDayByField($fieldId);
+                return response($days,200);
+            }
+        } catch (GroupClassException $e) {
+            $message['type'] = "error";
+            $message['content'] = $e->getMessage();
+            return response($message,$e->getCode());
+        }
+    }
+
+
+    public function getAvailableHourDay($fieldId ,Request $request)
+    {
+        try {
+            if ($request->ajax()) {
+                $days = $this->groupClass->getAvailableHourDay($request->get('day'), $fieldId);
+                return response($days,200);
+            }
+        } catch (GroupClassException $e) {
+            
+        }
+    }
 }

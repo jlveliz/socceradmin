@@ -150,4 +150,35 @@ class GroupClassRepository implements GroupClassRepositoryInterface
 		}
 		return $group;
 	}
+
+
+	public function getAvailableDayByField($fieldId)
+	{
+		$days = GroupClass::selectRaw(" distinct day ")->where("state",GroupClass::ACTIVE)->where('disponibility','>',0)->where('field_id',$fieldId)->get();
+		if (count($days) > 0) {
+			return $days;
+		}
+
+		throw new GroupClassException("Ha ocurrido un error al encontrar los días", 500);
+		
+	}
+
+
+	public function getAvailableHourDay($keyDay, $fieldId)
+	{
+		$hours = GroupClass::selectRaw(" distinct schedule ")->where("state",GroupClass::ACTIVE)->where('disponibility','>',0)->where('field_id',$fieldId)->where('day',$keyDay)->get();
+		
+		if (count($hours) > 0) {
+			$startHours = [];
+			foreach ($hours as $key => $value) {
+				if (count($startHours) == 0 || !array_key_exists($value->schedule['start'], $startHours))  {	
+					$startHours[$value->schedule['start']]  = $value->schedule['start'];
+				}
+			}
+
+			return $startHours;
+		}
+
+		throw new GroupClassException("Ha ocurrido un error al encontrar las horas disponibles", 500);
+	}
 }
