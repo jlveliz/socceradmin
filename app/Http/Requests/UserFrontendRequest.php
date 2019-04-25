@@ -30,7 +30,7 @@ class UserFrontendRequest extends FormRequest
             'representant' =>'required',
             'representant.name' => 'required',
             'representant.last_name' => 'required',
-            'representant.email' => 'required|unique:user,email',
+            'representant.email' => 'required',
             'representant.mobile' => 'required',
             'enrollment' => 'required',
             'enrollment.field_id' => 'required|exists:field,id',

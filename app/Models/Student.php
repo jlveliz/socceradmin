@@ -52,14 +52,6 @@ class Student extends Model
        return $this->enrollments()->where('state',self::ACTIVE)->first();
     }
 
-    
-
-    
-
-
-
-    
-
     public static function boot() {
         parent::boot();
         static::creating(function($student){

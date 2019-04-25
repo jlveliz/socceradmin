@@ -70,4 +70,30 @@ class GroupClass extends Model
     public function getScheduleAttribute($data) {
         return  unserialize( $this->attributes['schedule'] );
     }
+
+
+    /**
+     * Busca un grupo disponible basandose en su cancha, día, hora, disponibilidad
+     * rango de edad y hora
+     * 
+     */
+    public function getAvailableGroupByParams($params)
+    {
+        $fieldId = $params['field_id'];
+        $day = $params['day'];
+        $hour = $params['hour'];
+        $age = $params['age'];
+
+        $queryLike = '%"start";s:5:"'.$hour.'"%';
+
+        $group = $this->select('id')
+                ->whereRaw(" field_id = ".$fieldId." and day = '".$day."' and state = ".self::ACTIVE." and disponibility > 0 and schedule like '".$queryLike."' and range_age_id IN ( SELECT age_range.id FROM age_range WHERE ".$age."  >= age_range.min_age  AND ".$age." <= age_range.max_age AND deleted_at IS NULL ) ")
+                ->orderBy('id')
+                ->take(1)
+                ->first();
+        if (!$group) {
+            return false;
+        }
+        return $group->id;
+    }
 }

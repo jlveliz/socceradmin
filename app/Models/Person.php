@@ -91,6 +91,24 @@ class Person extends Model
         return $this->hasOne('HappyFeet\Models\User','person_id');
     }
 
+
+    public function hasStudents()
+    {
+        $students = Student::where('representant_id',$this->id)->first();
+
+        if (!$students) {
+            return false;
+        }
+
+        return true;
+    }
+
+
+    public function getStudents()
+    {
+        return Student::where('representant_id',$this->id)->get();
+    }
+
     
 
 

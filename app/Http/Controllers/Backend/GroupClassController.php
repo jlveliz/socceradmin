@@ -24,7 +24,7 @@ class GroupClassController extends Controller
 
     function __construct(GroupClassRepositoryInterface $groupClass, FieldRepositoryInterface $field, AgeRangeRepositoryInterface $ageRange)
     {
-        $this->middleware('auth');
+        $this->middleware('auth',['except' => ['getAvailableDayField','getAvailableHourDay']]);
         $this->groupClass = $groupClass;
         $this->field = $field;
         $this->ageRange = $ageRange;
@@ -204,7 +204,7 @@ class GroupClassController extends Controller
         } catch (GroupClassException $e) {
             $message['type'] = "error";
             $message['content'] = $e->getMessage();
-            return response($message,$e->getCode());
+            return response()->json($days,$e->getCode());
         }
     }
 
@@ -214,7 +214,7 @@ class GroupClassController extends Controller
         try {
             if ($request->ajax()) {
                 $days = $this->groupClass->getAvailableHourDay($request->get('day'), $fieldId);
-                return response($days,200);
+                return response()->json($days,200);
             }
         } catch (GroupClassException $e) {
             

@@ -5,12 +5,14 @@ use HappyFeet\RepositoryInterface\StudentRepositoryInterface;
 use HappyFeet\Events\DeleteEnrollmentGroup;
 use HappyFeet\Exceptions\StudentException;
 use HappyFeet\Models\EnrollmentGroup;
-use HappyFeet\Models\Student;
-use HappyFeet\Models\Person;
+use HappyFeet\Models\Enrollment;
 use HappyFeet\Models\PersonType;
+use HappyFeet\Models\GroupClass;
+use HappyFeet\Models\Student;
+use HappyFeet\Models\Season;
+use HappyFeet\Models\Person;
 use HappyFeet\Models\Role;
 use HappyFeet\Models\User;
-use HappyFeet\Models\Enrollment;
 use DB;
 
 /**
@@ -307,5 +309,119 @@ class StudentRepository implements StudentRepositoryInterface
 		
 		return $total;
 
+    }
+
+
+    public function insertFromRegisterForm($data)
+    {
+    	
+    	//Roles from table 
+    	$repreRole = Role::select('id')->where('code','representant')->orWhere('code','representante')->first();
+
+    	if (!$repreRole) {
+    		throw new StudentException("No se encontró el rol de representante", 404);
+    	}
+
+    	$dataRepresentant = $data['representant'];
+    	$dataRepresentant['person_type_id'] = $this->getPersonType();
+
+    	$userRepresentant = User::where('email',$dataRepresentant['email'])->first();
+
+    	//si existe usuario representante con ese correo
+    	if ($userRepresentant) {
+
+    		//si el usuario tiene rol de representante
+    		$hasRoleRep = $userRepresentant->hasRole($repreRole->id);
+    		if (!$hasRoleRep) {
+    			//si no tiene el rol de representante
+    			$userRepresentant->roles()->attach($repreRole->id);
+    		}
+			$personRepresentant = $userRepresentant->person;
+			$personRepresentant->fill($dataRepresentant)->update();
+			$userRepresentant->fill($dataRepresentant)->update();
+    	} else {
+    		
+    		$personRepresentant = new Person();
+    		$personRepresentant->fill($dataRepresentant);
+    		$savedPersonRepresentant = $personRepresentant->save();
+    		
+    		if(!$savedPersonRepresentant) {
+				throw new StudentException('Ha ocurrido un error al guardar el estudiante '.$data['name'],"500");
+			}
+
+    		$idPerson = $personRepresentant->getKey();
+    		$userRepresentant = new User();
+    		$dataRepresentant['person_id'] = $idPerson;
+			$dataRepresentant['password'] = (new User())->generateGenericPass();
+			//save user representant
+			$userRepresentant->fill($dataRepresentant);
+
+			$savedUserRepresentant = $userRepresentant->save();
+
+			if(!$savedUserRepresentant) {
+				throw new StudentException('Ha ocurrido un error al guardar el estudiante '.$data['name'],"500");
+			}
+
+			$userRepresentant->roles()->attach($repreRole->id);
+
+			$userRepresentant = $userRepresentant;
+
+    	}
+
+
+    	if($personRepresentant->hasStudents()) {
+    		$students = $personRepresentant->getStudents();
+
+    		dd($students);
+    		
+    	} else {
+
+    		$personStudent = new Person();
+			$data['person_type_id'] = $this->getPersonType();
+			$personStudent->fill($data);
+
+			if ($personStudent->save()) {
+				$personId = $personStudent->getKey();
+				$student = new Student();
+				$data['person_id'] = $personId;
+				$data['representant_id'] = $personRepresentant->getKey();
+				$student->fill($data);
+				if ($saved = $student->save()) {
+
+					$dataEnrollment = $data['enrollment'];
+					$dataEnrollment['season_id'] = (new Season())->getSeasonActive()->id;
+					$dataEnrollment['student_id'] = $student->getKey();
+					$dataEnrollment['state'] = Enrollment::ACTIVE;
+					$dataEnrollment['class_type'] = Enrollment::FREE;
+					$enrollment = new Enrollment();
+					$enrollment->fill($dataEnrollment);
+
+					if ($saveEnrollment = $enrollment->save()) {
+						$dataEnrollment['enrollment_id'] = $enrollment->getKey();
+						$dataEnrollment['age'] = $student->person->age;
+
+						$groupIdToInsert = (new GroupClass())->getAvailableGroupByParams($dataEnrollment);
+						if (!$groupIdToInsert) {
+							throw new StudentException('Ha ocurrido un error al guardar el estudiante '.$data['name'],"500");
+						}
+
+						$enrGroup = new EnrollmentGroup(['group_id' => $groupIdToInsert]);
+						$enrollment->groups()->save($enrGroup);
+
+						$dataEnrollment['groups'] = [];
+						$dataEnrollment['groups'][] = $groupIdToInsert;
+						$enrollment->insertCapacitiesGroups($dataEnrollment['groups']);
+
+						
+					}
+				}
+			}
+
+
+    	}
+
+
+
+    	return $userRepresentant;
     }
 }

@@ -23,6 +23,10 @@ class Enrollment extends Model
 
     const INACTIVE = 0;
 
+    const FREE = 1;
+
+    const PAYED = 2;
+
     protected $fillable = [
     	'student_id',
         'season_id',
@@ -155,6 +159,8 @@ class Enrollment extends Model
         }
     }
 
+
+    
 
     public static function boot() {
         parent::boot();
