@@ -149,6 +149,19 @@ button[type='submit']:hover {
                                         </span>
                                     </button>
                                 </div>
+
+                                <div class="elementor-element elementor-element-fb7f165 elementor-widget elementor-widget-alert" data-id="fb7f165" data-element_type="widget" data-widget_type="alert.default">
+                                    <div class="elementor-widget-container">
+                                        <div class="elementor-alert elementor-alert-info" role="alert">
+                                            <span class="elementor-alert-title">Esto es una alerta</span>
+                                            <span class="elementor-alert-description">Soy una descripción. Haz clic en el botón de editar para cambiar este texto.</span>
+                                            <button type="button" class="elementor-alert-dismiss"><span aria-hidden="true">×</span>
+                                                <span class="elementor-screen-only">Descartar alerta</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="elementor-element elementor-element-59bc091 elementor-align-center elementor-icon-list--layout-traditional elementor-widget elementor-widget-icon-list" data-id="59bc091" data-element_type="widget" data-widget_type="icon-list.default">
                                     <div class="elementor-widget-container">
                                         <ul class="elementor-icon-list-items text-center">

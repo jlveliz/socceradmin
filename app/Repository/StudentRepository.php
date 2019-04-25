@@ -372,8 +372,14 @@ class StudentRepository implements StudentRepositoryInterface
     	if($personRepresentant->hasStudents()) {
     		$students = $personRepresentant->getStudents();
 
-    		dd($students);
-    		
+    		foreach ($students as $key => $student) {
+    			if ($student->person->name == $data['name'] && $student->person->last_name == $data['last_name']) {
+    				throw new StudentException("Ya existe una solicitud ingresada", 411);
+    			} else {
+    				
+    			}
+    		}
+
     	} else {
 
     		$personStudent = new Person();

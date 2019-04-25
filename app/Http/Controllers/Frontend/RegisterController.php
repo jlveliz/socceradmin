@@ -8,11 +8,13 @@ use HappyFeet\RepositoryInterface\AgeRangeRepositoryInterface;
 use HappyFeet\RepositoryInterface\StudentRepositoryInterface;
 use HappyFeet\RepositoryInterface\FieldRepositoryInterface;
 use HappyFeet\Exceptions\AgeRangeException;
+use HappyFeet\Exceptions\StudentException;
 use HappyFeet\Http\Controllers\Controller;
 use HappyFeet\Http\Requests\UserFrontendRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Validator;
+use Exception;
 use DB;
 
 
@@ -62,7 +64,7 @@ class RegisterController extends Controller
             $user = $this->studentRepo->insertFromRegisterForm($request->all());
             DB::commit();
           
-        } catch (UserException $e) {
+        } catch (StudentException $e) {
             DB::rollback();
             $message['type'] = "error";
             $message['content'] = $e->getMessage();

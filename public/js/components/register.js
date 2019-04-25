@@ -63,7 +63,8 @@ $(document).ready(function() {
             console.log("success");
         })
         .fail(function(error) {
-            console.log(error);
+            var error = error.responseJSON;
+            
         })
         .always(function() {
             console.log("complete");
