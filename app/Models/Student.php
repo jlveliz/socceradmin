@@ -55,7 +55,7 @@ class Student extends Model
     public static function boot() {
         parent::boot();
         static::creating(function($student){
-            $student->created_user_id = Auth::user()->id;
+            $student->created_user_id = Auth::user() ? Auth::user()->id : null;
         });
 
         static::deleting(function($student){

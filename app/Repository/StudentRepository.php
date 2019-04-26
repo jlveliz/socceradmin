@@ -346,7 +346,7 @@ class StudentRepository implements StudentRepositoryInterface
     		$savedPersonRepresentant = $personRepresentant->save();
     		
     		if(!$savedPersonRepresentant) {
-				throw new StudentException('Ha ocurrido un error al guardar el estudiante '.$data['name'],"500");
+				throw new StudentException('Ha ocurrido un error al guardar el representante '.$data['name'],"500");
 			}
 
     		$idPerson = $personRepresentant->getKey();
@@ -359,7 +359,7 @@ class StudentRepository implements StudentRepositoryInterface
 			$savedUserRepresentant = $userRepresentant->save();
 
 			if(!$savedUserRepresentant) {
-				throw new StudentException('Ha ocurrido un error al guardar el estudiante '.$data['name'],"500");
+				throw new StudentException('Ha ocurrido un error al guardar el usuario representante '.$data['name'],"500");
 			}
 
 			$userRepresentant->roles()->attach($repreRole->id);
@@ -376,7 +376,7 @@ class StudentRepository implements StudentRepositoryInterface
     			if ($student->person->name == $data['name'] && $student->person->last_name == $data['last_name']) {
     				throw new StudentException("Ya existe una solicitud ingresada", 411);
     			} else {
-    				
+
     			}
     		}
 
@@ -405,10 +405,10 @@ class StudentRepository implements StudentRepositoryInterface
 					if ($saveEnrollment = $enrollment->save()) {
 						$dataEnrollment['enrollment_id'] = $enrollment->getKey();
 						$dataEnrollment['age'] = $student->person->age;
-
 						$groupIdToInsert = (new GroupClass())->getAvailableGroupByParams($dataEnrollment);
+						
 						if (!$groupIdToInsert) {
-							throw new StudentException('Ha ocurrido un error al guardar el estudiante '.$data['name'],"500");
+							throw new StudentException('Ha ocurrido un error el grupo para el estudiante '.$data['name'],"500");
 						}
 
 						$enrGroup = new EnrollmentGroup(['group_id' => $groupIdToInsert]);

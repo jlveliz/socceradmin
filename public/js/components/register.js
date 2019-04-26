@@ -48,28 +48,33 @@ $(document).ready(function() {
 
 
     $("#registro-form").on('submit', function(event) {
-        
+
         event.preventDefault();
         event.stopPropagation();
         var form = $(this).serialize();
-
+        $("#alert-message").css('display', 'none');
+        $("#alert-message .elementor-alert-description").html('')
         $.ajax({
-            url: 'register',
-            type: 'POST',
-            dataType: 'json',
-            data: form,
-        })
-        .done(function() {
-            console.log("success");
-        })
-        .fail(function(error) {
-            var error = error.responseJSON;
-            
-        })
-        .always(function() {
-            console.log("complete");
-        });
-        
+                url: 'register',
+                type: 'POST',
+                dataType: 'json',
+                data: form,
+            })
+            .done(function(redirectUrl) {
+                debugger;
+                $('#redirect-gracias', window.parent.document).trigger('click');
+
+            })
+            .fail(function(error) {
+                debugger
+                var error = error.responseJSON;
+                $("#alert-message .elementor-alert-description").append(error.content)
+                $("#alert-message").css('display', 'block');
+            })
+            .always(function() {
+                console.log("complete");
+            });
+
 
     });
 

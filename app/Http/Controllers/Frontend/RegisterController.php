@@ -63,13 +63,14 @@ class RegisterController extends Controller
             $message['content'] = "Se ha creado el usuario satisfactoriamente";
             $user = $this->studentRepo->insertFromRegisterForm($request->all());
             DB::commit();
-          
+            return response(["https://sur.happyfeetsoccer.com.ec/gracias/"],200);
         } catch (StudentException $e) {
             DB::rollback();
             $message['type'] = "error";
             $message['content'] = $e->getMessage();
             return response($message,$e->getCode());
-        } catch (Exception $e) {
+        } 
+        catch (Exception $e) {
             DB::rollback();
             $message['type'] = "error";
             $message['content'] = $e->getMessage();
