@@ -61,12 +61,10 @@ $(document).ready(function() {
                 data: form,
             })
             .done(function(redirectUrl) {
-                debugger;
-                $('#redirect-gracias', window.parent.document).trigger('click');
+                window.top.location.href = redirectUrl
 
             })
             .fail(function(error) {
-                debugger
                 var error = error.responseJSON;
                 $("#alert-message .elementor-alert-description").append(error.content)
                 $("#alert-message").css('display', 'block');

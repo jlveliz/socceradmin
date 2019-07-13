@@ -194,7 +194,8 @@ return [
         // HappyFeet\Providers\BroadcastServiceProvider::class,
         HappyFeet\Providers\EventServiceProvider::class,
         HappyFeet\Providers\RouteServiceProvider::class,
-        HappyFeet\Providers\ExtendValidatorServiceProvider::class
+        HappyFeet\Providers\ExtendValidatorServiceProvider::class,
+        Gentor\ActiveCampaign\ActiveCampaignServiceProvider::class,
 
     ],
 
@@ -244,6 +245,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'AC' => Gentor\ActiveCampaign\Facades\ActiveCampaign::class,
 
     ],
 

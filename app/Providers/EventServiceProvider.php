@@ -23,6 +23,10 @@ class EventServiceProvider extends ServiceProvider
 
         'HappyFeet\Events\DeleteEnrollmentGroup' => [
             'HappyFeet\Listeners\DeleteAssistances'
+        ],
+
+        'HappyFeet\Events\NewDemoClass' => [
+            'HappyFeet\Listeners\SendToActiveCampaign'
         ]
     ];
 

@@ -9,6 +9,7 @@ use HappyFeet\RepositoryInterface\StudentRepositoryInterface;
 use HappyFeet\RepositoryInterface\FieldRepositoryInterface;
 use HappyFeet\Exceptions\AgeRangeException;
 use HappyFeet\Exceptions\StudentException;
+use HappyFeet\Events\NewDemoClass;
 use HappyFeet\Http\Controllers\Controller;
 use HappyFeet\Http\Requests\UserFrontendRequest;
 use Illuminate\Validation\Rule;
@@ -63,6 +64,7 @@ class RegisterController extends Controller
             $message['content'] = "Se ha creado el usuario satisfactoriamente";
             $user = $this->studentRepo->insertFromRegisterForm($request->all());
             DB::commit();
+            event( new NewDemoClass($user) );
             return response(["https://sur.happyfeetsoccer.com.ec/gracias/"],200);
         } catch (StudentException $e) {
             DB::rollback();
