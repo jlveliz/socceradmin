@@ -1,15 +1,15 @@
 <?php
 
-namespace HappyFeet\Http\Controllers\Backend;
+namespace Futbol\Http\Controllers\Backend;
 
-use HappyFeet\Http\Controllers\Controller;
-use HappyFeet\RepositoryInterface\StudentRepositoryInterface;
-use HappyFeet\RepositoryInterface\SeasonRepositoryInterface;
-use HappyFeet\RepositoryInterface\FieldRepositoryInterface;
-use HappyFeet\Http\Requests\StudentRequest;
-use HappyFeet\Exception\StudentException;
-use HappyFeet\Exceptions\GroupClassException;
-use HappyFeet\Exceptions\EnrollmentGroupException;
+use Futbol\Http\Controllers\Controller;
+use Futbol\RepositoryInterface\StudentRepositoryInterface;
+use Futbol\RepositoryInterface\SeasonRepositoryInterface;
+use Futbol\RepositoryInterface\FieldRepositoryInterface;
+use Futbol\Http\Requests\StudentRequest;
+use Futbol\Exception\StudentException;
+use Futbol\Exceptions\GroupClassException;
+use Futbol\Exceptions\EnrollmentGroupException;
 use Exception;
 use DB;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace HappyFeet\Providers;
+namespace Futbol\Providers;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -13,20 +13,20 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'HappyFeet\Events\Event' => [
-            'HappyFeet\Listeners\EventListener',
+        'Futbol\Events\Event' => [
+            'Futbol\Listeners\EventListener',
         ],
 
-        'HappyFeet\Events\UserLoginEvent' => [
-            'HappyFeet\Listeners\UpdateLastAccess'
+        'Futbol\Events\UserLoginEvent' => [
+            'Futbol\Listeners\UpdateLastAccess'
         ],
 
-        'HappyFeet\Events\DeleteEnrollmentGroup' => [
-            'HappyFeet\Listeners\DeleteAssistances'
+        'Futbol\Events\DeleteEnrollmentGroup' => [
+            'Futbol\Listeners\DeleteAssistances'
         ],
 
-        'HappyFeet\Events\NewDemoClass' => [
-            'HappyFeet\Listeners\SendToActiveCampaign'
+        'Futbol\Events\NewDemoClass' => [
+            'Futbol\Listeners\SendToActiveCampaign'
         ]
     ];
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace HappyFeet\Models;
+namespace Futbol\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -37,27 +37,27 @@ class Permission extends Model
 
     public function module()
     {
-        return $this->belongsTo('HappyFeet\Models\Module','module_id');
+        return $this->belongsTo('Futbol\Models\Module','module_id');
     }
 
     public function parent()
     {
-        return $this->belongsTo('HappyFeet\Models\Permission','parent_id');
+        return $this->belongsTo('Futbol\Models\Permission','parent_id');
     }
 
     public function type()
     {
-    	return $this->belongsTo('HappyFeet\Models\PermissionType','type_id');
+    	return $this->belongsTo('Futbol\Models\PermissionType','type_id');
     }
 
     public function children()
     {
-       return $this->hasMany('HappyFeet\Models\Permission','parent_id','id');
+       return $this->hasMany('Futbol\Models\Permission','parent_id','id');
     }
 
     public function roles()
     {
-        return $this->belongsToMany('HappyFeet\Models\Role','permission_role','permission_id','role_id');
+        return $this->belongsToMany('Futbol\Models\Role','permission_role','permission_id','role_id');
     }
 
 

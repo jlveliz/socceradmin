@@ -1,10 +1,10 @@
 <?php
-namespace HappyFeet\Repository;
+namespace Futbol\Repository;
 
-use HappyFeet\RepositoryInterface\RepresentantRepositoryInterface;
-use HappyFeet\Exceptions\RepresentantException;
-use HappyFeet\Models\Representant;
-use HappyFeet\Models\Person;
+use Futbol\RepositoryInterface\RepresentantRepositoryInterface;
+use Futbol\Exceptions\RepresentantException;
+use Futbol\Models\Representant;
+use Futbol\Models\Person;
 use DB;
 
 /**

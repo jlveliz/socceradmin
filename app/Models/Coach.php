@@ -1,9 +1,9 @@
 <?php
 
-namespace HappyFeet\Models;
+namespace Futbol\Models;
 
-use HappyFeet\Models\User;
-use HappyFeet\Scopes\CoachScope;
+use Futbol\Models\User;
+use Futbol\Scopes\CoachScope;
 
 class Coach extends User {
 

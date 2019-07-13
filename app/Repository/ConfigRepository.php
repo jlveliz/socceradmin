@@ -1,8 +1,8 @@
 <?php
-namespace HappyFeet\Repository;
+namespace Futbol\Repository;
 
-use HappyFeet\RepositoryInterface\ConfigRepositoryInterface;
-use HappyFeet\Exceptions\ConfigException;
+use Futbol\RepositoryInterface\ConfigRepositoryInterface;
+use Futbol\Exceptions\ConfigException;
 
 /**
 * 

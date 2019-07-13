@@ -70,7 +70,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <input type="number" name="groups[{{$kday}}][{{$kSchedule}}][{{$groupNum}}][maximum_capacity]" id="groups[{{$kday}}][{{$kSchedule}}][{{$groupNum}}][maximum_capacity]" class="form-control form-control-sm capacity" max="{{config('happyfeet.group-max-num')}}" min="1" value="{{$groupDb->maximum_capacity}}">
+                                        <input type="number" name="groups[{{$kday}}][{{$kSchedule}}][{{$groupNum}}][maximum_capacity]" id="groups[{{$kday}}][{{$kSchedule}}][{{$groupNum}}][maximum_capacity]" class="form-control form-control-sm capacity" max="{{config('Futbol.group-max-num')}}" min="1" value="{{$groupDb->maximum_capacity}}">
                                         @if ($errors->has('groups.'.$kday.'.'.$kSchedule.'.'.$groupNum.'.maximum_capacity'))
                                             <div id="val-state-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('groups.'.$kday.'.'.$kSchedule.'.'.$groupNum.'.maximum_capacity') }}</div>
                                         @endif
@@ -135,7 +135,7 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <input type="number" name="groups[{{$kday}}][{{$kSchedule}}][0][maximum_capacity]" id="groups[{{$kday}}][{{$kSchedule}}][0][maximum_capacity]" class="form-control form-control-sm capacity" max="{{config('happyfeet.group-max-num')}}" min="1">
+                                        <input type="number" name="groups[{{$kday}}][{{$kSchedule}}][0][maximum_capacity]" id="groups[{{$kday}}][{{$kSchedule}}][0][maximum_capacity]" class="form-control form-control-sm capacity" max="{{config('Futbol.group-max-num')}}" min="1">
                                     </td>
                                     <td>
                                         <input type="time" name="groups[{{$kday}}][{{$kSchedule}}][0][schedule][start]" id="groups[{{$kday}}][{{$kSchedule}}][0][schedule][start]" min="{{$schedule['start']}}" max="{{$schedule['end']}}" class="form-control form-control-sm start-hour">
@@ -190,7 +190,7 @@
                                                 </select>
                                             </td>
                                             <td>
-                                            <input type="number" name="groups[{{$kday}}][{{$kSchedule}}][{{$groupNum}}][maximum_capacity]" id="groups[{{$kday}}][{{$kSchedule}}][{{$groupNum}}][maximum_capacity]" class="form-control form-control-sm capacity" max="{{config('happyfeet.group-max-num')}}" min="1" value="{{$groupCache[$groupNum]['maximum_capacity']}}">
+                                            <input type="number" name="groups[{{$kday}}][{{$kSchedule}}][{{$groupNum}}][maximum_capacity]" id="groups[{{$kday}}][{{$kSchedule}}][{{$groupNum}}][maximum_capacity]" class="form-control form-control-sm capacity" max="{{config('Futbol.group-max-num')}}" min="1" value="{{$groupCache[$groupNum]['maximum_capacity']}}">
                                             </td>
                                             <td>
                                                 <input type="time" name="groups[{{$kday}}][{{$kSchedule}}][{{$groupNum}}][schedule][start]" id="groups[{{$kday}}][{{$kSchedule}}][{{$groupNum}}][schedule][start]" min="{{$schedule['start']}}" max="{{$schedule['end']}}" class="form-control form-control-sm start-hour" value="{{$groupCache[$groupNum]['schedule']['start']}}">
@@ -238,7 +238,7 @@
                                     </select>
                                 </td>
                                 <td>
-                                    <input type="number" name="groups[{{$kday}}][{{$kSchedule}}][0][maximum_capacity]" id="groups[{{$kday}}][{{$kSchedule}}][0][maximum_capacity]" class="form-control form-control-sm capacity" max="{{config('happyfeet.group-max-num')}}" min="1">
+                                    <input type="number" name="groups[{{$kday}}][{{$kSchedule}}][0][maximum_capacity]" id="groups[{{$kday}}][{{$kSchedule}}][0][maximum_capacity]" class="form-control form-control-sm capacity" max="{{config('Futbol.group-max-num')}}" min="1">
                                 </td>
                                 <td>
                                     <input type="time" name="groups[{{$kday}}][{{$kSchedule}}][0][schedule][start]" id="groups[{{$kday}}][{{$kSchedule}}][0][schedule][start]" min="{{$schedule['start']}}" max="{{$schedule['end']}}" class="form-control form-control-sm start-hour">

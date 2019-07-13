@@ -25,8 +25,8 @@ return [
     'group-names' => [
         str_slug('Little Toes') => 'Little Toes',
         str_slug('Big Toes') => 'Big Toes',
-        str_slug('HappyFeet') => 'HappyFeet',
-        str_slug('HappyFeet Avanzado') => 'HappyFeet Avanzado',
+        str_slug('Futbol') => 'Futbol',
+        str_slug('Futbol Avanzado') => 'Futbol Avanzado',
     ],
     
     

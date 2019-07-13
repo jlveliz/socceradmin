@@ -1,10 +1,10 @@
 <?php
 
-namespace HappyFeet\Models;
+namespace Futbol\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use  Illuminate\Database\Eloquent\SoftDeletes;
-use HappyFeet\Exceptions\GroupClassException;
+use Futbol\Exceptions\GroupClassException;
 
 class Enrollment extends Model
 {
@@ -41,12 +41,12 @@ class Enrollment extends Model
 
     //Relationships
     public function groups () {
-        return $this->hasMany('HappyFeet\Models\EnrollmentGroup','enrollment_id');
+        return $this->hasMany('Futbol\Models\EnrollmentGroup','enrollment_id');
     }
 
     public function field()
     {
-        return $this->belongsTo('HappyFeet\Models\Field','field_id');
+        return $this->belongsTo('Futbol\Models\Field','field_id');
     }
 
     public function fieldOfGroup() {
@@ -86,7 +86,7 @@ class Enrollment extends Model
 
     public function season()
     {
-        return $this->belongsTo('HappyFeet\Models\Season','season_id');
+        return $this->belongsTo('Futbol\Models\Season','season_id');
     }
 
 
@@ -137,7 +137,7 @@ class Enrollment extends Model
                 $grf = GroupClass::find($oldGr);
                 if ($grf) {
                     //max capacity 
-                    $grf->disponibility = $grf->disponibility < config('happyfeet.group-max-num') ? $grf->disponibility + 1 : config('happyfeet.group-max-num');
+                    $grf->disponibility = $grf->disponibility < config('Futbol.group-max-num') ? $grf->disponibility + 1 : config('Futbol.group-max-num');
                     $grf->update();
 
                 } else {

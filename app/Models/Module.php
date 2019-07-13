@@ -1,6 +1,6 @@
 <?php
 
-namespace HappyFeet\Models;
+namespace Futbol\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,7 +26,7 @@ class Module extends Model
 
     public function permissions()
     {
-    	return $this->hasMany('HappyFeet\Models\Permission','module_id');
+    	return $this->hasMany('Futbol\Models\Permission','module_id');
     }
 
 

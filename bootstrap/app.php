@@ -28,17 +28,17 @@ $app = new Illuminate\Foundation\Application(
 
 $app->singleton(
     Illuminate\Contracts\Http\Kernel::class,
-    HappyFeet\Http\Kernel::class
+    Futbol\Http\Kernel::class
 );
 
 $app->singleton(
     Illuminate\Contracts\Console\Kernel::class,
-    HappyFeet\Console\Kernel::class
+    Futbol\Console\Kernel::class
 );
 
 $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
-    HappyFeet\Exceptions\Handler::class
+    Futbol\Exceptions\Handler::class
 );
 
 /*

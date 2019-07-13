@@ -1,15 +1,15 @@
 <?php
 
-namespace HappyFeet\Http\Controllers\Backend;
+namespace Futbol\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
-use HappyFeet\Http\Controllers\Controller;
-use HappyFeet\RepositoryInterface\FieldRepositoryInterface;
-use HappyFeet\RepositoryInterface\AgeRangeRepositoryInterface;
-use HappyFeet\RepositoryInterface\FieldTypeRepositoryInterface;
-use HappyFeet\RepositoryInterface\CoachRepositoryInterface;
-use HappyFeet\Http\Requests\FieldRequest;
-use HappyFeet\Exceptions\FieldException;
+use Futbol\Http\Controllers\Controller;
+use Futbol\RepositoryInterface\FieldRepositoryInterface;
+use Futbol\RepositoryInterface\AgeRangeRepositoryInterface;
+use Futbol\RepositoryInterface\FieldTypeRepositoryInterface;
+use Futbol\RepositoryInterface\CoachRepositoryInterface;
+use Futbol\Http\Requests\FieldRequest;
+use Futbol\Exceptions\FieldException;
 use Exception;
 use DB;
 

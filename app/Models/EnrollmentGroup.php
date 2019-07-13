@@ -1,10 +1,10 @@
 <?php 
 
-namespace HappyFeet\Models;
+namespace Futbol\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use  Illuminate\Database\Eloquent\SoftDeletes;
-use HappyFeet\Models\Assistance;
+use Futbol\Models\Assistance;
 
 
 class EnrollmentGroup extends Model
@@ -25,17 +25,17 @@ class EnrollmentGroup extends Model
 
 
     public function enrollment() {
-        return $this->belongsTo('HappyFeet\Models\Enrollment','enrollment_id');
+        return $this->belongsTo('Futbol\Models\Enrollment','enrollment_id');
     }
 
     public function group() {
-        return $this->belongsTo('HappyFeet\Models\GroupClass','group_id');
+        return $this->belongsTo('Futbol\Models\GroupClass','group_id');
     }
 
 
     public function assistances()
     {
-        return $this->hasMany('HappyFeet\Models\Assistance','enrollment_group_id');
+        return $this->hasMany('Futbol\Models\Assistance','enrollment_group_id');
     }
 
     private function saveAndCalculateAssitance()

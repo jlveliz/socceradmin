@@ -1,10 +1,10 @@
 <?php
-namespace HappyFeet\Repository;
+namespace Futbol\Repository;
 
-use HappyFeet\RepositoryInterface\AssistanceCoachRepositoryInterface;
-use HappyFeet\Repository\FieldRepository;
-use HappyFeet\Exceptions\AssistanceCoachException;
-use HappyFeet\Models\AssistanceCoach;
+use Futbol\RepositoryInterface\AssistanceCoachRepositoryInterface;
+use Futbol\Repository\FieldRepository;
+use Futbol\Exceptions\AssistanceCoachException;
+use Futbol\Models\AssistanceCoach;
 
 /**
 * 

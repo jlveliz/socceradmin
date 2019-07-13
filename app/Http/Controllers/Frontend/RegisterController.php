@@ -1,17 +1,17 @@
 <?php
 
-namespace HappyFeet\Http\Controllers\Frontend;
+namespace Futbol\Http\Controllers\Frontend;
 
-use HappyFeet\RepositoryInterface\RegisterStudentFrontendRepositoryInterface;
-use HappyFeet\RepositoryInterface\RepresentantRepositoryInterface;
-use HappyFeet\RepositoryInterface\AgeRangeRepositoryInterface;
-use HappyFeet\RepositoryInterface\StudentRepositoryInterface;
-use HappyFeet\RepositoryInterface\FieldRepositoryInterface;
-use HappyFeet\Exceptions\AgeRangeException;
-use HappyFeet\Exceptions\StudentException;
-use HappyFeet\Events\NewDemoClass;
-use HappyFeet\Http\Controllers\Controller;
-use HappyFeet\Http\Requests\UserFrontendRequest;
+use Futbol\RepositoryInterface\RegisterStudentFrontendRepositoryInterface;
+use Futbol\RepositoryInterface\RepresentantRepositoryInterface;
+use Futbol\RepositoryInterface\AgeRangeRepositoryInterface;
+use Futbol\RepositoryInterface\StudentRepositoryInterface;
+use Futbol\RepositoryInterface\FieldRepositoryInterface;
+use Futbol\Exceptions\AgeRangeException;
+use Futbol\Exceptions\StudentException;
+use Futbol\Events\NewDemoClass;
+use Futbol\Http\Controllers\Controller;
+use Futbol\Http\Requests\UserFrontendRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Validator;

@@ -1,9 +1,9 @@
 <?php
-namespace HappyFeet\Repository;
+namespace Futbol\Repository;
 
-use HappyFeet\RepositoryInterface\RoleRepositoryInterface;
-use HappyFeet\Exceptions\RoleException;
-use HappyFeet\Models\Role;
+use Futbol\RepositoryInterface\RoleRepositoryInterface;
+use Futbol\Exceptions\RoleException;
+use Futbol\Models\Role;
 
 /**
 * 

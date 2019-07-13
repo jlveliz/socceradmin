@@ -1,18 +1,18 @@
 <?php
-namespace HappyFeet\Repository;
+namespace Futbol\Repository;
 
-use HappyFeet\RepositoryInterface\StudentRepositoryInterface;
-use HappyFeet\Events\DeleteEnrollmentGroup;
-use HappyFeet\Exceptions\StudentException;
-use HappyFeet\Models\EnrollmentGroup;
-use HappyFeet\Models\Enrollment;
-use HappyFeet\Models\PersonType;
-use HappyFeet\Models\GroupClass;
-use HappyFeet\Models\Student;
-use HappyFeet\Models\Season;
-use HappyFeet\Models\Person;
-use HappyFeet\Models\Role;
-use HappyFeet\Models\User;
+use Futbol\RepositoryInterface\StudentRepositoryInterface;
+use Futbol\Events\DeleteEnrollmentGroup;
+use Futbol\Exceptions\StudentException;
+use Futbol\Models\EnrollmentGroup;
+use Futbol\Models\Enrollment;
+use Futbol\Models\PersonType;
+use Futbol\Models\GroupClass;
+use Futbol\Models\Student;
+use Futbol\Models\Season;
+use Futbol\Models\Person;
+use Futbol\Models\Role;
+use Futbol\Models\User;
 use DB;
 
 /**

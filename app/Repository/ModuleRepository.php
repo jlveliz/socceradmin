@@ -1,10 +1,10 @@
 <?php
-namespace HappyFeet\Repository;
+namespace Futbol\Repository;
 
-use HappyFeet\RepositoryInterface\ModuleRepositoryInterface;
-use HappyFeet\Exceptions\ModuleException;
-use HappyFeet\Models\Module;
-use HappyFeet\Models\Permission;
+use Futbol\RepositoryInterface\ModuleRepositoryInterface;
+use Futbol\Exceptions\ModuleException;
+use Futbol\Models\Module;
+use Futbol\Models\Permission;
 
 /**
 * 

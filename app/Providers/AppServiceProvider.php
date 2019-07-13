@@ -1,9 +1,9 @@
 <?php
 
-namespace HappyFeet\Providers;
+namespace Futbol\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use HappyFeet\Repository\ModuleRepository;
+use Futbol\Repository\ModuleRepository;
 use Validator;
 use Auth;
 
@@ -50,39 +50,39 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('HappyFeet\RepositoryInterface\RepresentantRepositoryInterface','HappyFeet\Repository\RepresentantRepository');
+        $this->app->bind('Futbol\RepositoryInterface\RepresentantRepositoryInterface','Futbol\Repository\RepresentantRepository');
 
-        $this->app->bind('HappyFeet\RepositoryInterface\RegisterStudentFrontendRepositoryInterface','HappyFeet\Repository\RegisterStudentFrontendRepository');
+        $this->app->bind('Futbol\RepositoryInterface\RegisterStudentFrontendRepositoryInterface','Futbol\Repository\RegisterStudentFrontendRepository');
 
-        $this->app->bind('HappyFeet\RepositoryInterface\ModuleRepositoryInterface','HappyFeet\Repository\ModuleRepository');
+        $this->app->bind('Futbol\RepositoryInterface\ModuleRepositoryInterface','Futbol\Repository\ModuleRepository');
 
-        $this->app->bind('HappyFeet\RepositoryInterface\PermissionTypeRepositoryInterface','HappyFeet\Repository\PermissionTypeRepository');
+        $this->app->bind('Futbol\RepositoryInterface\PermissionTypeRepositoryInterface','Futbol\Repository\PermissionTypeRepository');
 
-        $this->app->bind('HappyFeet\RepositoryInterface\PermissionRepositoryInterface','HappyFeet\Repository\PermissionRepository');
+        $this->app->bind('Futbol\RepositoryInterface\PermissionRepositoryInterface','Futbol\Repository\PermissionRepository');
         
         
-        $this->app->bind('HappyFeet\RepositoryInterface\RoleRepositoryInterface','HappyFeet\Repository\RoleRepository');
+        $this->app->bind('Futbol\RepositoryInterface\RoleRepositoryInterface','Futbol\Repository\RoleRepository');
 
-        $this->app->bind('HappyFeet\RepositoryInterface\PersonTypeRepositoryInterface','HappyFeet\Repository\PersonTypeRepository');
+        $this->app->bind('Futbol\RepositoryInterface\PersonTypeRepositoryInterface','Futbol\Repository\PersonTypeRepository');
         
-        $this->app->bind('HappyFeet\RepositoryInterface\UserRepositoryInterface','HappyFeet\Repository\UserRepository');
+        $this->app->bind('Futbol\RepositoryInterface\UserRepositoryInterface','Futbol\Repository\UserRepository');
         
-        $this->app->bind('HappyFeet\RepositoryInterface\FieldRepositoryInterface','HappyFeet\Repository\FieldRepository');
+        $this->app->bind('Futbol\RepositoryInterface\FieldRepositoryInterface','Futbol\Repository\FieldRepository');
 
-        $this->app->bind('HappyFeet\RepositoryInterface\StudentRepositoryInterface','HappyFeet\Repository\StudentRepository');
+        $this->app->bind('Futbol\RepositoryInterface\StudentRepositoryInterface','Futbol\Repository\StudentRepository');
 
-        $this->app->bind('HappyFeet\RepositoryInterface\AgeRangeRepositoryInterface','HappyFeet\Repository\AgeRangeRepository');
+        $this->app->bind('Futbol\RepositoryInterface\AgeRangeRepositoryInterface','Futbol\Repository\AgeRangeRepository');
 
-        $this->app->bind('HappyFeet\RepositoryInterface\GroupClassRepositoryInterface','HappyFeet\Repository\GroupClassRepository');
+        $this->app->bind('Futbol\RepositoryInterface\GroupClassRepositoryInterface','Futbol\Repository\GroupClassRepository');
 
-        $this->app->bind('HappyFeet\RepositoryInterface\SeasonRepositoryInterface','HappyFeet\Repository\SeasonRepository');
+        $this->app->bind('Futbol\RepositoryInterface\SeasonRepositoryInterface','Futbol\Repository\SeasonRepository');
 
-        $this->app->bind('HappyFeet\RepositoryInterface\AssistanceRepositoryInterface','HappyFeet\Repository\AssistanceRepository');
+        $this->app->bind('Futbol\RepositoryInterface\AssistanceRepositoryInterface','Futbol\Repository\AssistanceRepository');
 
-        $this->app->bind('HappyFeet\RepositoryInterface\FieldTypeRepositoryInterface','HappyFeet\Repository\FieldTypeRepository');
+        $this->app->bind('Futbol\RepositoryInterface\FieldTypeRepositoryInterface','Futbol\Repository\FieldTypeRepository');
 
-        $this->app->bind('HappyFeet\RepositoryInterface\CoachRepositoryInterface','HappyFeet\Repository\CoachRepository');
+        $this->app->bind('Futbol\RepositoryInterface\CoachRepositoryInterface','Futbol\Repository\CoachRepository');
 
-        $this->app->bind('HappyFeet\RepositoryInterface\AssistanceCoachRepositoryInterface','HappyFeet\Repository\AssistanceCoachRepository');
+        $this->app->bind('Futbol\RepositoryInterface\AssistanceCoachRepositoryInterface','Futbol\Repository\AssistanceCoachRepository');
     }
 }

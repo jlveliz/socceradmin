@@ -1,14 +1,14 @@
 <?php
 
-namespace HappyFeet\Http\Controllers\Backend;
+namespace Futbol\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
-use HappyFeet\Http\Controllers\Controller;
-use HappyFeet\RepositoryInterface\FieldRepositoryInterface;
-use HappyFeet\RepositoryInterface\StudentRepositoryInterface;
-use HappyFeet\RepositoryInterface\SeasonRepositoryInterface;
-use HappyFeet\RepositoryInterface\AssistanceRepositoryInterface;
-use HappyFeet\Exceptions\AssistanceException;
+use Futbol\Http\Controllers\Controller;
+use Futbol\RepositoryInterface\FieldRepositoryInterface;
+use Futbol\RepositoryInterface\StudentRepositoryInterface;
+use Futbol\RepositoryInterface\SeasonRepositoryInterface;
+use Futbol\RepositoryInterface\AssistanceRepositoryInterface;
+use Futbol\Exceptions\AssistanceException;
 
 
 

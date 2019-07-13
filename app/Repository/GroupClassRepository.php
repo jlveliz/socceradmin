@@ -1,9 +1,9 @@
 <?php
-namespace HappyFeet\Repository;
+namespace Futbol\Repository;
 
-use HappyFeet\RepositoryInterface\GroupClassRepositoryInterface;
-use HappyFeet\Exceptions\GroupClassException;
-use HappyFeet\Models\GroupClass;
+use Futbol\RepositoryInterface\GroupClassRepositoryInterface;
+use Futbol\Exceptions\GroupClassException;
+use Futbol\Models\GroupClass;
 
 /**
 * 

@@ -1,14 +1,14 @@
 <?php
 
-namespace HappyFeet\Http\Controllers\Backend;
+namespace Futbol\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
-use HappyFeet\Http\Controllers\Controller;
-use HappyFeet\RepositoryInterface\GroupClassRepositoryInterface;
-use HappyFeet\RepositoryInterface\FieldRepositoryInterface;
-use HappyFeet\RepositoryInterface\AgeRangeRepositoryInterface;
-use HappyFeet\Http\Requests\GroupClassRequest;
-use HappyFeet\Exceptions\GroupClassException;
+use Futbol\Http\Controllers\Controller;
+use Futbol\RepositoryInterface\GroupClassRepositoryInterface;
+use Futbol\RepositoryInterface\FieldRepositoryInterface;
+use Futbol\RepositoryInterface\AgeRangeRepositoryInterface;
+use Futbol\Http\Requests\GroupClassRequest;
+use Futbol\Exceptions\GroupClassException;
 use Exception;
 use DB;
 

@@ -1,7 +1,7 @@
 <?php
-namespace HappyFeet\RepositoryInterface;
+namespace Futbol\RepositoryInterface;
 
-// use HappyFeet\RespositoryInterface\CoreRepositoryInterface;
+// use Futbol\RespositoryInterface\CoreRepositoryInterface;
 
 
 interface ModuleRepositoryInterface extends CoreRepositoryInterface {

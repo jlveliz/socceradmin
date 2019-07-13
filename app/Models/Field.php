@@ -1,6 +1,6 @@
 <?php
 
-namespace HappyFeet\Models;
+namespace Futbol\Models;
 
 use  Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
@@ -32,12 +32,12 @@ class Field extends Model
 
     public function type()
     {
-        return $this->belongsTo('HappyFeet\Models\FieldType','type_field_id');
+        return $this->belongsTo('Futbol\Models\FieldType','type_field_id');
     }
 
     public function groups()
     {
-    	return $this->hasMany('HappyFeet\Models\GroupClass','field_id');
+    	return $this->hasMany('Futbol\Models\GroupClass','field_id');
     }
 
    

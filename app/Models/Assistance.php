@@ -1,6 +1,6 @@
 <?php
 
-namespace HappyFeet\Models;
+namespace Futbol\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Auth;
@@ -22,6 +22,6 @@ class Assistance extends Model
 
     public function enrollmentGroup()
     {
-    	return $this->belongsTo('HappyFeet\Models\EnrollmentGroup','enrollment_group_id');
+    	return $this->belongsTo('Futbol\Models\EnrollmentGroup','enrollment_group_id');
     }
 }

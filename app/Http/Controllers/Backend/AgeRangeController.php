@@ -1,12 +1,12 @@
 <?php
 
-namespace HappyFeet\Http\Controllers\Backend;
+namespace Futbol\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
-use HappyFeet\Http\Controllers\Controller;
-use HappyFeet\Http\Requests\AgeRangeRequest;
-use HappyFeet\RepositoryInterface\AgeRangeRepositoryInterface;
-use HappyFeet\Exceptions\AgeRangeException;
+use Futbol\Http\Controllers\Controller;
+use Futbol\Http\Requests\AgeRangeRequest;
+use Futbol\RepositoryInterface\AgeRangeRepositoryInterface;
+use Futbol\Exceptions\AgeRangeException;
 
 
 class AgeRangeController extends Controller

@@ -1,10 +1,10 @@
 <?php
-namespace HappyFeet\Repository;
+namespace Futbol\Repository;
 
-use HappyFeet\RepositoryInterface\AssistanceRepositoryInterface;
-use HappyFeet\Exceptions\AssistanceException;
-use HappyFeet\Models\Assistance;
-use HappyFeet\Models\Season;
+use Futbol\RepositoryInterface\AssistanceRepositoryInterface;
+use Futbol\Exceptions\AssistanceException;
+use Futbol\Models\Assistance;
+use Futbol\Models\Season;
 use DB;
 
 /**

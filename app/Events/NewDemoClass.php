@@ -1,6 +1,6 @@
 <?php
 
-namespace HappyFeet\Events;
+namespace Futbol\Events;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;

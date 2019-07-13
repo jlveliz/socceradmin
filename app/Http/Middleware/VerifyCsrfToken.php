@@ -1,6 +1,6 @@
 <?php
 
-namespace HappyFeet\Http\Middleware;
+namespace Futbol\Http\Middleware;
 
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as Middleware;
 

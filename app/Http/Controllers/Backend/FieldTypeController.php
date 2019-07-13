@@ -1,12 +1,12 @@
 <?php
 
-namespace HappyFeet\Http\Controllers\Backend;
+namespace Futbol\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
-use HappyFeet\Http\Controllers\Controller;
-use HappyFeet\Http\Requests\FieldTypeRequest;
-use HappyFeet\RepositoryInterface\FieldTypeRepositoryInterface;
-use HappyFeet\Exceptions\FieldTypeException;
+use Futbol\Http\Controllers\Controller;
+use Futbol\Http\Requests\FieldTypeRequest;
+use Futbol\RepositoryInterface\FieldTypeRepositoryInterface;
+use Futbol\Exceptions\FieldTypeException;
 
 
 class FieldTypeController extends Controller

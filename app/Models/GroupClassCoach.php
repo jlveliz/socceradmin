@@ -1,6 +1,6 @@
 <?php
 
-namespace HappyFeet\Models;
+namespace Futbol\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,6 +19,6 @@ class GroupClassCoach extends Model
 
     public function group()
     {
-        return $this->belongsTo('HappyFeet\Models\GroupClass','group_class_id');
+        return $this->belongsTo('Futbol\Models\GroupClass','group_class_id');
     }
 }

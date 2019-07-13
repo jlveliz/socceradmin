@@ -46,7 +46,7 @@
                                             <th>Día</th>
                                             <th>Fecha</th>
                                             @php
-                                                $coachs = (new HappyFeet\Models\Coach())->getCoachsByField($field->id);
+                                                $coachs = (new Futbol\Models\Coach())->getCoachsByField($field->id);
                                                 $idCoachs = [];
                                             @endphp
                                             @foreach ($coachs  as $coach)

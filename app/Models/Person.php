@@ -1,6 +1,6 @@
 <?php
 
-namespace HappyFeet\Models;
+namespace Futbol\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use  Illuminate\Database\Eloquent\SoftDeletes;
@@ -48,27 +48,27 @@ class Person extends Model
 
     public function personType()
     {
-        return $this->belongsTo('HappyFeet\Models\PersonType','person_type_id');
+        return $this->belongsTo('Futbol\Models\PersonType','person_type_id');
     }
 
     public function province()
     {
-        return $this->belongsTo('HappyFeet\Models\Province','province_id');
+        return $this->belongsTo('Futbol\Models\Province','province_id');
     }
 
     public function city()
     {
-        return $this->belongsTo('HappyFeet\Models\City','city_id');
+        return $this->belongsTo('Futbol\Models\City','city_id');
     }
 
     public function parish()
     {
-    	return $this->belongsTo('HappyFeet\Models\Parish','city_id');
+    	return $this->belongsTo('Futbol\Models\Parish','city_id');
     }
 
     public function identificationType()
     {
-        return $this->belongsTo('HappyFeet\Models\IdentificationType','identification_type_id');
+        return $this->belongsTo('Futbol\Models\IdentificationType','identification_type_id');
     }
 
     public function getMale()
@@ -88,7 +88,7 @@ class Person extends Model
 
     public function user()
     {
-        return $this->hasOne('HappyFeet\Models\User','person_id');
+        return $this->hasOne('Futbol\Models\User','person_id');
     }
 
 

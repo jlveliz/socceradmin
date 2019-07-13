@@ -1,11 +1,11 @@
 <?php
 
-namespace HappyFeet\Listeners;
+namespace Futbol\Listeners;
 
-use HappyFeet\Events\UserLoginEvent;
+use Futbol\Events\UserLoginEvent;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use HappyFeet\Models\User;
+use Futbol\Models\User;
 use Carbon\Carbon;
 
 class UpdateLastAccess

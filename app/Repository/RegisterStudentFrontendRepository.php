@@ -1,11 +1,11 @@
 <?php
-namespace HappyFeet\Repository;
+namespace Futbol\Repository;
 
-use HappyFeet\RepositoryInterface\RegisterStudentFrontendRepositoryInterface;
-use HappyFeet\Models\Representant;
-use HappyFeet\Models\Person;
-use HappyFeet\Models\User;
-use HappyFeet\Models\Student;
+use Futbol\RepositoryInterface\RegisterStudentFrontendRepositoryInterface;
+use Futbol\Models\Representant;
+use Futbol\Models\Person;
+use Futbol\Models\User;
+use Futbol\Models\Student;
 use Hash;
 use Exception;
 

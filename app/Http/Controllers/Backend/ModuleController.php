@@ -1,12 +1,12 @@
 <?php
 
-namespace HappyFeet\Http\Controllers\Backend;
+namespace Futbol\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
-use HappyFeet\Http\Controllers\Controller;
-use HappyFeet\Http\Requests\ModuleRequest;
-use HappyFeet\RepositoryInterface\ModuleRepositoryInterface;
-use HappyFeet\Exceptions\ModuleException;
+use Futbol\Http\Controllers\Controller;
+use Futbol\Http\Requests\ModuleRequest;
+use Futbol\RepositoryInterface\ModuleRepositoryInterface;
+use Futbol\Exceptions\ModuleException;
 use Exception;
 use DB;
 

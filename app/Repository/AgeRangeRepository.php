@@ -1,9 +1,9 @@
 <?php
-namespace HappyFeet\Repository;
+namespace Futbol\Repository;
 
-use HappyFeet\RepositoryInterface\AgeRangeRepositoryInterface;
-use HappyFeet\Exceptions\AgeRangeException;
-use HappyFeet\Models\AgeRange;
+use Futbol\RepositoryInterface\AgeRangeRepositoryInterface;
+use Futbol\Exceptions\AgeRangeException;
+use Futbol\Models\AgeRange;
 
 
 /**

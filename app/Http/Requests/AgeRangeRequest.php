@@ -1,6 +1,6 @@
 <?php
 
-namespace HappyFeet\Http\Requests;
+namespace Futbol\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -26,7 +26,7 @@ class AgeRangeRequest extends FormRequest
         $rules = [
             'name' => 'required|unique:age_range,name',
             'min_age' => 'required|min:1',
-            'max_age' => 'required|max:'.config('happyfeet.max-age')
+            'max_age' => 'required|max:'.config('Futbol.max-age')
         ];
         
         if ($this->method() == 'PUT') {

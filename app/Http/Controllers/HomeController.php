@@ -1,6 +1,6 @@
 <?php
 
-namespace HappyFeet\Http\Controllers;
+namespace Futbol\Http\Controllers;
 
 use Illuminate\Http\Request;
 

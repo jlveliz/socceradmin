@@ -12,7 +12,7 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(HappyFeet\User::class, function (Faker\Generator $faker) {
+$factory->define(Futbol\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [

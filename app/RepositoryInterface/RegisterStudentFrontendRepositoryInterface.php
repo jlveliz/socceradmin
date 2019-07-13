@@ -1,6 +1,6 @@
 <?php
 
-namespace HappyFeet\RepositoryInterface;
+namespace Futbol\RepositoryInterface;
 
 interface RegisterStudentFrontendRepositoryInterface {
 

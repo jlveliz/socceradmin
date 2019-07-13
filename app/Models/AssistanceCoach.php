@@ -1,6 +1,6 @@
 <?php
 
-namespace HappyFeet\Models;
+namespace Futbol\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,6 +22,6 @@ class AssistanceCoach extends Model
 
     public function coach()
     {
-    	return $this->belongsTo('HappyFeet\Models\User','coach_id');
+    	return $this->belongsTo('Futbol\Models\User','coach_id');
     }
 }

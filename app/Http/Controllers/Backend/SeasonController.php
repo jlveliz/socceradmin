@@ -1,12 +1,12 @@
 <?php
 
-namespace HappyFeet\Http\Controllers\Backend;
+namespace Futbol\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
-use HappyFeet\Http\Controllers\Controller;
-use HappyFeet\RepositoryInterface\SeasonRepositoryInterface;
-use HappyFeet\Http\Requests\SeasonRequest;
-use HappyFeet\Exceptions\SeasonException;
+use Futbol\Http\Controllers\Controller;
+use Futbol\RepositoryInterface\SeasonRepositoryInterface;
+use Futbol\Http\Requests\SeasonRequest;
+use Futbol\Exceptions\SeasonException;
 use Exception;
 use DB;
 

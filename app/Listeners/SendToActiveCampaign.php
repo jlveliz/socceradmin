@@ -1,8 +1,8 @@
 <?php
 
-namespace HappyFeet\Listeners;
+namespace Futbol\Listeners;
 
-use HappyFeet\Events\NewDemoClass;
+use Futbol\Events\NewDemoClass;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 

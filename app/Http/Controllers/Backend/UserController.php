@@ -1,12 +1,12 @@
 <?php
 
-namespace HappyFeet\Http\Controllers\Backend;
+namespace Futbol\Http\Controllers\Backend;
 
-use HappyFeet\Http\Controllers\Controller;
-use HappyFeet\RepositoryInterface\UserRepositoryInterface;
-use HappyFeet\RepositoryInterface\RoleRepositoryInterface;
-use HappyFeet\Exception\UserException;
-use HappyFeet\Http\Requests\UserRequest;
+use Futbol\Http\Controllers\Controller;
+use Futbol\RepositoryInterface\UserRepositoryInterface;
+use Futbol\RepositoryInterface\RoleRepositoryInterface;
+use Futbol\Exception\UserException;
+use Futbol\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 use Exception;
 use DB;

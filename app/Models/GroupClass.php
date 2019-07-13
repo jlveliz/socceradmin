@@ -1,6 +1,6 @@
 <?php
 
-namespace HappyFeet\Models;
+namespace Futbol\Models;
 
 use  Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
@@ -39,21 +39,21 @@ class GroupClass extends Model
 
     public function students()
     {
-        return $this->belongsToMany('HappyFeet\Models\Student','group_class_student','group_id','student_id');
+        return $this->belongsToMany('Futbol\Models\Student','group_class_student','group_id','student_id');
     }
 
     public function coach()
     {
-        return $this->belongsTo('HappyFeet\Models\User','coach_id');
+        return $this->belongsTo('Futbol\Models\User','coach_id');
     }
 
     public function range()
     {
-    	return $this->belongsTo('HappyFeet\Models\AgeRange','range_age_id');
+    	return $this->belongsTo('Futbol\Models\AgeRange','range_age_id');
 	}
 	
 	public function field() {
-		return $this->belongsTo('HappyFeet\Models\Field','field_id');
+		return $this->belongsTo('Futbol\Models\Field','field_id');
 	}
 
 	public static function boot() {

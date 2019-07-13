@@ -1,14 +1,14 @@
 <?php
 
-namespace HappyFeet\Http\Controllers\Backend;
+namespace Futbol\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
-use HappyFeet\Http\Controllers\Controller;
-use HappyFeet\RepositoryInterface\PermissionRepositoryInterface;
-use HappyFeet\RepositoryInterface\PermissionTypeRepositoryInterface;
-use HappyFeet\RepositoryInterface\ModuleRepositoryInterface;
-use HappyFeet\Http\Requests\PermissionRequest;
-use HappyFeet\Exceptions\PermissionException;
+use Futbol\Http\Controllers\Controller;
+use Futbol\RepositoryInterface\PermissionRepositoryInterface;
+use Futbol\RepositoryInterface\PermissionTypeRepositoryInterface;
+use Futbol\RepositoryInterface\ModuleRepositoryInterface;
+use Futbol\Http\Requests\PermissionRequest;
+use Futbol\Exceptions\PermissionException;
 use Exception;
 use DB;
 

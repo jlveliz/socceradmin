@@ -1,6 +1,6 @@
 <?php
 
-namespace HappyFeet\Http\Requests;
+namespace Futbol\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

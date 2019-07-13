@@ -1,9 +1,9 @@
 <?php
-namespace HappyFeet\Repository;
+namespace Futbol\Repository;
 
-use HappyFeet\RepositoryInterface\PersonTypeRepositoryInterface;
-use HappyFeet\Exceptions\PersonTypeException;
-use HappyFeet\Models\PersonType;
+use Futbol\RepositoryInterface\PersonTypeRepositoryInterface;
+use Futbol\Exceptions\PersonTypeException;
+use Futbol\Models\PersonType;
 
 /**
 * 

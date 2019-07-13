@@ -1,6 +1,6 @@
 <?php
 
-namespace HappyFeet\Providers;
+namespace Futbol\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -13,7 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'HappyFeet\Model' => 'HappyFeet\Policies\ModelPolicy',
+        'Futbol\Model' => 'Futbol\Policies\ModelPolicy',
     ];
 
     /**

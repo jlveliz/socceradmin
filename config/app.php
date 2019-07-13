@@ -189,12 +189,12 @@ return [
         /*
          * Application Service Providers...
          */
-        HappyFeet\Providers\AppServiceProvider::class,
-        HappyFeet\Providers\AuthServiceProvider::class,
-        // HappyFeet\Providers\BroadcastServiceProvider::class,
-        HappyFeet\Providers\EventServiceProvider::class,
-        HappyFeet\Providers\RouteServiceProvider::class,
-        HappyFeet\Providers\ExtendValidatorServiceProvider::class,
+        Futbol\Providers\AppServiceProvider::class,
+        Futbol\Providers\AuthServiceProvider::class,
+        // Futbol\Providers\BroadcastServiceProvider::class,
+        Futbol\Providers\EventServiceProvider::class,
+        Futbol\Providers\RouteServiceProvider::class,
+        Futbol\Providers\ExtendValidatorServiceProvider::class,
         Gentor\ActiveCampaign\ActiveCampaignServiceProvider::class,
 
     ],

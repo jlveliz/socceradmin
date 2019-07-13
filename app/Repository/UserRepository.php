@@ -1,11 +1,11 @@
 <?php
-namespace HappyFeet\Repository;
+namespace Futbol\Repository;
 
-use HappyFeet\RepositoryInterface\UserRepositoryInterface;
-use HappyFeet\Exceptions\UserException;
-use HappyFeet\Models\User;
-use HappyFeet\Models\Person;
-use HappyFeet\Models\PersonType;
+use Futbol\RepositoryInterface\UserRepositoryInterface;
+use Futbol\Exceptions\UserException;
+use Futbol\Models\User;
+use Futbol\Models\Person;
+use Futbol\Models\PersonType;
 /**
 * 
 */

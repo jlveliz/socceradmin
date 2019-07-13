@@ -1,6 +1,6 @@
 <?php
 
-namespace HappyFeet\Models;
+namespace Futbol\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use  Illuminate\Database\Eloquent\SoftDeletes;
@@ -26,13 +26,13 @@ class Representant extends Model
 
     public function user()
     {
-    	return $this->belongsTo('HappyFeet\Models\User','user_id');
+    	return $this->belongsTo('Futbol\Models\User','user_id');
     }
 
 
     public function students()
     {
-        return $this->hasMany('HappyFeet\Models\Student','representant_id');
+        return $this->hasMany('Futbol\Models\Student','representant_id');
     }
 
     

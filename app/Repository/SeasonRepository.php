@@ -1,9 +1,9 @@
 <?php
-namespace HappyFeet\Repository;
+namespace Futbol\Repository;
 
-use HappyFeet\RepositoryInterface\SeasonRepositoryInterface;
-use HappyFeet\Exceptions\SeasonException;
-use HappyFeet\Models\Season;
+use Futbol\RepositoryInterface\SeasonRepositoryInterface;
+use Futbol\Exceptions\SeasonException;
+use Futbol\Models\Season;
 use DB;
 
 /**

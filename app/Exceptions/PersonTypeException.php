@@ -1,5 +1,5 @@
 <?php
-namespace HappyFeet\Exceptions;
+namespace Futbol\Exceptions;
 use Exception;
 
 /**

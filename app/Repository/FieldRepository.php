@@ -1,10 +1,10 @@
 <?php
-namespace HappyFeet\Repository;
+namespace Futbol\Repository;
 
-use HappyFeet\RepositoryInterface\FieldRepositoryInterface;
-use HappyFeet\Exceptions\FieldException;
-use HappyFeet\Models\GroupClass;
-use HappyFeet\Models\Field;
+use Futbol\RepositoryInterface\FieldRepositoryInterface;
+use Futbol\Exceptions\FieldException;
+use Futbol\Models\GroupClass;
+use Futbol\Models\Field;
 use DB;
 
 /**

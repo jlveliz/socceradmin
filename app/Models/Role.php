@@ -1,6 +1,6 @@
 <?php
 
-namespace HappyFeet\Models;
+namespace Futbol\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -21,7 +21,7 @@ class Role extends Model
 
     public function permissions()
     {
-    	return $this->belongsToMany('HappyFeet\Models\Permission','permission_role','role_id','permission_id');
+    	return $this->belongsToMany('Futbol\Models\Permission','permission_role','role_id','permission_id');
     }
 
     public function hasPermission($idPermission)
@@ -36,7 +36,7 @@ class Role extends Model
 
     public function users()
     {
-        return $this->belongsToMany('HappyFeet\Models\User','user_role','role_id','user_id');
+        return $this->belongsToMany('Futbol\Models\User','user_role','role_id','user_id');
     }
 
     public function getIsDefaultAttribute($value)

@@ -1,11 +1,11 @@
 <?php
 
-namespace HappyFeet\Http\Controllers\Backend;
+namespace Futbol\Http\Controllers\Backend;
 
-use HappyFeet\Http\Controllers\Controller;
-use HappyFeet\RepositoryInterface\CoachRepositoryInterface;
-use HappyFeet\Http\Requests\CoachRequest;
-use HappyFeet\Exception\CoachException;
+use Futbol\Http\Controllers\Controller;
+use Futbol\RepositoryInterface\CoachRepositoryInterface;
+use Futbol\Http\Requests\CoachRequest;
+use Futbol\Exception\CoachException;
 use DB;
 
 class CoachController extends Controller

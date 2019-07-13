@@ -1,9 +1,9 @@
 <?php
-namespace HappyFeet\Repository;
+namespace Futbol\Repository;
 
-use HappyFeet\RepositoryInterface\FieldTypeRepositoryInterface;
-use HappyFeet\Exceptions\FieldTypeException;
-use HappyFeet\Models\FieldType;
+use Futbol\RepositoryInterface\FieldTypeRepositoryInterface;
+use Futbol\Exceptions\FieldTypeException;
+use Futbol\Models\FieldType;
 
 
 /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace HappyFeet\Providers;
+namespace Futbol\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Broadcast;

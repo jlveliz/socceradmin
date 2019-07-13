@@ -1,11 +1,11 @@
 <?php
 
-namespace HappyFeet\Http\Controllers\Backend;
+namespace Futbol\Http\Controllers\Backend;
 
-use HappyFeet\Http\Controllers\Controller;
-use HappyFeet\RepositoryInterface\PersonTypeRepositoryInterface;
-use HappyFeet\Exceptions\PersonTypeException;
-use HappyFeet\Http\Requests\PersonTypeRequest;
+use Futbol\Http\Controllers\Controller;
+use Futbol\RepositoryInterface\PersonTypeRepositoryInterface;
+use Futbol\Exceptions\PersonTypeException;
+use Futbol\Http\Requests\PersonTypeRequest;
 
 class PersonTypeController extends Controller
 {

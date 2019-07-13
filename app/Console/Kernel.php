@@ -1,6 +1,6 @@
 <?php
 
-namespace HappyFeet\Console;
+namespace Futbol\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;

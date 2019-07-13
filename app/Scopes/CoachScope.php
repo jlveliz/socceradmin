@@ -1,5 +1,5 @@
 <?php
-namespace HappyFeet\Scopes;
+namespace Futbol\Scopes;
 
 use Illuminate\Database\Eloquent\Scope;
 use Illuminate\Database\Eloquent\Model;

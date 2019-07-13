@@ -1,10 +1,10 @@
 <?php
 
-namespace HappyFeet\Http\Controllers\Auth;
+namespace Futbol\Http\Controllers\Auth;
 
-use HappyFeet\Http\Controllers\Controller;
+use Futbol\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use HappyFeet\Events\UserLoginEvent;
+use Futbol\Events\UserLoginEvent;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller

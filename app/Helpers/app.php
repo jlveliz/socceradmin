@@ -35,7 +35,7 @@ if(!function_exists('range_ages')) {
 
     function range_ages() {
         $range = [];
-        for ($i=1; $i <= config('happyfeet.max-age'); $i++) { 
+        for ($i=1; $i <= config('Futbol.max-age'); $i++) { 
             $range[$i] = $i; 
         }
         return $range;
@@ -47,7 +47,7 @@ if(!function_exists('range_ages')) {
 if(!function_exists('get_group_names')) {
     
     function get_group_names () {
-        return config('happyfeet.group-names');
+        return config('Futbol.group-names');
     }
 
 }
@@ -81,7 +81,7 @@ if(!function_exists('get_durations_string')) {
 if(!function_exists('get_type_class')) {
     
     function get_type_class () {
-        return config('happyfeet.class-types');
+        return config('Futbol.class-types');
     }
 
 }

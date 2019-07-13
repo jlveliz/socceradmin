@@ -1,5 +1,5 @@
 <?php
-namespace HappyFeet\RepositoryInterface;
+namespace Futbol\RepositoryInterface;
 
 
 interface SeasonRepositoryInterface extends CoreRepositoryInterface {	

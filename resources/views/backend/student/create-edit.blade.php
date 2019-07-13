@@ -80,7 +80,7 @@
 										<div class="col-lg-2 col-4">
 											<div class="form-group">
 												<label for="age">Edad <span class="text-danger">*</span></label>
-												<input type="number" name="age" id="age" class="form-control form-control-sm {{ $errors->has('age') ? ' is-invalid' : '' }}"  value="@if(isset($student)){{ $student->person->age }}@else{{ old('age') }}@endif" pattern="\d+" min="0" max="{{ config('happyfeet.max-age') }}" readonly="">
+												<input type="number" name="age" id="age" class="form-control form-control-sm {{ $errors->has('age') ? ' is-invalid' : '' }}"  value="@if(isset($student)){{ $student->person->age }}@else{{ old('age') }}@endif" pattern="\d+" min="0" max="{{ config('Futbol.max-age') }}" readonly="">
 												@if ($errors->has('age'))
 													<div class="invalid-feedback animated fadeInDown">{{ $errors->first('age') }}</div>
 												@endif

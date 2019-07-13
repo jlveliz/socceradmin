@@ -1,12 +1,12 @@
 <?php
 
-namespace HappyFeet\Listeners;
+namespace Futbol\Listeners;
 
-use HappyFeet\Events\DeleteEnrollmentGroup;
+use Futbol\Events\DeleteEnrollmentGroup;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use HappyFeet\Models\EnrollmentGroup;
-use HappyFeet\Exceptions\EnrollmentGroupException;
+use Futbol\Models\EnrollmentGroup;
+use Futbol\Exceptions\EnrollmentGroupException;
 
 class DeleteAssistances
 {

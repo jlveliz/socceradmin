@@ -1,6 +1,6 @@
 <?php
 
-namespace HappyFeet\Http\Middleware;
+namespace Futbol\Http\Middleware;
 use Illuminate\Support\Facades\Auth;
 use Closure;
 

@@ -43,7 +43,7 @@ return [
     */
 
     'models' => [
-        'namespace' => 'HappyFeet\\Models\\',
+        'namespace' => 'Futbol\\Models\\',
     ],
 
     /*

@@ -1,13 +1,13 @@
 <?php
 
-namespace HappyFeet\Http\Controllers\Backend;
+namespace Futbol\Http\Controllers\Backend;
 
-use HappyFeet\Http\Controllers\Controller;
-use HappyFeet\RepositoryInterface\RoleRepositoryInterface;
-use HappyFeet\RepositoryInterface\ModuleRepositoryInterface;
-use HappyFeet\RepositoryInterface\PermissionTypeRepositoryInterface;
-use HappyFeet\Http\Requests\RoleRequest;
-use HappyFeet\Exceptions\RoleException;
+use Futbol\Http\Controllers\Controller;
+use Futbol\RepositoryInterface\RoleRepositoryInterface;
+use Futbol\RepositoryInterface\ModuleRepositoryInterface;
+use Futbol\RepositoryInterface\PermissionTypeRepositoryInterface;
+use Futbol\Http\Requests\RoleRequest;
+use Futbol\Exceptions\RoleException;
 use Exception;
 use DB;
 class RoleController extends Controller

@@ -1,14 +1,14 @@
 <?php
 
-namespace HappyFeet\Http\Controllers\Backend;
+namespace Futbol\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
-use HappyFeet\Http\Controllers\Controller;
-use HappyFeet\RepositoryInterface\AssistanceCoachRepositoryInterface;
-use HappyFeet\RepositoryInterface\FieldRepositoryInterface;
-use HappyFeet\RepositoryInterface\CoachRepositoryInterface;
-use HappyFeet\Http\Requests\AssistanceCoachRequest;
-use HappyFeet\Exceptions\AssistanceCoachException;
+use Futbol\Http\Controllers\Controller;
+use Futbol\RepositoryInterface\AssistanceCoachRepositoryInterface;
+use Futbol\RepositoryInterface\FieldRepositoryInterface;
+use Futbol\RepositoryInterface\CoachRepositoryInterface;
+use Futbol\Http\Requests\AssistanceCoachRequest;
+use Futbol\Exceptions\AssistanceCoachException;
 use DB;
 
 class AssistanceCoachController extends Controller

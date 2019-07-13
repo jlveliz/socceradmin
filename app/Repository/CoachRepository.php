@@ -1,12 +1,12 @@
 <?php
-namespace HappyFeet\Repository;
+namespace Futbol\Repository;
 
-use HappyFeet\RepositoryInterface\CoachRepositoryInterface;
-use HappyFeet\Exceptions\CoachException;
-use HappyFeet\Models\Coach;
-use HappyFeet\Models\Person;
-use HappyFeet\Models\Role;
-use HappyFeet\Models\PersonType;
+use Futbol\RepositoryInterface\CoachRepositoryInterface;
+use Futbol\Exceptions\CoachException;
+use Futbol\Models\Coach;
+use Futbol\Models\Person;
+use Futbol\Models\Role;
+use Futbol\Models\PersonType;
 use DB;
 
 /**

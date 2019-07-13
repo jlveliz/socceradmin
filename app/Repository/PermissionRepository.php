@@ -1,9 +1,9 @@
 <?php
-namespace HappyFeet\Repository;
+namespace Futbol\Repository;
 
-use HappyFeet\RepositoryInterface\PermissionRepositoryInterface;
-use HappyFeet\Exceptions\PermissionException;
-use HappyFeet\Models\Permission;
+use Futbol\RepositoryInterface\PermissionRepositoryInterface;
+use Futbol\Exceptions\PermissionException;
+use Futbol\Models\Permission;
 use DB;
 
 /**

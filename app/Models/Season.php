@@ -1,6 +1,6 @@
 <?php
 
-namespace HappyFeet\Models;
+namespace Futbol\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use  Illuminate\Database\Eloquent\SoftDeletes;
@@ -31,7 +31,7 @@ class Season extends Model
 
     public function enrollments()
     {
-    	// return $this->hasMany('HappyFeet\Models\Permission','module_id');
+    	// return $this->hasMany('Futbol\Models\Permission','module_id');
     }
 
     public function getActive()
