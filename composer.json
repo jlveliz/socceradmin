@@ -12,6 +12,7 @@
         "fideloper/proxy": "^4.0",
         "gentor/activecampaign": "^1.0",
         "laravel/framework": "5.4.*",
+        "laravel/passport": "^7.3",
         "laravel/tinker": "~1.0"
     },
     "require-dev": {

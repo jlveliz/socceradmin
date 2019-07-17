@@ -26,7 +26,7 @@ class FieldController extends Controller
 
     function __construct(FieldRepositoryInterface $field, AgeRangeRepositoryInterface $ageRange, FieldTypeRepositoryInterface $ftype, CoachRepositoryInterface $coach)
     {
-        $this->middleware('auth',['except' => 'getSchedule']);
+        // $this->middleware('auth',['except' => 'getSchedule']);
         $this->field = $field;
         $this->ageRange = $ageRange;
         $this->ftype = $ftype;
@@ -37,7 +37,7 @@ class FieldController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $fields = $this->field->enum();
         return view('backend.field.index',compact('fields'));
@@ -228,5 +228,15 @@ class FieldController extends Controller
         }
 
         return response('no permitido',401);
+    }
+
+
+    /*
+        Show fields Json
+        @return \Illuminate\Http\Response
+    */
+    public function indexJson()
+    {
+        return response($this->field->enum(),200);
     }
 }
