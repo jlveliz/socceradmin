@@ -1,6 +1,6 @@
 <?php
 
-namespace Futbol\Models;
+namespace HappyFeet\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Auth;
