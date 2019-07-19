@@ -2,6 +2,8 @@
 
 namespace Futbol\Http;
 
+use Laravel\Passport\Http\Middleware\CheckClientCredentials;
+use Futbol\Http\Middleware\CORS;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -41,6 +43,8 @@ class Kernel extends HttpKernel
             'throttle:60,1',
             'bindings',
         ],
+
+        
     ];
 
     /**
@@ -59,5 +63,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'auth.backend' => \Futbol\Http\Middleware\AccessBackend::class,
         'backend.guest' => \Futbol\Http\Middleware\BackendRedirectIfAuthenticated::class,
+        'client' => CheckClientCredentials::class,
+        'CORS' => CORS::class,
     ];
 }

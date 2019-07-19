@@ -3,13 +3,14 @@
 namespace Futbol\Models;
 
 use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Hash;
 
 class User extends Authenticatable
 
 {
-    use Notifiable;
+    use HasApiTokens, Notifiable;
 
     protected $table = "user";
 

@@ -13,9 +13,14 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::prefix('api',function() {
+    
+// });
 
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
-Route::get('/fields','Backend\FieldController@indexJson');
+Route::post('login','ApiController@login');
+
+Route::get('/fields','ApiController@getFields');
