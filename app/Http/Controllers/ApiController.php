@@ -14,7 +14,7 @@ class ApiController extends Controller
 
     public function __construct(FieldRepositoryInterface $field) {
         $this->middleware('auth:api')->except('login');
-        $this->middleware('client');
+        $this->middleware('client')->except('login');
         $this->middleware('CORS');
         $this->field = $field; 
     }
@@ -32,8 +32,12 @@ class ApiController extends Controller
         ];
 
         if(auth()->attempt($credendials)) {
-            $token = auth()->user()->createToken('jlfutbol')->accessToken;
-            return response()->json(['token' => $token],200);
+            if(auth()->user()->isSuperAdmin()) {
+                $token = auth()->user()->createToken('jlfutbol')->accessToken;
+                return response()->json(['token' => $token],200);
+            } else {
+                return response()->json(['error'=> 'No Autorizado']);
+            }
         } else {
             return response()->json(['error'=> 'No Autorizado']);
         }
