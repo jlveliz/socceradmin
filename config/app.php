@@ -195,7 +195,7 @@ return [
         Futbol\Providers\EventServiceProvider::class,
         Futbol\Providers\RouteServiceProvider::class,
         Futbol\Providers\ExtendValidatorServiceProvider::class,
-        Gentor\ActiveCampaign\ActiveCampaignServiceProvider::class,
+        Laravel\Passport\PassportServiceProvider::class,
 
     ],
 
