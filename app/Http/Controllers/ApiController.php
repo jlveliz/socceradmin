@@ -15,7 +15,7 @@ class ApiController extends Controller
     public function __construct(FieldRepositoryInterface $field) {
         $this->middleware('auth:api')->except('login');
         $this->middleware('client')->except('login');
-        $this->middleware('CORS');
+        $this->middleware('CORS')->except('login');
         $this->field = $field; 
     }
 
@@ -36,10 +36,10 @@ class ApiController extends Controller
                 $token = auth()->user()->createToken('jlfutbol')->accessToken;
                 return response()->json(['token' => $token],200);
             } else {
-                return response()->json(['error'=> 'No Autorizado']);
+                return response()->json(['error'=> 'No Autorizado'],401);
             }
         } else {
-            return response()->json(['error'=> 'No Autorizado']);
+            return response()->json(['error'=> 'No Autorizado'],401);
         }
     }
 
@@ -52,6 +52,8 @@ class ApiController extends Controller
         if(auth()->user()) {
             return response($this->field->enum(),200);
         }
+
+        return response()->json(['error'=> 'No Autorizado'],401);
     }
 
 }
