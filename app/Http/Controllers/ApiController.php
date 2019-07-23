@@ -23,8 +23,8 @@ class ApiController extends Controller
     */
     public function login(Request $request) {
         
-        if(!$request->has('email'))  return response("ingrese una email",401);
-        if(!$request->has('password'))  return response("ingrese una contraseña",401);
+        if(!$request->has('email'))  return response()->json("ingrese una email",401);
+        if(!$request->has('password'))  return response()->json("ingrese una contraseña",401);
 
         $credendials = [
             'email' => $request->get('email'),
