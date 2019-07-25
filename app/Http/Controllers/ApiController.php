@@ -2,7 +2,9 @@
 
 namespace Futbol\Http\Controllers;
 
+use Futbol\RepositoryInterface\GroupClassRepositoryInterface;
 use Futbol\RepositoryInterface\FieldRepositoryInterface;
+use Futbol\Exceptions\GroupClassException;
 use Illuminate\Http\Request;
 
 class ApiController extends Controller
@@ -10,13 +12,18 @@ class ApiController extends Controller
 
     private $field;
 
+    private $groupClass;
 
 
-    public function __construct(FieldRepositoryInterface $field) {
+
+    public function __construct(FieldRepositoryInterface $field, GroupClassRepositoryInterface $groupClass) {
+       
         $this->middleware('auth:api')->except('login');
         $this->middleware('client')->except('login');
-        $this->middleware('CORS')->except('login');
+        // $this->middleware('CORS')->except('login');
         $this->field = $field; 
+        $this->groupClass = $groupClass; 
+
     }
 
     /*
@@ -54,6 +61,35 @@ class ApiController extends Controller
         }
 
         return response()->json(['error'=> 'No Autorizado'],401);
+    }
+
+
+    /**
+     * 
+     */
+
+    public function getAvailableDayField($fieldId, Request $request)
+    {
+        
+        try {
+            $days = $this->groupClass->getAvailableDayByField($fieldId);
+            return response()->json($days,200);
+            
+        } catch (GroupClassException $e) {
+            return response()->json($e->getMesage(),$e->getCode());
+        }
+        
+    }
+
+
+    public function getAvailableHourDay($fieldId ,Request $request)
+    {
+        try {  
+            $days = $this->groupClass->getAvailableHourDay($request->get('day'), $fieldId);
+            return response()->json($days,200);
+        } catch (GroupClassException $e) {
+            return response()->json($e->getMesage(),$e->getCode());
+        }
     }
 
 }

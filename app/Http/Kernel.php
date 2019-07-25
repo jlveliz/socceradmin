@@ -21,6 +21,7 @@ class Kernel extends HttpKernel
         \Futbol\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \Futbol\Http\Middleware\TrustProxies::class,
+        CORS::class
     ];
 
     /**
@@ -64,6 +65,6 @@ class Kernel extends HttpKernel
         'auth.backend' => \Futbol\Http\Middleware\AccessBackend::class,
         'backend.guest' => \Futbol\Http\Middleware\BackendRedirectIfAuthenticated::class,
         'client' => CheckClientCredentials::class,
-        'CORS' => CORS::class,
+        // 'CORS' => CORS::class,
     ];
 }
