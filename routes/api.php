@@ -27,4 +27,5 @@ Route::get('/fields','ApiController@getFields');
 
 Route::get('groups/{fieldId}/available-schedule','ApiController@getAvailableDayField');
 Route::get('groups/{fieldId}/available-hour','ApiController@getAvailableHourDay');
+Route::post('register','Frontend\RegisterController@process')->name('register-user-post');
 

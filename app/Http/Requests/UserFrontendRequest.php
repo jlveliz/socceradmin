@@ -23,6 +23,7 @@ class UserFrontendRequest extends FormRequest
      */
     public function rules()
     {
+        dd($this->all());
         $rules = [
             'name' => 'required',
             'last_name' => 'required',
