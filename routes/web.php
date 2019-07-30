@@ -62,20 +62,6 @@
 
 
 	//LAYOUTS
-
-	//Frontend
-	Route::prefix('frontend')->group(function(){
-		Route::get('register','Frontend\RegisterController@showRegisterForm')->name('register-user');
-		Route::get('groups/{fieldId}/available-schedule','Backend\GroupClassController@getAvailableDayField');
-		Route::get('groups/{fieldId}/available-hour','Backend\GroupClassController@getAvailableHourDay');
-		Route::post('register','Frontend\RegisterController@process')->name('register-user-post');
-	});
-
-
-
-	
-
-
 	//Backend
 	Auth::routes();
 
