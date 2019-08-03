@@ -81,7 +81,7 @@ if(!function_exists('get_durations_string')) {
 if(!function_exists('get_type_class')) {
     
     function get_type_class () {
-        return config('Futbol.class-types');
+        return config('futbol.class-types');
     }
 
 }
