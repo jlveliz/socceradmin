@@ -23,6 +23,7 @@ use Illuminate\Http\Request;
 
 Route::post('login','ApiController@login');
 
+Route::get('/ages','ApiController@getAgesRange');
 Route::get('/fields','ApiController@getFields');
 
 Route::get('groups/{fieldId}/available-schedule','ApiController@getAvailableDayField');

@@ -5,9 +5,11 @@ namespace Futbol\Http\Controllers;
 use Futbol\RepositoryInterface\GroupClassRepositoryInterface;
 use Futbol\RepositoryInterface\FieldRepositoryInterface;
 use Futbol\RepositoryInterface\StudentRepositoryInterface;
+use Futbol\RepositoryInterface\AgeRangeRepositoryInterface;
 use Futbol\Http\Requests\UserFrontendRequest;
 use Futbol\Exceptions\GroupClassException;
 use Futbol\Exceptions\StudentException;
+use Futbol\Exceptions\AgeRangeException;
 use Futbol\Events\NewDemoClass;
 use Illuminate\Http\Request;
 use DB;
@@ -21,9 +23,11 @@ class ApiController extends Controller
 
     private $studentRepo;
 
+    private $ageRange;
 
 
-    public function __construct(FieldRepositoryInterface $field, GroupClassRepositoryInterface $groupClass, StudentRepositoryInterface $studentRepo) {
+
+    public function __construct(FieldRepositoryInterface $field, GroupClassRepositoryInterface $groupClass, StudentRepositoryInterface $studentRepo, AgeRangeRepositoryInterface $ageRange) {
        
         $this->middleware('auth:api')->except('login');
         $this->middleware('client')->except('login');
@@ -31,6 +35,7 @@ class ApiController extends Controller
         $this->field = $field; 
         $this->groupClass = $groupClass; 
         $this->studentRepo = $studentRepo; 
+        $this->ageRange = $ageRange; 
 
     }
 
@@ -55,6 +60,23 @@ class ApiController extends Controller
             }
         } else {
             return response()->json(['error'=> 'No Autorizado'],401);
+        }
+    }
+
+    /**
+     * get age ranges from system
+     *
+     * @return json
+     */
+    public function getAgesRange()
+    {
+        try { 
+            $ages = $this->ageRange->getRangeSecuence();
+            return response()->json($ages,200);
+        } catch (AgeRangeException $e) {
+            $message['type'] = "error";
+            $message['content'] = $e->getMessage();
+            return response()->json($message,500);
         }
     }
 
