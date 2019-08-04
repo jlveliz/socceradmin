@@ -6,7 +6,6 @@ use Futbol\RepositoryInterface\GroupClassRepositoryInterface;
 use Futbol\RepositoryInterface\FieldRepositoryInterface;
 use Futbol\RepositoryInterface\StudentRepositoryInterface;
 use Futbol\RepositoryInterface\AgeRangeRepositoryInterface;
-use Futbol\Http\Requests\UserFrontendRequest;
 use Futbol\Exceptions\GroupClassException;
 use Futbol\Exceptions\StudentException;
 use Futbol\Exceptions\AgeRangeException;
@@ -122,13 +121,11 @@ class ApiController extends Controller
         }
     }
 
-    public function process(UserFrontendRequest $request)
+    public function process(Request $request)
     {
-      
         DB::beginTransaction();
         
         try {
-           
             $user = $this->studentRepo->insertFromRegisterForm($request->all());
             DB::commit();
             // event( new NewDemoClass($user) );

@@ -370,15 +370,55 @@ class StudentRepository implements StudentRepositoryInterface
 
 
     	if($personRepresentant->hasStudents()) {
-    		$students = $personRepresentant->getStudents();
 
+    		$students = $personRepresentant->getStudents();
+			
     		foreach ($students as $key => $student) {
     			if ($student->person->name == $data['name'] && $student->person->last_name == $data['last_name']) {
     				throw new StudentException("Ya existe una solicitud ingresada", 411);
-    			} else {
-
     			}
-    		}
+			}
+			
+			$personStudent = new Person();
+			$data['person_type_id'] = $this->getPersonType();
+			$personStudent->fill($data);
+
+			if ($personStudent->save()) {
+				$personId = $personStudent->getKey();
+				$student = new Student();
+				$data['person_id'] = $personId;
+				$data['representant_id'] = $personRepresentant->getKey();
+				$student->fill($data);
+				if ($saved = $student->save()) {
+
+					$dataEnrollment = $data['enrollment'];
+					$dataEnrollment['season_id'] = (new Season())->getSeasonActive()->id;
+					$dataEnrollment['student_id'] = $student->getKey();
+					$dataEnrollment['state'] = Enrollment::ACTIVE;
+					$dataEnrollment['class_type'] = Enrollment::FREE;
+					$enrollment = new Enrollment();
+					$enrollment->fill($dataEnrollment);
+
+					if ($saveEnrollment = $enrollment->save()) {
+						$dataEnrollment['enrollment_id'] = $enrollment->getKey();
+						$dataEnrollment['age'] = $student->person->age;
+						$groupIdToInsert = (new GroupClass())->getAvailableGroupByParams($dataEnrollment);
+						
+						if (!$groupIdToInsert) {
+							throw new StudentException('Ha ocurrido un error el grupo para el estudiante '.$data['name'],"500");
+						}
+
+						$enrGroup = new EnrollmentGroup(['group_id' => $groupIdToInsert]);
+						$enrollment->groups()->save($enrGroup);
+
+						$dataEnrollment['groups'] = [];
+						$dataEnrollment['groups'][] = $groupIdToInsert;
+						$enrollment->insertCapacitiesGroups($dataEnrollment['groups']);
+
+						
+					}
+				}
+			}
 
     	} else {
 
