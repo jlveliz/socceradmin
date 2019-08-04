@@ -24,7 +24,7 @@ use Illuminate\Http\Request;
 Route::post('login','ApiController@login');
 
 Route::get('/ages','ApiController@getAgesRange');
-Route::get('/fields','ApiController@getFields');
+Route::get('/fields/{ageId}/available','ApiController@getFields');
 
 Route::get('groups/{fieldId}/available-schedule','ApiController@getAvailableDayField');
 Route::get('groups/{fieldId}/available-hour','ApiController@getAvailableHourDay');

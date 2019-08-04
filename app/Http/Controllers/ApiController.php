@@ -84,10 +84,10 @@ class ApiController extends Controller
         Show fields Json
         @return \Illuminate\Http\Response
     */
-    public function getFields()
+    public function getFields($age)
     {
         if(auth()->user()) {
-            return response($this->field->enum(),200);
+            return response($this->field->getFieldsByAge($age),200);
         }
 
         return response()->json(['error'=> 'No Autorizado'],401);

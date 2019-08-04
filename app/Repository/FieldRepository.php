@@ -173,4 +173,27 @@ class FieldRepository implements FieldRepositoryInterface
 		return $count;
 	}
 
+
+	public function getFieldsByAge($age) {
+		$sql = "SELECT
+					field.id,
+					field.name 
+				FROM
+					group_class,
+					field,
+					age_range
+				WHERE
+					field.id = group_class.field_id
+					and group_class.range_age_id = age_range.id
+					and group_class.deleted_at is null and group_class.disponibility > 0
+					and $age BETWEEN age_range.min_age and age_range.max_age
+					and field.deleted_at is null
+					and group_class.deleted_at is null
+					and age_range.deleted_at is null
+					GROUP BY field_id;";
+
+		$fields = DB::select($sql);
+		return $fields;
+	}
+
 }
