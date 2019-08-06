@@ -388,6 +388,7 @@ class StudentRepository implements StudentRepositoryInterface
 				$student = new Student();
 				$data['person_id'] = $personId;
 				$data['representant_id'] = $personRepresentant->getKey();
+				$data['state'] = Student::ACTIVE;
 				$student->fill($data);
 				if ($saved = $student->save()) {
 
@@ -431,6 +432,7 @@ class StudentRepository implements StudentRepositoryInterface
 				$student = new Student();
 				$data['person_id'] = $personId;
 				$data['representant_id'] = $personRepresentant->getKey();
+				$data['state'] = Student::STATE;
 				$student->fill($data);
 				if ($saved = $student->save()) {
 
