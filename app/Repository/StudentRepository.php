@@ -375,7 +375,7 @@ class StudentRepository implements StudentRepositoryInterface
 			
     		foreach ($students as $key => $student) {
     			if ($student->person->name == $data['name'] && $student->person->last_name == $data['last_name']) {
-    				throw new StudentException("Ya existe una solicitud ingresada", 411);
+    				throw new StudentException("Ya existe una solicitud ingresada", 401);
     			}
 			}
 			
