@@ -70,7 +70,7 @@
 										</div>
 										<div class="col-lg-4 col-4">
 											<div class="form-group">
-												<label for="date_birth">F. de Nacimiento <span class="text-danger">*</span></label>
+												<label for="date_birth">F. de Nacimiento</label>
 												<input type="date" name="date_birth" id="date_birth" class="form-control form-control-sm {{ $errors->has('date_birth') ? ' is-invalid' : '' }}"  value="@if(isset($student)){{ $student->person->date_birth }}@else{{ old('date_birth') }}@endif">
 												@if ($errors->has('date_birth'))
 													<div class="invalid-feedback animated fadeInDown">{{ $errors->first('date_birth') }}</div>
