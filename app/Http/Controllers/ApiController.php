@@ -132,15 +132,11 @@ class ApiController extends Controller
             return response()->json("Exitoso",200);
         } catch (StudentException $e) {
             DB::rollback();
-            $message['type'] = "error";
-            $message['content'] = $e->getMessage();
-            return response()->json($message,$e->getCode());
+            return response()->json($e->getMessage(),$e->getCode());
         } 
         catch (Exception $e) {
             DB::rollback();
-            $message['type'] = "error";
-            $message['content'] = $e->getMessage();
-            return response()->json($message,$e->getCode());
+            return response()->json($e->getMessage(),$e->getCode());
         }
     }
 
