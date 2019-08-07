@@ -30,3 +30,6 @@ Route::get('groups/{fieldId}/available-schedule','ApiController@getAvailableDayF
 Route::get('groups/{fieldId}/available-hour','ApiController@getAvailableHourDay');
 Route::post('register','ApiController@process')->name('register-user-post');
 
+
+Route::get('activecampaign','ActiveCampaignController@index');
+
