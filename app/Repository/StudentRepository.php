@@ -286,7 +286,7 @@ class StudentRepository implements StudentRepositoryInterface
 
     /**
      * extrae el total de estudiantes activos
-       en la temporada actual
+     *  en la temporada actual
      */
     public function getTotalStudents()
     {
@@ -397,6 +397,8 @@ class StudentRepository implements StudentRepositoryInterface
 					$dataEnrollment['student_id'] = $student->getKey();
 					$dataEnrollment['state'] = Enrollment::ACTIVE;
 					$dataEnrollment['class_type'] = Enrollment::FREE;
+					$dataEnrollment['day'] = get_day_from_key($dataEnrollment['day']);
+					$dataEnrollment['field_id'] = (new FieldRepository())->find(['name'=>$dataEnrollment['field_id']])->id;
 					$enrollment = new Enrollment();
 					$enrollment->fill($dataEnrollment);
 
@@ -441,6 +443,8 @@ class StudentRepository implements StudentRepositoryInterface
 					$dataEnrollment['student_id'] = $student->getKey();
 					$dataEnrollment['state'] = Enrollment::ACTIVE;
 					$dataEnrollment['class_type'] = Enrollment::FREE;
+					$dataEnrollment['day'] = get_day_from_key($dataEnrollment['day']);
+					$dataEnrollment['field_id'] = (new FieldRepository())->find(['name'=>$dataEnrollment['field_id']])->id;
 					$enrollment = new Enrollment();
 					$enrollment->fill($dataEnrollment);
 
