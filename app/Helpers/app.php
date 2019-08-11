@@ -15,6 +15,19 @@ if(!function_exists('days_of_week')) {
     }
 }
 
+
+if(!function_exists('get_day_from_key')) {
+
+    function get_day_from_key($day) {
+        $days =  days_of_week();
+        $keyDay = array_search($day,$days);
+        if($keyDay) return $keyDay;
+        return false;
+        
+    }
+
+}
+
 if(!function_exists('num_days_of_week')) {
     
     function num_days_of_week () {

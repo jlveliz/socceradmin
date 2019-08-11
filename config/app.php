@@ -181,6 +181,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         // TCG\Voyager\VoyagerServiceProvider::class,
+        Gentor\ActiveCampaign\ActiveCampaignServiceProvider::class,
 
         /*
          * Package Service Providers...
